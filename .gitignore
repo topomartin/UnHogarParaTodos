@@ -1,0 +1,21 @@
+# Node modules (para cualquier subcarpeta)
+node_modules/
+
+# Builds
+dist/
+build/
+
+# Logs
+logs/
+*.log
+
+# Entorno
+.env
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
