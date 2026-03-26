@@ -6,6 +6,7 @@ import { ConsoleLogger } from '@nestjs/common/services/console-logger.service';
 import { SwaggerModule } from '@nestjs/swagger/dist/swagger-module';
 import { DocumentBuilder } from '@nestjs/swagger/dist/document-builder';
 import { FileLogger } from './common/fileLogger';
+import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
 
 const appConfig = require(join(process.cwd(), 'config', 'app.config'));
 
@@ -14,6 +15,9 @@ const appConfig = require(join(process.cwd(), 'config', 'app.config'));
 async function bootstrap() {
   
   const app = await NestFactory.create(AppModule);
+
+  //VALIDATIONS
+  app.useGlobalPipes(new ValidationPipe());
 
   //LOGGER
   const logger = new Logger('Main');

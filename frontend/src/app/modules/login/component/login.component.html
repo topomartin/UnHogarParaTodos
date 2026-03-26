@@ -1,1 +1,28 @@
-<div>Login</div>
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-title>Login</mat-card-title>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>User</mat-label>
+        <input matInput placeholder="" formControlName="username" required>
+        <mat-error *ngIf="loginForm.get('username')?.hasError('required')">El nombre de usuario es obligatorio</mat-error>
+        <mat-error *ngIf="loginForm.get('username')?.hasError('email')">Usuario inválido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" required>
+        <button mat-icon-button matSuffix (click)="clickEvent($event)" type="button" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
+          <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">La contraseña es obligatoria</mat-error>
+      </mat-form-field>
+
+      <div class="button-row">
+        <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancelar</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
