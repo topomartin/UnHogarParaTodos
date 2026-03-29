@@ -7,7 +7,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { MaterialModule } from "./material.module";
 import { LoginComponent } from "./modules/login/component/login.component";
 import { ReactiveFormsModule } from '@angular/forms';
-import { NavigationMenuComponent } from "./modules/shared/side-nav.component/navigation-menu.component";
+import { NavigationMenuComponent } from "./modules/shared/navigation-menu.component/navigation-menu.component";
 import { NavigationBarComponent } from "./modules/shared/navigation-bar/navigation-bar.component";
 import { CommonModule } from "@angular/common";
 
