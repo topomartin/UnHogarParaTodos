@@ -1,1 +1,15 @@
-<router-outlet></router-outlet>
+<div class="app-container">
+  <!-- HEADER -->
+  <navigation-bar (toggleMenuEvent)="navigationMenuComponent.toggleMenu($event)" #navigationBarComponent></navigation-bar>
+
+  <!-- MAIN CONTAINER -->
+  <div class="main-content-wrapper">
+    <!-- NAV-MENU -->
+    <navigation-menu (isMenuOpenEvent)="navigationBarComponent.isMenuOpen = $event.isMenuOpen" #navigationMenuComponent></navigation-menu>
+
+    <!-- MAIN_CONTENT -->
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

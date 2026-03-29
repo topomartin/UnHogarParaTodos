@@ -1,0 +1,24 @@
+
+<div class="navigation-bar-component">
+  <div class="navigation-bar-component__logo-wrapper">
+    <button mat-icon-button aria-label="Toggle menu" (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div class="navigation-bar-component__account-wrapper">
+    <div class="navigation-bar-component__account" [matMenuTriggerFor]="menu">
+      <span>{{ currentUser }}</span>
+      <mat-icon>account_box</mat-icon>
+    </div>
+    <mat-menu #menu="matMenu" xPosition="before">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>

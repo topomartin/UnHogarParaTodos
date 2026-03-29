@@ -1,10 +1,5 @@
+import { UserRole } from 'src/common/knowledge/enums';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-
-export enum UserRole {
-    ADMIN = "admin",
-    WORKER = "worker",
-    USER = "user",
-}
 
 @Entity()
 export class User {

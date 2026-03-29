@@ -1,0 +1,30 @@
+.navigation-bar-component {
+  &__logo-wrapper {
+    button {
+      //color: #fff;
+
+      mat-icon {
+        font-size: 28px;
+      }
+    }
+  }
+
+  &__account-wrapper {
+    display: flex;
+    align-items: center;
+
+    .navigation-bar-component__account {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      gap: 0.5rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #3b82f6;
+      }
+    }
+  }
+}

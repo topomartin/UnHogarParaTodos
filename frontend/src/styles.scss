@@ -1,39 +1,113 @@
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
+
+@include mat.core();
 
 html {
   height: 100%;
-  @include mat.theme(
-    (
-      color: (
-        primary: mat.$magenta-palette,
-        tertiary: mat.$violet-palette,
-      ),
-      typography: Roboto,
-      density: 0,
-    )
-  );
+  margin: 0;
+
+  @include mat.theme((
+    color: (
+      primary: mat.$magenta-palette,
+      tertiary: mat.$violet-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
 }
 
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
   color-scheme: light;
-
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
   background-color: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
 
-  // Reset the user agent margin.
   margin: 0;
   height: 100%;
 }
-/* You can add global styles to this file, and also import other style files */
+
+/* LAYOUT GLOBAL */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* HEADER */
+.navigation-bar-component {
+  height: 64px;
+  min-height: 64px;
+  max-height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 1rem;
+
+  background-color: var(--mat-sys-primary); // ✅ Material
+  color: var(--mat-sys-on-primary);
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.main-content-wrapper {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 64px);
+}
+
+/* SIDEBAR */
+.navigation-menu-component {
+  width: 260px;
+  height: 100%;
+
+  background-color: var(--mat-sys-surface-container); // ✅ Material
+  color: var(--mat-sys-on-surface);
+
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* CONTENIDO */
+.main-content {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  background-color: var(--mat-sys-surface);
+}
+
+/* 🔥 ANGULAR MATERIAL FIXES */
+.navigation-menu-component .mat-nav-list {
+  padding: 0;
+}
+
+.navigation-menu-component .mat-list-item {
+  border-radius: 8px;
+  margin: 0.25rem 0;
+  transition: background-color 0.3s ease;
+
+  color: inherit; // ✅ no romper tema
+
+  &:hover {
+    background-color: var(--mat-sys-primary-container); // ✅ Material
+    color: var(--mat-sys-on-primary-container);
+
+    mat-icon {
+      color: var(--mat-sys-on-primary-container);
+    }
+  }
+}
+
+/* ICONOS */
+.navigation-menu-component mat-icon {
+  color: inherit; // ✅ usa colores del tema
+}
+
+/* Hover icon fix */
+.navigation-menu-component .mat-list-item:hover mat-icon {
+  color: inherit;
+}

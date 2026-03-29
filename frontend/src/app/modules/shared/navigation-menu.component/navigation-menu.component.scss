@@ -1,0 +1,18 @@
+.menu-item-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon-item-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+}
+
+.menu-name-wrapper {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
