@@ -1,16 +1,16 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, HttpCode, HttpStatus, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { AuthenticationService } from "./services/auth.service";
+import { AuthService } from "./services/auth.service";
 import { LoginDTO } from "./dto/login.dto";
 
-@ApiTags(AuthenticationController.name)
+@ApiTags(AuthController.name)
 @Controller('auth')
-export class AuthenticationController {
-  constructor(private authenticationService: AuthenticationService) {}
+export class AuthController {
+  constructor(private authService: AuthService) {}
 
+  @HttpCode(HttpStatus.OK)
   @Post('login')
     login(@Body() loginDto: LoginDTO) {
-      console.log(`${JSON.stringify(loginDto)}`);
-      return 'Login endponint reached!'
+      return this.authService.signIn(loginDto.username, loginDto.password);
     }
 }

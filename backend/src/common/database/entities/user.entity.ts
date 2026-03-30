@@ -1,5 +1,5 @@
 import { UserRole } from 'src/common/knowledge/enums';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -12,7 +12,7 @@ export class User {
     @Column({ length: 10 })
     password: string;
 
-    @Column({ type: "varchar", length: 10,  unique: true })
+    @Column({ type: "varchar", length: 50,  unique: true })
     email: string;
 
     @Column({ type: "enum", enum: UserRole, default: UserRole.USER })
@@ -22,12 +22,13 @@ export class User {
     gdpr_consent: boolean;
 
     @Column({ type: "date" })
-    created_at: string;
+    @CreateDateColumn({ type: 'timestamp' })
+    created_at: Date;
 
-    @Column({ type: "date", nullable:true, default: null })
-    updated_at: string;
+    @Column({ type: "timestamp", nullable:true, default: null })
+    updated_at: Date;
 
-    @Column({ type: "date", nullable:true, default: null })
-    deleted_at: string;
+    @Column({ type: "timestamp", nullable:true, default: null })
+    deleted_at: Date;
 
 }

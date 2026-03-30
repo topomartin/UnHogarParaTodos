@@ -3,33 +3,34 @@ import {
   IsString,
   IsNotEmpty,
   MinLength,
-  IsEnum,
   IsBoolean,
+  IsEnum,
 } from 'class-validator';
 import { UserRole } from "src/common/knowledge/enums";
 
 export class CreateUserDto {
-    @ApiProperty()
+    @ApiProperty({example: 'nuevoUsuario', description: 'Nombre de usuario',required:true})
     @IsString()
     @IsNotEmpty()
     username:string;
 
-    @ApiProperty()
+    @ApiProperty({required:true})
     @IsString()
     @IsNotEmpty()
     @MinLength(6, { message: 'Password must be at least 6 characters long' })
     password: string;
 
-    @ApiProperty()
+    @ApiProperty({required:true})
     @IsString()
     @IsNotEmpty()
     email: string;
 
-    @ApiProperty()
+    @ApiProperty({required:true})
     @IsNotEmpty()
+    @IsEnum(UserRole)
     role: UserRole;
 
-    @ApiProperty()
+    @ApiProperty({required:true})
     @IsBoolean()
     gdpr_consent: boolean;
 
