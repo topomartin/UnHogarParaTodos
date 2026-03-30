@@ -3,12 +3,15 @@ import { UsersRepositoryService } from './user.repository.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { Utils } from '../../../common/utils/utils'
 import { User } from 'src/common/database/entities/user.entity';
+import { HashService } from './hash.service';
 
 @Injectable()
 export class UserService {
-  constructor(private userRepositoryService: UsersRepositoryService){}
+  constructor(private userRepositoryService: UsersRepositoryService, private hashService: HashService){}
 
   async create(createUserDto: CreateUserDto): Promise<any>{
+    const hash = await this.hashService.hashPassword(createUserDto.password)
+    createUserDto.password = hash;
     return await this.userRepositoryService.create(createUserDto);
   }
 
