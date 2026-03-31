@@ -9,10 +9,6 @@ export class HashService {
         return await bcrypt.hash(password, this.saltOrRounds);
     }
 
-    private async generateSalt(){
-        return await bcrypt.genSalt();
-    }
-
     async getMatch(password, hash): Promise<boolean>{
         return await bcrypt.compare(password, hash);
     }
