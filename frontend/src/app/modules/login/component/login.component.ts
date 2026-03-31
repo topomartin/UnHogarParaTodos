@@ -1,4 +1,5 @@
 import { Component, OnInit, signal } from "@angular/core";
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from "../../../services/authentication.service";
 
@@ -18,7 +19,10 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required)
   });
 
-  constructor(private authenticationService: AuthenticationService){}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router   // <- nombre exacto "router"
+  ) {}
 
   ngOnInit(): void {}
   /**
@@ -47,6 +51,10 @@ export class LoginComponent implements OnInit {
         }
       )
     }
+  }
+  
+goToRegister() {
+    this.router.navigate(['/register']);   // <-- Redirige al componente Register
   }
 
   onCancel() {

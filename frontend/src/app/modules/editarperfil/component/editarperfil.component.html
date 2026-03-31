@@ -1,0 +1,38 @@
+<div class="editar-container">
+
+  <h1 class="titulo">EDITAR PERFIL</h1>
+
+  <div class="form-card">
+
+    <div class="campo">
+      <label>Username</label>
+      <input type="text">
+    </div>
+
+    <div class="campo">
+      <label>Email</label>
+      <input type="email">
+    </div>
+
+    <div class="campo">
+      <label>Contraseña</label>
+      <input type="password">
+    </div>
+
+    <div class="campo">
+      <label>Rol</label>
+      <select>
+        <option value="USER">USER</option>
+        <option value="ADMIN">ADMIN</option>
+        <option value="WORKER">WORKER</option>
+      </select>
+    </div>
+
+    <!-- BOTÓN GUARDAR -->
+    <button class="btn-guardar" (click)="guardarCambios()">
+      Guardar cambios
+    </button>
+
+  </div>
+
+</div>

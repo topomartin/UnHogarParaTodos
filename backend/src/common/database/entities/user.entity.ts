@@ -1,7 +1,7 @@
 import { UserRole } from 'src/common/knowledge/enums';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 
-@Entity()
+@Entity('users')
 export class User {
     @PrimaryGeneratedColumn()
     id: number;

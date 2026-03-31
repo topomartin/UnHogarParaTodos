@@ -1,0 +1,58 @@
+.perfil-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  font-family: Arial, sans-serif;
+}
+
+.titulo {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.perfil-card {
+  background-color: #f5f5f5;
+  padding: 30px;
+  border-radius: 12px;
+  width: 350px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+.campo {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.valor {
+  color: #333;
+}
+
+.password {
+  letter-spacing: 2px;
+}
+
+/* BOTÓN EDITAR */
+.btn-editar {
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.btn-editar:hover {
+  background-color: #0056b3;
+}

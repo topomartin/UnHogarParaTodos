@@ -4,19 +4,27 @@ import { HashService } from '../../user/services/hash.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private userService: UserService, private hashService: HashService) {}
+  constructor(private userService: UserService, private hashService: HashService) { }
 
   async signIn(username: string, pass: string): Promise<any> {
-    const user = await this.userService.findOne({username});
-    if (!user){
+    const user = await this.userService.findOne({ username });
+    if (!user) {
       throw new NotFoundException('Usuario no encontrado');
     }
-    const match = await this.hashService.getMatch(pass,user?.password );
+    /*const match = await this.hashService.getMatch(pass,user?.password );
     if (!match) {
+      throw new UnauthorizedException('Usuario o password incorrectos');
+    }*/
+
+    if (pass !== user.password) {
       throw new UnauthorizedException('Usuario o password incorrectos');
     }
     const { password, ...result } = user;
     // TODO: Generate a JWT and return it here
+
+    console.log(`Login exitoso para el usuario: ${username}`);
+    
+    // Puedes devolver un mensaje también junto con los datos
 
     return result;
   }

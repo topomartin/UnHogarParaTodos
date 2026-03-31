@@ -3,12 +3,32 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f5f5f5;
+  background-color: lch(97.47% 3.73 242.7); /* azul claro de fondo general */
 }
 
 .login-card {
   width: 360px;
-  padding: 20px;
+  padding: 24px;
+  text-align: center;
+  background-color: #90caf9; /* azul más claro dentro de la card */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  border-radius: 12px;
+}
+
+.welcome-text {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: white; /* texto blanco */
+}
+
+/* Labels y placeholders */
+.mat-form-field-label {
+  color: white !important; /* labels blancos */
+}
+
+.mat-input-element {
+  color: white; /* texto input blanco */
 }
 
 .full-width {
@@ -16,7 +36,24 @@
   margin-bottom: 16px;
 }
 
-.button-row {
-  display: flex;
-  justify-content: space-between;
+/* Botón Login azul oscuro */
+.login-button {
+  margin-top: 8px;
+  background-color: #0d47a1; /* azul oscuro */
+  color: white;
+}
+
+.login-button:hover {
+  background-color: #08306b; /* azul aún más oscuro al pasar */
+}
+
+/* Texto de registro */
+.register-text {
+  margin-top: 16px;
+  font-size: 14px;
+  color: white;
+}
+
+.register-text button {
+  color: #0d47a1; /* azul oscuro, mismo que el login */
 }
