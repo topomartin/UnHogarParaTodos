@@ -19,9 +19,9 @@ export class AuthService {
     if (!match) {
       throw new UnauthorizedException('Usuario o password incorrectos');
     }
-    const { password, ...result } = user;
+    const { ...result } = user;
     if (appConfig.app.jwtActive){
-      return {access_token: await this.jwtService.signAsync({ password, ...result })};
+      return {access_token: await this.jwtService.signAsync({ ...result })};
     }else{
       return result;
     }
