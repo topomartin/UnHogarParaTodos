@@ -1,4 +1,5 @@
 import { Component, OnInit, signal } from "@angular/core";
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from "../../../services/authentication.service";
 
@@ -18,7 +19,10 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required)
   });
 
-  constructor(private authenticationService: AuthenticationService){}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router   // <- nombre exacto "router"
+  ) {}
 
   ngOnInit(): void {}
   /**
@@ -43,10 +47,14 @@ export class LoginComponent implements OnInit {
       console.log('Login data:', this.loginForm.value);
       this.authenticationService.login(this.loginForm.value as any).subscribe(
         result=>{
-          console.log('aquí ha pasado algo');
+          this.router.navigate(['/perfil']);
         }
       )
     }
+  }
+  
+goToRegister() {
+    this.router.navigate(['/register']);   // <-- Redirige al componente Register
   }
 
   onCancel() {

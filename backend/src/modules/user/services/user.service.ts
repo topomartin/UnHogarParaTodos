@@ -23,10 +23,24 @@ export class UserService {
     return await this.userRepositoryService.findAll();
   }
 
-  async update(id, parcialUser ){
-    parcialUser['updated_at'] = Utils.toLocalDateForMySQL(new Date());
-    return await this.userRepositoryService.update(id,parcialUser);
+
+    
+
+ async update(id: string, partialUser: Partial<User>): Promise<User> {
+  if (partialUser.password) {
+    partialUser.password = await this.hashService.hashPassword(partialUser.password);
   }
+  partialUser['updated_at'] = Utils.toLocalDateForMySQL(new Date());
+
+  await this.userRepositoryService.update(id, partialUser);
+
+  const updatedUser = await this.findOne({ id });
+  if (!updatedUser) {
+    throw new Error('Usuario no encontrado'); // o NotFoundException si es NestJS
+  }
+
+  return updatedUser;
+}
 
   async delete(id){
     return await this.userRepositoryService.update(id, {deleted_at: Utils.toLocalDateForMySQL(new Date())})

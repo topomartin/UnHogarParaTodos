@@ -6,6 +6,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from "./app-routing.module";
 import { MaterialModule } from "./material.module";
 import { LoginComponent } from "./modules/login/component/login.component";
+import { RegisterComponent } from "./modules/register/component/register.component";
+import { VerPerfilComponent } from "./modules/VerPerfil/component/verperfil.component";
+import { EditarPerfilComponent } from "./modules/editarperfil/component/editarperfil.component";
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavigationMenuComponent } from "./modules/shared/navigation-menu.component/navigation-menu.component";
 import { NavigationBarComponent } from "./modules/shared/navigation-bar/navigation-bar.component";
@@ -14,7 +17,7 @@ import { CommonModule } from "@angular/common";
 
 
 @NgModule({
-  declarations:[AppComponent, LoginComponent, NavigationMenuComponent , NavigationBarComponent],
+  declarations:[AppComponent, LoginComponent, RegisterComponent, VerPerfilComponent, EditarPerfilComponent,  NavigationMenuComponent , NavigationBarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
