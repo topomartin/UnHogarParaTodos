@@ -1,6 +1,10 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { UserService } from 'src/modules/user/services/user.service';
 import { HashService } from '../../user/services/hash.service';
+import { JwtService } from '@nestjs/jwt';
+import { join } from 'path';
+
+const appConfig = require(join(process.cwd(), 'config', 'app.config'));
 
 @Injectable()
 export class AuthService {
