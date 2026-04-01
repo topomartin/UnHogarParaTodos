@@ -1,58 +1,30 @@
-.editar-container {
+.editperfil-container {
+  max-width: 400px;
+  margin: 2rem auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
   font-family: Arial, sans-serif;
-}
 
-.titulo {
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 30px;
-}
+  .titulo {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
 
-.form-card {
-  background-color: #f5f5f5;
-  padding: 30px;
-  border-radius: 12px;
-  width: 350px;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-}
+  form {
+    display: flex;
+    flex-direction: column;
 
-.campo {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-}
+    mat-form-field.full-width {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
 
-.campo label {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.campo input,
-.campo select {
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-/* BOTÓN */
-.btn-guardar {
-  width: 100%;
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-}
-
-.btn-guardar:hover {
-  background-color: #1e7e34;
+    button {
+      width: 100%;
+      margin-top: 1rem;
+      font-size: 16px;
+    }
+  }
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit, signal } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
+import { AuthenticationService, IUser } from "../../../services/authentication.service";
 
 @Component({
   selector: 'app-verperfil',
@@ -7,16 +8,39 @@ import { Router } from '@angular/router';
   styleUrls: ['./verperfil.component.scss'],
   standalone: false
 })
-
 export class VerPerfilComponent implements OnInit {
 
-ngOnInit(): void {}
+  public user: IUser | null = null; // usuario actual
+  public loading: boolean = true;   // para controlar el estado de carga
 
-constructor(private router: Router) {}
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ) {}
 
-editarPerfil() {
-  console.log('Ir a editar perfil');
-  this.router.navigate(['/editperfil']);
-}
+  ngOnInit(): void {
+    const currentUser = this.authService.getCurrentUser();
 
+    if (!currentUser) {
+      console.warn('No hay usuario logueado');
+      this.loading = false;
+      return;
+    }
+
+    // mostrar datos de localStorage primero
+    this.user = currentUser;
+    this.loading = false;
+
+    // refrescar datos desde backend
+    this.authService.getUserById(currentUser.id).subscribe(
+      res => this.user = res,
+      err => {
+        console.error('Error al cargar perfil', err);
+      }
+    );
+  }
+
+  editarPerfil() {
+    this.router.navigate(['/editperfil']);
+  }
 }

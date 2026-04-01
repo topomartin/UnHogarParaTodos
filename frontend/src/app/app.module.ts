@@ -17,7 +17,7 @@ import { CommonModule } from "@angular/common";
 
 
 @NgModule({
-  declarations:[AppComponent, LoginComponent, RegisterComponent, VerPerfilComponent,  NavigationMenuComponent , NavigationBarComponent],
+  declarations:[AppComponent, LoginComponent, RegisterComponent, VerPerfilComponent, EditarPerfilComponent,  NavigationMenuComponent , NavigationBarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

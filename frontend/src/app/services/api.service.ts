@@ -26,6 +26,11 @@ export class ApiService {
     return this.http.post(`${this.API_URL}${path}`, JSON.stringify(body), this.options).pipe(catchError(err => this.handleError(err)));
   }
 
+  public patch(path: string, body: object = {}): Observable<any> {
+  return this.http.patch(`${this.API_URL}${path}`, JSON.stringify(body), this.options)
+    .pipe(catchError(err => this.handleError(err)));
+}
+
   private handleError(error: HttpErrorResponse): Observable<any> {
     const message = error.error?.message || 'Error en la petición';
     this.snackBar.open(message, 'Cerrar', {

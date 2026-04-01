@@ -1,4 +1,4 @@
-<div class="perfil-container">
+<div class="perfil-container" *ngIf="user; else loading">
 
   <h1 class="titulo">PERFIL</h1>
 
@@ -6,12 +6,12 @@
     
     <div class="campo">
       <span class="label">Nombre:</span>
-      <span class="valor">Daniel</span>
+      <span class="valor">{{ user.username }}</span>
     </div>
 
     <div class="campo">
       <span class="label">Email:</span>
-      <span class="valor">daniel@gmail.com</span>
+      <span class="valor">{{ user.email }}</span>
     </div>
 
     <div class="campo">
@@ -21,7 +21,7 @@
 
     <div class="campo">
       <span class="label">Rol:</span>
-      <span class="valor">ADMIN</span>
+      <span class="valor">{{ user.role }}</span>
     </div>
 
     <button class="btn-editar" (click)="editarPerfil()">
@@ -31,3 +31,10 @@
   </div>
 
 </div>
+
+<!-- Mensaje si user aún no cargó -->
+<ng-template #loading>
+  <p>Cargando perfil...</p>
+</ng-template>
+
+<p *ngIf="user === null">No se pudo cargar el perfil</p>

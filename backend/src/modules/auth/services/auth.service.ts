@@ -1,7 +1,6 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { UserService } from 'src/modules/user/services/user.service';
 import { HashService } from '../../user/services/hash.service';
-import { JwtService } from '@nestjs/jwt';
 import { join } from 'path';
 
 const appConfig = require(join(process.cwd(), 'config', 'app.config'));
@@ -15,14 +14,13 @@ export class AuthService {
     if (!user) {
       throw new NotFoundException('Usuario no encontrado');
     }
-    /*const match = await this.hashService.getMatch(pass,user?.password );
+    const match = await this.hashService.getMatch(pass,user?.password );
+    console.log('PASS FRONT:', pass);
+    console.log('PASS BD:', user.password);
     if (!match) {
       throw new UnauthorizedException('Usuario o password incorrectos');
-    }*/
-
-    if (pass !== user.password) {
-      throw new UnauthorizedException('Usuario o password incorrectos');
     }
+
     const { password, ...result } = user;
     // TODO: Generate a JWT and return it here
 

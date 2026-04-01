@@ -11,30 +11,24 @@ import { AuthenticationService } from "../../../services/authentication.service"
 
 export class RegisterComponent implements OnInit {
 
-    public hidePassword = true;
+  public hidePassword = true;
 
-     public registerForm = new FormGroup({
+  public registerForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
-    role: new FormControl('', Validators.required)
+    role: new FormControl('', Validators.required),
+    gdpr_consent: new FormControl(false, Validators.requiredTrue)
   });
 
-    constructor(private authenticationService: AuthenticationService){}
+  constructor(private authenticationService: AuthenticationService){}
 
   ngOnInit(): void {}
-  /**
-   *
-   * @returns value of hidePassword
-   */
+
   hide() {
     return this.hidePassword;
   }
 
-  /**
-   *
-   * @param event
-   */
   clickEvent(event: Event) {
     event.preventDefault();
     this.hidePassword = !this.hidePassword;
@@ -42,13 +36,21 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      console.log('Login data:', this.registerForm.value);
-      this.authenticationService.login(this.registerForm.value as any).subscribe(
-        result=>{
-          console.log('aquí ha pasado algo');
+
+      this.authenticationService.register(this.registerForm.value as any).subscribe(
+        result => {
+          console.log('Usuario creado', result);
+
+          // 🔥 auto login opcional
+          this.authenticationService.login({
+            username: this.registerForm.value.username!,
+            password: this.registerForm.value.password!
+          }).subscribe();
+        },
+        error => {
+          console.error('Error en registro', error);
         }
-      )
+      );
     }
   }
-    
 }
