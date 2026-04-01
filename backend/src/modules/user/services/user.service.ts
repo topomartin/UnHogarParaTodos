@@ -19,6 +19,10 @@ export class UserService {
     return await this. userRepositoryService.findOne(filter);
   }
 
+  async findAll(): Promise<User[]>{
+    return await this.userRepositoryService.findAll();
+  }
+
   async update(id, parcialUser ){
     parcialUser['updated_at'] = Utils.toLocalDateForMySQL(new Date());
     return await this.userRepositoryService.update(id,parcialUser);

@@ -28,6 +28,10 @@ export class UsersRepositoryService {
             this.handleError(e);
         }
     }
+    async findAll(): Promise<User[]>{
+        let data = await this.userRepository.find();
+        return data.map(({ password, ...user }) => user as User); //deleting the password from de user to be sent
+    }
     async update(id, parcialUser){
         try{
             return this.userRepository.update({id}, parcialUser);
