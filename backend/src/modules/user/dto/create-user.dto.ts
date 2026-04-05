@@ -25,7 +25,7 @@ export class CreateUserDto {
     @IsNotEmpty()
     email!: string;
 
-    @ApiProperty({required:false})
+    //@ApiProperty({required:false})
     @IsNotEmpty()
     @IsEnum(UserRole)
     role: UserRole = UserRole.USER;
