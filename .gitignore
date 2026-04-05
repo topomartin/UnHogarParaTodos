@@ -27,6 +27,3 @@ Thumbs.db
 .vs/VSWorkspaceState.json
 .vs/UnHogarParaTodos/config/applicationhost.config
 .vs/UnHogarParaTodos/v16/.suo
-
-# Config DB
-**/config/database.config.js
