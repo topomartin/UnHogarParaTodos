@@ -44,5 +44,3 @@ __screenshots__/
 Thumbs.db
 
 
-# Config DB
-/backend/config/database.config.js
