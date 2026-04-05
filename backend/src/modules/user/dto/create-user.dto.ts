@@ -12,26 +12,26 @@ export class CreateUserDto {
     @ApiProperty({example: 'nuevoUsuario', description: 'Nombre de usuario',required:true})
     @IsString()
     @IsNotEmpty()
-    username:string;
+    username!:string;
 
     @ApiProperty({required:true})
     @IsString()
     @IsNotEmpty()
     @MinLength(6, { message: 'Password must be at least 6 characters long' })
-    password: string;
+    password!: string;
 
     @ApiProperty({required:true})
     @IsString()
     @IsNotEmpty()
-    email: string;
+    email!: string;
 
-    @ApiProperty({required:true})
+    @ApiProperty({required:false})
     @IsNotEmpty()
     @IsEnum(UserRole)
-    role: UserRole;
+    role: UserRole = UserRole.USER;
 
     @ApiProperty({required:true})
     @IsBoolean()
-    gdpr_consent: boolean;
+    gdpr_consent!: boolean;
 
 }
