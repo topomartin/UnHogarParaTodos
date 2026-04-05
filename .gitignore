@@ -22,3 +22,8 @@ Thumbs.db
 
 #constants
 **/config/constants.js
+.vs/ProjectSettings.json
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
+.vs/UnHogarParaTodos/config/applicationhost.config
+.vs/UnHogarParaTodos/v16/.suo

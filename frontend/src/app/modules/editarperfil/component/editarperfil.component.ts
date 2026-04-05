@@ -38,12 +38,33 @@ export class EditarPerfilComponent implements OnInit {
 
   // Validación de contraseñas iguales
   passwordsMatch(group: AbstractControl): ValidationErrors | null {
-    const pass = group.get('password')?.value;
-    const confirm = group.get('confirmPassword')?.value;
+    const pass = group.get('password');
+    const confirm = group.get('confirmPassword');
 
-    if (pass && confirm && pass !== confirm) {
+    if (!pass || !confirm) return null;
+
+    const password = pass.value;
+    const confirmPassword = confirm.value;
+
+    // Limpiar errores previos personalizados
+    if (confirm.errors?.['confirmPasswordRequired'] || confirm.errors?.['passwordMismatch']) {
+      const errors = { ...confirm.errors };
+      delete errors['confirmPasswordRequired'];
+      delete errors['passwordMismatch'];
+
+      confirm.setErrors(Object.keys(errors).length ? errors : null);
+    }
+
+    if (password && !confirmPassword) {
+      confirm.setErrors({ ...confirm.errors, confirmPasswordRequired: true });
+      return { confirmPasswordRequired: true };
+    }
+
+    if (password && confirmPassword && password !== confirmPassword) {
+      confirm.setErrors({ ...confirm.errors, passwordMismatch: true });
       return { passwordMismatch: true };
     }
+
     return null;
   }
 

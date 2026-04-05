@@ -20,8 +20,8 @@
     </div>
 
     <div class="campo">
-      <span class="label">Rol:</span>
-      <span class="valor">{{ user.role }}</span>
+      <span class="label">Miembro desde:</span>
+      <span class="valor">{{ user.created_at | date:'dd/MM/yyyy' }}</span>
     </div>
 
     <button class="btn-editar" (click)="editarPerfil()">

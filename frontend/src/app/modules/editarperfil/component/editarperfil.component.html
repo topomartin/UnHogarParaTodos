@@ -43,7 +43,10 @@
       <button mat-icon-button matSuffix type="button" (click)="hideConfirmPassword = !hideConfirmPassword">
         <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
-      <mat-error *ngIf="editForm.hasError('passwordMismatch')">
+      <mat-error *ngIf="editForm.get('confirmPassword')?.hasError('confirmPasswordRequired')">
+        Debes confirmar la nueva contraseña
+      </mat-error>
+      <mat-error *ngIf="editForm.get('confirmPassword')?.hasError('passwordMismatch')">
         Las contraseñas no coinciden
       </mat-error>
     </mat-form-field>

@@ -1,5 +1,6 @@
 import { Component, OnInit, signal } from "@angular/core";
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthenticationService } from "../../../services/authentication.service";
 
 @Component({
@@ -21,7 +22,10 @@ export class RegisterComponent implements OnInit {
     gdpr_consent: new FormControl(false, Validators.requiredTrue)
   });
 
-  constructor(private authenticationService: AuthenticationService){}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {}
 
@@ -45,7 +49,13 @@ export class RegisterComponent implements OnInit {
           this.authenticationService.login({
             username: this.registerForm.value.username!,
             password: this.registerForm.value.password!
-          }).subscribe();
+          }).subscribe({
+            next: () => {
+              // redirige al perfil, puede seria mejor al listado de animales o página principal en cuanto existan
+              this.router.navigate(['/perfil']);
+            },
+            error: err => console.error(err)
+          });
         },
         error => {
           console.error('Error en registro', error);
