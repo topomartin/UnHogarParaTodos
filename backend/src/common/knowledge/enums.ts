@@ -9,8 +9,8 @@ export enum AnimalType {
 }
 
 export enum AnimalStatus {
-  AVAILABLE = 'available',
-  ADOPTED = 'adopted', 
-  FOSTERING ='fostering'
+  AVAILABLE = 'AVAILABLE',
+  ADOPTED = 'ADOPTED', 
+  PENDING ='PENDING'
 
 }

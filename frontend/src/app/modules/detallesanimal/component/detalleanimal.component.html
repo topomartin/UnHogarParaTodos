@@ -1,0 +1,26 @@
+<div class="container" *ngIf="animal">
+
+  <h1 class="titulo">{{ animal.name }}</h1>
+
+  <div class="card">
+
+    <p><strong>Tipo:</strong> {{ animal.type }}</p>
+    <p><strong>Fecha de nacimiento:</strong> {{ animal.birth_date }}</p>
+    <p><strong>Descripción:</strong> {{ animal.description }}</p>
+
+    <p class="status" [ngClass]="animal.status.toLowerCase()">
+      <strong>Estado:</strong> {{ animal.status }}
+
+      <span *ngIf="animal.status.toLowerCase() === 'available'">✔️</span>
+      <span *ngIf="animal.status.toLowerCase() === 'pending'">⏳</span>
+      <span *ngIf="animal.status.toLowerCase() === 'adopted'">❌</span>
+    </p>
+
+  </div>
+
+  <!-- BOTÓN VOLVER -->
+  <button class="btn-volver" routerLink="/listaanimal">
+    ← Volver a la lista
+  </button>
+
+</div>
