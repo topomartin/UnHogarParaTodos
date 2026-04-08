@@ -28,9 +28,8 @@ export class NavigationMenuComponent implements OnInit {
   public linkText = true;
 
   public pages: IPage[] = [
-    {name: 'Test', link: '/test', icon: 'list_alt'},
-    {name: 'Test2', link: '/test', icon: 'list_alt'},
-    {name: 'Test3', link: '/test', icon: 'list_alt'},
+    {name: 'Lista Animales', link: '/listaanimal', icon: 'list_alt'},
+    {name: 'Perfil', link: '/profile', icon: 'list_alt'}
   ];
 
   @ViewChild('menu', { read: ElementRef }) menu!: ElementRef;
