@@ -13,6 +13,12 @@ export class ListaAnimalComponent implements OnInit {
 
   public animales: any[] = [];
 
+  // Paginacion
+  public paginatedAnimals: any[] = [];
+  public itemsPerPage: number = 5;
+  public currentPage: number = 1;
+  public totalPages: number = 1;
+
   constructor(
     private router: Router,
     private apiService: ApiService,
@@ -28,6 +34,8 @@ export class ListaAnimalComponent implements OnInit {
     this.apiService.post('animal', {}).subscribe(
       (data) => {
         this.animales = data;
+
+        this.updatePagination();
         console.log('Animales:', this.animales);
 
         this.cdr.detectChanges();
@@ -36,6 +44,28 @@ export class ListaAnimalComponent implements OnInit {
         console.error('Error al obtener animales', error);
       }
     );
+  }
+
+  updatePagination() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+
+    this.paginatedAnimals = this.animales.slice(startIndex, endIndex);
+    this.totalPages = Math.ceil(this.animales.length / this.itemsPerPage);
+  }
+
+  goToNextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePagination();
+    }
+  }
+
+  goToPreviousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePagination();
+    }
   }
 
   verDetalle(id: number) {

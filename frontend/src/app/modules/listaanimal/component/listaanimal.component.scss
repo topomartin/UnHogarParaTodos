@@ -103,3 +103,31 @@
 .btn.adoptar:hover {
   background-color: #1e7e34;
 }
+
+/* PAGINACIÓN */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.pagination span {
+  font-weight: bold;
+  color: #555;
+}
+
+.pagination .btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination .btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.pagination .btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}

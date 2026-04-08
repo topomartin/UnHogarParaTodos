@@ -4,17 +4,15 @@
 
   <div class="lista">
 
-    <div class="card" *ngFor="let animal of animales">
+    <div class="card" *ngFor="let animal of paginatedAnimals">
 
       <!-- INFO -->
       <div class="info">
         <span class="nombre">{{ animal.name }}</span>
         <span class="tipo">{{ animal.type }}</span>
 
-        <span 
-          class="status"
-          [ngClass]="animal.status.toLowerCase()"
-        >
+        <span class="status"
+              [ngClass]="animal.status.toLowerCase()">
           {{ animal.status }}
 
           <span *ngIf="animal.status.toLowerCase() === 'available'">✔️</span>
@@ -30,10 +28,8 @@
           Ver detalles
         </button>
 
-        <button 
-          class="btn adoptar" 
-          *ngIf="animal.status.toLowerCase() === 'available'"
-        >
+        <button class="btn adoptar"
+                *ngIf="animal.status.toLowerCase() === 'available'">
           Adoptar
         </button>
 
@@ -41,6 +37,18 @@
 
     </div>
 
+  </div>
+
+  <div class="pagination" *ngIf="animales.length > itemsPerPage">
+    <button class="btn" (click)="goToPreviousPage()" [disabled]="currentPage === 1">
+      Anterior
+    </button>
+
+    <span>Página {{ currentPage }} de {{ totalPages }}</span>
+
+    <button class="btn" (click)="goToNextPage()" [disabled]="currentPage === totalPages">
+      Siguiente
+    </button>
   </div>
 
 </div>
