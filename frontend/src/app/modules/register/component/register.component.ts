@@ -18,7 +18,6 @@ export class RegisterComponent implements OnInit {
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
-    role: new FormControl('', Validators.required),
     gdpr_consent: new FormControl(false, Validators.requiredTrue)
   });
 
@@ -52,7 +51,7 @@ export class RegisterComponent implements OnInit {
           }).subscribe({
             next: () => {
               // redirige al perfil, puede seria mejor al listado de animales o página principal en cuanto existan
-              this.router.navigate(['/perfil']);
+              this.router.navigate(['/profile']);
             },
             error: err => console.error(err)
           });

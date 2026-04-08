@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ApiService } from "./api.service";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 
 export interface IUser {
@@ -26,6 +26,9 @@ interface ILoginUser {
 export class AuthenticationService {
   private currentUser: IUser | null = null;
 
+  private userSubject = new BehaviorSubject<IUser | null>(this.getCurrentUser());
+  public user$ = this.userSubject.asObservable();
+
   constructor(private apiService: ApiService){}
 
   login({username, password}: ILoginUser): Observable<IUser>{
@@ -49,8 +52,9 @@ export class AuthenticationService {
     this.currentUser = user;
     localStorage.setItem('current_user', JSON.stringify(user));
 
+    this.userSubject.next(user); // notificar a quien esté escuchando
     
-    //localStorage.setItem('access_token', authResult.access_token);
+    //localStorage.setItem('access_token', authResult.access_token); // si usas JWT
     /*if (authResult.user) {
       this.currentUser = authResult.user ;
     }*/
@@ -86,6 +90,7 @@ getCurrentUser(): IUser | null {
   logout(): void {
     this.currentUser = null;
     localStorage.removeItem('current_user');
+    this.userSubject.next(null);
     // localStorage.removeItem('access_token'); // si usas JWT
   }
 }

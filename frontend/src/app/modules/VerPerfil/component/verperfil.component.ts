@@ -41,6 +41,6 @@ export class VerPerfilComponent implements OnInit {
   }
 
   editarPerfil() {
-    this.router.navigate(['/editperfil']);
+    this.router.navigate(['/edit-profile']);
   }
 }

@@ -1,0 +1,78 @@
+<div class="container">
+
+  <h1 class="titulo">Lista de Animales</h1>
+
+  <!-- FILTERS -->
+  <div class="filters">
+    <input type="text"
+           placeholder="Buscar por nombre"
+           [(ngModel)]="searchText"
+           (input)="applyFilters()" />
+
+    <select [(ngModel)]="selectedType" (change)="applyFilters()">
+      <option value="">Todos los tipos</option>
+      <option *ngFor="let type of typeOptions" [value]="type">{{ type }}</option>
+    </select>
+
+    <select [(ngModel)]="selectedStatus" (change)="applyFilters()">
+      <option value="">Todos los estados</option>
+      <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+    </select>
+  </div>
+
+  <div class="lista">
+
+    <div class="card" *ngFor="let animal of paginatedAnimals">
+
+      <!-- INFO -->
+      <div class="info">
+        <span class="nombre">{{ animal.name }}</span>
+        <span class="tipo">{{ animal.type }}</span>
+
+        <span class="status"
+              [ngClass]="animal.status.toLowerCase()">
+          {{ animal.status }}
+
+          <span *ngIf="animal.status.toLowerCase() === 'available'">✔️</span>
+          <span *ngIf="animal.status.toLowerCase() === 'pending'">⏳</span>
+          <span *ngIf="animal.status.toLowerCase() === 'adopted'">❌</span>
+        </span>
+      </div>
+
+      <!-- BOTONES -->
+      <div class="acciones">
+
+        <button class="btn detalle" (click)="verDetalle(animal.id)">
+          Ver detalles
+        </button>
+
+        <button class="btn adoptar"
+                *ngIf="animal.status.toLowerCase() === 'available'">
+          Adoptar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div class="empty-state" *ngIf="paginatedAnimals.length === 0">
+    No hay animales que mostrar.
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="pagination" *ngIf="animales.length > itemsPerPage">
+    <button class="btn" (click)="goToPreviousPage()" [disabled]="currentPage === 1">
+      Anterior
+    </button>
+
+    <span>Página {{ currentPage }} de {{ totalPages }}</span>
+
+    <button class="btn" (click)="goToNextPage()" [disabled]="currentPage === totalPages">
+      Siguiente
+    </button>
+  </div>
+
+</div>

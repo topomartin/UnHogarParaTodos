@@ -17,12 +17,12 @@ export class CreateAnimalDto {
   @IsNotEmpty()
   name!: string;
 
-  @ApiProperty({ required: true })
+    @ApiProperty({ description: `Valores posibles: ${Object.values(AnimalType).join(', ')} `, required: true })
   @IsNotEmpty()
   @IsEnum(AnimalType)
   type: AnimalType | undefined;
 
-  @ApiProperty({ required: true })
+  @ApiProperty({ description: '"25-12-2025"', required: true })
   @IsDateString()
   @IsNotEmpty()
   birth_date!: string;

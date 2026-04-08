@@ -31,18 +31,6 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- 🔥 CAMBIO: SELECT en vez de input -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Rol</mat-label>
-        <mat-select formControlName="role" required>
-          <mat-option value="USER">Usuario</mat-option>
-          <mat-option value="ADMIN">Administrador</mat-option>
-        </mat-select>
-        <mat-error *ngIf="registerForm.get('role')?.hasError('required')">
-          El rol es obligatorio
-        </mat-error>
-      </mat-form-field>
-
       <!-- 🔥 NUEVO: GDPR -->
       <mat-checkbox formControlName="gdpr_consent">
         Acepto la política de privacidad (GDPR)
