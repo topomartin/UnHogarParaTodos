@@ -1,21 +1,38 @@
-<div class="container" *ngIf="animal">
+<div class="container">
 
-  <h1 class="titulo">{{ animal.name }}</h1>
+  <!-- SPINNER -->
+  <ng-container *ngIf="loading">
+    <div class="spinner-container">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-container>
 
-  <div class="card">
+  <!-- ANIMAL DETALLE -->
+  <div *ngIf="!loading && animal">
 
-    <p><strong>Tipo:</strong> {{ animal.type }}</p>
-    <p><strong>Fecha de nacimiento:</strong> {{ animal.birth_date }}</p>
-    <p><strong>Descripción:</strong> {{ animal.description }}</p>
+    <h1 class="titulo">{{ animal.name }}</h1>
 
-    <p class="status" [ngClass]="animal.status.toLowerCase()">
-      <strong>Estado:</strong> {{ animal.status }}
+    <div class="card">
 
-      <span *ngIf="animal.status.toLowerCase() === 'available'">✔️</span>
-      <span *ngIf="animal.status.toLowerCase() === 'pending'">⏳</span>
-      <span *ngIf="animal.status.toLowerCase() === 'adopted'">❌</span>
-    </p>
+      <p><strong>Tipo:</strong> {{ animal.type }}</p>
+      <p><strong>Fecha de nacimiento:</strong> {{ animal.birth_date }}</p>
+      <p><strong>Descripción:</strong> {{ animal.description }}</p>
 
+      <p class="status" [ngClass]="animal.status.toLowerCase()">
+        <strong>Estado:</strong> {{ animal.status }}
+
+        <span *ngIf="animal.status.toLowerCase() === 'available'">✔️</span>
+        <span *ngIf="animal.status.toLowerCase() === 'pending'">⏳</span>
+        <span *ngIf="animal.status.toLowerCase() === 'adopted'">❌</span>
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- MENSAJE NO ENCONTRADO -->
+  <div *ngIf="!loading && animalNotFound" class="no-animal-message">
+    <p>No se encontró el animal.</p>
   </div>
 
   <!-- BOTÓN VOLVER -->
