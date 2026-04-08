@@ -3,6 +3,7 @@ import { ApiBody, ApiTags } from "@nestjs/swagger";
 import { Animal } from "src/common/database/entities/animal.entity";
 import { CreateAnimalDto } from "./dto/create-animal.dto";
 import { AnimalService } from "./services/animal.service";
+import { FilterDataDto } from "src/common/dto/filter.data.dto";
 
 @ApiTags(AnimalController.name)
 @Controller('animal')
@@ -16,8 +17,8 @@ export class AnimalController {
     }
 
     @Post()
-    findAll() {
-        return this.animalService.findAll();
+    findAll(@Body() filter: FilterDataDto ) {
+        return this.animalService.findAll(filter);
     }
 
     @Get(':id')

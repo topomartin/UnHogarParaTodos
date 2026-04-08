@@ -3,6 +3,7 @@ import { Utils } from '../../../common/utils/utils'
 import { AnimalRepositoryService } from './animal.repository.service';
 import { Animal } from 'src/common/database/entities/animal.entity';
 import { CreateAnimalDto } from '../dto/create-animal.dto';
+import { FilterDataDto } from 'src/common/dto/filter.data.dto';
 
 @Injectable()
 export class AnimalService {
@@ -17,8 +18,8 @@ export class AnimalService {
     return await this. userRepositoryService.findOne(filter);
   }
 
-  async findAll(): Promise<Animal[]>{
-    return await this.userRepositoryService.findAll();
+  async findAll(filter: FilterDataDto): Promise<Animal[]>{
+    return await this.userRepositoryService.findAll(filter);
   }
 
   async update(id, parcialUser ){
