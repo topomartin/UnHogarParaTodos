@@ -78,7 +78,7 @@ export class EditarPerfilComponent implements OnInit {
     this.authService.updateProfile(this.user.id, updateData).subscribe(
       res => {
         alert('Perfil actualizado correctamente!');
-        this.router.navigate(['/perfil']);
+        this.router.navigate(['/profile']);
       },
       err => {
         console.error('Error al actualizar perfil', err);
