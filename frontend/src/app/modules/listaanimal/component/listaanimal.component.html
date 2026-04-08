@@ -2,6 +2,7 @@
 
   <h1 class="titulo">Lista de Animales</h1>
 
+  <!-- FILTERS -->
   <div class="filters">
     <input type="text"
            placeholder="Buscar por nombre"
@@ -10,15 +11,12 @@
 
     <select [(ngModel)]="selectedType" (change)="applyFilters()">
       <option value="">Todos los tipos</option>
-      <option value="dog">Dog</option>
-      <option value="cat">Cat</option>
+      <option *ngFor="let type of typeOptions" [value]="type">{{ type }}</option>
     </select>
 
     <select [(ngModel)]="selectedStatus" (change)="applyFilters()">
       <option value="">Todos los estados</option>
-      <option value="available">Available</option>
-      <option value="pending">Pending</option>
-      <option value="adopted">Adopted</option>
+      <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
     </select>
   </div>
 
@@ -59,6 +57,12 @@
 
   </div>
 
+  <!-- EMPTY STATE -->
+  <div class="empty-state" *ngIf="paginatedAnimals.length === 0">
+    No hay animales que mostrar.
+  </div>
+
+  <!-- PAGINATION -->
   <div class="pagination" *ngIf="animales.length > itemsPerPage">
     <button class="btn" (click)="goToPreviousPage()" [disabled]="currentPage === 1">
       Anterior

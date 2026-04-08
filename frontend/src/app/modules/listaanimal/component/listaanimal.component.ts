@@ -23,6 +23,8 @@ export class ListaAnimalComponent implements OnInit {
   public searchText: string = '';
   public selectedType: string = '';
   public selectedStatus: string = '';
+  public typeOptions: string[] = [];
+  public statusOptions: string[] = [];
   public filteredAnimals: any[] = [];
 
   constructor(
@@ -41,7 +43,13 @@ export class ListaAnimalComponent implements OnInit {
       (data) => {
         this.animales = data;
 
+        // Filter
+        this.typeOptions = Array.from(new Set(this.animales.map(a => a.type)));
+        this.statusOptions = Array.from(new Set(this.animales.map(a => a.status)));
+
         this.filteredAnimals = [...this.animales];
+
+        // Pagination
         this.updatePagination();
 
         console.log('Animales:', this.animales);
