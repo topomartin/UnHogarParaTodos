@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-
+import { Router } from '@angular/router';
+import { AuthenticationService } from "../../../services/authentication.service";
 
 export interface MenuToggleEvent {
   isMenuOpen: boolean;
@@ -21,12 +22,26 @@ export class NavigationBarComponent implements OnInit {
 
   public isMenuOpen = true;
 
-  constructor() {}
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.authService.user$.subscribe(user => {
+      this.currentUser = user ? user.username : '';
+    });
   }
 
   logout(): void {
+    // Limpiar sesión
+    this.authService.logout();
+    this.currentUser = '';      // borra la sesión visible en la barra (el nombre de usuario)
+
+    // localStorage.removeItem('access_token'); // si usas JWT (limpiar token)
+
+    // Redirigir a login
+    this.router.navigate(['/login']);
   }
 
   public toggleMenu(): void {

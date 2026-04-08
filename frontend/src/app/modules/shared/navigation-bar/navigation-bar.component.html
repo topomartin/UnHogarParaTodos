@@ -11,11 +11,11 @@
       <mat-icon>account_box</mat-icon>
     </div>
     <mat-menu #menu="matMenu" xPosition="before">
-      <button mat-menu-item (click)="logout()">
+      <button mat-menu-item *ngIf="!currentUser" [routerLink]="['/login']">
         <mat-icon>login</mat-icon>
         <span>Login</span>
       </button>
-      <button mat-menu-item (click)="logout()">
+      <button mat-menu-item *ngIf="currentUser" (click)="logout()">
         <mat-icon>logout</mat-icon>
         <span>Logout</span>
       </button>
