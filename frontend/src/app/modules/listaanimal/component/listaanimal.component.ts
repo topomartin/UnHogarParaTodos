@@ -13,11 +13,17 @@ export class ListaAnimalComponent implements OnInit {
 
   public animales: any[] = [];
 
-  // Paginacion
+  // Pagination
   public paginatedAnimals: any[] = [];
   public itemsPerPage: number = 5;
   public currentPage: number = 1;
   public totalPages: number = 1;
+
+  // Filter
+  public searchText: string = '';
+  public selectedType: string = '';
+  public selectedStatus: string = '';
+  public filteredAnimals: any[] = [];
 
   constructor(
     private router: Router,
@@ -35,7 +41,9 @@ export class ListaAnimalComponent implements OnInit {
       (data) => {
         this.animales = data;
 
+        this.filteredAnimals = [...this.animales];
         this.updatePagination();
+
         console.log('Animales:', this.animales);
 
         this.cdr.detectChanges();
@@ -46,12 +54,13 @@ export class ListaAnimalComponent implements OnInit {
     );
   }
 
+  // Pagination
   updatePagination() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
 
-    this.paginatedAnimals = this.animales.slice(startIndex, endIndex);
-    this.totalPages = Math.ceil(this.animales.length / this.itemsPerPage);
+    this.paginatedAnimals = this.filteredAnimals.slice(startIndex, endIndex);
+    this.totalPages = Math.ceil(this.filteredAnimals.length / this.itemsPerPage);
   }
 
   goToNextPage() {
@@ -68,8 +77,28 @@ export class ListaAnimalComponent implements OnInit {
     }
   }
 
+  // Filter
+  applyFilters() {
+    this.filteredAnimals = this.animales.filter(animal => {
+      const matchesText = animal.name.toLowerCase().includes(this.searchText.toLowerCase());
+
+      const matchesType = this.selectedType
+        ? animal.type.toLowerCase() === this.selectedType.toLowerCase()
+        : true;
+
+      const matchesStatus = this.selectedStatus
+        ? animal.status.toLowerCase() === this.selectedStatus.toLowerCase()
+        : true;
+
+      return matchesText && matchesType && matchesStatus;
+    });
+
+    this.currentPage = 1;
+    this.updatePagination();
+  }
+
   verDetalle(id: number) {
-  this.router.navigate(['/infoanimal', id]);
-}
+    this.router.navigate(['/infoanimal', id]);
+  }
 
 }

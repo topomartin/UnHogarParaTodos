@@ -2,6 +2,26 @@
 
   <h1 class="titulo">Lista de Animales</h1>
 
+  <div class="filters">
+    <input type="text"
+           placeholder="Buscar por nombre"
+           [(ngModel)]="searchText"
+           (input)="applyFilters()" />
+
+    <select [(ngModel)]="selectedType" (change)="applyFilters()">
+      <option value="">Todos los tipos</option>
+      <option value="dog">Dog</option>
+      <option value="cat">Cat</option>
+    </select>
+
+    <select [(ngModel)]="selectedStatus" (change)="applyFilters()">
+      <option value="">Todos los estados</option>
+      <option value="available">Available</option>
+      <option value="pending">Pending</option>
+      <option value="adopted">Adopted</option>
+    </select>
+  </div>
+
   <div class="lista">
 
     <div class="card" *ngFor="let animal of paginatedAnimals">

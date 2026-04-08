@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NavigationMenuComponent } from "./modules/shared/navigation-menu.component/navigation-menu.component";
 import { NavigationBarComponent } from "./modules/shared/navigation-bar/navigation-bar.component";
 import { CommonModule } from "@angular/common";
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -27,7 +28,8 @@ import { CommonModule } from "@angular/common";
     MaterialModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   bootstrap:[AppComponent]
 })
