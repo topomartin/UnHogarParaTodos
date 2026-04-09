@@ -16,6 +16,6 @@ export class FilterDataDto {
 
   @ApiProperty({ required: false })
   @IsNumber()
-  take: number = 2;
+  take: number = 10;
 
 }
