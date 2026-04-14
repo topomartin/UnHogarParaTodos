@@ -36,7 +36,7 @@ async function bootstrap() {
     .setTitle('Un Hogar para Todos')
     .setDescription('Un Hogar para Todos API documentation')
     .setVersion('1.0')
-    .addTag('animales')
+    .addTag('--')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   const swaggerApiURL = `${appConfig.app.globalPrefix}/${appConfig.app.swaggerURL}/`;
