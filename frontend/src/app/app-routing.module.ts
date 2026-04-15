@@ -6,6 +6,8 @@ import { VerPerfilComponent } from './modules/VerPerfil/component/verperfil.comp
 import { EditarPerfilComponent } from './modules/editarperfil/component/editarperfil.component';
 import { ListaAnimalComponent } from "./modules/listaanimal/component/listaanimal.component";
 import { DetalleAnimalComponent } from "./modules/detallesanimal/component/detalleanimal.component";
+import { AdoptarAnimalComponent } from "./modules/adoptaranimal/component/adoptaranimal.component";
+import { RegisterFosterComponent } from "./modules/registerfoster/component/registerfoster.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -14,7 +16,9 @@ const routes: Routes = [
   { path: 'listaanimal', component: ListaAnimalComponent },
   { path: 'infoanimal/:id', component: DetalleAnimalComponent },
   { path: 'profile', component: VerPerfilComponent },
-  { path: 'edit-profile', component: EditarPerfilComponent }
+  { path: 'edit-profile', component: EditarPerfilComponent },
+  { path: 'adopt/:id', component: AdoptarAnimalComponent },
+  { path: 'registerfoster', component: RegisterFosterComponent }
 ];
 
 @NgModule({

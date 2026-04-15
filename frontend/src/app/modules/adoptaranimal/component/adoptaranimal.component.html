@@ -1,0 +1,116 @@
+<div class="container">
+
+  <!-- 🔥 NOMBRE DEL ANIMAL -->
+  <h1 class="title">
+    Adoptar a {{ animalName }}
+  </h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!-- 👤 DATOS PERSONALES -->
+    <div class="section">
+      <h2>Datos personales</h2>
+
+      <input placeholder="Nombre completo" formControlName="fullName">
+      <input placeholder="Email" formControlName="email">
+      <input placeholder="Teléfono" formControlName="phone">
+      <input placeholder="Dirección" formControlName="address">
+
+      <div class="row">
+        <input placeholder="Piso (opcional)" formControlName="floor">
+        <input placeholder="Puerta (opcional)" formControlName="door">
+      </div>
+
+      <select formControlName="hasJob">
+        <option value="">¿Tienes trabajo?</option>
+        <option value="yes">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+      <!-- trabajo solo si tiene -->
+      <input *ngIf="form.get('hasJob')?.value === 'yes'" placeholder="¿Cuál es tu trabajo?" formControlName="job">
+    </div>
+
+    <!-- 🧑‍🤝‍🧑 SITUACIÓN PERSONAL -->
+    <div class="section">
+      <h2>Situación personal</h2>
+
+      <input placeholder="¿Cuántas personas viven contigo?" formControlName="peopleInHome">
+
+      <input placeholder="Edades de las personas" formControlName="agesOfPeople">
+
+      <input placeholder="Parentesco (familia, pareja...)" formControlName="relationship">
+
+      <select formControlName="allergies">
+        <option value="">¿Alguien es alérgico?</option>
+        <option value="no">No</option>
+        <option value="yes">Sí</option>
+      </select>
+    </div>
+
+    <!-- 🏠 DOMICILIO -->
+    <div class="section">
+      <h2>Datos del domicilio</h2>
+
+      <select formControlName="homeType">
+        <option value="">Tipo de vivienda</option>
+        <option value="house">Casa</option>
+        <option value="apartment">Apartamento</option>
+      </select>
+
+      <input placeholder="Metros cuadrados" formControlName="sizeM2">
+
+      <select formControlName="movingSoon">
+        <option value="">¿Planeas mudarte pronto?</option>
+        <option value="no">No</option>
+        <option value="yes">Sí</option>
+      </select>
+
+      <select formControlName="outdoorSpace">
+        <option value="">¿Tiene exterior?</option>
+        <option value="garden">Jardín</option>
+        <option value="terrace">Terraza</option>
+        <option value="patio">Patio</option>
+        <option value="none">Ninguno</option>
+      </select>
+    </div>
+
+    <!-- 🐾 MOTIVACIÓN Y EXPERIENCIA -->
+    <div class="section">
+      <h2>Motivación y experiencia</h2>
+
+      <!-- Por qué quiere adoptar -->
+      <textarea placeholder="¿Por qué deseas adoptar este animal?" formControlName="reasonAdoption">
+  </textarea>
+
+      <!-- Tiene otros animales -->
+      <select formControlName="hasOtherAnimals">
+        <option value="">¿Tienes otros animales en casa?</option>
+        <option value="no">No</option>
+        <option value="yes">Sí</option>
+      </select>
+
+      <input *ngIf="form.get('hasOtherAnimals')?.value === 'yes'" placeholder="¿Cuántos animales tienes?"
+        formControlName="otherAnimalsCount">
+
+      <!-- Tenía animales antes -->
+      <select formControlName="hadAnimalsBefore">
+        <option value="">¿Has tenido animales antes?</option>
+        <option value="no">No</option>
+        <option value="yes">Sí</option>
+      </select>
+
+      <textarea *ngIf="form.get('hadAnimalsBefore')?.value === 'yes'" placeholder="¿Qué pasó con ellos?"
+        formControlName="whatHappenedPreviousAnimals">
+  </textarea>
+
+    </div>
+
+    <!-- BOTÓN -->
+    <button type="submit" [disabled]="form.invalid">
+      Enviar solicitud de adopción
+    </button>
+
+  </form>
+
+</div>

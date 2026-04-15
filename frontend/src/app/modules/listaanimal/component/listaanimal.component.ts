@@ -109,4 +109,8 @@ export class ListaAnimalComponent implements OnInit {
     this.router.navigate(['/infoanimal', id]);
   }
 
+  adoptarAnimal(id: number) {
+  this.router.navigate(['/adopt', id]);
+}
+
 }

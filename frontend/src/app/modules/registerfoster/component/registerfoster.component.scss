@@ -1,0 +1,27 @@
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.section {
+  background: #f5f5f5;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+}
+
+.section input,
+.section select,
+.section textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
