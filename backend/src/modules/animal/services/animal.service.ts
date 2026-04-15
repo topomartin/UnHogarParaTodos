@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { Utils } from '../../../common/utils/utils'
-import { AnimalRepositoryService } from './animal.repository.service';
+import { Utils } from '../../../common/utils/utils';
 import { Animal } from 'src/common/database/entities/animal.entity';
-import { CreateAnimalDto } from '../dto/create-animal.dto';
-import { FilterDataDto } from 'src/common/dto/filter.data.dto';
+import { CreateAnimalDto } from '../dto/animal-create.dto';
+import { AnimalRepositoryService } from './animal.repository.service';
+import { AnimalSearchDto } from '../dto/animal-search.dto';
+import { IPaginatedResult } from 'src/common/knowledge/interfaces';
+
 
 @Injectable()
 export class AnimalService {
@@ -18,7 +20,7 @@ export class AnimalService {
     return await this. userRepositoryService.findOne(filter);
   }
 
-  async findAll(filter: FilterDataDto): Promise<Animal[]>{
+  async findAll(filter: AnimalSearchDto): Promise<IPaginatedResult<Animal>>{
     return await this.userRepositoryService.findAll(filter);
   }
 

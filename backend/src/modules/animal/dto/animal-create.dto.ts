@@ -9,7 +9,7 @@ import {
   IsDateString,
 } from 'class-validator';
 import { AnimalStatus, AnimalType } from "src/common/knowledge/enums";
-import { Type } from 'class-transformer';
+
 
 export class CreateAnimalDto {
   @ApiProperty({ description: 'Nombre del animal', required: true })
@@ -17,7 +17,7 @@ export class CreateAnimalDto {
   @IsNotEmpty()
   name!: string;
 
-    @ApiProperty({ description: `Valores posibles: ${Object.values(AnimalType).join(', ')} `, required: true })
+  @ApiProperty({ description: `Valores posibles: ${Object.values(AnimalType).join(', ')} `, required: true, enum: AnimalType})
   @IsNotEmpty()
   @IsEnum(AnimalType)
   type: AnimalType | undefined;
@@ -32,7 +32,7 @@ export class CreateAnimalDto {
   @IsNotEmpty()
   description!: string;
 
-  @ApiProperty({ required: true })
+  @ApiProperty({ required: true, enum: AnimalStatus })
   @IsNotEmpty()
   @IsEnum(AnimalStatus)
   status: AnimalStatus | undefined;
