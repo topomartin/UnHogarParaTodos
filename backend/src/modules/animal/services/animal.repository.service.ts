@@ -44,13 +44,21 @@ export class AnimalRepositoryService {
         if (filter){
             Object.entries(filter).forEach(([key, value])=>{
                 console.log(key, value);
-                if (value != null && key == 'name') query.andWhere(`animal.${key} LIKE :value, { value: '%${value}%' }`);
-            })
+                if (value != null && key == 'name') query.andWhere(`animal.${key} LIKE :value`,
+                    {
+                        value: `%${value}%`});
+                    }
+                )
         }
         if (range){
             //TODO: filter date fields to allow range filter.
             if (range.from && range.to){
-                query.andWhere(`animal.${range.field} BETWEEN :from AND :to`, { from: `${range.from}`, to: `${range.to}`});
+                query.andWhere(`animal.${range.field} BETWEEN :from AND :to`,
+                    {
+                        from: range.from,
+                        to: range.to,
+                    }
+                );
             }
         }
         if (sort){
@@ -58,6 +66,7 @@ export class AnimalRepositoryService {
             const order = sort.order?.toUpperCase() === 'ASC' ? 'ASC' : 'DESC';
             query.orderBy(`${sort.field}`, order);
         }
+
         query.take(take).skip(skip);
 
         const [data, total] = await query.getManyAndCount();

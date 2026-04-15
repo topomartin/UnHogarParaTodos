@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post } from "@nestjs/common";
 import { ApiBody, ApiOkResponse, ApiTags } from "@nestjs/swagger";
 import { Animal } from "src/common/database/entities/animal.entity";
 import { CreateAnimalDto } from "./dto/animal-create.dto";
@@ -20,6 +20,7 @@ export class AnimalController {
     }
 
     @ApiOkResponse({ type: PaginatedAnimalDto })
+    @HttpCode(200)
     @Post()
     findAll(@Body() filter: AnimalSearchDto ): Promise<IPaginatedResult<Animal>> {
         return this.animalService.findAll(filter);
