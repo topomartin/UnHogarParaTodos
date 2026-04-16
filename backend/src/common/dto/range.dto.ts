@@ -2,7 +2,7 @@ import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsOptional } from 'class-validator';
 
 export class RangeDto<T = string> {
-    @ApiPropertyOptional()
+    @ApiPropertyOptional({ example: '<nombre campo>' })
     field?: string;
 
     @ApiPropertyOptional()

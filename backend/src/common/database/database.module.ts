@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
+import { QueryBuilderHelper } from './queryBuilder.helper';
 
 const databaseConfig = require(join(process.cwd(), 'config', 'database.config'));
 
 @Module({
+  providers:[QueryBuilderHelper],
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -18,6 +20,6 @@ const databaseConfig = require(join(process.cwd(), 'config', 'database.config'))
       logging: databaseConfig.logging,
     }),
   ],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, QueryBuilderHelper],
 })
 export class DatabaseModule {}
