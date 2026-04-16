@@ -1,31 +1,38 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
-import { ApiBody, ApiTags } from "@nestjs/swagger";
+import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post } from "@nestjs/common";
+import { ApiBody, ApiOkResponse, ApiTags } from "@nestjs/swagger";
 import { Animal } from "src/common/database/entities/animal.entity";
-import { CreateAnimalDto } from "./dto/create-animal.dto";
+import { CreateAnimalDto } from "./dto/animal-create.dto";
 import { AnimalService } from "./services/animal.service";
-import { FilterDataDto } from "src/common/dto/filter.data.dto";
+import { AnimalSearchDto } from "./dto/animal-search.dto";
+import { IPaginatedResult } from "src/common/knowledge/interfaces";
+import { PaginatedAnimalDto } from "./dto/paginated-swagger-animal.dto";
 
 @ApiTags(AnimalController.name)
 @Controller('animal')
 export class AnimalController {
     constructor(private animalService: AnimalService) {}
 
+    @ApiOkResponse({ type: Animal })
     @Post('create')
     @ApiBody({ type: CreateAnimalDto })
     create(@Body() createAnimalDto: CreateAnimalDto): Promise<Animal> {
         return this.animalService.create(createAnimalDto);
     }
 
+    @ApiOkResponse({ type: PaginatedAnimalDto })
+    @HttpCode(200)
     @Post()
-    findAll(@Body() filter: FilterDataDto ) {
+    findAll(@Body() filter: AnimalSearchDto ): Promise<IPaginatedResult<Animal>> {
         return this.animalService.findAll(filter);
     }
 
+    @ApiOkResponse({ type: Animal })
     @Get(':id')
     findOne(@Param('id') id: string): Promise<Animal|null|undefined> {
         return this.animalService.findOne({id});
     }
 
+    @ApiOkResponse({ type: Animal })
     @Patch(':id')
     update(@Param('id') id: string, @Body() updateAnimalDto: CreateAnimalDto) {
         return this.animalService.update(id, updateAnimalDto);

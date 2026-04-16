@@ -4,14 +4,18 @@ import { Like, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { handleMySQLError } from "src/common/database/mysql.error.handler";
 import { Animal } from "src/common/database/entities/animal.entity";
-import { CreateAnimalDto } from "../dto/create-animal.dto";
-import { FilterDataDto } from "src/common/dto/filter.data.dto";
+import { CreateAnimalDto } from "../dto/animal-create.dto";
+import { AnimalSearchDto } from "../dto/animal-search.dto";
+import { IPaginatedResult, IQueryConfig } from "src/common/knowledge/interfaces";
+import { QueryBuilderHelper } from "src/common/database/queryBuilder.helper";
+import { queryConfig } from "../config/query.config";
 
 @Injectable()
 export class AnimalRepositoryService {
     private logger = new Logger(AnimalRepositoryService.name);
     constructor( @InjectRepository(Animal)
-    private animalRepository: Repository<Animal>,){}
+    private animalRepository: Repository<Animal>,
+    private queryBuilderHelper: QueryBuilderHelper){}
 
 
     async create(cretateAnimalDto: CreateAnimalDto): Promise<Animal | null | undefined>{
@@ -29,17 +33,19 @@ export class AnimalRepositoryService {
             this.handleError(e);
         }
     }
-    async findAll(filterData: FilterDataDto): Promise<Animal[]>{
-        let {filter, order,  take, skip} = filterData ;
-        let data = await this.animalRepository.find({
-            where: filter.name ? {name: Like(`%${filter.name}%`)}: filter,
-            order,
-            skip,
-            take
+    async findAll(filterData: AnimalSearchDto): Promise<IPaginatedResult<Animal>>{
 
-        });
-        return data.map(({ ...animal }) => animal as Animal);
+        const query = this.animalRepository.createQueryBuilder('animal');
+        const {qb, take, page} = await this.queryBuilderHelper.SelectQueryBuilder(query, queryConfig, filterData )
+        const [data, total] = await qb.getManyAndCount();
+
+        return {
+            data: data.map(({ ...animal }) => animal as Animal),
+            meta: {total, page, lastPage: Math.ceil(total / take), limit: take }
+        };
     }
+
+
     async update(id, parcialAnimal){
         try{
             return this.animalRepository.update({id}, parcialAnimal);
