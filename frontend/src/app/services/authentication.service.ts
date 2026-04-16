@@ -31,7 +31,7 @@ export class AuthenticationService {
 
   constructor(private apiService: ApiService){}
 
-  login({ username, password }: ILoginUser): Observable<any> {
+  login({ username, password }: ILoginUser): Observable<void> {
     return this.apiService.post('auth/login', { username, password }).pipe(
       tap((response: any) => {
 
