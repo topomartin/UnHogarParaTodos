@@ -32,8 +32,8 @@ export class User {
     @Column({ type: "timestamp", nullable: true, default: null })
     deleted_at!: Date;
 
-    @OneToMany(() => Adoption, (adoption) => adoption.id)
-    adoption_!: Adoption[]
+    @OneToMany(() => Adoption, (adoption) => adoption.user)
+    adoptions!: Adoption[]
 
 
 

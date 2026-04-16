@@ -36,7 +36,7 @@ export class Animal {
     @Column({ type: "timestamp", nullable: true, default: null })
     updated_at!: Date;
 
-    @OneToMany(() => Adoption, (adoption) => adoption.id)
-    adoption_!: Adoption[]
+    @OneToMany(() => Adoption, (adoption) => adoption.animal)
+    adoptions!: Adoption[]
 
 }

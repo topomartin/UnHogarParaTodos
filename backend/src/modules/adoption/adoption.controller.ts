@@ -10,27 +10,28 @@ import { AdoptionSearchDto } from "./dto/adoption-search.dto";
 @ApiTags(AdoptionController.name)
 @Controller('adoption')
 export class AdoptionController {
+
     constructor(private adoptionService: AdoptionService) {}
 
     @ApiOkResponse({ type: Adoption })
     @Post('create')
     @ApiBody({ type: CreateAdoptionDto })
-    create(@Body() createAnimalDto: CreateAdoptionDto): Promise<Adoption> {
+    create(@Body() createAnimalDto: CreateAdoptionDto): Promise<Adoption | null | undefined> {
         return this.adoptionService.create(createAnimalDto);
     }
 
     @ApiOkResponse({ type: PaginatedAdoptionDto })
     @HttpCode(200)
     @Post()
-    findAll(@Body() filter: AdoptionSearchDto ): Promise<IPaginatedResult<Adoption>> {
+    findAll(@Body() filter: AdoptionSearchDto ): Promise<IPaginatedResult<Adoption | null | undefined>> {
         return this.adoptionService.findAll(filter);
     }
 
     @ApiOkResponse({ type: Adoption })
     @Get(':id')
-    findOne(@Param('id') id: string): Promise<Adoption|null|undefined> {
+    findOne(@Param('id') id: string): Promise<Adoption | null | undefined> {
         return this.adoptionService.findOne({id});
-    }   
+    }
 
     @ApiOkResponse({ type: Adoption })
     @Patch(':id')

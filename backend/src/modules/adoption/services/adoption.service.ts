@@ -3,12 +3,13 @@ import { Adoption } from "src/common/database/entities/adoption.entity";
 import { CreateAdoptionDto } from "../dto/adoption.create.dto";
 import { IPaginatedResult } from "src/common/knowledge/interfaces";
 import { AdoptionSearchDto } from "../dto/adoption-search.dto";
+import { AdoptionRepositoryService } from "./adoption.repository.service";
 
 @Injectable()
 export class  AdoptionService {
-    create(createAdoptionDto: CreateAdoptionDto): Promise<Adoption> {
-    //return this.adoptionService.create(createAdoptionDto);
-    return {} as any;
+    constructor(private adoptionRepositoryService: AdoptionRepositoryService){}
+    create(createAdoptionDto: CreateAdoptionDto): Promise<Adoption | null | undefined> {
+    return this.adoptionRepositoryService.create(createAdoptionDto);
     }
     findAll( filter: AdoptionSearchDto ): Promise<IPaginatedResult<Adoption>> {
         //return this.adoptionService.findAll(filter);

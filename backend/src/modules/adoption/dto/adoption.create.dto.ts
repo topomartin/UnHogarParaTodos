@@ -1,30 +1,26 @@
 import { ApiProperty } from "@nestjs/swagger/dist/decorators/api-property.decorator"
 import {
-    IsString,
     IsNotEmpty,
-    MinLength,
-    IsBoolean,
     IsEnum,
-    IsDate,
-    IsDateString,
+    IsNumber,
 } from 'class-validator';
 import { AdoptionStatus } from "src/common/knowledge/enums";
 
 
 export class CreateAdoptionDto {
-    @ApiProperty({ description: 'Nombre del animal', required: true })
-    @IsString()
+    @ApiProperty({ description: 'Id del animal', required: true })
+    @IsNumber()
     @IsNotEmpty()
-    name!: string;
+    animal_id!: number;
 
-    @ApiProperty({ description: '"25-12-2025"', required: true })
-    @IsDateString()
+    @ApiProperty({ description: 'Id del usuario', required: true })
+    @IsNumber()
     @IsNotEmpty()
-    date!: string;
+    user_id!: number;
 
-    @ApiProperty({ required: false })
-    @IsString()
+    @ApiProperty({ required: true, enum: AdoptionStatus })
     @IsNotEmpty()
-    description!: string;
+    @IsEnum(AdoptionStatus)
+    status: AdoptionStatus | undefined;
 
 }

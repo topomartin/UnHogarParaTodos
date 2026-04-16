@@ -4,5 +4,8 @@ import { IQueryConfig } from "src/common/knowledge/interfaces";
 export const queryConfig: IQueryConfig<Animal> = {
     alias: 'animal',
     rangeFields: ['birth_date'],
-    sortFields: ['name']
+    sortFields: ['name'],
+    joins: [
+        { property: 'adoptions', alias: 'adoption', type: 'left'},
+    ]
 }

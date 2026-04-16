@@ -1,37 +1,35 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { ValidateNested, IsOptional, IsString, IsEnum, IsDateString } from 'class-validator';
+import { ValidateNested, IsOptional, IsString, IsEnum, IsDateString, IsNumber } from 'class-validator';
 import { PaginatorDto } from 'src/common/dto/paginator.dto';
 import { RangeDto } from 'src/common/dto/range.dto';
 import { SortDto } from 'src/common/dto/sort.dto';
-import { AnimalStatus, AnimalType } from 'src/common/knowledge/enums';
+import { AdoptionStatus, AnimalStatus, AnimalType } from 'src/common/knowledge/enums';
 
 export class AdoptionFilterDto {
-  @ApiPropertyOptional({ description: 'Filtrar por nombre' })
+
+  @ApiPropertyOptional({ description: 'Filtrar por id de adopción' })
   @IsOptional()
-  @IsString()
-  name?: string;
+  @IsNumber()
+  id?: number;
+
+
+  @ApiPropertyOptional({ description: 'Filtrar por usuario' })
+  @IsOptional()
+  @IsNumber()
+  user_id?: number;
+
+  @ApiPropertyOptional({ description: 'Filtrar por animal' })
+  @IsOptional()
+  @IsNumber()
+  animal_id?: number;
 
   @ApiPropertyOptional({
-    description: `Filtrar por tipo: ${Object.values(AnimalType).join(', ')}`,
+    description: `Filtrar por estado: ${Object.values(AdoptionStatus).join(', ')}`,
   })
   @IsOptional()
-  @IsEnum(AnimalType)
-  type?: AnimalType;
-
-  @ApiPropertyOptional({
-    description: `Filtrar por estado: ${Object.values(AnimalStatus).join(', ')}`,
-  })
-  @IsOptional()
-  @IsEnum(AnimalStatus)
-  status?: AnimalStatus;
-
-  @ApiPropertyOptional({
-    description: 'Buscar en descripción',
-  })
-  @IsOptional()
-  @IsString()
-  description?: string;
+  @IsEnum(AdoptionStatus)
+  status?: AdoptionStatus;
 }
 
 export class AdoptionSearchDto extends PaginatorDto {
