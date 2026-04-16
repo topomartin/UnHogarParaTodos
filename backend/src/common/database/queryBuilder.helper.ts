@@ -37,11 +37,18 @@ export class QueryBuilderHelper {
         if (filter){
             Object.entries(filter).forEach(([key, value])=>{
                 console.log(key, value);
-                if (value != null && key == 'name') qb.andWhere(`${queryConfig.alias}.${key} LIKE :value`,
-                    {
-                        value: `%${value}%`});
+                if (value != null) {
+                    if (key === 'name') {
+                        qb.andWhere(`${queryConfig.alias}.${key} LIKE :${key}`, {
+                            [key]: `%${value}%`
+                        });
+                    } else {
+                        qb.andWhere(`${queryConfig.alias}.${key} = :${key}`, {
+                            [key]: value
+                        });
                     }
-                )
+                }
+            })
         }
         if (range){
             if (range.from && range.to && queryConfig.rangeFields.includes(range.field)){

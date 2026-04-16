@@ -7,22 +7,26 @@
     <input type="text"
            placeholder="Buscar por nombre"
            [(ngModel)]="searchText"
-           (input)="applyFilters()" />
+           (input)="onSearchChange()"
+           [disabled]="loading" />
 
-    <select [(ngModel)]="selectedType" (change)="applyFilters()">
+    <select [(ngModel)]="selectedType" (change)="applyFilters()" [disabled]="loading">
       <option value="">Todos los tipos</option>
-      <option *ngFor="let type of typeOptions" [value]="type">{{ type }}</option>
+      <option value="cat">Gato</option>
+      <option value="dog">Perro</option>
     </select>
 
-    <select [(ngModel)]="selectedStatus" (change)="applyFilters()">
+    <select [(ngModel)]="selectedStatus" (change)="applyFilters()" [disabled]="loading">
       <option value="">Todos los estados</option>
-      <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+      <option value="available">Disponible</option>
+      <option value="pending">Pendiente</option>
+      <option value="adopted">Adoptado</option>
     </select>
   </div>
 
   <div class="lista">
 
-    <div class="card" *ngFor="let animal of paginatedAnimals">
+    <div class="card" *ngFor="let animal of animales">
 
       <!-- INFO -->
       <div class="info">
@@ -58,21 +62,25 @@
   </div>
 
   <!-- EMPTY STATE -->
-  <div class="empty-state" *ngIf="paginatedAnimals.length === 0">
+  <div class="empty-state" *ngIf="animales.length === 0">
     No hay animales que mostrar.
   </div>
 
   <!-- PAGINATION -->
-  <div class="pagination" *ngIf="animales.length > itemsPerPage">
-    <button class="btn" (click)="goToPreviousPage()" [disabled]="currentPage === 1">
+  <div class="pagination" *ngIf="totalItems > itemsPerPage">
+    <button class="btn" (click)="goToPreviousPage()" [disabled]="currentPage === 1 || loading">
       Anterior
     </button>
 
     <span>Página {{ currentPage }} de {{ totalPages }}</span>
 
-    <button class="btn" (click)="goToNextPage()" [disabled]="currentPage === totalPages">
+    <button class="btn" (click)="goToNextPage()" [disabled]="currentPage === totalPages || loading">
       Siguiente
     </button>
+  </div>
+
+  <div *ngIf="loading" class="loading-overlay">
+    <div class="spinner"></div>
   </div>
 
 </div>
