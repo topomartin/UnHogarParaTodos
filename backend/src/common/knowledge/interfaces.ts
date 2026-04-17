@@ -13,5 +13,12 @@ export interface IPaginatedResult<T> {
 export interface IQueryConfig<T> {
     alias: string,
     rangeFields: (keyof T)[],
-    sortFields: (keyof T)[]
+    sortFields: (keyof T)[],
+    joins?: IQueryJoin[];
+}
+
+export interface IQueryJoin {
+    property: string;
+    alias: string;
+    type?: 'left' | 'inner' | 'right';
 }

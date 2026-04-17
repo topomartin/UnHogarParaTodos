@@ -11,7 +11,7 @@ import { IPaginatedResult } from 'src/common/knowledge/interfaces';
 export class AnimalService {
   constructor(private userRepositoryService: AnimalRepositoryService){}
 
-  async create(createAnimalDto: CreateAnimalDto): Promise<any>{
+  async create(createAnimalDto: CreateAnimalDto): Promise<Animal | null | undefined>{
     //let birthDate = new Date(createAnimalDto.birth_date);
     return await this.userRepositoryService.create(createAnimalDto);
   }

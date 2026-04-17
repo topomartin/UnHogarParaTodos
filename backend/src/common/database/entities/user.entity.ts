@@ -1,5 +1,6 @@
 import { UserRole } from 'src/common/knowledge/enums';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToMany } from 'typeorm';
+import { Adoption } from './adoption.entity';
 
 @Entity()
 export class User {
@@ -30,5 +31,10 @@ export class User {
 
     @Column({ type: "timestamp", nullable: true, default: null })
     deleted_at!: Date;
+
+    @OneToMany(() => Adoption, (adoption) => adoption.user)
+    adoptions!: Adoption[]
+
+
 
 }

@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { AnimalStatus, AnimalType } from "src/common/knowledge/enums";
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Adoption } from "./adoption.entity";
 
 @Entity()
 export class Animal {
@@ -34,5 +35,8 @@ export class Animal {
     @ApiProperty()
     @Column({ type: "timestamp", nullable: true, default: null })
     updated_at!: Date;
+
+    @OneToMany(() => Adoption, (adoption) => adoption.animal)
+    adoptions!: Adoption[]
 
 }
