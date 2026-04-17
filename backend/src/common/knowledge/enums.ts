@@ -22,3 +22,10 @@ export enum AdoptionStatus {
   APPROVED = 'approved',
   REJECTED = 'rejected'
 }
+
+export enum FosterProfileStatus {
+  APPROVED = 'approved',
+  PENDING = 'pending',
+  REJECTED ='rejected'
+
+}
