@@ -101,11 +101,15 @@ export class ListaAnimalComponent implements OnInit {
 
     this.searchTimeout = setTimeout(() => {
       this.applyFilters();
-    }, 500); 
+    }, 500);
   }
 
   verDetalle(id: number) {
     this.router.navigate(['/infoanimal', id]);
   }
+
+  adoptarAnimal(id: number) {
+  this.router.navigate(['/adopt', id]);
+}
 
 }

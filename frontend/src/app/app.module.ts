@@ -11,6 +11,8 @@ import { VerPerfilComponent } from "./modules/VerPerfil/component/verperfil.comp
 import { EditarPerfilComponent } from "./modules/editarperfil/component/editarperfil.component";
 import { ListaAnimalComponent } from "./modules/listaanimal/component/listaanimal.component";
 import { DetalleAnimalComponent } from "./modules/detallesanimal/component/detalleanimal.component";
+import { AdoptarAnimalComponent } from "./modules/adoptaranimal/component/adoptaranimal.component";
+import { RegisterFosterComponent } from "./modules/registerfoster/component/registerfoster.component";
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavigationMenuComponent } from "./modules/shared/navigation-menu.component/navigation-menu.component";
 import { NavigationBarComponent } from "./modules/shared/navigation-bar/navigation-bar.component";
@@ -20,7 +22,7 @@ import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations:[AppComponent, LoginComponent, RegisterComponent, VerPerfilComponent, EditarPerfilComponent, ListaAnimalComponent, DetalleAnimalComponent,  NavigationMenuComponent , NavigationBarComponent],
+  declarations:[AppComponent, LoginComponent, RegisterComponent, VerPerfilComponent, EditarPerfilComponent, ListaAnimalComponent, DetalleAnimalComponent, AdoptarAnimalComponent, RegisterFosterComponent,  NavigationMenuComponent , NavigationBarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

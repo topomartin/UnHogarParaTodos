@@ -51,7 +51,8 @@
         </button>
 
         <button class="btn adoptar"
-                *ngIf="animal.status.toLowerCase() === 'available'">
+                *ngIf="animal.status.toLowerCase() === 'available'"
+                (click)="adoptarAnimal(animal.id)">
           Adoptar
         </button>
 

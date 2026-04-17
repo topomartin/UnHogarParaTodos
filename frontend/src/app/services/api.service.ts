@@ -12,6 +12,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class ApiService {
   private readonly API_URL = environment.apiBaseUrl;
+
   private getOptions() {
     const token = localStorage.getItem('access_token');
 
@@ -24,7 +25,7 @@ export class ApiService {
     return { headers };
   }
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
 
   public get(path: string): Observable<any> {
     return this.http.get(`${this.API_URL}${path}`, this.getOptions())

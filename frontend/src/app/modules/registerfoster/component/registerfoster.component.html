@@ -1,0 +1,98 @@
+<div class="container">
+
+  <h1 class="title">Registro Casa de Acogida</h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!-- 👤 DATOS PERSONALES -->
+    <div class="section">
+      <h2>Datos personales</h2>
+
+      <input placeholder="Nombre completo" formControlName="fullName">
+      <input placeholder="Email" formControlName="email">
+      <input placeholder="Teléfono" formControlName="phone">
+      <input placeholder="Edad" formControlName="age">
+      <input placeholder="Dirección" formControlName="address">
+    </div>
+
+    <!-- 🏠 VIVIENDA -->
+    <div class="section">
+      <h2>Vivienda</h2>
+
+      <select formControlName="homeType">
+        <option value="">Tipo de vivienda</option>
+        <option value="house">Casa</option>
+        <option value="apartment">Apartamento</option>
+      </select>
+
+      <input placeholder="Metros cuadrados" formControlName="sizeM2">
+
+      <select formControlName="hasGarden">
+        <option value="">¿Tienes jardín?</option>
+        <option value="yes">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+      <select formControlName="hasTerrace">
+        <option value="">¿Tienes terraza?</option>
+        <option value="yes">Sí</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+
+    <!-- 🐾 ANIMALES -->
+    <div class="section">
+      <h2>Animales</h2>
+
+      <select formControlName="hasAnimals">
+        <option value="">¿Tienes animales?</option>
+        <option value="yes">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+      <textarea
+        *ngIf="form.get('hasAnimals')?.value === 'yes'"
+        placeholder="Describe tus animales"
+        formControlName="animalsDetails">
+      </textarea>
+    </div>
+
+    <!-- 🏡 EXPERIENCIA FOSTER -->
+    <div class="section">
+      <h2>Experiencia como casa de acogida</h2>
+
+      <select formControlName="hasFosterExperience">
+        <option value="">¿Has sido casa de acogida antes?</option>
+        <option value="yes">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+      <textarea
+        *ngIf="form.get('hasFosterExperience')?.value === 'yes'"
+        placeholder="Describe tu experiencia"
+        formControlName="fosterExperienceDetails">
+      </textarea>
+    </div>
+
+    <!-- ⏱️ DISPONIBILIDAD -->
+    <div class="section">
+      <h2>Disponibilidad</h2>
+
+      <input placeholder="Tiempo disponible" formControlName="availabilityTime">
+      <input placeholder="Máximo de animales" formControlName="maxAnimals">
+    </div>
+
+    <!-- ❤️ MOTIVACIÓN -->
+    <div class="section">
+      <h2>Motivación</h2>
+
+      <textarea placeholder="¿Por qué quieres ser casa de acogida?" formControlName="motivation"></textarea>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">
+      Enviar solicitud
+    </button>
+
+  </form>
+
+</div>

@@ -29,7 +29,7 @@ export class AuthenticationService {
   private userSubject = new BehaviorSubject<IUser | null>(this.getCurrentUser());
   public user$ = this.userSubject.asObservable();
 
-  constructor(private apiService: ApiService){}
+  constructor(private apiService: ApiService) { }
 
   login({ username, password }: ILoginUser): Observable<void> {
     return this.apiService.post('auth/login', { username, password }).pipe(
@@ -75,10 +75,9 @@ export class AuthenticationService {
     localStorage.setItem('current_user', JSON.stringify(user));
 
     this.userSubject.next(user); // notificar a quien esté escuchando
-    
   }
 
-getCurrentUser(): IUser | null {
+  getCurrentUser(): IUser | null {
     if (this.currentUser) return this.currentUser;
 
     const user = localStorage.getItem('current_user');
@@ -90,25 +89,25 @@ getCurrentUser(): IUser | null {
     return null;
   }
 
- 
+
   getUserById(id: number | string): Observable<IUser> {
     const userId = Number(id);
     return this.apiService.get(`user/${userId}`);
   }
 
   updateProfile(id: number, data: Partial<IUser>) {
-  return this.apiService.patch(`user/${id}`, data).pipe(
-    tap((updatedUser: IUser) => {
-      // actualizar el localStorage
-      this.initSession(updatedUser);
-    })
-  );
-}
-  
+    return this.apiService.patch(`user/${id}`, data).pipe(
+      tap((updatedUser: IUser) => {
+        // actualizar el localStorage
+        this.initSession(updatedUser);
+      })
+    );
+  }
+
   logout(): void {
     this.currentUser = null;
     localStorage.removeItem('current_user');
-    localStorage.removeItem('access_token'); 
+    localStorage.removeItem('access_token');
     this.userSubject.next(null);
   }
 }
