@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
 
+
 @Component({
   selector: 'app-listaanimal',
   templateUrl: './listaanimal.component.html',
@@ -13,19 +14,18 @@ export class ListaAnimalComponent implements OnInit {
 
   public animales: any[] = [];
 
-  // Pagination
-  public paginatedAnimals: any[] = [];
-  public itemsPerPage: number = 5;
   public currentPage: number = 1;
-  public totalPages: number = 1;
+  public itemsPerPage: number = 10;
 
-  // Filter
+  public totalPages: number = 1;
+  public totalItems: number = 0;
+
   public searchText: string = '';
   public selectedType: string = '';
   public selectedStatus: string = '';
-  public typeOptions: string[] = [];
-  public statusOptions: string[] = [];
-  public filteredAnimals: any[] = [];
+
+  public loading: boolean = false;
+  private searchTimeout: any;
 
   constructor(
     private router: Router,
@@ -33,76 +33,75 @@ export class ListaAnimalComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getAnimales();
   }
 
   // 🔥 OBTENER ANIMALES DESDE BACKEND
   getAnimales() {
-    this.apiService.post('animal', {}).subscribe(
-      (data) => {
-        this.animales = data;
+    this.loading = true;
 
-        // Filter
-        this.typeOptions = Array.from(new Set(this.animales.map(a => a.type)));
-        this.statusOptions = Array.from(new Set(this.animales.map(a => a.status)));
+    const body = {
+      page: this.currentPage,
+      limit: this.itemsPerPage,
+      filter: {
+        name: this.searchText || undefined,
+        type: this.selectedType ? this.selectedType.toLowerCase() : undefined,
+        status: this.selectedStatus ? this.selectedStatus.toUpperCase() : undefined
+      }
+    };
 
-        this.filteredAnimals = [...this.animales];
+    this.apiService.post('animal', body).subscribe(
+      (response: any) => {
 
-        // Pagination
-        this.updatePagination();
+        this.animales = response.data;
 
-        console.log('Animales:', this.animales);
+        this.totalItems = response.meta.total;
+        this.totalPages = response.meta.lastPage;
+        this.currentPage = response.meta.page;
+
+        this.loading = false;
 
         this.cdr.detectChanges();
+
+        console.log('Animales:', this.animales);
+        console.log('Meta:', response.meta);
       },
       (error) => {
+        this.loading = false;
         console.error('Error al obtener animales', error);
       }
     );
   }
 
   // Pagination
-  updatePagination() {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-
-    this.paginatedAnimals = this.filteredAnimals.slice(startIndex, endIndex);
-    this.totalPages = Math.ceil(this.filteredAnimals.length / this.itemsPerPage);
-  }
-
   goToNextPage() {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
-      this.updatePagination();
+      this.getAnimales();
     }
   }
 
   goToPreviousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
-      this.updatePagination();
+      this.getAnimales();
     }
   }
 
   // Filter
   applyFilters() {
-    this.filteredAnimals = this.animales.filter(animal => {
-      const matchesText = animal.name.toLowerCase().includes(this.searchText.toLowerCase());
-
-      const matchesType = this.selectedType
-        ? animal.type.toLowerCase() === this.selectedType.toLowerCase()
-        : true;
-
-      const matchesStatus = this.selectedStatus
-        ? animal.status.toLowerCase() === this.selectedStatus.toLowerCase()
-        : true;
-
-      return matchesText && matchesType && matchesStatus;
-    });
-
+    if (this.loading) return;
     this.currentPage = 1;
-    this.updatePagination();
+    this.getAnimales();
+  }
+
+  onSearchChange() {
+    clearTimeout(this.searchTimeout);
+
+    this.searchTimeout = setTimeout(() => {
+      this.applyFilters();
+    }, 500); 
   }
 
   verDetalle(id: number) {
