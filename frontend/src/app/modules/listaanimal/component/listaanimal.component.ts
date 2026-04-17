@@ -41,7 +41,10 @@ export class ListaAnimalComponent implements OnInit {
   getAnimales() {
     this.apiService.post('animal', {}).subscribe(
       (data) => {
-        this.animales = data;
+
+        console.log('DATA COMPLETA:', data);
+
+        this.animales = data.data;
 
         // Filter
         this.typeOptions = Array.from(new Set(this.animales.map(a => a.type)));

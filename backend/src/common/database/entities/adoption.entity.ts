@@ -14,9 +14,13 @@ export class Adoption {
     @Column({ type: "timestamp", nullable: true, default: null })
     date!: Date;
 
-    @ApiProperty({ enum: AdoptionStatus, enumName: 'AdoptionStatus'})
+    @ApiProperty({ enum: AdoptionStatus, enumName: 'AdoptionStatus' })
     @Column({ type: "enum", enum: AdoptionStatus, default: AdoptionStatus.PENDING })
     status!: AdoptionStatus;
+
+    @ApiProperty()
+    @Column({ type: 'json', nullable: true })
+    formData!: any;
 
     @ApiProperty()
     @CreateDateColumn({ type: 'timestamp' })

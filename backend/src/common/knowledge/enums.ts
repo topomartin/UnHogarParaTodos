@@ -11,10 +11,9 @@ export enum AnimalType {
 }
 
 export enum AnimalStatus {
-  AVAILABLE = 'AVAILABLE',
-  ADOPTED = 'ADOPTED',
-  PENDING ='PENDING'
-
+  AVAILABLE = 'available',
+  PENDING = 'pending',
+  ADOPTED = 'adopted'
 }
 
 export enum AdoptionStatus {

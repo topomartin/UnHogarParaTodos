@@ -3,6 +3,7 @@ import {
     IsNotEmpty,
     IsEnum,
     IsNumber,
+    IsOptional
 } from 'class-validator';
 import { AdoptionStatus } from "src/common/knowledge/enums";
 
@@ -21,6 +22,10 @@ export class CreateAdoptionDto {
     @ApiProperty({ required: true, enum: AdoptionStatus })
     @IsNotEmpty()
     @IsEnum(AdoptionStatus)
-    status: AdoptionStatus | undefined;
+    status!: AdoptionStatus;
+
+    @ApiProperty({ required: false })
+    @IsOptional()
+    formData?: any;
 
 }

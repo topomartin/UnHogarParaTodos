@@ -29,13 +29,30 @@ export class AuthenticationService {
   private userSubject = new BehaviorSubject<IUser | null>(this.getCurrentUser());
   public user$ = this.userSubject.asObservable();
 
-  constructor(private apiService: ApiService){}
+  constructor(private apiService: ApiService) { }
 
-  login({username, password}: ILoginUser): Observable<IUser>{
-    return this.apiService.post('auth/login',{username,password}).pipe(
-        tap((user: IUser) => {
+  login({ username, password }: ILoginUser): Observable<void> {
+    return this.apiService.post('auth/login', { username, password }).pipe(
+      tap((response: any) => {
+
+        const token = response.access_token;
+        localStorage.setItem('access_token', token);
+
+        const payload = this.decodeJwt(token);
+
+        const user: IUser = {
+          id: payload.id,
+          username: payload.username,
+          email: payload.email,
+          role: payload.role,
+          gdpr_consent: payload.gdpr_consent,
+          created_at: payload.created_at,
+          updated_at: payload.updated_at,
+          deleted_at: payload.deleted_at,
+          password: ''
+        };
         this.initSession(user);
-      }),
+      })
     );
   }
 
@@ -47,20 +64,20 @@ export class AuthenticationService {
     );
   }
 
+  private decodeJwt(token: string): any {
+    const payload = token.split('.')[1];
+    return JSON.parse(atob(payload));
+  }
+
 
   private initSession(user: IUser) {
     this.currentUser = user;
     localStorage.setItem('current_user', JSON.stringify(user));
 
-    this.userSubject.next(user); // notificar a quien esté escuchando
-    
-    //localStorage.setItem('access_token', authResult.access_token); // si usas JWT
-    /*if (authResult.user) {
-      this.currentUser = authResult.user ;
-    }*/
+    this.userSubject.next(user);
   }
 
-getCurrentUser(): IUser | null {
+  getCurrentUser(): IUser | null {
     if (this.currentUser) return this.currentUser;
 
     const user = localStorage.getItem('current_user');
@@ -72,25 +89,25 @@ getCurrentUser(): IUser | null {
     return null;
   }
 
- 
+
   getUserById(id: number | string): Observable<IUser> {
     const userId = Number(id);
     return this.apiService.get(`user/${userId}`);
   }
 
   updateProfile(id: number, data: Partial<IUser>) {
-  return this.apiService.patch(`user/${id}`, data).pipe(
-    tap((updatedUser: IUser) => {
-      // actualizar el localStorage
-      this.initSession(updatedUser);
-    })
-  );
-}
-  
+    return this.apiService.patch(`user/${id}`, data).pipe(
+      tap((updatedUser: IUser) => {
+        // actualizar el localStorage
+        this.initSession(updatedUser);
+      })
+    );
+  }
+
   logout(): void {
     this.currentUser = null;
     localStorage.removeItem('current_user');
+    localStorage.removeItem('access_token');
     this.userSubject.next(null);
-    // localStorage.removeItem('access_token'); // si usas JWT
   }
 }

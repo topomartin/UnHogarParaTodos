@@ -7,7 +7,9 @@ interface ILoginUser {
   password: string
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   private currentUser!: ILoginUser ;
 
@@ -27,4 +29,9 @@ export class AuthService {
       this.currentUser = authResult.user ;
     }
   }
+
+  getCurrentUser() {
+  const user = localStorage.getItem('current_user');
+  return user ? JSON.parse(user) : null;
+}
 }

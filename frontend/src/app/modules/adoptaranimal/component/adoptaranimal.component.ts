@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from '../../../services/api.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-adoptaranimal',
@@ -19,7 +20,8 @@ export class AdoptarAnimalComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -69,16 +71,32 @@ export class AdoptarAnimalComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.invalid) return;
+  if (this.form.invalid) return;
 
-    const data = {
-      animalId: this.animalId,
-      ...this.form.value
-    };
+  const user = this.authService.getCurrentUser();
 
-    console.log('Adopción enviada:', data);
-
-    alert('Solicitud de adopción enviada correctamente');
-    this.router.navigate(['/listaanimal']);
+  // 🔒 si no está logeado
+  if (!user || !user.id) {
+    alert('Debes iniciar sesión');
+    this.router.navigate(['/login']);
+    return;
   }
+
+  const data = {
+    animal_id: this.animalId,
+    user_id: user.id,
+    status: 'pending',
+    formData: this.form.value
+  };
+
+  this.apiService.post('adoption/create', data).subscribe(
+    () => {
+      alert('Solicitud enviada correctamente');
+      this.router.navigate(['/listaanimal']);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+}
 }
