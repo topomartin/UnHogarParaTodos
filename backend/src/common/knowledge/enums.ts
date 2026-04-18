@@ -29,3 +29,8 @@ export enum FosterProfileStatus {
   REJECTED ='rejected'
 
 }
+
+export enum HousingType {
+  HOUSE = 'casa',
+  APPARTAMENT = 'apartamenteo',
+}

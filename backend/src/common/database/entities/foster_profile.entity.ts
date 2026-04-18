@@ -80,7 +80,3 @@ export class FosterProfile {
 
 }
 
-
-// available_time varchar
-// max_animals int
-// motivation text
