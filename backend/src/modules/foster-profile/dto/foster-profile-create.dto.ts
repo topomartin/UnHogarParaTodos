@@ -13,6 +13,11 @@ import { FosterProfileStatus, HousingType } from "src/common/knowledge/enums";
 
 
 export class CreateFosterProfileDto {
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  user_id!: number;
+
   @ApiProperty({ description: 'Nombre de la casa de acogida', required: true })
   @IsString()
   @IsNotEmpty()
@@ -33,7 +38,7 @@ export class CreateFosterProfileDto {
   @IsNotEmpty()
   address!: string;
 
-  @ApiProperty({ description: `Valores posibles: ${Object.values(HousingType).join(', ')} `, required: true, enum: HousingType})
+  @ApiProperty({ description: `Valores posibles: ${Object.values(HousingType).join(', ')} `, required: true, enum: HousingType })
   @IsNotEmpty()
   @IsEnum(HousingType)
   housing_type: HousingType | undefined;
@@ -43,30 +48,30 @@ export class CreateFosterProfileDto {
   @IsNotEmpty()
   square_meters!: number;
 
-  @ApiProperty({  required: true })
+  @ApiProperty({ required: true })
   @IsBoolean()
   @IsNotEmpty()
   has_garden!: boolean;
 
-  @ApiProperty({  required: true })
+  @ApiProperty({ required: true })
   @IsBoolean()
   @IsNotEmpty()
   has_terrace!: boolean;
 
-  @ApiProperty({  required: true })
+  @ApiProperty({ required: true })
   @IsBoolean()
   @IsNotEmpty()
   has_other_animals!: boolean;
 
-  @ApiProperty({  required: true })
+  @ApiProperty({ required: true })
   @IsBoolean()
   @IsNotEmpty()
   has_experience!: boolean;
 
   @ApiProperty({ required: true })
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
-  available_time!: number;
+  available_time!: string;
 
   @ApiProperty({ required: true })
   @IsNumber()
@@ -81,6 +86,6 @@ export class CreateFosterProfileDto {
   @ApiProperty({ required: true, enum: FosterProfileStatus })
   @IsNotEmpty()
   @IsEnum(FosterProfileStatus)
-  status: FosterProfileStatus | undefined;
+  status!: FosterProfileStatus;
 
 }

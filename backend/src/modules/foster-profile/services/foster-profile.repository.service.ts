@@ -13,48 +13,55 @@ import { CreateFosterProfileDto } from "../dto/foster-profile-create.dto";
 @Injectable()
 export class FosterProfileRepositoryService {
     private logger = new Logger(FosterProfileRepositoryService.name);
-    constructor( @InjectRepository(FosterProfile)
+    constructor(@InjectRepository(FosterProfile)
     private animalRepository: Repository<FosterProfile>,
-    private queryBuilderHelper: QueryBuilderHelper){}
+        private queryBuilderHelper: QueryBuilderHelper) { }
 
 
-    async create(cretateFosterProfileDto: CreateFosterProfileDto): Promise<FosterProfile | null | undefined>{
-        try{
-            return await this.animalRepository.save(cretateFosterProfileDto as any);
-        }catch (e){
+    async create(createFosterProfileDto: CreateFosterProfileDto): Promise<FosterProfile | null | undefined> {
+        try {
+
+            const { user_id, ...rest } = createFosterProfileDto;
+
+            return await this.animalRepository.save({
+                ...rest,
+                user: { id: user_id }
+            });
+
+        } catch (e) {
             this.handleError(e);
         }
     }
 
-    async findOne(filter): Promise<FosterProfile | null | undefined>{
-        try{
-            return await this.animalRepository.findOne({where: filter});
-        }catch(e){
+    async findOne(filter): Promise<FosterProfile | null | undefined> {
+        try {
+            return await this.animalRepository.findOne({ where: filter });
+        } catch (e) {
             this.handleError(e);
         }
     }
-    async findAll(filterData: FosterProfileSearchDto): Promise<IPaginatedResult<FosterProfile>>{
+    async findAll(filterData: FosterProfileSearchDto): Promise<IPaginatedResult<FosterProfile>> {
 
         const query = this.animalRepository.createQueryBuilder('fosterProfile');
-        const {qb, take, page} = await this.queryBuilderHelper.SelectQueryBuilder(query, queryConfig, filterData )
+        const { qb, take, page } = await this.queryBuilderHelper.SelectQueryBuilder(query, queryConfig, filterData)
         const [data, total] = await qb.getManyAndCount();
 
         return {
             data: data.map(({ ...fosterProfile }) => fosterProfile as FosterProfile),
-            meta: {total, page, lastPage: Math.ceil(total / take), limit: take }
+            meta: { total, page, lastPage: Math.ceil(total / take), limit: take }
         };
     }
 
 
-    async update(id, parcialAnimal){
-        try{
-            return this.animalRepository.update({id}, parcialAnimal);
-        }catch (e){
+    async update(id, parcialAnimal) {
+        try {
+            return this.animalRepository.update({ id }, parcialAnimal);
+        } catch (e) {
             this.handleError(e);
         }
     }
 
-    private handleError(e){
+    private handleError(e) {
         this.logger.error(e);
         handleMySQLError(e);
     }

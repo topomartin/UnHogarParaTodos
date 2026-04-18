@@ -44,7 +44,7 @@ export class FosterProfile {
 
     @ApiProperty()
     @Column({ type: "boolean", nullable: false })
-    has_other_animal!: boolean;
+    has_other_animals!: boolean;
 
     @ApiProperty()
     @Column({ type: "boolean", nullable: false })
