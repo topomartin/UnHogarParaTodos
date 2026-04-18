@@ -8,7 +8,7 @@ import { FosterProfileSearchDto } from "./dto/foster-profile-search.dto";
 import { FosterProfileService } from "./services/foster-profile.service";
 
 @ApiTags(FosterProfileController.name)
-@Controller('foster-profile')
+@Controller('foster')
 export class FosterProfileController {
     constructor(private fosterProfileService: FosterProfileService) {}
 

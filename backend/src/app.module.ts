@@ -4,6 +4,7 @@ import { DatabaseModule } from './common/database/database.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { AnimalModule } from './modules/animal/animal.module';
 import { AdoptionModule } from './modules/adoption/adoption.module';
+import { FosterProfileModule } from './modules/foster-profile/foster-profile.module';
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { AdoptionModule } from './modules/adoption/adoption.module';
     AuthModule,
     UserModule,
     AnimalModule,
-    AdoptionModule],
+    AdoptionModule,
+    FosterProfileModule],
 
   controllers: [],
   providers: [],
