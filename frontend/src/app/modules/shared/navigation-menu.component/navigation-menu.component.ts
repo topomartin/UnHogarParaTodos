@@ -49,8 +49,8 @@ export class NavigationMenuComponent implements OnInit {
     this.isMenuOpenEvent.emit({ isMenuOpen: isDesktop });
   }
 
-  toggleMenu(event: { toggleMenu: boolean }): void {
-    this.menu.nativeElement.style.width = event.toggleMenu ? '120px' : '0';
+  toggleMenu(event: { isMenuOpen: boolean }): void {
+    this.menu.nativeElement.style.width = event.isMenuOpen ? '120px' : '0';
   }
 
   toggleText() {
