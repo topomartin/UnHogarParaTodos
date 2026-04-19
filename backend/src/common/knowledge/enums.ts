@@ -31,5 +31,5 @@ export enum FosterProfileStatus {
 
 export enum HousingType {
   HOUSE = 'house',
-  APPARTAMENT = 'appartament',
+  APARTAMENT = 'apartament',
 }
