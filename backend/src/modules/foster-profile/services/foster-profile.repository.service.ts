@@ -46,9 +46,9 @@ export class FosterProfileRepositoryService {
     }
 
 
-    async update(id, parcialAnimal){
+    async update(id, parcialFosterProfile){
         try{
-            return this.fosterProfileRepository.update({id}, parcialAnimal);
+            return this.fosterProfileRepository.update({id}, parcialFosterProfile);
         }catch (e){
             this.handleError(e);
         }

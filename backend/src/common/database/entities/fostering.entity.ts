@@ -29,7 +29,7 @@ export class Fostering {
     @JoinColumn({ name: 'user_id' })
     user!: User;
 
-    @ManyToOne(() => Animal, (animal) => animal.adoptions)
+    @ManyToOne(() => Animal, (animal) => animal.fosterings)
     @JoinColumn({ name: 'animal_id' })
     animal!: Animal
 
