@@ -5,6 +5,7 @@ import { FosterProfile } from 'src/common/database/entities/foster_profile.entit
 import { FosterProfileSearchDto } from '../dto/foster-profile-search.dto';
 import { CreateFosterProfileDto } from '../dto/foster-profile-create.dto';
 import { FosterProfileRepositoryService } from './foster-profile.repository.service';
+import { FosterProfileModelNames as Names } from '../config/foster-profile-model-name';
 
 
 @Injectable()
@@ -24,7 +25,7 @@ export class FosterProfileService {
   }
 
   async update(id, parcialFosterProfile ){
-    parcialFosterProfile['updated_at'] = Utils.toLocalDateForMySQL(new Date());
+    parcialFosterProfile[Names.tableFields.UPDATED_AT] = Utils.toLocalDateForMySQL(new Date());
     return await this.fosterProfileRepositoryService.update(id,parcialFosterProfile);
   }
 

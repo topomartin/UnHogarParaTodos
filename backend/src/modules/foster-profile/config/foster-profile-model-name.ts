@@ -1,6 +1,7 @@
 export class FosterProfileModelNames {
 
   static readonly modelFields = {
+    ID: 'id',
     FULL_NAME: 'fullName',
     PHONE: 'phone',
     AGE: 'age',
@@ -20,6 +21,7 @@ export class FosterProfileModelNames {
 
   };
   static readonly tableFields = {
+    ID: 'id',
     FULL_NAME: 'full_name',
     PHONE: 'phone',
     AGE: 'age',
