@@ -12,7 +12,6 @@ export class FosterProfileService {
   constructor(private fosterProfileRepositoryService: FosterProfileRepositoryService){}
 
   async create(createFosterProfileDto: CreateFosterProfileDto): Promise<FosterProfile | null | undefined>{
-    //let birthDate = new Date(createAnimalDto.birth_date);
     return await this.fosterProfileRepositoryService.create(createFosterProfileDto);
   }
 

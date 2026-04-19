@@ -3,6 +3,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 import { User } from "./user.entity";
 import { FosterProfileStatus } from "src/common/knowledge/enums";
+import { FosterProfileModelNames as Names } from "src/modules/foster-profile/config/foster-profile-model-name";
 
 
 @Entity()
@@ -11,68 +12,68 @@ export class FosterProfile {
     id!: number;
 
     @ApiProperty()
-    @Column({ type: "varchar", length: 50, nullable: false })
-    full_name!: string;
+    @Column({ name: Names.tableFields.FULL_NAME,  type: "varchar", length: 50, nullable: false })
+    [Names.modelFields.FULL_NAME]!: string;
 
     @ApiProperty()
-    @Column({ type: "varchar", length: 12, nullable: false })
-    phone!: string;
+    @Column({ name: Names.tableFields.PHONE ,type: "varchar", length: 12, nullable: false })
+    [Names.modelFields.PHONE]!: string;
 
     @ApiProperty()
-    @Column({ type: "integer", nullable: false })
-    age!: number;
+    @Column({ name: Names.tableFields.AGE, type: "integer", nullable: false })
+    [Names.modelFields.AGE]!: number;
 
     @ApiProperty()
-    @Column({ type: "varchar", length: 254, nullable: false })
-    address!: string;
+    @Column({ name: Names.tableFields.ADDRESS, type: "varchar", length: 254, nullable: false })
+    [Names.modelFields.ADDRESS]!: string;
 
     @ApiProperty()
-    @Column({ type: "varchar", length: 40, nullable: false })
-    housing_type!: string;
+    @Column({ name: Names.tableFields.HOUSING_TYPE, type: "varchar", length: 40, nullable: false })
+    [Names.modelFields.HOUSING_TYPE]!: string;
 
     @ApiProperty()
-    @Column({ type: "integer", nullable: false })
-    square_meters!: number;
+    @Column({ name: Names.tableFields.SQUARE_METERS, type: "integer", nullable: false })
+    [Names.modelFields.SQUARE_METERS]!: number;
 
     @ApiProperty()
-    @Column({ type: "boolean", nullable: false })
-    has_garden!: boolean;
+    @Column({ name: Names.tableFields.HAS_GARDEN, type: "boolean", nullable: false })
+    [Names.modelFields.HAS_GARDEN]!: boolean;
 
     @ApiProperty()
-    @Column({ type: "boolean", nullable: false })
-    has_terrace!: boolean;
+    @Column({ name: Names.tableFields.HAS_TERRACE, type: "boolean", nullable: false })
+    [Names.modelFields.HAS_TERRACE]!: boolean;
 
     @ApiProperty()
-    @Column({ type: "boolean", nullable: false })
-    has_other_animal!: boolean;
+    @Column({ name: Names.tableFields.HAS_OTHER_ANIMALS, type: "boolean", nullable: false, default:false })
+    [Names.modelFields.HAS_OTHER_ANIMALS]!: boolean;
 
     @ApiProperty()
-    @Column({ type: "boolean", nullable: false })
-    has_experience!: boolean;
+    @Column({ name: Names.tableFields.HAS_EXPERIENCE, type: "boolean", nullable: false })
+    [Names.modelFields.HAS_EXPERIENCE]!: boolean;
 
     @ApiProperty()
-    @Column({ type: "varchar", length: 10, nullable: false })
-    available_time!: string;
+    @Column({ name: Names.tableFields.AVAILABEL_TIME, type: "varchar", length: 10, nullable: false })
+    [Names.modelFields.AVAILABEL_TIME]!: string;
 
     @ApiProperty()
-    @Column({ type: "integer", nullable: false })
-    max_animals!: number;
+    @Column({ name: Names.tableFields.MAX_ANIMALS, type: "integer", nullable: false })
+    [Names.modelFields.MAX_ANIMALS]!: number;
 
     @ApiProperty()
-    @Column({ type: "varchar", length: 254, nullable: false })
-    motivation!: string;
+    @Column({ name: Names.tableFields.MOTIVATION, type: "varchar", length: 254, nullable: false })
+    [Names.modelFields.MOTIVATION]!: string;
 
     @ApiProperty({ enum: FosterProfileStatus, enumName: 'FosterProfileStatus'})
-    @Column({ type: "enum", enum: FosterProfileStatus, default: FosterProfileStatus.PENDING })
-    status!: FosterProfileStatus;
+    @Column({ name: Names.tableFields.STATUS, type: "enum", enum: FosterProfileStatus, default: FosterProfileStatus.PENDING })
+    [Names.modelFields.STATUS]!: FosterProfileStatus;
 
     @ApiProperty()
-    @CreateDateColumn({ type: 'timestamp' })
-    created_at!: Date;
+    @CreateDateColumn({name: Names.tableFields.CREATED_AT, type: 'timestamp' })
+    [Names.modelFields.CREATED_AT]!: Date;
 
     @ApiProperty()
-    @Column({ type: "timestamp", nullable: true, default: null })
-    updated_at!: Date;
+    @Column({ name: Names.tableFields.UPDATED_AT, type: "timestamp", nullable: true, default: null })
+    [Names.modelFields.UPDATED_AT]!: Date;
 
     @ManyToOne(() => User, (user) => user.foster_profiles)
     @JoinColumn({ name: 'user_id' })
