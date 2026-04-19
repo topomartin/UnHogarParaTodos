@@ -25,7 +25,7 @@ export class Fostering {
     @Column({ name: Names.tableFields.UPDATED_AT, type: "timestamp", nullable: true, default: null })
     [Names.modelFields.UPDATED_AT]!: Date;
 
-    @ManyToOne(() => User, (user) => user.adoptions)
+    @ManyToOne(() => User, (user) => user.fosterings)
     @JoinColumn({ name: 'user_id' })
     user!: User;
 
