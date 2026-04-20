@@ -9,7 +9,7 @@ import { FosterProfileModelNames as Names } from "src/modules/foster-profile/con
 @Entity()
 export class FosterProfile {
     @PrimaryGeneratedColumn()
-    [Names.modelFields.ID]!: number;
+    id!: number;
 
     @ApiProperty()
     @Column({ name: Names.tableFields.FULL_NAME,  type: "varchar", length: 50, nullable: false })

@@ -7,7 +7,7 @@ import { FosteringModelNames as Names } from "src/modules/fostering/config/foste
 @Entity()
 export class Fostering {
     @PrimaryGeneratedColumn()
-    [Names.modelFields.ID]!: number;
+    id!: number;
 
     @ApiProperty()
     @Column({ name: Names.tableFields.START_DATE, type: "timestamp", nullable: false })

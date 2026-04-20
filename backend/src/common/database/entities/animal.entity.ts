@@ -8,35 +8,35 @@ import { AnimalModelNames as Names } from "src/modules/animal/config/animal-mode
 @Entity()
 export class Animal {
     @PrimaryGeneratedColumn()
-    [Names.modelFields.ID]!: number;
+    id!: number;
 
     @ApiProperty()
     @Column({ name: Names.tableFields.NAME, type: "varchar", length: 50, nullable: false })
-    [Names.modelFields.NAME]!: string;
+    name!: string;
 
     @ApiProperty({ enum: AnimalType, enumName: 'AnimalType'})
     @Column({ name: Names.tableFields.TYPE, type: 'enum', enum: AnimalType, nullable: false })
-    [Names.modelFields.TYPE]!: AnimalType;
+    type!: AnimalType;
 
     @ApiProperty({example: new Date().toISOString().split('T')[0],format: 'date',})
     @Column({ name: Names.tableFields.BIRTH_DATE, type: "date", nullable: false })
-    [Names.modelFields.BIRTH_DATE]!: Date;
+    birth_date!: Date;
 
     @ApiProperty()
     @Column({ name: Names.tableFields.DESCRIPTION, type: "varchar", length: 254 })
-    [Names.modelFields.DESCRIPTION]!: string;
+    description!: string;
 
     @ApiProperty({ enum: AnimalStatus, enumName: 'AnimalStatus'})
     @Column({ name: Names.tableFields.STATUS, type: "enum", enum: AnimalStatus, default: AnimalStatus.AVAILABLE })
-    [Names.modelFields.STATUS]!: AnimalStatus;
+    status!: AnimalStatus;
 
     @ApiProperty()
     @CreateDateColumn({ name: Names.tableFields.CREATED_AT, type: 'timestamp' })
-    [Names.modelFields.CREATED_AT]!: Date;
+    create_at!: Date;
 
     @ApiProperty()
     @Column({ name: Names.tableFields.UPDATED_AT, type: "timestamp", nullable: true, default: null })
-    [Names.modelFields.UPDATED_AT]!: Date;
+    update_at!: Date;
 
     @OneToMany(() => Adoption, (adoption) => adoption.animal)
     adoptions!: Adoption[]

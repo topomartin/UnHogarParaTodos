@@ -41,7 +41,7 @@ export class User {
     foster_profiles!: FosterProfile[]
 
     @OneToMany(() => Fostering, (fostering) => fostering.user)
-        fosterings!: Fostering[]
+    fosterings!: Fostering[]
 
 
 
