@@ -1,13 +1,16 @@
-import { Body, Controller, Get, HttpCode, Param, Patch, Post } from "@nestjs/common";
-import { ApiBody, ApiOkResponse, ApiTags } from "@nestjs/swagger";
+import { Body, Controller, Get, HttpCode, Param, Patch, Post, UseGuards } from "@nestjs/common";
+import { ApiBody, ApiOkResponse, ApiSecurity, ApiTags } from "@nestjs/swagger";
 import { Animal } from "src/common/database/entities/animal.entity";
 import { CreateAnimalDto } from "./dto/animal-create.dto";
 import { AnimalService } from "./services/animal.service";
 import { AnimalSearchDto } from "./dto/animal-search.dto";
 import { IPaginatedResult } from "src/common/knowledge/interfaces";
 import { PaginatedAnimalDto } from "./dto/paginated-swagger-animal.dto";
+import { ApiKeyGuard } from "../auth/guards/apiKey.guard";
 
 @ApiTags(AnimalController.name)
+//@UseGuards(ApiKeyGuard)
+//@ApiSecurity('api-key')
 @Controller('animal')
 export class AnimalController {
     constructor(private animalService: AnimalService) {}

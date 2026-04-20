@@ -12,6 +12,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class ApiService {
   private readonly API_URL = environment.apiBaseUrl;
+  private x_api_key = environment["x-api-key"];
 
   private getOptions() {
     const token = localStorage.getItem('access_token');
@@ -21,6 +22,7 @@ export class ApiService {
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
+    headers.set('x-api-key', this.x_api_key);
 
     return { headers };
   }

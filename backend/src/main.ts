@@ -37,6 +37,14 @@ async function bootstrap() {
     .setDescription('Un Hogar para Todos API documentation')
     .setVersion('1.0')
     .addTag('--')
+    .addApiKey(
+    {
+      type: 'apiKey',
+      name: 'x-api-key', 
+      in: 'header',
+    },
+    'swagger-api-key', 
+  )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   const swaggerApiURL = `${appConfig.app.globalPrefix}/${appConfig.app.swaggerURL}/`;
