@@ -1,28 +1,40 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { BrowserModule } from "@angular/platform-browser";
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from "./app-routing.module";
-import { MaterialModule } from "./material.module";
-import { LoginComponent } from "./modules/login/component/login.component";
-import { RegisterComponent } from "./modules/register/component/register.component";
-import { VerPerfilComponent } from "./modules/VerPerfil/component/verperfil.component";
-import { EditarPerfilComponent } from "./modules/editarperfil/component/editarperfil.component";
-import { ListaAnimalComponent } from "./modules/listaanimal/component/listaanimal.component";
-import { DetalleAnimalComponent } from "./modules/detallesanimal/component/detalleanimal.component";
-import { AdoptarAnimalComponent } from "./modules/adoptaranimal/component/adoptaranimal.component";
-import { RegisterFosterComponent } from "./modules/registerfoster/component/registerfoster.component";
+import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './material.module';
+import { HomeComponent } from './modules/home/component/home.component';
+import { LoginComponent } from './modules/login/component/login.component';
+import { RegisterComponent } from './modules/register/component/register.component';
+import { VerPerfilComponent } from './modules/VerPerfil/component/verperfil.component';
+import { EditarPerfilComponent } from './modules/editarperfil/component/editarperfil.component';
+import { ListaAnimalComponent } from './modules/listaanimal/component/listaanimal.component';
+import { DetalleAnimalComponent } from './modules/detallesanimal/component/detalleanimal.component';
+import { AdoptarAnimalComponent } from './modules/adoptaranimal/component/adoptaranimal.component';
+import { RegisterFosterComponent } from './modules/registerfoster/component/registerfoster.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NavigationMenuComponent } from "./modules/shared/navigation-menu.component/navigation-menu.component";
-import { NavigationBarComponent } from "./modules/shared/navigation-bar/navigation-bar.component";
-import { CommonModule } from "@angular/common";
+import { NavigationMenuComponent } from './modules/shared/navigation-menu.component/navigation-menu.component';
+import { NavigationBarComponent } from './modules/shared/navigation-bar/navigation-bar.component';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-
-
 @NgModule({
-  declarations:[AppComponent, LoginComponent, RegisterComponent, VerPerfilComponent, EditarPerfilComponent, ListaAnimalComponent, DetalleAnimalComponent, AdoptarAnimalComponent, RegisterFosterComponent,  NavigationMenuComponent , NavigationBarComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    VerPerfilComponent,
+    EditarPerfilComponent,
+    ListaAnimalComponent,
+    DetalleAnimalComponent,
+    AdoptarAnimalComponent,
+    RegisterFosterComponent,
+    NavigationMenuComponent,
+    NavigationBarComponent,
+    HomeComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,8 +43,8 @@ import { FormsModule } from '@angular/forms';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     CommonModule,
-    FormsModule
+    FormsModule,
   ],
-  bootstrap:[AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,0 +1,169 @@
+<div class="container">
+
+  <!-- ================= LOADING ================= -->
+  <div *ngIf="loading">
+    <p>Cargando animales...</p>
+  </div>
+
+  <!-- ================= CAROUSEL PRINCIPAL ================= -->
+  <section *ngIf="!loading && animals.length > 0">
+
+    <!-- HEADER -->
+    <div class="carousel-header">
+      <h1>Un Hogar Para Todos</h1>
+      <p>Encuentra, cuida y adopta un nuevo compañero</p>
+      <span class="hint">Haz click en un animal para conocer su historia 🐾</span>
+    </div>
+
+    <!-- SWIPER -->
+    <div class="swiper">
+
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide" *ngFor="let animal of animals">
+
+          <div class="animal-card"
+               (click)="navigateToDetail(animal.id)">
+
+            <!-- IMAGE -->
+            <img *ngIf="animal.image_url; else noImage"
+                 [src]="animal.image_url"
+                 (error)="handleImageError($event)"
+                 [alt]="animal.name" />
+
+            <!-- FALLBACK -->
+            <ng-template #noImage>
+              <div class="no-image">
+                <h2>{{ animal.name }}</h2>
+                <p>{{ animal.type }}</p>
+                <p>{{ animal.status }}</p>
+              </div>
+            </ng-template>
+
+            <!-- OVERLAY -->
+            <div class="overlay" *ngIf="animal.image_url">
+              <h2>{{ animal.name }}</h2>
+              <small>{{ animal.age }}</small>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- NAVIGATION -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+
+      <!-- PAGINATION -->
+      <div class="swiper-pagination"></div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="about">
+    <div class="about-content">
+
+      <div class="about-image">
+        <img src="https://picsum.photos/500/300" alt="Protectora" />
+      </div>
+
+      <div class="about-text">
+        <h2>¿Quiénes somos?</h2>
+
+        <p>
+          Somos una protectora dedicada a rescatar animales en situación de abandono
+          y encontrarles un hogar lleno de cariño.
+        </p>
+
+        <p>
+          Desde nuestros inicios, hemos ayudado a cientos de animales.
+        </p>
+
+        <p class="highlight">
+          🐾 Cada adopción cambia dos vidas.
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= CAROUSEL SECUNDARIO ================= -->
+  <div class="adopted-section">
+
+    <div class="carousel-header">
+      <h2>Historias felices</h2>
+      <p>Animales que ya encontraron un hogar</p>
+    </div>
+
+    <div class="swiper swiper-adopted">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide" *ngFor="let animal of adoptedAnimals">
+
+          <div class="animal-card adopted">
+
+            <img [src]="animal.image_url" />
+
+            <div class="overlay">
+
+              <h2>{{ animal.name }}</h2>
+
+              <p class="adoption-story">
+                Encontró su hogar feliz 🏡
+              </p>
+
+              <small class="adoption-time">
+                {{ animal.adopted_at }}
+              </small>
+
+              <small *ngIf="animal.adopter_name" class="adopter">
+                Con {{ animal.adopter_name }}
+              </small>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+
+  <!-- ================= FINAL CTA ================= -->
+  <section class="final-cta">
+
+    <div class="final-content">
+
+      <h2>¿Quieres ayudar a cambiar una vida?</h2>
+
+      <p>
+        Cada adopción libera espacio para salvar otro animal.
+        Puedes adoptar, apadrinar o colaborar con nosotros.
+      </p>
+
+      <div class="final-actions">
+
+        <button routerLink="/adopt">
+          Ver animales disponibles
+        </button>
+
+        <button routerLink="/contact">
+          Contactar
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
