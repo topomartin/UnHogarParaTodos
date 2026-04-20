@@ -1,18 +1,31 @@
-<mat-nav-list class="navigation-menu-component" #menu>
-    <a mat-list-item class="menu-item" routerLinkActive="active" routerLink="{{ page?.link }}" *ngFor="let page of pages">
-      <div class="menu-item-content">
-        <div class="icon-item-content">
-          <mat-icon *ngIf="sideNavState">
-            {{page?.icon}}
-          </mat-icon>
-          <mat-icon *ngIf="!sideNavState" matTooltip="{{ page?.name }}">
-            {{page?.icon}}
-          </mat-icon>
-        </div>
-        <div class="menu-name-wrapper" [@animateText]="linkText ? 'show' : 'hide'">
-          {{ page?.name }}
-        </div>
-      </div>
-    </a>
-</mat-nav-list>
+<div class="menu-click-catcher"
+     *ngIf="isOpen"
+     (click)="closeMenu()">
+</div>
 
+<mat-nav-list class="navigation-menu-component" #menu>
+
+  <a mat-list-item
+     *ngFor="let page of pages"
+     [routerLink]="page.link"
+     routerLinkActive="active-link"
+     [routerLinkActiveOptions]="{ exact: true }">
+
+    <div class="menu-item-content">
+
+      <div class="icon-item-content">
+        <mat-icon *ngIf="sideNavState">{{ page.icon }}</mat-icon>
+      </div>
+
+      <div class="menu-name-wrapper"
+           [@animateText]="linkText ? 'visible' : 'hidden'">
+
+        {{ page.name }}
+
+      </div>
+
+    </div>
+
+  </a>
+
+</mat-nav-list>

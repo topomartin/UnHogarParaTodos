@@ -1,18 +1,47 @@
+.navigation-menu-component {
+  position: fixed;
+  top: 64px; // altura header
+  left: 0;
+  height: calc(100vh - 64px);
+  width: 220px;
+  background: white;
+  z-index: 1000;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+}
+
 .menu-item-content {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 12px;
 }
 
 .icon-item-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 32px;
+  flex-shrink: 0;
 }
 
 .menu-name-wrapper {
+  flex: 1;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+.menu-click-catcher {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 64px);
+  z-index: 999;
+}
+
+.active-link {
+  background-color: rgba(144, 202, 249, 0.25);
+  border-left: 4px solid #90caf9;
+  border-radius: 6px;
+}
+
+.active-link .menu-item-content {
+  font-weight: 600;
 }
