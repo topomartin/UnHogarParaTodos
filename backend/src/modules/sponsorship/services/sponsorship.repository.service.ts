@@ -6,48 +6,48 @@ import { handleMySQLError } from "src/common/database/mysql.error.handler";
 import { IPaginatedResult, IQueryConfig } from "src/common/knowledge/interfaces";
 import { QueryBuilderHelper } from "src/common/database/queryBuilder.helper";
 import { queryConfig } from "../config/query.config";
-import { Fostering } from "src/common/database/entities/fostering.entity";
-import { CreateFosteringDto } from "../dto/fostering-create.dto";
-import { FosteringSearchDto } from "../dto/fostering-search.dto";
+import { Sponsorship } from "src/common/database/entities/sponsorship.entity";
+import { CreateSponsorshipDto } from "../dto/sponsorship-create.dto";
+import { SponsorshipSearchDto } from "../dto/sponsorship-search.dto";
 @Injectable()
-export class FosteringRepositoryService {
-    private logger = new Logger(FosteringRepositoryService.name);
-    constructor( @InjectRepository(Fostering)
-    private fosteringRepository: Repository<Fostering>,
+export class SponsorshipRepositoryService {
+    private logger = new Logger(SponsorshipRepositoryService.name);
+    constructor( @InjectRepository(Sponsorship)
+    private sponsorshipRepository: Repository<Sponsorship>,
     private queryBuilderHelper: QueryBuilderHelper){}
 
 
-    async create(cretateFosteringDto: CreateFosteringDto): Promise<Fostering | null | undefined>{
+    async create(cretateSponsorshipDto: CreateSponsorshipDto): Promise<Sponsorship | null | undefined>{
         try{
-            return await this.fosteringRepository.save(cretateFosteringDto as any);
+            return await this.sponsorshipRepository.save(cretateSponsorshipDto as any);
         }catch (e){
             this.handleError(e);
         }
     }
 
-    async findOne(filter): Promise<Fostering | null | undefined>{
+    async findOne(filter): Promise<Sponsorship | null | undefined>{
         try{
-            return await this.fosteringRepository.findOne({where: filter});
+            return await this.sponsorshipRepository.findOne({where: filter});
         }catch(e){
             this.handleError(e);
         }
     }
-    async findAll(filterData: FosteringSearchDto): Promise<IPaginatedResult<Fostering>>{
+    async findAll(filterData: SponsorshipSearchDto): Promise<IPaginatedResult<Sponsorship>>{
 
-        const query = this.fosteringRepository.createQueryBuilder('fostering');
+        const query = this.sponsorshipRepository.createQueryBuilder('sponsroship');
         const {qb, take, page} = await this.queryBuilderHelper.SelectQueryBuilder(query, queryConfig, filterData )
         const [data, total] = await qb.getManyAndCount();
 
         return {
-            data: data.map(({ ...fostering }) => fostering as Fostering),
+            data: data.map(({ ...sponsorship }) => sponsorship as Sponsorship),
             meta: {total, page, lastPage: Math.ceil(total / take), limit: take }
         };
     }
 
 
-    async update(id, parcialFostering){
+    async update(id, parcialSponsorship){
         try{
-            return this.fosteringRepository.update({id}, parcialFostering);
+            return this.sponsorshipRepository.update({id}, parcialSponsorship);
         }catch (e){
             this.handleError(e);
         }

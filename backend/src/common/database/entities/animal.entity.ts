@@ -4,6 +4,7 @@ import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } f
 import { Adoption } from "./adoption.entity";
 import { Fostering } from "./fostering.entity";
 import { AnimalModelNames as Names } from "src/modules/animal/config/animal-model-name";
+import { Sponsorship } from "./sponsorship.entity";
 
 @Entity()
 export class Animal {
@@ -43,5 +44,8 @@ export class Animal {
 
     @OneToMany(() => Fostering, (fostering) => fostering.animal)
     fosterings!: Fostering[]
+
+    @OneToMany(() => Sponsorship, (sponsorship) => sponsorship.animal)
+    sponsorships!: Sponsorship[]
 
 }

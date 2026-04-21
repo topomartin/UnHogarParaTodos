@@ -33,3 +33,9 @@ export enum HousingType {
   HOUSE = 'house',
   APARTAMENT = 'apartament',
 }
+
+export enum SponsorshipFrequency {
+  UNIC = 'unic',
+  MONTHLY = 'monthly',
+  YEARLY = 'yearly'
+}

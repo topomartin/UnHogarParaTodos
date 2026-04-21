@@ -3,6 +3,7 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToMany } f
 import { Adoption } from './adoption.entity';
 import { FosterProfile } from './foster_profile.entity';
 import { Fostering } from './fostering.entity';
+import { Sponsorship } from './sponsorship.entity';
 
 @Entity()
 export class User {
@@ -43,6 +44,7 @@ export class User {
     @OneToMany(() => Fostering, (fostering) => fostering.user)
     fosterings!: Fostering[]
 
-
+    @OneToMany(() => Sponsorship, (sponsorship) => sponsorship.animal)
+    sponsorships!: Sponsorship[]
 
 }
