@@ -6,6 +6,7 @@ import { AnimalRepositoryService } from './animal.repository.service';
 import { AnimalSearchDto } from '../dto/animal-search.dto';
 import { IPaginatedResult } from 'src/common/knowledge/interfaces';
 import { AnimalModelNames as Names } from '../config/animal-model-name';
+import { AdoptionStatus, AnimalStatus } from 'src/common/knowledge/enums';
 
 
 @Injectable()
@@ -30,4 +31,21 @@ export class AnimalService {
     return await this.userRepositoryService.update(id,parcialUser);
   }
 
+  async updateStatus(animalId: number, adoptionStatus: AdoptionStatus) {
+    const statusToUpdate = this.mapAdoptionToAnimalStatus(adoptionStatus);
+    return this.update(animalId, {status: statusToUpdate});
+  }
+
+
+  private mapAdoptionToAnimalStatus(status: AdoptionStatus): AnimalStatus {
+    switch (status) {
+      case AdoptionStatus.PENDING:
+        return AnimalStatus.PENDING;
+      case AdoptionStatus.APPROVED:
+        return AnimalStatus.ADOPTED;
+      case AdoptionStatus.REJECTED:
+      default:
+        return AnimalStatus.AVAILABLE;
+    }
+  }
 }

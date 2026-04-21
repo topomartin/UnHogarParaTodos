@@ -34,11 +34,11 @@ export class Animal {
 
     @ApiProperty()
     @CreateDateColumn({ name: Names.tableFields.CREATED_AT, type: 'timestamp' })
-    create_at!: Date;
+    created_at!: Date;
 
     @ApiProperty()
     @Column({ name: Names.tableFields.UPDATED_AT, type: "timestamp", nullable: true, default: null })
-    update_at!: Date;
+    updated_at!: Date;
 
     @OneToMany(() => Adoption, (adoption) => adoption.animal)
     adoptions!: Adoption[]
