@@ -6,6 +6,7 @@ import { AnimalModule } from './modules/animal/animal.module';
 import { AdoptionModule } from './modules/adoption/adoption.module';
 import { FosterProfileModule } from './modules/foster-profile/foster-profile.module';
 import { FosteringModule } from './modules/fostering/fostering.module';
+import { TmpCleanerService } from './common/utils/tmp-cleaner.service';
 
 @Module({
   imports: [
@@ -18,6 +19,6 @@ import { FosteringModule } from './modules/fostering/fostering.module';
     FosteringModule],
 
   controllers: [],
-  providers: [],
+    providers: [TmpCleanerService],
 })
 export class AppModule {}
