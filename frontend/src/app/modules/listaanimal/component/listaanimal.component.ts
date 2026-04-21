@@ -47,7 +47,7 @@ export class ListaAnimalComponent implements OnInit {
       filter: {
         name: this.searchText || undefined,
         type: this.selectedType ? this.selectedType.toLowerCase() : undefined,
-        status: this.selectedStatus ? this.selectedStatus.toUpperCase() : undefined
+        status: this.selectedStatus ? this.selectedStatus.toLowerCase() : undefined
       }
     };
 
