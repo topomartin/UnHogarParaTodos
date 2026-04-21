@@ -1,0 +1,20 @@
+<div class="container">
+
+  <h1>Apadrinar a {{ animalName }} 🐾</h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <input type="number"
+           placeholder="Cantidad (€)"
+           formControlName="amount">
+
+    <textarea placeholder="Mensaje (opcional)"
+              formControlName="message"></textarea>
+
+    <button type="submit" [disabled]="form.invalid">
+      Donar 💸
+    </button>
+
+  </form>
+
+</div>

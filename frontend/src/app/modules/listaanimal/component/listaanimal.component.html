@@ -4,11 +4,8 @@
 
   <!-- FILTERS -->
   <div class="filters">
-    <input type="text"
-           placeholder="Buscar por nombre"
-           [(ngModel)]="searchText"
-           (input)="onSearchChange()"
-           [disabled]="loading" />
+    <input type="text" placeholder="Buscar por nombre" [(ngModel)]="searchText" (input)="onSearchChange()"
+      [disabled]="loading" />
 
     <select [(ngModel)]="selectedType" (change)="applyFilters()" [disabled]="loading">
       <option value="">Todos los tipos</option>
@@ -33,8 +30,7 @@
         <span class="nombre">{{ animal.name }}</span>
         <span class="tipo">{{ animal.type }}</span>
 
-        <span class="status"
-              [ngClass]="animal.status.toLowerCase()">
+        <span class="status" [ngClass]="animal.status.toLowerCase()">
           {{ animal.status }}
 
           <span *ngIf="animal.status.toLowerCase() === 'available'">✔️</span>
@@ -50,10 +46,14 @@
           Ver detalles
         </button>
 
-        <button class="btn adoptar"
-                *ngIf="animal.status.toLowerCase() === 'available'"
-                (click)="adoptarAnimal(animal.id)">
+        <button class="btn adoptar" *ngIf="animal.status.toLowerCase() === 'available'"
+          (click)="adoptarAnimal(animal.id)">
           Adoptar
+        </button>
+
+        <button class="btn apadrinar" *ngIf="animal.status.toLowerCase() === 'available'" 
+        (click)="apadrinarAnimal(animal.id)">
+          💸 Apadrinar
         </button>
 
       </div>

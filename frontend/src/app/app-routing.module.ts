@@ -9,6 +9,7 @@ import { ListaAnimalComponent } from "./modules/listaanimal/component/listaanima
 import { DetalleAnimalComponent } from "./modules/detallesanimal/component/detalleanimal.component";
 import { AdoptarAnimalComponent } from "./modules/adoptaranimal/component/adoptaranimal.component";
 import { RegisterFosterComponent } from "./modules/registerfoster/component/registerfoster.component";
+import { SponsorAnimalComponent } from './modules/sponsor-animal/component/sponsor-animal.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'profile', component: VerPerfilComponent },
   { path: 'edit-profile', component: EditarPerfilComponent },
   { path: 'adopt/:id', component: AdoptarAnimalComponent },
+  { path: 'sponsor/:id', component: SponsorAnimalComponent },
   // Paginas a ver en menu-nav
   {
     path: 'listaanimal',

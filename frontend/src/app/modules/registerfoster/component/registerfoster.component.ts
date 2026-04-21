@@ -61,27 +61,29 @@ export class RegisterFosterComponent implements OnInit {
     const data = {
       user_id: user.id,
 
-      full_name: this.form.value.fullName,
+      fullName: this.form.value.fullName,
       phone: this.form.value.phone,
       age: Number(this.form.value.age),
       address: this.form.value.address,
 
-      housing_type: this.form.value.homeType,
-      square_meters: Number(this.form.value.sizeM2),
+      homeType: this.form.value.homeType,
+      sizeM2: Number(this.form.value.sizeM2),
 
-      has_garden: this.form.value.hasGarden === 'true',
-      has_terrace: this.form.value.hasTerrace === 'true',
+      hasGarden: this.form.value.hasGarden,
+      hasTerrace: this.form.value.hasTerrace,
 
-      has_other_animals: this.form.value.hasAnimals === 'true',
-      has_experience: this.form.value.hasFosterExperience === 'true',
+      hasAnimals: this.form.value.hasAnimals,
+      hasFosterExperience: this.form.value.hasFosterExperience,
 
-      available_time: this.form.value.availabilityTime,
-      max_animals: Number(this.form.value.maxAnimals),
+      availabilityTime: this.form.value.availabilityTime,
+      maxAnimals: Number(this.form.value.maxAnimals),
 
       motivation: this.form.value.motivation,
 
       status: 'pending'
     };
+
+    console.log(data);
 
     this.apiService.post('foster/create', data).subscribe(
       () => {

@@ -46,7 +46,7 @@ export class CreateFosterProfileDto {
   @ApiProperty({ description: `Valores posibles: ${Object.values(HousingType).join(', ')} `, required: true, enum: HousingType })
   @IsNotEmpty()
   @IsEnum(HousingType)
-  [Names.modelFields.HOUSING_TYPE]: HousingType | undefined;
+  [Names.modelFields.HOUSING_TYPE]!: HousingType;
 
   @ApiProperty({ description: 'Supermicie en metros cuadrados', required: true })
   @IsNumber()
@@ -58,8 +58,8 @@ export class CreateFosterProfileDto {
   @IsBoolean()
   @IsNotEmpty()
   @Transform(({ value }) => {
-    if (value === 'yes') return true;
-    if (value === 'no') return false;
+    if (value === 'true') return true;
+    if (value === 'false') return false;
     return value; // return value just in case the boolean value is correct.
   })
   [Names.modelFields.HAS_GARDEN]!: boolean;
@@ -68,8 +68,8 @@ export class CreateFosterProfileDto {
   @IsBoolean()
   @IsNotEmpty()
   @Transform(({ value }) => {
-    if (value === 'yes') return true;
-    if (value === 'no') return false;
+    if (value === 'true') return true;
+    if (value === 'false') return false;
     return value;
   })
   [Names.modelFields.HAS_TERRACE]!: boolean;
@@ -78,8 +78,8 @@ export class CreateFosterProfileDto {
   @IsBoolean()
   @IsNotEmpty()
   @Transform(({ value }) => {
-    if (value === 'yes') return true;
-    if (value === 'no') return false;
+    if (value === 'true') return true;
+    if (value === 'false') return false;
     return value;
   })
   [Names.modelFields.HAS_OTHER_ANIMALS]!: boolean;
@@ -88,8 +88,8 @@ export class CreateFosterProfileDto {
   @IsBoolean()
   @IsNotEmpty()
   @Transform(({ value }) => {
-    if (value === 'yes') return true;
-    if (value === 'no') return false;
+    if (value === 'true') return true;
+    if (value === 'false') return false;
     return value;
   })
   [Names.modelFields.HAS_EXPERIENCE]!: boolean;
@@ -97,8 +97,7 @@ export class CreateFosterProfileDto {
   @ApiProperty({ required: true })
   @IsString()
   @IsNotEmpty()
-  @Transform(({ value }) => {return Number(value);})
-  [Names.modelFields.AVAILABEL_TIME]!: number;
+  [Names.modelFields.AVAILABEL_TIME]!: string;
 
   @ApiProperty({ required: true })
   @IsNumber()
