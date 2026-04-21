@@ -51,7 +51,11 @@ export class AnimalImageService {
             });
         }
 
-        return this.imageRepository.save(images);
+        const saved = await this.imageRepository.save(images);
+
+        await this.ensureMainImage(animalId);
+
+        return saved;
     }
 
     async setMainImage(imageId: number) {
@@ -90,29 +94,57 @@ export class AnimalImageService {
         if (!image) return null;
 
         image.deleted_at = new Date();
-        await this.imageRepository.save(image);
-
-        if (!image.is_main) {
-            return true;
-        }
-
         image.is_main = false;
 
-        const nextMain = await this.imageRepository.findOne({
-            where: {
-                animal: { id: image.animal.id },
-                deleted_at: IsNull(),
-            },
-            order: { created_at: 'DESC' },
-        });
+        await this.imageRepository.save(image);
 
-        if (nextMain) {
-            nextMain.is_main = true;
-            await this.imageRepository.save(nextMain);
-        }
+        await this.ensureMainImage(image.animal.id);
 
         return true;
     }
+
+    async restoreImage(imageId: number) {
+        const image = await this.imageRepository.findOne({
+            where: { id: imageId },
+            relations: ['animal'],
+        });
+
+        if (!image || !image.deleted_at) return null;
+
+        image.deleted_at = null;
+
+        await this.imageRepository.save(image);
+
+        await this.ensureMainImage(image.animal.id);
+
+        return image;
+    }
+
+    async hardDeleteImage(imageId: number) {
+        const image = await this.imageRepository.findOne({
+            where: { id: imageId },
+            relations: ['animal'],
+        });
+
+        if (!image) return null;
+
+        const filePath = path.join(process.cwd(), image.image_url);
+
+        if (fs.existsSync(filePath)) {
+            try {
+                fs.unlinkSync(filePath);
+            } catch (e) {
+                console.error('Error deleting file:', filePath, e);
+            }
+        }
+
+        await this.imageRepository.remove(image);
+
+        await this.ensureMainImage(image.animal.id);
+
+        return true;
+    }
+
 
     async findByAnimal(animalId: number) {
         return this.imageRepository.find({
@@ -122,5 +154,33 @@ export class AnimalImageService {
             },
             order: { created_at: 'DESC' },
         });
+    }
+
+    async findAllIncludingDeleted(animalId: number) {
+        return this.imageRepository.find({
+            where: {
+                animal: { id: animalId },
+            },
+            order: { created_at: 'DESC' },
+        });
+    }
+
+    private async ensureMainImage(animalId: number) {
+        const images = await this.imageRepository.find({
+            where: {
+                animal: { id: animalId },
+                deleted_at: IsNull(),
+            },
+            order: { created_at: 'DESC' },
+        });
+
+        if (images.length === 0) return;
+
+        const hasMain = images.some(img => img.is_main);
+
+        if (!hasMain) {
+            images[0].is_main = true;
+            await this.imageRepository.save(images[0]);
+        }
     }
 }

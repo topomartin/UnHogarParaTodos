@@ -66,4 +66,14 @@ export class AnimalController {
     deleteImage(@Param('imageId', ParseIntPipe) imageId: number) {
         return this.animalImageService.softDeleteImage(imageId);
     }
+
+    @Patch('images/:imageId/restore')
+    restoreImage(@Param('imageId', ParseIntPipe) imageId: number) {
+        return this.animalImageService.restoreImage(imageId);
+    }
+
+    @Delete('images/:imageId/hard')
+    hardDeleteImage(@Param('imageId', ParseIntPipe) imageId: number) {
+        return this.animalImageService.hardDeleteImage(imageId);
+    }
 }
