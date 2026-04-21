@@ -4,12 +4,8 @@ import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } f
 import { Adoption } from "./adoption.entity";
 import { Fostering } from "./fostering.entity";
 import { AnimalModelNames as Names } from "src/modules/animal/config/animal-model-name";
-<<<<<<< HEAD
 import { Sponsorship } from "./sponsorship.entity";
 import { AnimalImage } from "./animal_image.entity";
-=======
-import { AnimalImage } from "./animal_image.entity";
->>>>>>> e760ea536deec652fd33dce4bf66431fb0ab478e
 
 @Entity()
 export class Animal {
@@ -52,7 +48,7 @@ export class Animal {
 
     @OneToMany(() => Sponsorship, (sponsorship) => sponsorship.animal)
     sponsorships!: Sponsorship[]
-    
+
     @OneToMany(() => AnimalImage, (image) => image.animal)
     images!: AnimalImage[];
 

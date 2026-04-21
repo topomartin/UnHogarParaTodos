@@ -1,6 +1,6 @@
 import { Logger } from "@nestjs/common";
 import { Injectable } from "@nestjs/common/decorators/core/injectable.decorator";
-import { Like, Repository } from "typeorm";
+import { DeepPartial, Like, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { handleMySQLError } from "src/common/database/mysql.error.handler";
 import { IPaginatedResult, IQueryConfig } from "src/common/knowledge/interfaces";
@@ -17,9 +17,9 @@ export class SponsorshipRepositoryService {
     private queryBuilderHelper: QueryBuilderHelper){}
 
 
-    async create(cretateSponsorshipDto: CreateSponsorshipDto): Promise<Sponsorship | null | undefined>{
+    async create(sponsorshipToUpdate: DeepPartial<Sponsorship>): Promise<Sponsorship | null | undefined>{
         try{
-            return await this.sponsorshipRepository.save(cretateSponsorshipDto as any);
+            return await this.sponsorshipRepository.save(sponsorshipToUpdate);
         }catch (e){
             this.handleError(e);
         }

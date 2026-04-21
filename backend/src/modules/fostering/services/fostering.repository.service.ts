@@ -19,7 +19,7 @@ export class FosteringRepositoryService {
 
     async create(cretateFosteringDto: CreateFosteringDto): Promise<Fostering | null | undefined>{
         try{
-            return await this.fosteringRepository.save(cretateFosteringDto as any);
+            return await this.fosteringRepository.save(cretateFosteringDto);
         }catch (e){
             this.handleError(e);
         }

@@ -27,7 +27,7 @@ export class SponsorAnimalComponent implements OnInit {
 
     const now = new Date();
     this.today = now.toISOString().split('T')[0];
-    
+
     this.animalId = Number(this.route.snapshot.paramMap.get('id'));
 
     // obtener nombre animal
@@ -65,7 +65,7 @@ export class SponsorAnimalComponent implements OnInit {
 
     console.log('DONATION DATA:', data);
 
-    this.apiService.post('donation/create', data).subscribe(
+    this.apiService.post('sponsorship/create', data).subscribe(
       () => {
         alert('Gracias por apadrinar ❤️');
       },

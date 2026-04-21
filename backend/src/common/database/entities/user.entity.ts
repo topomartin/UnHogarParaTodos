@@ -44,7 +44,7 @@ export class User {
     @OneToMany(() => Fostering, (fostering) => fostering.user)
     fosterings!: Fostering[]
 
-    @OneToMany(() => Sponsorship, (sponsorship) => sponsorship.animal)
+    @OneToMany(() => Sponsorship, (sponsorship) => sponsorship.user)
     sponsorships!: Sponsorship[]
 
 }

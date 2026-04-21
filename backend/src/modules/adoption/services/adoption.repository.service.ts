@@ -29,12 +29,14 @@ export class AdoptionRepositoryService {
     async create(createAdoptionDto: CreateAdoptionDto): Promise<Adoption | null | undefined> {
         try {
 
-            const adoption = await this.adoptionRepository.save({
+            const data = {
                 user: { id: createAdoptionDto.user_id },
                 animal: { id: createAdoptionDto.animal_id },
                 status: createAdoptionDto.status,
                 formData: createAdoptionDto.formData
-            });
+            }
+
+            const adoption = await this.adoptionRepository.save(data);
 
             // 🔥 ACTUALIZAR ESTADO DEL ANIMAL
             await this.updateAnimalStatus(createAdoptionDto.animal_id, createAdoptionDto.status);
