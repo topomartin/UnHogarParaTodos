@@ -22,7 +22,6 @@ const routes: Routes = [
   { path: 'edit-profile', component: EditarPerfilComponent },
   { path: 'adopt/:id', component: AdoptarAnimalComponent },
   { path: 'sponsor/:id', component: SponsorAnimalComponent },
-  { path: 'contact', component: ContactComponent },
 
   // Paginas a ver en menu-nav
   {
