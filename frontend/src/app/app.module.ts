@@ -14,9 +14,12 @@ import { ListaAnimalComponent } from './modules/listaanimal/component/listaanima
 import { DetalleAnimalComponent } from './modules/detallesanimal/component/detalleanimal.component';
 import { AdoptarAnimalComponent } from './modules/adoptaranimal/component/adoptaranimal.component';
 import { RegisterFosterComponent } from './modules/registerfoster/component/registerfoster.component';
+import { SponsorAnimalComponent } from './modules/sponsor-animal/component/sponsor-animal.component';
+import { ContactComponent } from './modules/appcontact/component/appcontact.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavigationMenuComponent } from './modules/shared/navigation-menu.component/navigation-menu.component';
 import { NavigationBarComponent } from './modules/shared/navigation-bar/navigation-bar.component';
+import { FooterComponent } from './modules/shared/footer/footer';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -31,8 +34,11 @@ import { FormsModule } from '@angular/forms';
     DetalleAnimalComponent,
     AdoptarAnimalComponent,
     RegisterFosterComponent,
+    SponsorAnimalComponent,
+    ContactComponent,
     NavigationMenuComponent,
     NavigationBarComponent,
+    FooterComponent,
     HomeComponent,
   ],
   imports: [

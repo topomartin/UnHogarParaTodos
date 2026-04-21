@@ -18,10 +18,17 @@ export class FosterProfileRepositoryService {
     private queryBuilderHelper: QueryBuilderHelper){}
 
 
-    async create(cretateFosterProfileDto: CreateFosterProfileDto): Promise<FosterProfile | null | undefined>{
-        try{
-            return await this.fosterProfileRepository.save(cretateFosterProfileDto as any);
-        }catch (e){
+    async create(createFosterProfileDto: CreateFosterProfileDto): Promise<FosterProfile | null | undefined> {
+        try {
+
+            const { user_id, ...rest } = createFosterProfileDto;
+
+            return await this.fosterProfileRepository.save({
+                ...rest,
+                user: { id: user_id }
+            });
+
+        } catch (e) {
             this.handleError(e);
         }
     }
@@ -33,7 +40,7 @@ export class FosterProfileRepositoryService {
             this.handleError(e);
         }
     }
-    async findAll(filterData: FosterProfileSearchDto): Promise<IPaginatedResult<FosterProfile>>{
+    async findAll(filterData: FosterProfileSearchDto): Promise<IPaginatedResult<FosterProfile>> {
 
         const query = this.fosterProfileRepository.createQueryBuilder('fosterProfile');
         const {qb, take, page} = await this.queryBuilderHelper.SelectQueryBuilder(query, queryConfig, filterData )
@@ -41,7 +48,7 @@ export class FosterProfileRepositoryService {
 
         return {
             data: data.map(({ ...fosterProfile }) => fosterProfile as FosterProfile),
-            meta: {total, page, lastPage: Math.ceil(total / take), limit: take }
+            meta: { total, page, lastPage: Math.ceil(total / take), limit: take }
         };
     }
 
@@ -54,7 +61,7 @@ export class FosterProfileRepositoryService {
         }
     }
 
-    private handleError(e){
+    private handleError(e) {
         this.logger.error(e);
         handleMySQLError(e);
     }

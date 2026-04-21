@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       console.log('Login data:', this.loginForm.value);
       this.authenticationService.login(this.loginForm.value as any).subscribe(
         result=>{
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/home']);
         }
       )
     }

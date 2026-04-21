@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
           }).subscribe({
             next: () => {
               // redirige al perfil, puede seria mejor al listado de animales o página principal en cuanto existan
-              this.router.navigate(['/profile']);
+              this.router.navigate(['/home']);
             },
             error: err => console.error(err)
           });

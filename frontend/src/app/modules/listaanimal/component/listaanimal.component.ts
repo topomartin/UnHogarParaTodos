@@ -31,7 +31,7 @@ export class ListaAnimalComponent implements OnInit {
     private router: Router,
     private apiService: ApiService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getAnimales();
@@ -109,7 +109,11 @@ export class ListaAnimalComponent implements OnInit {
   }
 
   adoptarAnimal(id: number) {
-  this.router.navigate(['/adopt', id]);
-}
+    this.router.navigate(['/adopt', id]);
+  }
+
+  apadrinarAnimal(id: number) {
+    this.router.navigate(['/sponsor', id]);
+  }
 
 }

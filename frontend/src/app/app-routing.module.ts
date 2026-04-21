@@ -9,6 +9,8 @@ import { ListaAnimalComponent } from "./modules/listaanimal/component/listaanima
 import { DetalleAnimalComponent } from "./modules/detallesanimal/component/detalleanimal.component";
 import { AdoptarAnimalComponent } from "./modules/adoptaranimal/component/adoptaranimal.component";
 import { RegisterFosterComponent } from "./modules/registerfoster/component/registerfoster.component";
+import { SponsorAnimalComponent } from './modules/sponsor-animal/component/sponsor-animal.component';
+import { ContactComponent } from './modules/appcontact/component/appcontact.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,6 +21,9 @@ const routes: Routes = [
   { path: 'profile', component: VerPerfilComponent },
   { path: 'edit-profile', component: EditarPerfilComponent },
   { path: 'adopt/:id', component: AdoptarAnimalComponent },
+  { path: 'sponsor/:id', component: SponsorAnimalComponent },
+  { path: 'contact', component: ContactComponent },
+
   // Paginas a ver en menu-nav
   {
     path: 'listaanimal',
@@ -39,11 +44,20 @@ const routes: Routes = [
       showInMenu: true
       // roles: ['USER', 'ADMIN', 'WORKER'] // Limitar a dichos roles, por defecto se muestra sin log
     }
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
+    data: {
+      title: 'Contáctanos',
+      icon: 'mail',
+      showInMenu: true
+    }
   }
 ];
 
 @NgModule({
-	imports: [ RouterModule.forRoot(routes) ],
-	exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

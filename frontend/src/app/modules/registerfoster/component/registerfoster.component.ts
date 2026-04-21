@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-registerfoster',
@@ -15,8 +16,9 @@ export class RegisterFosterComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
 
@@ -24,7 +26,6 @@ export class RegisterFosterComponent implements OnInit {
 
       // 👤 Datos personales
       fullName: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
       phone: new FormControl('', Validators.required),
       age: new FormControl('', Validators.required),
       address: new FormControl('', Validators.required),
@@ -55,14 +56,41 @@ export class RegisterFosterComponent implements OnInit {
   onSubmit() {
     if (this.form.invalid) return;
 
-    this.apiService.post('foster/create', this.form.value).subscribe(
+    const user = this.authService.getCurrentUser();
+
+    const data = {
+      user_id: user.id,
+
+      fullName: this.form.value.fullName,
+      phone: this.form.value.phone,
+      age: Number(this.form.value.age),
+      address: this.form.value.address,
+
+      homeType: this.form.value.homeType,
+      sizeM2: Number(this.form.value.sizeM2),
+
+      hasGarden: this.form.value.hasGarden,
+      hasTerrace: this.form.value.hasTerrace,
+
+      hasAnimals: this.form.value.hasAnimals,
+      hasFosterExperience: this.form.value.hasFosterExperience,
+
+      availabilityTime: this.form.value.availabilityTime,
+      maxAnimals: Number(this.form.value.maxAnimals),
+
+      motivation: this.form.value.motivation,
+
+      status: 'pending'
+    };
+
+    console.log(data);
+
+    this.apiService.post('foster/create', data).subscribe(
       () => {
-        alert('Solicitud de casa de acogida enviada');
-        this.router.navigate(['/']);
+        alert('Solicitud enviada correctamente');
+        this.router.navigate(['/profile']);
       },
-      (err) => {
-        console.error(err);
-      }
+      (err) => console.error(err)
     );
   }
 }
