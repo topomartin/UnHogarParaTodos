@@ -1,0 +1,48 @@
+<div class="contact-container">
+
+    <h1>Contacta con nosotros</h1>
+    <p>¿Tienes dudas? Escríbenos y te responderemos lo antes posible.</p>
+
+    <!-- 📍 INFO EMPRESA -->
+    <div class="contact-info">
+
+        <div class="info-item">
+            📞 <strong>Teléfono:</strong> +34 600 123 456
+        </div>
+
+        <div class="info-item">
+            📧 <strong>Email:</strong> info@protectora.org
+        </div>
+
+        <div class="info-item">
+            📍 <strong>Ubicación:</strong> Barcelona, España
+        </div>
+
+        <div class="info-item">
+            🕒 <strong>Horario:</strong> Lunes - Viernes | 09:00 - 18:00
+        </div>
+
+    </div>
+
+    <!-- FORMULARIO -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!sent">
+
+        <input type="text" placeholder="Nombre" formControlName="name">
+
+        <input type="email" placeholder="Email" formControlName="email">
+
+        <input type="text" placeholder="Asunto" formControlName="subject">
+
+        <textarea placeholder="Mensaje" formControlName="message"></textarea>
+
+        <button type="submit" [disabled]="form.invalid">
+            Enviar mensaje
+        </button>
+
+    </form>
+
+    <div class="success" *ngIf="sent">
+        ✅ Mensaje enviado correctamente. Te responderemos pronto.
+    </div>
+
+</div>

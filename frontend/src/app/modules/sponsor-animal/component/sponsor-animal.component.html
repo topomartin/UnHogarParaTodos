@@ -4,13 +4,49 @@
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
+    <!-- 💸 Cantidad -->
     <input type="number"
            placeholder="Cantidad (€)"
            formControlName="amount">
 
+    <!-- 🧾 Mensaje -->
     <textarea placeholder="Mensaje (opcional)"
               formControlName="message"></textarea>
 
+    <!-- 🔁 Frecuencia -->
+    <select formControlName="frequency">
+      <option value="">Frecuencia</option>
+      <option value="monthly">Mensual</option>
+      <option value="yearly">Anual</option>
+      <option value="unic">Única vez</option>
+    </select>
+
+    <!-- 📅 Fecha inicio -->
+    <input type="date"
+           formControlName="startDate"
+           [min]="today">
+
+    <!-- 📊 RESUMEN (solo visual) -->
+    <div class="summary" *ngIf="form.value.amount || form.value.frequency">
+
+      <h3>Resumen de apadrinamiento</h3>
+
+      <p><strong>Cantidad:</strong> {{ form.value.amount || 0 }} €</p>
+
+      <p>
+        <strong>Frecuencia:</strong>
+        {{
+          form.value.frequency === 'monthly' ? 'Mensual' :
+          form.value.frequency === 'yearly' ? 'Anual' :
+          form.value.frequency === 'unic' ? 'Única vez' : '-'
+        }}
+      </p>
+
+      <p><strong>Inicio:</strong> {{ form.value.startDate || '-' }}</p>
+
+    </div>
+
+    <!-- BOTÓN -->
     <button type="submit" [disabled]="form.invalid">
       Donar 💸
     </button>

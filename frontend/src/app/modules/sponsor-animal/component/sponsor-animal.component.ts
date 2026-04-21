@@ -15,15 +15,19 @@ export class SponsorAnimalComponent implements OnInit {
   form!: FormGroup;
   animalId!: number;
   animalName: string = '';
+  today: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 
+    const now = new Date();
+    this.today = now.toISOString().split('T')[0];
+    
     this.animalId = Number(this.route.snapshot.paramMap.get('id'));
 
     // obtener nombre animal
@@ -33,6 +37,8 @@ export class SponsorAnimalComponent implements OnInit {
 
     this.form = new FormGroup({
       amount: new FormControl('', Validators.required),
+      frequency: new FormControl('monthly', Validators.required),
+      startDate: new FormControl('', Validators.required),
       message: new FormControl('')
     });
   }
@@ -45,9 +51,19 @@ export class SponsorAnimalComponent implements OnInit {
     const data = {
       user_id: user.id,
       animal_id: this.animalId,
+
       amount: Number(this.form.value.amount),
-      message: this.form.value.message
+      message: this.form.value.message,
+
+      // 🔥 NUEVOS CAMPOS IMPORTANTES
+      frequency: this.form.value.frequency,
+
+      startDate: this.form.value.startDate
+        ? new Date(this.form.value.startDate).toISOString()
+        : null
     };
+
+    console.log('DONATION DATA:', data);
 
     this.apiService.post('donation/create', data).subscribe(
       () => {
