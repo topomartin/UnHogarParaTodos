@@ -43,7 +43,7 @@ export class QueryBuilderHelper {
                             [key]: `%${value}%`
                         });
                     } else {
-                        qb.andWhere(`${queryConfig.alias}.${key} = :${key}`, {
+                        qb.andWhere(`${queryConfig.alias}.${key} LIKE :${key}`, {
                             [key]: value
                         });
                     }

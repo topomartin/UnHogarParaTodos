@@ -1,3 +1,4 @@
+import { HousingType } from './../../../common/knowledge/enums';
 import { ApiProperty } from "@nestjs/swagger/dist/decorators/api-property.decorator"
 import {
   IsString,
@@ -9,7 +10,9 @@ import {
   IsDateString,
   IsNumber,
 } from 'class-validator';
-import { FosterProfileStatus, HousingType } from "src/common/knowledge/enums";
+import { FosterProfileStatus } from "src/common/knowledge/enums";
+import { FosterProfileModelNames as Names } from "../config/foster-profile-model-name";
+import { Expose, Transform } from "class-transformer";
 
 
 export class CreateFosterProfileDto {
@@ -21,71 +24,95 @@ export class CreateFosterProfileDto {
   @ApiProperty({ description: 'Nombre de la casa de acogida', required: true })
   @IsString()
   @IsNotEmpty()
-  full_name!: string;
+  [Names.modelFields.FULL_NAME]!: string;
 
   @ApiProperty({ description: 'Teléfono', required: true })
   @IsString()
   @IsNotEmpty()
-  phone!: string;
+  @Expose({ name: Names.modelFields.PHONE })
+  [Names.modelFields.PHONE]!: string;
 
-  @ApiProperty({ description: 'Teléfono', required: true })
+  @ApiProperty({ description: 'Edad', required: true })
   @IsNumber()
   @IsNotEmpty()
-  age!: number;
+  @Transform(({ value }) => {return Number(value);})
+  [Names.modelFields.AGE]!: number;
 
   @ApiProperty({ description: 'Dirección', required: true })
   @IsString()
   @IsNotEmpty()
-  address!: string;
+  [Names.modelFields.ADDRESS]!: string;
 
   @ApiProperty({ description: `Valores posibles: ${Object.values(HousingType).join(', ')} `, required: true, enum: HousingType })
   @IsNotEmpty()
   @IsEnum(HousingType)
-  housing_type: HousingType | undefined;
+  [Names.modelFields.HOUSING_TYPE]: HousingType | undefined;
 
   @ApiProperty({ description: 'Supermicie en metros cuadrados', required: true })
   @IsNumber()
   @IsNotEmpty()
-  square_meters!: number;
+  @Transform(({ value }) => {return Number(value);})
+  [Names.modelFields.SQUARE_METERS]!: number;
 
   @ApiProperty({ required: true })
   @IsBoolean()
   @IsNotEmpty()
-  has_garden!: boolean;
+  @Transform(({ value }) => {
+    if (value === 'yes') return true;
+    if (value === 'no') return false;
+    return value; // return value just in case the boolean value is correct.
+  })
+  [Names.modelFields.HAS_GARDEN]!: boolean;
 
   @ApiProperty({ required: true })
   @IsBoolean()
   @IsNotEmpty()
-  has_terrace!: boolean;
+  @Transform(({ value }) => {
+    if (value === 'yes') return true;
+    if (value === 'no') return false;
+    return value;
+  })
+  [Names.modelFields.HAS_TERRACE]!: boolean;
 
   @ApiProperty({ required: true })
   @IsBoolean()
   @IsNotEmpty()
-  has_other_animals!: boolean;
+  @Transform(({ value }) => {
+    if (value === 'yes') return true;
+    if (value === 'no') return false;
+    return value;
+  })
+  [Names.modelFields.HAS_OTHER_ANIMALS]!: boolean;
 
   @ApiProperty({ required: true })
   @IsBoolean()
   @IsNotEmpty()
-  has_experience!: boolean;
+  @Transform(({ value }) => {
+    if (value === 'yes') return true;
+    if (value === 'no') return false;
+    return value;
+  })
+  [Names.modelFields.HAS_EXPERIENCE]!: boolean;
 
   @ApiProperty({ required: true })
   @IsString()
   @IsNotEmpty()
-  available_time!: string;
+  @Transform(({ value }) => {return Number(value);})
+  [Names.modelFields.AVAILABEL_TIME]!: number;
 
   @ApiProperty({ required: true })
   @IsNumber()
   @IsNotEmpty()
-  max_animals!: number;
+  @Transform(({ value }) => {return Number(value);})
+  [Names.modelFields.MAX_ANIMALS]!: number;
 
   @ApiProperty({ required: true })
   @IsString()
   @IsNotEmpty()
-  motivation!: string;
+  [Names.modelFields.MOTIVATION]!: string;
 
-  @ApiProperty({ required: true, enum: FosterProfileStatus })
-  @IsNotEmpty()
-  @IsEnum(FosterProfileStatus)
-  status!: FosterProfileStatus;
-
+  //@ApiProperty({ required: false , enum: FosterProfileStatus })
+  //@IsNotEmpty()
+  //@IsEnum(FosterProfileStatus)
+  //[Names.modelFields.STATUS]!: FosterProfileStatus;
 }

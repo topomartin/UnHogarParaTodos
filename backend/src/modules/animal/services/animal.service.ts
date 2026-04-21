@@ -5,6 +5,7 @@ import { CreateAnimalDto } from '../dto/animal-create.dto';
 import { AnimalRepositoryService } from './animal.repository.service';
 import { AnimalSearchDto } from '../dto/animal-search.dto';
 import { IPaginatedResult } from 'src/common/knowledge/interfaces';
+import { AnimalModelNames as Names } from '../config/animal-model-name';
 
 
 @Injectable()
@@ -25,7 +26,7 @@ export class AnimalService {
   }
 
   async update(id, parcialUser ){
-    parcialUser['updated_at'] = Utils.toLocalDateForMySQL(new Date());
+    parcialUser[Names.tableFields.UPDATED_AT] = Utils.toLocalDateForMySQL(new Date());
     return await this.userRepositoryService.update(id,parcialUser);
   }
 

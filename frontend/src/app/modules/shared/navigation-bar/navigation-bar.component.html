@@ -1,24 +1,65 @@
+<div class="header">
 
-<div class="navigation-bar-component">
-  <div class="navigation-bar-component__logo-wrapper">
-    <button mat-icon-button aria-label="Toggle menu" (click)="toggleMenu()">
+  <!-- LEFT -->
+  <div class="header-left">
+    <button mat-icon-button (click)="toggleMenu()">
       <mat-icon>menu</mat-icon>
     </button>
+
+    <div class="logo" [routerLink]="['/']">🐾</div> <!--<img src="assets/logo.png" class="logo-img">-->
+    <span class="title">Un Hogar Para Todos</span>
   </div>
-  <div class="navigation-bar-component__account-wrapper">
-    <div class="navigation-bar-component__account" [matMenuTriggerFor]="menu">
-      <span>{{ currentUser }}</span>
-      <mat-icon>account_box</mat-icon>
-    </div>
-    <mat-menu #menu="matMenu" xPosition="before">
-      <button mat-menu-item *ngIf="!currentUser" [routerLink]="['/login']">
-        <mat-icon>login</mat-icon>
-        <span>Login</span>
+
+  <!-- CENTER -->
+  <div class="header-center"></div>
+
+  <!-- RIGHT -->
+  <div class="header-right">
+
+    <!-- CTA -->
+    <button mat-raised-button color="primary" class="cta" [routerLink]="['/listaanimal']">
+      Adoptar
+    </button>
+
+    <!-- USER AREA -->
+    <ng-container *ngIf="user$ | async as user; else guest">
+
+      <button mat-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" class="user-button">
+        <mat-icon>account_circle</mat-icon>
+        <span class="username">{{ user.username }}</span>
       </button>
-      <button mat-menu-item *ngIf="currentUser" (click)="logout()">
-        <mat-icon>logout</mat-icon>
-        <span>Logout</span>
-      </button>
-    </mat-menu>
+
+      <mat-menu #menu="matMenu">
+
+        <button mat-menu-item (click)="navigateAndClose('/profile')">
+          <mat-icon>person</mat-icon>
+          <span>Perfil</span>
+        </button>
+
+        <button mat-menu-item
+                *ngIf="isAdminOrWorker(user)"
+                (click)="navigateAndClose('/admin')">
+          <mat-icon>admin_panel_settings</mat-icon>
+          <span>Admin</span>
+        </button>
+
+        <mat-divider></mat-divider>
+
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+
+      </mat-menu>
+
+    </ng-container>
+
+    <!-- GUEST -->
+    <ng-template #guest>
+      <button mat-button [routerLink]="['/login']">Login</button>
+      <button mat-button [routerLink]="['/register']">Register</button>
+    </ng-template>
+
   </div>
+
 </div>

@@ -2,6 +2,8 @@ import { ApiProperty } from "@nestjs/swagger";
 import { AnimalStatus, AnimalType } from "src/common/knowledge/enums";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 import { Adoption } from "./adoption.entity";
+import { Fostering } from "./fostering.entity";
+import { AnimalModelNames as Names } from "src/modules/animal/config/animal-model-name";
 
 @Entity()
 export class Animal {
@@ -9,34 +11,37 @@ export class Animal {
     id!: number;
 
     @ApiProperty()
-    @Column({ type: "varchar", length: 50, nullable: false })
+    @Column({ name: Names.tableFields.NAME, type: "varchar", length: 50, nullable: false })
     name!: string;
 
     @ApiProperty({ enum: AnimalType, enumName: 'AnimalType'})
-    @Column({ type: 'enum', enum: AnimalType, nullable: false })
+    @Column({ name: Names.tableFields.TYPE, type: 'enum', enum: AnimalType, nullable: false })
     type!: AnimalType;
 
     @ApiProperty({example: new Date().toISOString().split('T')[0],format: 'date',})
-    @Column({ type: "date", nullable: false })
+    @Column({ name: Names.tableFields.BIRTH_DATE, type: "date", nullable: false })
     birth_date!: Date;
 
     @ApiProperty()
-    @Column({ type: "varchar", length: 254 })
+    @Column({ name: Names.tableFields.DESCRIPTION, type: "varchar", length: 254 })
     description!: string;
 
     @ApiProperty({ enum: AnimalStatus, enumName: 'AnimalStatus'})
-    @Column({ type: "enum", enum: AnimalStatus, default: AnimalStatus.AVAILABLE })
+    @Column({ name: Names.tableFields.STATUS, type: "enum", enum: AnimalStatus, default: AnimalStatus.AVAILABLE })
     status!: AnimalStatus;
 
     @ApiProperty()
-    @CreateDateColumn({ type: 'timestamp' })
-    created_at!: Date;
+    @CreateDateColumn({ name: Names.tableFields.CREATED_AT, type: 'timestamp' })
+    create_at!: Date;
 
     @ApiProperty()
-    @Column({ type: "timestamp", nullable: true, default: null })
-    updated_at!: Date;
+    @Column({ name: Names.tableFields.UPDATED_AT, type: "timestamp", nullable: true, default: null })
+    update_at!: Date;
 
     @OneToMany(() => Adoption, (adoption) => adoption.animal)
     adoptions!: Adoption[]
+
+    @OneToMany(() => Fostering, (fostering) => fostering.animal)
+    fosterings!: Fostering[]
 
 }

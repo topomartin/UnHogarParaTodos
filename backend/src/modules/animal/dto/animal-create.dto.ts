@@ -9,32 +9,33 @@ import {
   IsDateString,
 } from 'class-validator';
 import { AnimalStatus, AnimalType } from "src/common/knowledge/enums";
+import { AnimalModelNames as Names } from "../config/animal-model-name";
 
 
 export class CreateAnimalDto {
   @ApiProperty({ description: 'Nombre del animal', required: true })
   @IsString()
   @IsNotEmpty()
-  name!: string;
+  [Names.modelFields.NAME]!: string;
 
   @ApiProperty({ description: `Valores posibles: ${Object.values(AnimalType).join(', ')} `, required: true, enum: AnimalType})
   @IsNotEmpty()
   @IsEnum(AnimalType)
-  type: AnimalType | undefined;
+  [Names.modelFields.TYPE]: AnimalType | undefined;
 
   @ApiProperty({ description: '"25-12-2025"', required: true })
   @IsDateString()
   @IsNotEmpty()
-  birth_date!: string;
+  [Names.modelFields.BIRTH_DATE]!: string;
 
   @ApiProperty({ required: false })
   @IsString()
   @IsNotEmpty()
-  description!: string;
+  [Names.modelFields.DESCRIPTION]!: string;
 
   @ApiProperty({ required: true, enum: AnimalStatus })
   @IsNotEmpty()
   @IsEnum(AnimalStatus)
-  status: AnimalStatus | undefined;
+  [Names.modelFields.STATUS]: AnimalStatus | undefined;
 
 }

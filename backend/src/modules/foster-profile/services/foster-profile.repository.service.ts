@@ -13,9 +13,9 @@ import { CreateFosterProfileDto } from "../dto/foster-profile-create.dto";
 @Injectable()
 export class FosterProfileRepositoryService {
     private logger = new Logger(FosterProfileRepositoryService.name);
-    constructor(@InjectRepository(FosterProfile)
-    private animalRepository: Repository<FosterProfile>,
-        private queryBuilderHelper: QueryBuilderHelper) { }
+    constructor( @InjectRepository(FosterProfile)
+    private fosterProfileRepository: Repository<FosterProfile>,
+    private queryBuilderHelper: QueryBuilderHelper){}
 
 
     async create(createFosterProfileDto: CreateFosterProfileDto): Promise<FosterProfile | null | undefined> {
@@ -23,7 +23,7 @@ export class FosterProfileRepositoryService {
 
             const { user_id, ...rest } = createFosterProfileDto;
 
-            return await this.animalRepository.save({
+            return await this.fosterProfileRepository.save({
                 ...rest,
                 user: { id: user_id }
             });
@@ -33,17 +33,17 @@ export class FosterProfileRepositoryService {
         }
     }
 
-    async findOne(filter): Promise<FosterProfile | null | undefined> {
-        try {
-            return await this.animalRepository.findOne({ where: filter });
-        } catch (e) {
+    async findOne(filter): Promise<FosterProfile | null | undefined>{
+        try{
+            return await this.fosterProfileRepository.findOne({where: filter});
+        }catch(e){
             this.handleError(e);
         }
     }
     async findAll(filterData: FosterProfileSearchDto): Promise<IPaginatedResult<FosterProfile>> {
 
-        const query = this.animalRepository.createQueryBuilder('fosterProfile');
-        const { qb, take, page } = await this.queryBuilderHelper.SelectQueryBuilder(query, queryConfig, filterData)
+        const query = this.fosterProfileRepository.createQueryBuilder('fosterProfile');
+        const {qb, take, page} = await this.queryBuilderHelper.SelectQueryBuilder(query, queryConfig, filterData )
         const [data, total] = await qb.getManyAndCount();
 
         return {
@@ -53,10 +53,10 @@ export class FosterProfileRepositoryService {
     }
 
 
-    async update(id, parcialAnimal) {
-        try {
-            return this.animalRepository.update({ id }, parcialAnimal);
-        } catch (e) {
+    async update(id, parcialFosterProfile){
+        try{
+            return this.fosterProfileRepository.update({id}, parcialFosterProfile);
+        }catch (e){
             this.handleError(e);
         }
     }

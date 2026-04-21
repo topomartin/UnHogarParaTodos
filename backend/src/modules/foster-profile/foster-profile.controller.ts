@@ -34,7 +34,7 @@ export class FosterProfileController {
 
     @ApiOkResponse({ type: FosterProfile })
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateAnimalDto: any) {
-        return this.fosterProfileService.update(id, updateAnimalDto);
+    update(@Param('id') id: string, @Body() updateFosterProfileDto: any) {
+        return this.fosterProfileService.update(id, updateFosterProfileDto);
     }
 }

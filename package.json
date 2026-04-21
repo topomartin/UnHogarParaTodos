@@ -2,6 +2,7 @@
   "dependencies": {
     "@nestjs/jwt": "^11.0.2",
     "mysql": "^2.18.1",
-    "mysql2": "^3.20.0"
+    "mysql2": "^3.20.0",
+    "swiper": "^12.1.3"
   }
 }

@@ -2,6 +2,7 @@ import { UserRole } from 'src/common/knowledge/enums';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToMany } from 'typeorm';
 import { Adoption } from './adoption.entity';
 import { FosterProfile } from './foster_profile.entity';
+import { Fostering } from './fostering.entity';
 
 @Entity()
 export class User {
@@ -38,6 +39,9 @@ export class User {
 
     @OneToMany(() => FosterProfile, (fosterProfile) => fosterProfile.user)
     foster_profiles!: FosterProfile[]
+
+    @OneToMany(() => Fostering, (fostering) => fostering.user)
+    fosterings!: Fostering[]
 
 
 
