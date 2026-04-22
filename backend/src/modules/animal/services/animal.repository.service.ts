@@ -33,6 +33,7 @@ export class AnimalRepositoryService {
             this.handleError(e);
         }
     }
+
     async findAll(filterData: AnimalSearchDto): Promise<IPaginatedResult<Animal>>{
 
         const query = this.animalRepository.createQueryBuilder('animal');
@@ -40,11 +41,10 @@ export class AnimalRepositoryService {
         const [data, total] = await qb.getManyAndCount();
 
         return {
-            data: data.map(({ ...animal }) => animal as Animal),
+            data,
             meta: {total, page, lastPage: Math.ceil(total / take), limit: take }
         };
     }
-
 
     async update(id, parcialAnimal){
         try{

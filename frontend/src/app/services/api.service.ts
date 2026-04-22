@@ -42,6 +42,21 @@ export class ApiService {
       .pipe(catchError(err => this.handleError(err)));
   }
 
+  public getImageUrl(path: string): string {
+    if (!path) return '';
+
+    // Si ya es absoluta, devolver tal cual
+    if (path.startsWith('http')) return path;
+
+    const backendUrl = 'http://localhost:7200'
+
+    return `${backendUrl}${path}`;
+  }
+
+  public getAnimalImages(animalId: number): Observable<any[]> {
+    return this.get(`animal/${animalId}/images`);
+  }
+
   private handleError(error: HttpErrorResponse): Observable<any> {
     const message = error.error?.message || 'Error en la petición';
     this.snackBar.open(message, 'Cerrar', {

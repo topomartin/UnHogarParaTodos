@@ -7,6 +7,7 @@ import { SwaggerModule } from '@nestjs/swagger/dist/swagger-module';
 import { DocumentBuilder } from '@nestjs/swagger/dist/document-builder';
 import { FileLogger } from './common/fileLogger';
 import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 const appConfig = require(join(process.cwd(), 'config', 'app.config'));
 
@@ -14,7 +15,7 @@ const appConfig = require(join(process.cwd(), 'config', 'app.config'));
 
 async function bootstrap() {
   
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   //VALIDATIONS
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
@@ -30,6 +31,11 @@ async function bootstrap() {
 
   //CORS
   app.enableCors();
+
+  //Read images from HD
+  app.useStaticAssets(join(process.cwd(), 'uploads'), {
+      prefix: '/uploads/',
+  });
 
   //SWAGGER API DOCS
   const config = new DocumentBuilder()

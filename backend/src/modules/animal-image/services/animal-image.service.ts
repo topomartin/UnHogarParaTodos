@@ -145,6 +145,26 @@ export class AnimalImageService {
         return true;
     }
 
+    private async ensureMainImage(animalId: number) {
+        const images = await this.imageRepository.find({
+            where: {
+                animal: { id: animalId },
+                deleted_at: IsNull(),
+            },
+            order: { created_at: 'DESC' },
+        });
+
+        if (images.length === 0) return;
+
+        const hasMain = images.some(img => img.is_main);
+
+        if (!hasMain) {
+            images[0].is_main = true;
+            await this.imageRepository.save(images[0]);
+        }
+    }
+
+    // SEARCH
 
     async findByAnimal(animalId: number) {
         return this.imageRepository.find({
@@ -165,22 +185,13 @@ export class AnimalImageService {
         });
     }
 
-    private async ensureMainImage(animalId: number) {
-        const images = await this.imageRepository.find({
+    async findMainImage(animalId: number) {
+        return this.imageRepository.findOne({
             where: {
                 animal: { id: animalId },
-                deleted_at: IsNull(),
+                is_main: true,
+                deleted_at: null,
             },
-            order: { created_at: 'DESC' },
         });
-
-        if (images.length === 0) return;
-
-        const hasMain = images.some(img => img.is_main);
-
-        if (!hasMain) {
-            images[0].is_main = true;
-            await this.imageRepository.save(images[0]);
-        }
     }
 }
