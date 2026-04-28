@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpCode, Param, Patch, Post } from "@nestjs/common";
 import { ApiBody, ApiOkResponse, ApiTags } from "@nestjs/swagger";
-import { FosterProfile } from "src/common/database/entities/foster_profile.entity";
+import { UserProfile } from "src/common/database/entities/user_profile.entity";
 import { Fostering } from "src/common/database/entities/fostering.entity";
 import { IPaginatedResult } from "src/common/knowledge/interfaces";
 import { CreateFosteringDto } from "./dto/fostering-create.dto";
@@ -13,7 +13,7 @@ import { FosteringService } from "./services/fostering.service";
 export class FosteringController {
     constructor(private fosteringService: FosteringService) {}
 
-    @ApiOkResponse({ type: FosterProfile })
+    @ApiOkResponse({ type: UserProfile })
     @Post('create')
     @ApiBody({ type: CreateFosteringDto })
     create(@Body() createFosteringDto: CreateFosteringDto): Promise<Fostering | null | undefined> {
