@@ -8,6 +8,7 @@ import { FosteringModule } from './modules/fostering/fostering.module';
 import { TmpCleanerService } from './common/utils/tmp-cleaner.service';
 import { SponsorshipModule } from './modules/sponsorship/sponsorship.module';
 import { UserProfileModule } from './modules/user-profile/user-profile.module';
+import { AnimalRequestModule } from './modules/animal-request/animal-request.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { UserProfileModule } from './modules/user-profile/user-profile.module';
     AdoptionModule,
     FosteringModule,
     SponsorshipModule,
-    UserProfileModule],
+    UserProfileModule,
+    AnimalRequestModule],
 
   controllers: [],
     providers: [TmpCleanerService],

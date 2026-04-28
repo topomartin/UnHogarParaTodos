@@ -1,4 +1,4 @@
-import { HousingType } from '../../../common/knowledge/enums';
+import { FosterStatus } from '../../../common/knowledge/enums';
 import { ApiProperty } from "@nestjs/swagger/dist/decorators/api-property.decorator"
 import {
   IsString,
@@ -26,12 +26,17 @@ export class CreateFosteringDto {
   @IsNotEmpty()
   user_id!: number;
 
+  @ApiProperty({ description: 'Estado de acogida activo/acabado', required: true, enum: FosterStatus, default: FosterStatus.ACTIVE })
+  @IsNotEmpty()
+  @IsEnum(FosterStatus)
+  status: FosterStatus = FosterStatus.ACTIVE;
+
   @ApiProperty({ description: 'Inicio acogida', required: true })
   @IsString()
   @IsNotEmpty()
   [Names.modelFields.START_DATE]!: Date;
 
-   @ApiProperty({ description: 'Fin acogida', required: true })
+  @ApiProperty({ description: 'Fin acogida', required: true })
   @IsString()
   @IsNotEmpty()
   [Names.modelFields.END_DATE]!: Date;

@@ -23,7 +23,7 @@ export class  AdoptionService {
                 user: {id:user_id}
             }
 
-        await this.animalService.updateStatus(animal_id, data.status);
+        //await this.animalService.updateStatus(animal_id, data.status);
         const adoption = await this.adoptionRepositoryService.create(newAdoption);
         return adoption;
     }
