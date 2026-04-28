@@ -22,6 +22,7 @@ export enum AdoptionStatus {
   REJECTED = 'rejected'
 }
 
+// Modificar a FosterStatus??
 export enum FosterProfileStatus {
   APPROVED = 'approved',
   PENDING = 'pending',
@@ -30,8 +31,32 @@ export enum FosterProfileStatus {
 }
 
 export enum HousingType {
-  HOUSE = 'house',
-  APARTAMENT = 'apartament',
+    FLAT = 'flat',
+    HOUSE = 'house',
+    ROOM = 'room',
+}
+
+export enum AvailableTime {
+    LOW = 'low',
+    MEDIUM = 'medium',
+    HIGH = 'high',
+}
+
+export enum Lifestyle {
+    CALM = 'calm',
+    ACTIVE = 'active',
+}
+
+export enum NoiseTolerance {
+    LOW = 'low',
+    MEDIUM = 'medium',
+    HIGH = 'high',
+}
+
+export enum TimeAtHome {
+    LITTLE = 'little',
+    NORMAL = 'normal',
+    LOT = 'lot',
 }
 
 export enum SponsorshipFrequency {
