@@ -29,22 +29,22 @@ export class AdminPageComponent implements OnInit {
         { key: 'birth_date', label: 'Nacimiento' },
       ]
     },
-    {
-      modelName: 'foster',
-      displayedColumns: [
-        { key: 'id', label: 'ID' },
-        { key: 'fullname', label: 'Propietario' },
-        { key: 'age', label: 'Edad' },
-        { key: 'availabilityTime', label: 'Disponible' },
-        { key: 'hasAnimals', label: 'Otros animales' },
-        { key: 'houseType', label: 'Tipo' },
-        { key: 'sizeM2', label: 'Superfice' },
-        { key: 'hasGarden', label: 'Jardín' },
-        { key: 'maxAnimals', label: 'Máximo acogida' },
-        { key: 'status', label: 'Estado' },
-      ]
-
-    },
+    //{
+    //  modelName: 'foster',
+    //  displayedColumns: [
+    //    { key: 'id', label: 'ID' },
+    //    { key: 'fullname', label: 'Propietario' },
+    //    { key: 'age', label: 'Edad' },
+    //    { key: 'availabilityTime', label: 'Disponible' },
+    //    { key: 'hasAnimals', label: 'Otros animales' },
+    //    { key: 'houseType', label: 'Tipo' },
+    //    { key: 'sizeM2', label: 'Superfice' },
+    //    { key: 'hasGarden', label: 'Jardín' },
+    //    { key: 'maxAnimals', label: 'Máximo acogida' },
+    //    { key: 'status', label: 'Estado' },
+    //  ]
+//
+    //},
     {
       modelName: 'sponsorship',
       displayedColumns: [
