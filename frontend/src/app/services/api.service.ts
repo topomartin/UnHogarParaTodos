@@ -42,6 +42,11 @@ export class ApiService {
       .pipe(catchError(err => this.handleError(err)));
   }
 
+  public delete(path: string): Observable<any> {
+    return this.http.delete(`${this.API_URL}${path}`, this.getOptions())
+      .pipe(catchError(err => this.handleError(err)));
+  }
+
   private handleError(error: HttpErrorResponse): Observable<any> {
     const message = error.error?.message || 'Error en la petición';
     this.snackBar.open(message, 'Cerrar', {

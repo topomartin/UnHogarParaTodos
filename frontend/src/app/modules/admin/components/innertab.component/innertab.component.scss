@@ -1,0 +1,31 @@
+.table-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 500px;
+  overflow: hidden;
+}
+
+.table-scroll {
+  flex: 1;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-mdc-header-cell {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: white;
+}
+
+mat-paginator {
+  border-top: 1px solid #ddd;
+  background: white;
+  position: sticky;
+  bottom: 0;
+  z-index: 15;
+}
