@@ -5,9 +5,10 @@ import { AnimalRequestController } from "./animal-request.controller";
 import { AnimalRequestService } from "./services/animal-request.service";
 import { AnimalRequestRepositoryService } from "./services/animal-request.repository.service";
 import { AnimalModule } from "../animal/animal.module";
+import { DatabaseModule } from "src/common/database/database.module";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([AnimalRequest]), AnimalModule],
+    imports: [TypeOrmModule.forFeature([AnimalRequest]), AnimalModule, DatabaseModule],
     controllers: [AnimalRequestController],
     providers: [AnimalRequestService, AnimalRequestRepositoryService],
     exports: [AnimalRequestService]

@@ -30,11 +30,13 @@ export class AdminPageComponent implements OnInit {
       ]
     },
     {
-      modelName: 'animal_request',
+      modelName: 'animal-requests',
       displayedColumns: [
         { key: 'id', label: 'ID' },
-        { key: 'animal:id', label: 'Animal' },
-        { key: 'user_id', label: 'usuario' },
+        { key: 'animal.name', label: 'Animal'  },
+        { key: 'user.username', label: 'usuario' },
+        { key: 'type', label: 'tipo' },
+        { key: 'status', label: 'status' },
       ]
     },
     {

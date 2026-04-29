@@ -91,4 +91,8 @@ export class InnerTabComponent implements OnInit {
       }
     });
   }
+
+  getNestedValue(obj: any, path: string): any {
+  return path.split('.').reduce((acc, part) => acc?.[part], obj);
+}
 }

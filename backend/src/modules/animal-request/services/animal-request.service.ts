@@ -53,9 +53,9 @@ export class AnimalRequestService {
             throw new Error('Animal no encontrado');
         }
 
-        // no puedes aprobar si ya está adoptado
+        // no puedes aprobar si ya estï¿½ adoptado
         if (animal.status === AnimalStatus.ADOPTED) {
-            throw new Error('Este animal ya está adoptado');
+            throw new Error('Este animal ya estï¿½ adoptado');
         }
 
         // ADOPTION FLOW
@@ -65,7 +65,7 @@ export class AnimalRequestService {
                 status: AnimalStatus.ADOPTED
             });
 
-            // RECHAZAR TODAS LAS DEMÁS REQUEST DEL MISMO ANIMAL
+            // RECHAZAR TODAS LAS DEMï¿½S REQUEST DEL MISMO ANIMAL
             await this.repo.rejectAllExcept(animal.id, request.id);
         }
 
@@ -115,7 +115,7 @@ export class AnimalRequestService {
         return request;
     }
 
-    async findAll() {
-        return this.repo.findAll();
+    async findAll(filter:any) {
+        return this.repo.findAll(filter);
     }
 }

@@ -10,5 +10,6 @@ import { AnimalProfileRepositoryService } from './services/animal-profile.reposi
   imports: [TypeOrmModule.forFeature([AnimalProfile]), DatabaseModule],
   controllers: [AnimalProfileController],
   providers: [AnimalProfileService, AnimalProfileRepositoryService],
+  exports: [AnimalProfileService]
 })
 export class AnimalProfileModule {}
