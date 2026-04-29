@@ -7,28 +7,40 @@ import { AnimalSearchDto } from '../dto/animal-search.dto';
 import { IPaginatedResult } from 'src/common/knowledge/interfaces';
 import { AnimalModelNames as Names } from '../config/animal-model-name';
 import { AnimalStatus } from 'src/common/knowledge/enums';
+import { AnimalProfileRepositoryService } from "src/modules/animal-profile/services/animal-profile.repository.service";
 
 
 @Injectable()
 export class AnimalService {
-  constructor(private userRepositoryService: AnimalRepositoryService){}
+  constructor(
+      private animalRepositoryService: AnimalRepositoryService,
+      private animalProfileRepositoryService: AnimalProfileRepositoryService
+  ) { }
 
   async create(createAnimalDto: CreateAnimalDto): Promise<Animal | null | undefined>{
     //let birthDate = new Date(createAnimalDto.birth_date);
-    return await this.userRepositoryService.create(createAnimalDto);
+      const animal = await this.animalRepositoryService.create(createAnimalDto);
+
+      if (animal) {
+          await this.animalProfileRepositoryService.create({
+              animal: { id: animal.id }
+          });
+      }
+
+      return animal;
   }
 
   async findOne(filter): Promise<Animal | null | undefined>{
-    return await this. userRepositoryService.findOne(filter);
+      return await this.animalRepositoryService.findOne(filter);
   }
 
   async findAll(filter: AnimalSearchDto): Promise<IPaginatedResult<Animal>>{
-    return await this.userRepositoryService.findAll(filter);
+      return await this.animalRepositoryService.findAll(filter);
   }
 
   async update(id, parcialUser ){
     parcialUser[Names.tableFields.UPDATED_AT] = Utils.toLocalDateForMySQL(new Date());
-    return await this.userRepositoryService.update(id,parcialUser);
+      return await this.animalRepositoryService.update(id,parcialUser);
   }
 
 }
