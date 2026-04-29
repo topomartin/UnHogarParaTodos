@@ -8,13 +8,15 @@ import { IPaginatedResult } from 'src/common/knowledge/interfaces';
 import { AnimalModelNames as Names } from '../config/animal-model-name';
 import { AnimalStatus } from 'src/common/knowledge/enums';
 import { AnimalProfileRepositoryService } from "src/modules/animal-profile/services/animal-profile.repository.service";
+import { AnimalProfileService } from 'src/modules/animal-profile/services/animal-profile.service';
+import { CreateAnimalProfileDto } from 'src/modules/animal-profile/dto/create-animal-profile.dto';
 
 
 @Injectable()
 export class AnimalService {
   constructor(
       private animalRepositoryService: AnimalRepositoryService,
-      private animalProfileRepositoryService: AnimalProfileRepositoryService
+      private animalProfileService: AnimalProfileService
   ) { }
 
   async create(createAnimalDto: CreateAnimalDto): Promise<Animal | null | undefined>{
@@ -22,9 +24,9 @@ export class AnimalService {
       const animal = await this.animalRepositoryService.create(createAnimalDto);
 
       if (animal) {
-          await this.animalProfileRepositoryService.create({
-              animal: { id: animal.id }
-          });
+          await this.animalProfileService.create(
+              { animal_id: animal.id } as CreateAnimalProfileDto
+          );
       }
 
       return animal;

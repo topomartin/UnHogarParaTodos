@@ -23,6 +23,7 @@ import { NavigationBarComponent } from './modules/shared/navigation-bar/navigati
 import { FooterComponent } from './modules/shared/footer/footer';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AdminModule } from './modules/admin/adminpage.module';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
+    AdminModule
   ],
   bootstrap: [AppComponent],
 })

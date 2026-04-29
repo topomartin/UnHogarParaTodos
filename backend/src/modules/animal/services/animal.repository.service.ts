@@ -54,6 +54,14 @@ export class AnimalRepositoryService {
         }
     }
 
+    async delete(id){
+        try{
+            return await this.animalRepository.softDelete(id);
+        }catch (e){
+            this.handleError(e);
+        }
+    }
+
     private handleError(e){
         this.logger.error(e);
         handleMySQLError(e);
