@@ -48,10 +48,19 @@
 
   </div>
 
-  <!-- PAGINATOR -->
+  <!-- FOOTER -->
+ <div class="table-footer">
+
+  <button mat-raised-button color="primary" (click)="create()">
+    <mat-icon>add</mat-icon>
+    Crear
+  </button>
+
   <mat-paginator
     [pageSizeOptions]="[5, 10, 25, 50]"
     showFirstLastButtons>
   </mat-paginator>
+
+</div>
 
 </div>

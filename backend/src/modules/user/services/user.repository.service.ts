@@ -1,8 +1,7 @@
 import { Inject, Logger } from "@nestjs/common";
 import { Injectable } from "@nestjs/common/decorators/core/injectable.decorator";
-import { DataSource, Repository } from "typeorm";
+import { DataSource, IsNull, Repository } from "typeorm";
 import { User } from "../../../common/database/entities/user.entity";
-import { UserProfile } from "src/common/database/entities/user_profile.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateUserDto } from '../dto/create-user.dto';
 import { handleMySQLError } from "src/common/database/mysql.error.handler";
@@ -13,9 +12,6 @@ export class UsersRepositoryService {
     constructor(
         @InjectRepository(User)
         private userRepository: Repository<User>,
-
-        @InjectRepository(UserProfile)
-        private userProfileRepository: Repository<UserProfile>,
     ) { }
 
 
@@ -26,12 +22,6 @@ export class UsersRepositoryService {
             this.handleError(e);
             throw e;
         }
-    }
-
-    async createProfile(userId: number): Promise<UserProfile> {
-        return this.userProfileRepository.save({
-            user: { id: userId }
-        });
     }
 
     async findOne(filter): Promise<User | null | undefined>{
@@ -55,7 +45,9 @@ export class UsersRepositoryService {
     }
 
     async findAll(): Promise<User[]>{
-        let data = await this.userRepository.find();
+        let data = await this.userRepository.find({where: {
+            deleted_at: IsNull()}
+        });
         return data.map(({ password, ...user }) => user as User); //deleting the password from de user to be sent
     }
     async update(id, parcialUser){
