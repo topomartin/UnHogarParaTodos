@@ -1,10 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "./user.entity";
 import { Animal } from "./animal.entity";
 import { AnimalRequestType, AnimalRequestStatus } from "src/common/knowledge/enums";
 
 @Entity()
+@Index(["user", "animal", "status"])
 export class AnimalRequest {
     @PrimaryGeneratedColumn()
     id!: number;

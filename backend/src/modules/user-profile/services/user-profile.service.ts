@@ -25,4 +25,8 @@ export class UserProfileService {
         return this.userProfileRepository.update(id, dto);
     }
 
+    async upsertByUserId(userId: number, dto: CreateUserProfileDto) {
+        return this.userProfileRepository.upsertByUserId(userId, dto);
+    }
+
 }

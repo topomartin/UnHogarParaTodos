@@ -16,9 +16,7 @@ export class UserProfileRepositoryService {
 
     async create(data: CreateUserProfileDto): Promise<UserProfile> {
         try {
-            const existing = await this.userProfileRepository.findOne({
-                where: { user: { id: data.userId } },
-            });
+            const existing = await this.findByUserId(data.userId); 
 
             if (existing) {
                 return existing;
@@ -40,9 +38,7 @@ export class UserProfileRepositoryService {
 
     async createForUser(userId: number): Promise<UserProfile> {
         try {
-            const existing = await this.userProfileRepository.findOne({
-                where: { user: { id: userId } },
-            });
+            const existing = await this.findByUserId(userId);
 
             if (existing) {
                 return existing;
@@ -86,5 +82,18 @@ export class UserProfileRepositoryService {
             handleMySQLError(e);
             throw e;
         }
+    }
+
+    async upsertByUserId(userId: number, dto: CreateUserProfileDto) {
+        const existing = await this.findByUserId(userId);
+
+        if (existing) {
+            return this.update(existing.id, dto);
+        }
+
+        return this.create({
+            ...dto,
+            userId
+        });
     }
 }
