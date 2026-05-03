@@ -36,7 +36,6 @@ export class QueryBuilderHelper {
 
         if (filter){
             Object.entries(filter).forEach(([key, value])=>{
-                console.log(key, value);
                 if (value != null) {
                     if (key === 'name') {
                         qb.andWhere(`${queryConfig.alias}.${key} LIKE :${key}`, {
