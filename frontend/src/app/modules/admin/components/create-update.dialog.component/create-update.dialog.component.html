@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="dialog-form">
+
+    <div *ngFor="let field of data.schema.fields">
+
+      <mat-form-field appearance="outline" class="full-width">
+
+        <mat-label>{{ field.label }}</mat-label>
+        <input
+          *ngIf="field.type !== 'select'"
+          matInput
+          [type]="field.type"
+          [formControlName]="field.key"
+        />
+
+        <mat-select
+          *ngIf="field.type === 'select'"
+          [formControlName]="field.key"
+        >
+          <mat-option
+            *ngFor="let option of field.values"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-option>
+        </mat-select>
+
+        <mat-error
+          *ngIf="form.get(field.key)?.invalid && form.get(field.key)?.touched"
+        >
+          Campo obligatorio
+        </mat-error>
+
+      </mat-form-field>
+
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="save()">
+    {{ actionLabel }}
+  </button>
+</mat-dialog-actions>

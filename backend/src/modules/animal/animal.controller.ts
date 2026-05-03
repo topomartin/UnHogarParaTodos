@@ -75,6 +75,11 @@ export class AnimalController {
         return this.animalService.update(id, updateAnimalDto);
     }
 
+    //@Delete(':id')
+    //delete(@Param('id') id: string) {
+    //    return this.animalService.delete(id);
+    //}
+
     // -------------------------
     // IMAGES
     // -------------------------

@@ -4,8 +4,8 @@ import { AnimalRequestService } from "./services/animal-request.service";
 import { CreateAnimalRequestDto } from "./dto/create-animal-request.dto";
 import { IPaginatedResult } from "src/common/knowledge/interfaces";
 import { AnimalRequest } from "src/common/database/entities/animal_request.entity";
-import { AnimalRequestSearchDto } from "./dto/animal-request-search.dto";
 import { AnimalRequestSchemaService } from "./services/animal-request-schema.service";
+import { AnimalRequestSearchDto } from "./dto/animal-request-search.dto";
 
 @ApiTags("Animal Requests")
 @Controller("animal-requests")

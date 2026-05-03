@@ -5,10 +5,14 @@ import { PaginatorDto } from 'src/common/dto/paginator.dto';
 import { RangeDto } from 'src/common/dto/range.dto';
 import { SortDto } from 'src/common/dto/sort.dto';
 import { AnimalStatus, AnimalType } from 'src/common/knowledge/enums';
-import { AnimalRequestModelNames as Names } from '../config/animal-request-model-name';
+import { AnimalModelNames as Names } from '../config/animal-model-name';
 
 export class AnimalRequestFilterDto {
- 
+  @ApiPropertyOptional({ description: 'Filtrar por nombre' })
+  @IsOptional()
+  @IsString()
+  [Names.modelFields.NAME]?: string;
+
   @ApiPropertyOptional({
     description: `Filtrar por tipo: ${Object.values(AnimalType).join(', ')}`,
   })
@@ -23,6 +27,12 @@ export class AnimalRequestFilterDto {
   @IsEnum(AnimalStatus)
   [Names.modelFields.STATUS]?: AnimalStatus;
 
+  @ApiPropertyOptional({
+    description: 'Buscar en descripción',
+  })
+  @IsOptional()
+  @IsString()
+  [Names.modelFields.DESCRIPTION]?: string;
 }
 
 export class AnimalRequestSearchDto extends PaginatorDto {

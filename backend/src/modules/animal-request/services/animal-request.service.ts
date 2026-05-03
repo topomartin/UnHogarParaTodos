@@ -115,7 +115,7 @@ export class AnimalRequestService {
         return request;
     }
 
-    async findAll(filter:any) {
+    async findAll(filter) {
         return this.repo.findAll(filter);
     }
 }
