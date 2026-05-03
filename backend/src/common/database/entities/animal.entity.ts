@@ -6,6 +6,7 @@ import { Fostering } from "./fostering.entity";
 import { AnimalModelNames as Names } from "src/modules/animal/config/animal-model-name";
 import { Sponsorship } from "./sponsorship.entity";
 import { AnimalImage } from "./animal_image.entity";
+import { AnimalRequest } from './animal_request.entity';
 
 @Entity()
 export class Animal {
@@ -42,6 +43,9 @@ export class Animal {
 
     @OneToMany(() => Adoption, (adoption) => adoption.animal)
     adoptions!: Adoption[]
+
+    @OneToMany(() => AnimalRequest, (req) => req.animal)
+    animal_requests!: AnimalRequest[];
 
     @OneToMany(() => Fostering, (fostering) => fostering.animal)
     fosterings!: Fostering[]

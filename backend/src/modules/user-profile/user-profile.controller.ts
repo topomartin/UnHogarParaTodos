@@ -22,6 +22,14 @@ export class UserProfileController {
         return this.service.create(dto);
     }
 
+    @Post(":userId/upsert")
+    upsert(
+        @Param("userId") userId: number,
+        @Body() dto: CreateUserProfileDto
+    ) {
+        return this.service.upsertByUserId(userId, dto);
+    }
+
     @Patch(":id")
     update(
         @Param("id") id: number,

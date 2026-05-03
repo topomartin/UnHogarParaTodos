@@ -10,23 +10,33 @@ export enum AnimalType {
   CAT = 'cat',
 }
 
+// QUITAR SI SE QUITA ADOPTION
+export enum AdoptionStatus {
+    AVAILABLE = 'available',
+    PENDING = 'pending',
+    ADOPTED = 'adopted'
+}
+
 export enum AnimalStatus {
   AVAILABLE = 'available',
   PENDING = 'pending',
   ADOPTED = 'adopted'
 }
 
-export enum AdoptionStatus {
-  PENDING = 'pending',
-  APPROVED = 'approved',
-  REJECTED = 'rejected'
+export enum AnimalRequestType {
+    ADOPTION = 'adoption',
+    FOSTER = 'foster',
 }
 
-// Modificar a FosterStatus??
-export enum FosterProfileStatus {
-  APPROVED = 'approved',
-  PENDING = 'pending',
-  REJECTED ='rejected'
+export enum AnimalRequestStatus {
+    PENDING = 'pending',
+    APPROVED = 'approved',
+    REJECTED = 'rejected',
+}
+
+export enum FosterStatus {
+  ACTIVE = 'active',
+  FINISHED = 'finished'
 
 }
 

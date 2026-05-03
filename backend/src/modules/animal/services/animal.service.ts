@@ -6,7 +6,7 @@ import { AnimalRepositoryService } from './animal.repository.service';
 import { AnimalSearchDto } from '../dto/animal-search.dto';
 import { IPaginatedResult } from 'src/common/knowledge/interfaces';
 import { AnimalModelNames as Names } from '../config/animal-model-name';
-import { AdoptionStatus, AnimalStatus } from 'src/common/knowledge/enums';
+import { AnimalStatus } from 'src/common/knowledge/enums';
 
 
 @Injectable()
@@ -31,6 +31,7 @@ export class AnimalService {
     return await this.animalRepositoryService.update(id,parcialUser);
   }
 
+<<<<<<< HEAD
   async updateStatus(animalId: number, adoptionStatus: AdoptionStatus) {
     const statusToUpdate = this.mapAdoptionToAnimalStatus(adoptionStatus);
     return this.update(animalId, {status: statusToUpdate});
@@ -52,4 +53,6 @@ export class AnimalService {
         return AnimalStatus.AVAILABLE;
     }
   }
+=======
+>>>>>>> features/05_Front_newDB
 }

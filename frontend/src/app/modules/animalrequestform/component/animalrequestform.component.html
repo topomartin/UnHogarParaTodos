@@ -1,0 +1,137 @@
+<div class="container">
+
+  <h1 class="title">
+    {{
+       type === 'ADOPTION'
+            ? 'Adoptar a ' + animalName
+            : 'Casa de acogida para ' + animalName
+    }}
+  </h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!-- 👤 DATOS PERSONALES -->
+    <div class="section">
+      <h2>Datos personales *</h2>
+
+      <input placeholder="Nombre completo *" formControlName="fullname">
+      <div class="error" *ngIf="form.get('fullname')?.touched && form.get('fullname')?.invalid">
+        Campo obligatorio
+      </div>
+
+      <input placeholder="Teléfono *" formControlName="phone">
+      <div class="error" *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid">
+        Campo obligatorio
+      </div>
+
+      <input type="number" placeholder="Edad *" formControlName="age">
+      <div class="error" *ngIf="form.get('age')?.touched && form.get('age')?.invalid">
+        Campo obligatorio
+      </div>
+
+      <input placeholder="Dirección *" formControlName="address">
+      <div class="error" *ngIf="form.get('address')?.touched && form.get('address')?.invalid">
+        Campo obligatorio
+      </div>
+    </div>
+
+    <!-- 🏠 VIVIENDA -->
+    <div class="section">
+      <h2>Vivienda *</h2>
+
+      <select formControlName="housing_type">
+        <option value="">Tipo de vivienda *</option>
+        <option value="house">Casa</option>
+        <option value="flat">Piso</option>
+        <option value="room">Habitación</option>
+      </select>
+      <div class="error" *ngIf="form.get('housing_type')?.touched && form.get('housing_type')?.invalid">
+        Campo obligatorio
+      </div>
+
+      <input type="number" placeholder="Metros cuadrados *" formControlName="square_meters">
+      <div class="error" *ngIf="form.get('square_meters')?.touched && form.get('square_meters')?.invalid">
+        Campo obligatorio
+      </div>
+
+      <label>
+        <input type="checkbox" formControlName="has_garden">
+        Tiene jardín?
+      </label>
+
+      <label>
+        <input type="checkbox" formControlName="has_terrace">
+        Tiene terraza?
+      </label>
+    </div>
+
+    <!-- 🐾 ANIMALES Y EXPERIENCIA -->
+    <div class="section">
+      <h2>Experiencia y Animales</h2>
+
+      <label>
+        <input type="checkbox" formControlName="has_other_animals">
+        Hay otros animales?
+      </label>
+
+      <label>
+        <input type="checkbox" formControlName="experience">
+        Tienes experiencia previa?
+      </label>
+    </div>
+
+    <!-- ESTILO DE VIDA -->
+    <div class="section">
+      <h2>Estilo de vida</h2>
+
+      <select formControlName="available_time">
+        <option value="">Tiempo disponible</option>
+        <option value="low">Poco</option>
+        <option value="medium">Medio</option>
+        <option value="high">Mucho</option>
+      </select>
+
+      <select formControlName="lifestyle">
+        <option value="">Estilo de vida</option>
+        <option value="calm">Tranquilo</option>
+        <option value="active">Activo</option>
+      </select>
+
+      <select formControlName="noise_tolerance">
+        <option value="">Tolerancia al ruido</option>
+        <option value="low">Baja</option>
+        <option value="medium">Media</option>
+        <option value="high">Alta</option>
+      </select>
+
+      <select formControlName="time_at_home">
+        <option value="">Tiempo en casa</option>
+        <option value="little">Poco</option>
+        <option value="normal">Normal</option>
+        <option value="lot">Mucho</option>
+      </select>
+
+      <input type="number" placeholder="Máx animales" formControlName="max_animals">
+    </div>
+
+    <!-- ❤️ MOTIVACIÓN -->
+    <div class="section">
+      <h2>Motivación *</h2>
+
+      <textarea placeholder="¿Por qué quieres hacerlo? *" formControlName="motivation"></textarea>
+      <div class="error" *ngIf="form.get('motivation')?.touched && form.get('motivation')?.invalid">
+        Campo obligatorio
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">
+      {{
+        type === 'ADOPTION'
+          ? 'Enviar adopción'
+          : 'Enviar acogida'
+      }}
+    </button>
+
+  </form>
+
+</div>

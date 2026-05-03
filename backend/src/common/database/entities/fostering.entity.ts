@@ -3,6 +3,7 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGenerat
 import { User } from "./user.entity";
 import { Animal } from "./animal.entity";
 import { FosteringModelNames as Names } from "src/modules/fostering/config/fostering-model-name";
+import { FosterStatus } from "../../knowledge/enums";
 
 @Entity()
 export class Fostering {
@@ -16,6 +17,9 @@ export class Fostering {
     @ApiProperty()
     @Column({ name: Names.tableFields.END_DATE, type: "timestamp", nullable: false })
     [Names.modelFields.END_DATE]!: Date;
+
+    @Column({type: 'enum', enum: FosterStatus, default: FosterStatus.ACTIVE })
+    status!: FosterStatus;
 
     @ApiProperty()
     @CreateDateColumn({ name: Names.tableFields.CREATED_AT, type: 'timestamp' })

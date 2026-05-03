@@ -12,6 +12,7 @@ import { VerPerfilComponent } from './modules/VerPerfil/component/verperfil.comp
 import { EditarPerfilComponent } from './modules/editarperfil/component/editarperfil.component';
 import { ListaAnimalComponent } from './modules/listaanimal/component/listaanimal.component';
 import { DetalleAnimalComponent } from './modules/detallesanimal/component/detalleanimal.component';
+import { AnimalRequestFormComponent } from './modules/animalrequestform/component/animalrequestform.component';
 import { AdoptarAnimalComponent } from './modules/adoptaranimal/component/adoptaranimal.component';
 import { RegisterFosterComponent } from './modules/registerfoster/component/registerfoster.component';
 import { SponsorAnimalComponent } from './modules/sponsor-animal/component/sponsor-animal.component';
@@ -41,6 +42,7 @@ import { AdminModule } from './modules/admin/adminpage.module';
     NavigationBarComponent,
     FooterComponent,
     HomeComponent,
+    AnimalRequestFormComponent,
   ],
   imports: [
     BrowserModule,

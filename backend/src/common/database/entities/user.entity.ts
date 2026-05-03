@@ -4,6 +4,7 @@ import { Adoption } from './adoption.entity';
 import { Fostering } from './fostering.entity';
 import { Sponsorship } from './sponsorship.entity';
 import { UserProfile } from './user_profile.entity';
+import { AnimalRequest } from './animal_request.entity';
 
 @Entity()
 export class User {
@@ -40,6 +41,9 @@ export class User {
 
     @OneToMany(() => Adoption, (adoption) => adoption.user)
     adoptions!: Adoption[]
+
+    @OneToMany(() => AnimalRequest, (req) => req.user)
+    animal_requests!: AnimalRequest[];
 
     @OneToMany(() => Fostering, (fostering) => fostering.user)
     fosterings!: Fostering[]
