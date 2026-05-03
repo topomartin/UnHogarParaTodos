@@ -22,6 +22,10 @@ export class InnerTabComponent implements OnInit {
   @Input() canCreate: boolean = false;
   @Input() canUpdate: boolean = false;
 
+  public page: number = 1;
+  public pageSize: number = 5;
+  public totalItems: number = 0;
+
   public columns: IColumnItem[] = [];
   private gridSchemaSubscription!: Subscription;
   private dataSubscription!: Subscription;
@@ -66,8 +70,8 @@ export class InnerTabComponent implements OnInit {
   }
 
   create(){
-    this.createSchemaSubscription = this.dataService.getCreateSchema(this.modelName).subscribe(
-      (schema)=>{
+    this.createSchemaSubscription = this.dataService.getCreateSchema(this.modelName).subscribe({
+      next: (schema)=>{
         const dialogRef = this.dialog.open(CreateUpdateDialogComponent, {
             disableClose: true,
             data: {
@@ -76,10 +80,10 @@ export class InnerTabComponent implements OnInit {
               schema: schema
             }
           });
-        dialogRef.afterClosed().subscribe(
-          (result) =>{
-            this.createSubscription = this.dataService.create(`${this.modelName}`, result).subscribe(
-              (data)=>{
+        dialogRef.afterClosed().subscribe({
+          next: (result) =>{
+            this.createSubscription = this.dataService.create(`${this.modelName}`, result).subscribe({
+              next: (data)=>{
                 this.snackBar.open(`${this.modelName} creado correctamente'` , 'Cerrar', {
                   duration: 3000,
                   horizontalPosition: 'center',
@@ -87,22 +91,30 @@ export class InnerTabComponent implements OnInit {
                 });
                 this.loadData();
                 this.createSubscription.unsubscribe();
+              },
+              error: (err: any) =>{
+                console.log(err);
               }
-            )
+          })
             console.log(result);
+          },
+          error: (err: any)=>{
+            console.log(err);
           }
-        );
+        });
         this.createSchemaSubscription.unsubscribe();
+      },
+      error: (err: any)=>{
+        console.log(err);
       }
-
-    )
+    })
 
   }
 
 
   edit(row: any) {
-    this.updateSchemaSubscription = this.dataService.getUpdateSchema(this.modelName).subscribe(
-      (schema)=>{
+    this.updateSchemaSubscription = this.dataService.getUpdateSchema(this.modelName).subscribe({
+      next: (schema)=>{
         const dialogRef = this.dialog.open(CreateUpdateDialogComponent, {
           disableClose: true,
           data: {
@@ -129,9 +141,12 @@ export class InnerTabComponent implements OnInit {
             )
           }
         )
+      },
+      error: (err: any)=>{
+        console.log(err);
       }
 
-    )
+  })
 
   }
 
@@ -145,33 +160,42 @@ export class InnerTabComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.dataService.delete(this.modelName,row).subscribe(
-          data=>{
-            this.snackBar.open(`${this.modelName} eliminado correctamente'` , 'Cerrar', {
-              duration: 3000,
-              horizontalPosition: 'center',
-              verticalPosition: 'bottom',
-            });
-            this.loadData();
-          }
-        )
+    dialogRef.afterClosed().subscribe({
+      next: (result) => {
+        if (result) {
+          this.dataService.delete(this.modelName,row).subscribe({
+            next: data=>{
+              this.snackBar.open(`${this.modelName} eliminado correctamente'` , 'Cerrar', {
+                duration: 3000,
+                horizontalPosition: 'center',
+                verticalPosition: 'bottom',
+              });
+              this.loadData();
+            },
+            error: (e)=>{
+              console.log(e);
+            }
+          })
+        }
+      },
+      error: (error)=>{
+        console.log(error);
       }
     });
   }
 
   private loadData(): void {
     let filter ={
-      page: 1,
-      limit: 10
+      page: this.page,
+      limit: this.pageSize
     }
     this.dataSubscription = this.dataService.list(`${this.modelName}` ,filter).subscribe({
-      next: (data: any) => {
+      next: (response: any) => {
         if (this.modelName == 'user')
-        this.dataSource.data = data;
-        else {this.dataSource.data = data.data;
-              this.paginator = data.meta;
+          this.dataSource.data = response;
+        else {
+          this.dataSource.data = response.data;
+          this.totalItems = response.meta.total;
         }
         this.dataSubscription.unsubscribe()
       },
@@ -181,7 +205,13 @@ export class InnerTabComponent implements OnInit {
     });
   }
 
-  getNestedValue(obj: any, path: string): any {
-    return path.split('.').reduce((acc, part) => acc?.[part], obj);
+  getNestedValue(row: any, path: string): any {
+    return path.split('.').reduce((acc, part) => acc?.[part], row);
+  }
+
+  onPageChange(event: any) {
+    this.page = event.pageIndex + 1;
+    this.pageSize = event.pageSize;
+    this.loadData();
   }
 }
