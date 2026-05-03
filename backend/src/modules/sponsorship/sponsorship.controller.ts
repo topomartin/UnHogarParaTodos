@@ -6,11 +6,14 @@ import { CreateSponsorshipDto } from "./dto/sponsorship-create.dto";
 import { FosteringSearchDto } from "../fostering/dto/fostering-search.dto";
 import { PaginatedSponsorshipDto } from "./dto/paginated-swagger-sponsorship.dto";
 import { SponsorshipService } from "./services/sponsorship.service";
+import { SponsorshipSchemaService } from "./services/sponsorship-schema.service";
 
 @ApiTags(SponsorshipController.name)
 @Controller('sponsorship')
 export class SponsorshipController {
-    constructor(private sponsorshipService: SponsorshipService) {}
+    constructor(private sponsorshipService: SponsorshipService,
+                private schemaService: SponsorshipSchemaService
+    ) {}
 
     @ApiOkResponse({ type: Sponsorship })
     @Post('create')
@@ -36,5 +39,19 @@ export class SponsorshipController {
     @Patch(':id')
     update(@Param('id') id: string, @Body() updateSponsorshipDto: any) {
         return this.sponsorshipService.update(id, updateSponsorshipDto);
+    }
+
+    @Get('schema/gridSchema')
+    getGridSchema() {
+        return this.schemaService.getGridSchema();
+    }
+
+    @Get('schema/createSchema')
+    getCreateSchema() {
+        return this.schemaService.getCreateSchema();
+    }
+    @Get('schema/updateSchema')
+    getUpdateSchema() {
+        return this.schemaService.getUpdateSchema();
     }
 }

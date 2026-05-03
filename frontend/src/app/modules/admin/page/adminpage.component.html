@@ -5,8 +5,9 @@
     <ng-template matTabContent>
       <div style="padding: 16px;">
         <app-innertab
-          [columns]="tab.displayedColumns"
-          [modelName] = "tab.modelName" >
+          [modelName] = "tab.modelName"
+          [canCreate] = "tab.canCreate"
+          [canUpdate] = "tab.canUpdate">
         </app-innertab>
       </div>
     </ng-template>

@@ -51,7 +51,8 @@ import { AdminModule } from './modules/admin/adminpage.module';
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
-    AdminModule
+    AdminModule,
+    ReactiveFormsModule
   ],
   bootstrap: [AppComponent],
 })

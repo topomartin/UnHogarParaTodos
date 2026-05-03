@@ -33,6 +33,7 @@ import { UploadAnimalImagesDto } from './dto/upload-animal-images.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { multerAnimalConfig } from 'src/common/utils/multer-animal.config';
 import { Express } from 'express';
+import { AnimalSchemaService } from "./services/animal-schema.service";
 
 @ApiTags(AnimalController.name)
 @Controller('animal')
@@ -41,6 +42,7 @@ export class AnimalController {
     constructor(
         private animalService: AnimalService,
         private animalImageService: AnimalImageService,
+        private schemaService: AnimalSchemaService
     ) { }
 
     // -------------------------
@@ -122,5 +124,19 @@ export class AnimalController {
     @Delete('images/:imageId/hard')
     hardDeleteImage(@Param('imageId', ParseIntPipe) imageId: number) {
         return this.animalImageService.hardDeleteImage(imageId);
+    }
+
+    @Get('schema/gridSchema')
+    getGridSchema() {
+        return this.schemaService.getGridSchema();
+    }
+
+    @Get('schema/createSchema')
+    getCreateSchema() {
+        return this.schemaService.getCreateSchema();
+    }
+    @Get('schema/updateSchema')
+    getUpdateSchema() {
+        return this.schemaService.getUpdateSchema();
     }
 }

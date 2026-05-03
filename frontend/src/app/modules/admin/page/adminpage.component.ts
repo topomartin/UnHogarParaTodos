@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ITabItem } from '../interfaces/interfaces';
+import { Subscription } from 'rxjs';
+import { AdminPageService } from '../service/admin-data.service';
 
 @Component({
   selector: 'app-adminpage',
@@ -9,53 +11,43 @@ import { ITabItem } from '../interfaces/interfaces';
 })
 export class AdminPageComponent implements OnInit {
 
+  private tabsSchemaSubscription!: Subscription;
+
   public tabs: ITabItem[] = [
-    {
-      modelName: 'user',
-      displayedColumns: [
-        { key: 'id', label: 'ID' },
-        { key: 'username', label: 'Usuario' },
-        { key: 'email', label: 'Email' },
-        { key: 'role', label: 'Rol' }
-      ]
-    },
-    {
-      modelName: 'animal',
-      displayedColumns: [
-        { key: 'id', label: 'ID' },
-        { key: 'name', label: 'Nombre' },
-        { key: 'type', label: 'Tipo' },
-        { key: 'status', label: 'Estado' },
-        { key: 'birth_date', label: 'Nacimiento' },
-      ]
-    },
     //{
-    //  modelName: 'foster',
-    //  displayedColumns: [
-    //    { key: 'id', label: 'ID' },
-    //    { key: 'fullname', label: 'Propietario' },
-    //    { key: 'age', label: 'Edad' },
-    //    { key: 'availabilityTime', label: 'Disponible' },
-    //    { key: 'hasAnimals', label: 'Otros animales' },
-    //    { key: 'houseType', label: 'Tipo' },
-    //    { key: 'sizeM2', label: 'Superfice' },
-    //    { key: 'hasGarden', label: 'Jardín' },
-    //    { key: 'maxAnimals', label: 'Máximo acogida' },
-    //    { key: 'status', label: 'Estado' },
-    //  ]
-//
+    //  modelName: 'user',
+    //  canCreate: false,
+    //  canUpdate: false
     //},
-    {
-      modelName: 'sponsorship',
-      displayedColumns: [
-        { key: 'id', label: 'ID' },
-        { key: 'amount', label: 'Cantidad' },
-        { key: 'frequency', label: 'Frecuencia' },
-        { key: 'startDate', label: 'Inicio' },
-      ]
-    }
+    //{
+    //  modelName: 'animal',
+    //  canCreate: true,
+    //  canUpdate: false
+    //},
+    //{
+    //  modelName: 'animal-requests',
+    //  canCreate: false,
+    //  canUpdate: true
+    //},
+    //{
+    //  modelName: 'sponsorship',
+    //  canCreate: false,
+    //  canUpdate: false
+    //}
   ];
 
+  constructor(private dataService: AdminPageService){}
+
   ngOnInit(): void {
+    this.getTabsSchema();
+  }
+
+  getTabsSchema(){
+    const modelName = 'admin-page'
+    this.tabsSchemaSubscription = this.dataService.getGridSchema(modelName).subscribe(data=>{
+      this.tabs = data.displayedTabs;
+      this.tabsSchemaSubscription.unsubscribe();
+    });
+
   }
 }
