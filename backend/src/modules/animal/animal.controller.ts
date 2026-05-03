@@ -25,6 +25,7 @@ import { AnimalService } from "./services/animal.service";
 import { AnimalSearchDto } from "./dto/animal-search.dto";
 import { IPaginatedResult } from "src/common/knowledge/interfaces";
 import { PaginatedAnimalDto } from "./dto/paginated-swagger-animal.dto";
+import { ApiKeyGuard } from "../auth/guards/apiKey.guard";
 
 import { AnimalImageService } from './services/animal-image.service';
 import { AnimalImageDto } from './dto/animal-image.dto';
@@ -36,6 +37,8 @@ import { Express } from 'express';
 import { AnimalSchemaService } from "./services/animal-schema.service";
 
 @ApiTags(AnimalController.name)
+//@UseGuards(ApiKeyGuard)
+//@ApiSecurity('api-key')
 @Controller('animal')
 export class AnimalController {
 

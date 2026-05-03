@@ -8,6 +8,7 @@
 export const environment = {
   production: false,
   apiBaseUrl: '/api/', // Proxy redirects to http://localhost:7200 in dev
+  "x-api-key": "KLK9vbAA4rfD51Y*"
 };
 
 /*
