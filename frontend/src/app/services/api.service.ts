@@ -22,7 +22,7 @@ export class ApiService {
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
-    headers.set('x-api-key', this.x_api_key);
+    headers = headers.set('x-api-key', this.x_api_key);
 
     return { headers };
   }
