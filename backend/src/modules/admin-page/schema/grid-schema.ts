@@ -4,7 +4,7 @@ export const AdminPageGridSchema = {
         {
             modelName: 'user',
             canCreate: false,
-            canUpdate: false
+            canUpdate: true
         },
         {
             modelName: 'animal',

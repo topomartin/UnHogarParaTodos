@@ -85,15 +85,22 @@ export class UserProfileRepositoryService {
     }
 
     async upsertByUserId(userId: number, dto: CreateUserProfileDto) {
-        const existing = await this.findByUserId(userId);
+        try{
+            const existing = await this.findByUserId(userId);
 
-        if (existing) {
-            return this.update(existing.id, dto);
+            if (existing) {
+                return this.update(existing.id, dto);
+            }
+
+            return this.create({
+                ...dto,
+                userId
+            });
+        }catch (e: any){
+            this.logger.error(e);
+            handleMySQLError(e);
+            throw e;
         }
 
-        return this.create({
-            ...dto,
-            userId
-        });
     }
 }

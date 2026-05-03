@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { UserGridSchema } from "../schemas/grid-schema";
+import { UserUpdateSchema } from "../schemas/update-schema";
 
 @Injectable()
 export class UserSchemaService {
@@ -8,7 +9,8 @@ export class UserSchemaService {
         return 'CreateSchema'
     };
     getUpdateSchema(){
-        return 'UpdateSchema'
+        return UserUpdateSchema;
+
     };
     getGridSchema(){
         return UserGridSchema;

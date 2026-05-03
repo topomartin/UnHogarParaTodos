@@ -26,7 +26,7 @@ export class UsersRepositoryService {
 
     async findOne(filter): Promise<User | null | undefined>{
         try{
-            return await this.userRepository.findOne({where: filter});
+            return await this.userRepository.findOne({where: filter, select: ['id', 'username', 'email', 'password', 'role']});
         }catch(e){
             this.handleError(e);
         }
