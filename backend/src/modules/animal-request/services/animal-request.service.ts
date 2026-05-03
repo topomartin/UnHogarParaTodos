@@ -2,6 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { AnimalRequestStatus, AnimalRequestType, AnimalStatus } from "../../../common/knowledge/enums";
 import { AnimalService } from "../../animal/services/animal.service";
 import { AnimalRequestRepositoryService } from "./animal-request.repository.service";
+import { Utils } from "src/common/utils/utils";
+import { AnimalRequestModelNames as Names } from "../config/animal-request-model-name";
 
 @Injectable()
 export class AnimalRequestService {
@@ -37,6 +39,11 @@ export class AnimalRequestService {
             type: dto.type,
             status: AnimalRequestStatus.PENDING
         });
+    }
+
+    async update(id, parcialAnimalRequest ){
+        parcialAnimalRequest[Names.tableFields.UPDATED_AT] = Utils.toLocalDateForMySQL(new Date());
+        return await this.repo.update(id,parcialAnimalRequest);
     }
 
     async approve(id: number) {
@@ -102,7 +109,7 @@ export class AnimalRequestService {
 
             if (pendingAdoptionRequests.length === 0) {
 
-                const animal = await this.animalService.findOne(request.animal.id);
+                const animal = await this.animalService.findOne({id:request.animal.id});
 
                 if (animal && animal.status !== AnimalStatus.ADOPTED) {
                     await this.animalService.update(animal.id, {

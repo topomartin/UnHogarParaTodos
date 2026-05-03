@@ -13,33 +13,33 @@ import { AnimalProfileService } from 'src/modules/animal-profile/services/animal
 
 @Injectable()
 export class AnimalService {
-  constructor(
-      private animalRepositoryService: AnimalRepositoryService,
-      private animalProfileService: AnimalProfileService
-  ) { }
+    constructor(
+        private animalRepositoryService: AnimalRepositoryService,
+        private animalProfileService: AnimalProfileService
+    ) { }
 
-  async create(createAnimalDto: CreateAnimalDto): Promise<Animal | null | undefined>{
-    //let birthDate = new Date(createAnimalDto.birth_date);
-      const animal = await this.animalRepositoryService.create(createAnimalDto);
+    async create(createAnimalDto: CreateAnimalDto): Promise<Animal | null | undefined>{
+      //let birthDate = new Date(createAnimalDto.birth_date);
+        const animal = await this.animalRepositoryService.create(createAnimalDto);
 
-      if (animal) {
-          await this.animalProfileService.create(animal as any);
-      }
+        if (animal) {
+            await this.animalProfileService.create(animal as any);
+        }
 
-      return animal;
-  }
+        return animal;
+    }
 
-  async findOne(filter): Promise<Animal | null | undefined>{
-      return await this.animalRepositoryService.findOne(filter);
-  }
+    async findOne(filter): Promise<Animal | null | undefined>{
+        return await this.animalRepositoryService.findOne(filter);
+    }
 
-  async findAll(filter: AnimalSearchDto): Promise<IPaginatedResult<Animal>>{
-      return await this.animalRepositoryService.findAll(filter);
-  }
+    async findAll(filter: AnimalSearchDto): Promise<IPaginatedResult<Animal>>{
+        return await this.animalRepositoryService.findAll(filter);
+    }
 
-  async update(id, parcialUser ){
-    parcialUser[Names.tableFields.UPDATED_AT] = Utils.toLocalDateForMySQL(new Date());
-      return await this.animalRepositoryService.update(id,parcialUser);
-  }
+    async update(id, parcialUser ){
+        parcialUser[Names.tableFields.UPDATED_AT] = Utils.toLocalDateForMySQL(new Date());
+        return await this.animalRepositoryService.update(id,parcialUser);
+    }
 
 }

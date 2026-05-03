@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Patch, HttpCode } from "@nestjs/common";
-import { ApiTags, ApiBody, ApiOperation } from "@nestjs/swagger";
+import { ApiTags, ApiBody, ApiOperation, ApiOkResponse } from "@nestjs/swagger";
 import { AnimalRequestService } from "./services/animal-request.service";
 import { CreateAnimalRequestDto } from "./dto/create-animal-request.dto";
 import { IPaginatedResult } from "src/common/knowledge/interfaces";
@@ -27,6 +27,12 @@ export class AnimalRequestController {
     findAll(@Body() filter: AnimalRequestSearchDto): Promise<IPaginatedResult<AnimalRequest | null | undefined>> {
         return this.service.findAll(filter);
     }
+
+    //@ApiOkResponse({ type: AnimalRequest })
+    @Patch(':id')
+    update(@Param('id') id: string, @Body() updateAnimalRequestDto: any) {
+            return this.service.update(id, updateAnimalRequestDto);
+        }
 
     @Patch(":id/approve")
     approve(@Param("id") id: number) {

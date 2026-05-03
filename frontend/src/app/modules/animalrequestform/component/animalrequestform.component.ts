@@ -114,7 +114,7 @@ export class AnimalRequestFormComponent implements OnInit {
           type: this.type === 'ADOPTION' ? 'adoption' : 'foster'
         };
 
-        this.apiService.post('animal-requests', requestPayload).subscribe({
+        this.apiService.post('animal-requests/create', requestPayload).subscribe({
           next: () => {
             alert('Solicitud enviada correctamente');
             this.router.navigate(['/listaanimal']);
