@@ -10,10 +10,11 @@ import { AnimalImageService } from './services/animal-image.service';
 import { AnimalProfile } from "src/common/database/entities/animal_profile.entity";
 import { AnimalProfileRepositoryService } from "src/modules/animal-profile/services/animal-profile.repository.service";
 import { AnimalProfileModule } from "../animal-profile/animal-profile.module";
+import { AnimalSchemaService } from "./services/animal-schema.service";
 
 @Module({
   imports: [TypeOrmModule.forFeature([Animal, AnimalImage]), DatabaseModule, AnimalProfileModule],
-  providers: [AnimalService, AnimalRepositoryService, AnimalImageService],
+  providers: [AnimalService, AnimalRepositoryService, AnimalImageService, AnimalSchemaService],
   controllers: [AnimalController],
   exports:[AnimalService]
 })

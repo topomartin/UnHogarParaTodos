@@ -10,6 +10,7 @@ import { SponsorshipModule } from './modules/sponsorship/sponsorship.module';
 import { UserProfileModule } from './modules/user-profile/user-profile.module';
 import { AnimalRequestModule } from './modules/animal-request/animal-request.module';
 import { AnimalProfileModule } from './modules/animal-profile/animal-profile.module';
+import { AdminPageModule } from './modules/admin-page/admin-page.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { AnimalProfileModule } from './modules/animal-profile/animal-profile.mod
     SponsorshipModule,
     UserProfileModule,
     AnimalRequestModule,
-    AnimalProfileModule],
+    AnimalProfileModule,
+    AdminPageModule],
 
   controllers: [],
     providers: [TmpCleanerService],

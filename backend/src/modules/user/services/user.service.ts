@@ -19,7 +19,7 @@ export class UserService {
     createUserDto.password = hash;
     const user = await this.userRepositoryService.create(createUserDto);
 
-    // crear perfil vacío automáticamente
+    // crear perfil vacï¿½o automï¿½ticamente
     await this.userProfileService.createForUser(user.id);
 
     if (!user?.id) {
