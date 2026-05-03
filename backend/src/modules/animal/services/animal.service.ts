@@ -6,53 +6,37 @@ import { AnimalRepositoryService } from './animal.repository.service';
 import { AnimalSearchDto } from '../dto/animal-search.dto';
 import { IPaginatedResult } from 'src/common/knowledge/interfaces';
 import { AnimalModelNames as Names } from '../config/animal-model-name';
-import { AnimalStatus } from 'src/common/knowledge/enums';
+import { AnimalProfileService } from 'src/modules/animal-profile/services/animal-profile.service';
 
 
 @Injectable()
 export class AnimalService {
-  constructor(private animalRepositoryService: AnimalRepositoryService){}
+    constructor(
+        private animalRepositoryService: AnimalRepositoryService,
+        private animalProfileService: AnimalProfileService
+    ) { }
 
-  async create(createAnimalDto: CreateAnimalDto): Promise<Animal | null | undefined>{
-    //let birthDate = new Date(createAnimalDto.birth_date);
-    return await this.animalRepositoryService.create(createAnimalDto);
-  }
+    async create(createAnimalDto: CreateAnimalDto): Promise<Animal | null | undefined>{
+        //let birthDate = new Date(createAnimalDto.birth_date);
+        const animal = await this.animalRepositoryService.create(createAnimalDto);
 
-  async findOne(filter): Promise<Animal | null | undefined>{
-    return await this. animalRepositoryService.findOne(filter);
-  }
-
-  async findAll(filter: AnimalSearchDto): Promise<IPaginatedResult<Animal>>{
-    return await this.animalRepositoryService.findAll(filter);
-  }
-
-  async update(id, parcialUser ){
-    parcialUser[Names.tableFields.UPDATED_AT] = Utils.toLocalDateForMySQL(new Date());
-    return await this.animalRepositoryService.update(id,parcialUser);
-  }
-
-<<<<<<< HEAD
-  async updateStatus(animalId: number, adoptionStatus: AdoptionStatus) {
-    const statusToUpdate = this.mapAdoptionToAnimalStatus(adoptionStatus);
-    return this.update(animalId, {status: statusToUpdate});
-  }
-
-  async delete(id){
-    return await this.animalRepositoryService.delete(id)
-  }
-
-
-  private mapAdoptionToAnimalStatus(status: AdoptionStatus): AnimalStatus {
-    switch (status) {
-      case AdoptionStatus.PENDING:
-        return AnimalStatus.PENDING;
-      case AdoptionStatus.APPROVED:
-        return AnimalStatus.ADOPTED;
-      case AdoptionStatus.REJECTED:
-      default:
-        return AnimalStatus.AVAILABLE;
+        if (animal) {
+            await this.animalProfileService.create(animal as any);
+        }
+        return animal;
     }
-  }
-=======
->>>>>>> features/05_Front_newDB
+
+    async findOne(filter): Promise<Animal | null | undefined>{
+        return await this.animalRepositoryService.findOne(filter);
+    }
+
+    async findAll(filter: AnimalSearchDto): Promise<IPaginatedResult<Animal>>{
+        return await this.animalRepositoryService.findAll(filter);
+    }
+
+    async update(id, parcialUser ){
+        parcialUser[Names.tableFields.UPDATED_AT] = Utils.toLocalDateForMySQL(new Date());
+        return await this.animalRepositoryService.update(id,parcialUser);
+    }
+
 }

@@ -1,12 +1,13 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { AnimalStatus, AnimalType } from "src/common/knowledge/enums";
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm"
 import { Adoption } from "./adoption.entity";
 import { Fostering } from "./fostering.entity";
 import { AnimalModelNames as Names } from "src/modules/animal/config/animal-model-name";
 import { Sponsorship } from "./sponsorship.entity";
 import { AnimalImage } from "./animal_image.entity";
 import { AnimalRequest } from './animal_request.entity';
+import { AnimalProfile } from "./animal_profile.entity";
 
 @Entity()
 export class Animal {
@@ -55,5 +56,8 @@ export class Animal {
 
     @OneToMany(() => AnimalImage, (image) => image.animal)
     images!: AnimalImage[];
+
+    @OneToOne (() => AnimalProfile, (profile) => profile.animal)
+    profile!: AnimalProfile;
 
 }

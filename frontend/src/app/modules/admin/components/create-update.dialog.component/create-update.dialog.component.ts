@@ -57,7 +57,7 @@ export class CreateUpdateDialogComponent implements OnInit {
     return this.data.mode === 'update' ? 'Actualizar' : 'Crear';
   }
 
-  getNestedValue(obj: any, path: string): any {
-    return path.split('.').reduce((acc, part) => acc?.[part], obj);
+  getNestedValue(row: any, path: string): any {
+    return path.split('.').reduce((acc, part) => acc?.[part], row);
   }
 }

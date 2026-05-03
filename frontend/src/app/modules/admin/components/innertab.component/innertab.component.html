@@ -12,6 +12,7 @@
         </th>
 
         <td mat-cell *matCellDef="let row">
+          {{ getNestedValue(row, column.key) }}
           {{ row[column.key] }}
         </td>
 

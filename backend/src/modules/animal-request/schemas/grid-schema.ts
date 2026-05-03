@@ -3,7 +3,7 @@ import { AnimalRequestStatus, AnimalRequestType } from "src/common/knowledge/enu
 export const AnimalRequestGridchema = {
     displayedColumns: [
         { key: 'id', label: 'ID' },
-        { key: 'animal.name', label: 'Animal'  },
+        { key: 'animal.name', label: 'animal'  },
         { key: 'user.username', label: 'usuario' },
         { key: 'type', label: 'tipo' },
         { key: 'status', label: 'status'},

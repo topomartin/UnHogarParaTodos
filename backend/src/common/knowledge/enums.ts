@@ -74,3 +74,21 @@ export enum SponsorshipFrequency {
   MONTHLY = 'monthly',
   YEARLY = 'yearly'
 }
+
+export enum AnimalSize {
+    SMALL = 'small',
+    MEDIUM = 'medium',
+    LARGE = 'large',
+}
+
+export enum EnergyLevel {
+    LOW = 'low',
+    MEDIUM = 'medium',
+    HIGH = 'high',
+}
+
+export enum Temperament {
+    CALM = 'calm',
+    ACTIVE = 'active',
+    AGGRESSIVE = 'aggressive',
+}
