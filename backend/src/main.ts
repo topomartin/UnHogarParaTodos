@@ -8,6 +8,7 @@ import { DocumentBuilder } from '@nestjs/swagger/dist/document-builder';
 import { FileLogger } from './common/fileLogger';
 import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
 import { ApiKeyGuard } from './modules/auth/guards/apiKey.guard';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 const appConfig = require(join(process.cwd(), 'config', 'app.config'));
 

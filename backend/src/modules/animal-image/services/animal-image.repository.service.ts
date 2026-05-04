@@ -1,6 +1,6 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { IsNull, Repository } from 'typeorm';
 import { AnimalImage } from "src/common/database/entities/animal_image.entity";
 
 @Injectable()
@@ -12,11 +12,11 @@ export class AnimalImageRepositoryService {
         private readonly animalImageRepository: Repository<AnimalImage>,
     ) {}
 
-    async findByAnimal(animalId: number) {
+    // FIND IMAGES
+    async findAll(filter) {
         return this.animalImageRepository.find({
             where: {
-                animal: { id: animalId },
-                deleted_at: null,
+                ...filter,
             },
             order: {
                 is_main: "DESC",
@@ -25,32 +25,56 @@ export class AnimalImageRepositoryService {
         });
     }
 
-    async findMainImage(animalId: number) {
-        return this.animalImageRepository.findOne({
-            where: {
-                animal: { id: animalId },
-                is_main: true,
-                deleted_at: null,
-            },
-        });
-    }
-
-    async findAllMainImages() {
+    async findActive(filter) {
         return this.animalImageRepository.find({
             where: {
-                is_main: true,
-                deleted_at: null,
+                ...filter,
+                deleted_at: IsNull(),
             },
-            relations: ['animal'], 
+            order: {
+                is_main: "DESC",
+                created_at: "ASC",
+            },
         });
     }
 
+    async findOne(filter) {
+        return this.animalImageRepository.findOne({ 
+            where: {
+                ...filter,
+            },
+        });
+    }
+
+    // FIND MAIN IMAGES
+    async findOneMain(filter) {
+        return this.animalImageRepository.findOne({
+            where: {
+                ...filter,
+                is_main: true,
+            },
+        });
+    }
+
+    async findAllMains() {
+        return this.animalImageRepository.find({
+            where: {
+                deleted_at: IsNull(),
+                is_main: true,
+            },
+            order: {
+                created_at: "ASC",
+            },
+        });
+    }
+
+    // SAVE, REMOVE
     async create(images: Partial<AnimalImage>[]) {
         return this.animalImageRepository.save(images);
     }
 
     async save(entity: Partial<AnimalImage> | Partial<AnimalImage>[]) {
-        return this.animalImageRepository.save(entity);
+        return this.animalImageRepository.save(entity as any);
     }
 
     async remove(entity: AnimalImage) {

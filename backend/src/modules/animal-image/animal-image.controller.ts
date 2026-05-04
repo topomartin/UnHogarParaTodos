@@ -9,6 +9,7 @@ import {
     Patch,
     Post,
     UploadedFiles,
+    UseGuards,
     UseInterceptors
 } from "@nestjs/common";
 
@@ -25,7 +26,11 @@ import { UploadAnimalImagesDto } from './dto/upload-animal-images.dto';
 
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { multerAnimalConfig } from 'src/common/utils/multer-animal.config';
-import { Express } from 'express';
+
+import { AuthGuard } from "../auth/guards/auth.guard";
+import { Roles } from "../auth/decorators/roles.decorator";
+import { UserRole } from 'src/common/knowledge/enums';
+import { RolesGuard } from "../auth/guards/roles.guard";
 
 @ApiTags(AnimalImageController.name)
 @Controller('animal-image')
@@ -36,6 +41,8 @@ export class AnimalImageController {
     ) { }
 
     // Upload images for an animal
+    @UseGuards(AuthGuard, RolesGuard)
+    @Roles(UserRole.WORKER, UserRole.ADMIN)
     @Post(':animalId')
     @ApiConsumes('multipart/form-data')
     @ApiBody({ type: UploadAnimalImagesDto })
@@ -48,14 +55,39 @@ export class AnimalImageController {
         return this.animalImageService.uploadImages(animalId, files);
     }
 
-    // Get all images of an animal
+    // Get active images of an animal
     @Get(':animalId')
     @ApiOkResponse({ type: [AnimalImageDto] })
-    getImages(@Param('animalId', ParseIntPipe) animalId: number) {
-        return this.animalImageService.findByAnimal(animalId);
+    getActiveImages(@Param('animalId', ParseIntPipe) animalId: number) {
+        return this.animalImageService.findActive(animalId);
+    }
+
+    // Get main image of animal
+    @Get(':animalId/main')
+    @ApiOkResponse({ type: AnimalImageDto })
+    getMainImage(@Param('animalId', ParseIntPipe) animalId: number) {
+        return this.animalImageService.findOneMain(animalId);
+    }
+
+    // Get all images of an animal
+    @UseGuards(AuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
+    @Get(':animalId/all')
+    @ApiOkResponse({ type: [AnimalImageDto] })
+    getAllImages(@Param('animalId', ParseIntPipe) animalId: number) {
+        return this.animalImageService.findAll(animalId);
+    }
+
+    // Get all main images
+    @Get('main')
+    @ApiOkResponse({ type: [AnimalImageDto] })
+    getAllMainImages() {
+        return this.animalImageService.findAllMains();
     }
 
     // Set main image
+    @UseGuards(AuthGuard, RolesGuard)
+    @Roles(UserRole.WORKER, UserRole.ADMIN)
     @Patch(':imageId/main')
     @ApiOkResponse({ type: AnimalImageDto })
     setMain(@Param('imageId', ParseIntPipe) imageId: number) {
@@ -63,6 +95,8 @@ export class AnimalImageController {
     }
 
     // Soft delete image
+    @UseGuards(AuthGuard, RolesGuard)
+    @Roles(UserRole.WORKER, UserRole.ADMIN)
     @Delete(':imageId')
     @ApiOkResponse({ type: Boolean })
     deleteImage(@Param('imageId', ParseIntPipe) imageId: number) {
@@ -70,6 +104,8 @@ export class AnimalImageController {
     }
 
     // Restore image
+    @UseGuards(AuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
     @Patch(':imageId/restore')
     @ApiOkResponse({ type: AnimalImageDto })
     restoreImage(@Param('imageId', ParseIntPipe) imageId: number) {
@@ -77,23 +113,13 @@ export class AnimalImageController {
     }
 
     // Hard delete image
+    @UseGuards(AuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
     @Delete(':imageId/hard')
     @ApiOkResponse({ type: Boolean })
     hardDeleteImage(@Param('imageId', ParseIntPipe) imageId: number) {
         return this.animalImageService.hardDeleteImage(imageId);
     }
 
-    // Get main image of animal
-    @Get(':animalId/main')
-    @ApiOkResponse({ type: AnimalImageDto })
-    getMainImage(@Param('animalId', ParseIntPipe) animalId: number) {
-        return this.animalImageService.findMainImage(animalId);
-    }
-
-    // Get all main images
-    @Get('main')
-    @ApiOkResponse({ type: [AnimalImageDto] })
-    getMainImages() {
-        return this.animalImageService.findAllMainImages();
-    }
+    
 }
