@@ -11,6 +11,7 @@ import { AnimalImageModule } from './modules/animal-image/animal-image.module';
 import { UserProfileModule } from './modules/user-profile/user-profile.module';
 import { AnimalRequestModule } from './modules/animal-request/animal-request.module';
 import { AnimalProfileModule } from './modules/animal-profile/animal-profile.module';
+import { AdminPageModule } from './modules/admin-page/admin-page.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { AnimalProfileModule } from './modules/animal-profile/animal-profile.mod
     AnimalImageModule,
     UserProfileModule,
     AnimalRequestModule,
-    AnimalProfileModule],
+    AnimalProfileModule,
+    AdminPageModule],
 
   controllers: [],
     providers: [TmpCleanerService],

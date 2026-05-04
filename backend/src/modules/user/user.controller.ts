@@ -4,11 +4,14 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { User } from 'src/common/database/entities/user.entity';
+import { UserSchemaService } from './services/user-schema.service';
 
 @ApiTags(UserController.name)
 @Controller('user')
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,
+              private schemaService: UserSchemaService
+  ) {}
 
   @Post('create')
   @ApiBody({ type: CreateUserDto })
@@ -38,4 +41,18 @@ export class UserController {
   delete(@Param('id') id: string) {
     return this.userService.delete(id);
   }
+
+  @Get('schema/gridSchema')
+    getGridSchema() {
+        return this.schemaService.getGridSchema();
+    }
+
+    @Get('schema/createSchema')
+    getCreateSchema() {
+        return this.schemaService.getCreateSchema();
+    }
+    @Get('schema/updateSchema')
+    getUpdateSchema() {
+        return this.schemaService.getUpdateSchema();
+    }
 }

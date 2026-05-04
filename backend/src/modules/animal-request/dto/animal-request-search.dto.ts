@@ -4,25 +4,18 @@ import { ValidateNested, IsOptional, IsString, IsEnum, IsDateString } from 'clas
 import { PaginatorDto } from 'src/common/dto/paginator.dto';
 import { RangeDto } from 'src/common/dto/range.dto';
 import { SortDto } from 'src/common/dto/sort.dto';
-import { AnimalStatus, AnimalType } from 'src/common/knowledge/enums';
+import { AnimalRequestStatus } from 'src/common/knowledge/enums';
 import { AnimalRequestModelNames as Names } from '../config/animal-request-model-name';
 
 export class AnimalRequestFilterDto {
- 
-  @ApiPropertyOptional({
-    description: `Filtrar por tipo: ${Object.values(AnimalType).join(', ')}`,
-  })
-  @IsOptional()
-  @IsEnum(AnimalType)
-  [Names.modelFields.TYPE]?: AnimalType;
+
 
   @ApiPropertyOptional({
-    description: `Filtrar por estado: ${Object.values(AnimalStatus).join(', ')}`,
+    description: `Filtrar por estado: ${Object.values(AnimalRequestStatus).join(', ')}`,
   })
   @IsOptional()
-  @IsEnum(AnimalStatus)
-  [Names.modelFields.STATUS]?: AnimalStatus;
-
+  @IsEnum(AnimalRequestStatus)
+  [Names.modelFields.STATUS]?: AnimalRequestStatus;
 }
 
 export class AnimalRequestSearchDto extends PaginatorDto {

@@ -12,7 +12,7 @@
         </th>
 
         <td mat-cell *matCellDef="let row">
-          {{ getNestedValue(row, column.key)  }}
+          {{ getNestedValue(row, column.key) }}
         </td>
 
       </ng-container>
@@ -26,7 +26,7 @@
 
         <td mat-cell *matCellDef="let row">
 
-          <button mat-icon-button color="primary" (click)="edit(row)">
+          <button *ngIf="canUpdate" mat-icon-button color="primary" (click)="edit(row)">
             <mat-icon>edit</mat-icon>
           </button>
 
@@ -51,14 +51,16 @@
   <!-- FOOTER -->
  <div class="table-footer">
 
-  <button mat-raised-button color="primary" (click)="create()">
+  <button *ngIf="canCreate" mat-raised-button color="primary" (click)="create()">
     <mat-icon>add</mat-icon>
     Crear
   </button>
 
   <mat-paginator
+    [length]="totalItems"
+    [pageSize]="pageSize"
     [pageSizeOptions]="[5, 10, 25, 50]"
-    showFirstLastButtons>
+    (page)="onPageChange($event)">
   </mat-paginator>
 
 </div>

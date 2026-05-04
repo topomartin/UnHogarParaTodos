@@ -7,7 +7,7 @@ import { SwaggerModule } from '@nestjs/swagger/dist/swagger-module';
 import { DocumentBuilder } from '@nestjs/swagger/dist/document-builder';
 import { FileLogger } from './common/fileLogger';
 import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
-import { NestExpressApplication } from '@nestjs/platform-express';
+import { ApiKeyGuard } from './modules/auth/guards/apiKey.guard';
 
 const appConfig = require(join(process.cwd(), 'config', 'app.config'));
 
@@ -43,11 +43,21 @@ async function bootstrap() {
     .setDescription('Un Hogar para Todos API documentation')
     .setVersion('1.0')
     .addTag('--')
+    .addApiKey(
+    {
+      type: 'apiKey',
+      name: 'x-api-key', 
+      in: 'header',
+    },
+    'swagger-api-key', 
+  )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   const swaggerApiURL = `${appConfig.app.globalPrefix}/${appConfig.app.swaggerURL}/`;
   SwaggerModule.setup(swaggerApiURL, app, document);
   logger.log(`API documentacion available from ${swaggerApiURL}`)
+
+  app.useGlobalGuards(new ApiKeyGuard());
 
 
   //APP SERVER PORT 

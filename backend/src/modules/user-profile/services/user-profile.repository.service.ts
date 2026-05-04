@@ -16,7 +16,7 @@ export class UserProfileRepositoryService {
 
     async create(data: CreateUserProfileDto): Promise<UserProfile> {
         try {
-            const existing = await this.findByUserId(data.userId); 
+            const existing = await this.findByUserId(data.userId);
 
             if (existing) {
                 return existing;
@@ -29,7 +29,7 @@ export class UserProfileRepositoryService {
 
             return await this.userProfileRepository.save(profile);
 
-        } catch (e) {
+        } catch (e: any) {
             this.logger.error(e);
             handleMySQLError(e);
             throw e;
@@ -48,7 +48,7 @@ export class UserProfileRepositoryService {
                 user: { id: userId },
             });
 
-        } catch (e) {
+        } catch (e: any) {
             this.logger.error(e);
             handleMySQLError(e);
             throw e;
@@ -77,7 +77,7 @@ export class UserProfileRepositoryService {
 
             return await this.userProfileRepository.save(profile);
 
-        } catch (e) {
+        } catch (e: any) {
             this.logger.error(e);
             handleMySQLError(e);
             throw e;
@@ -85,15 +85,22 @@ export class UserProfileRepositoryService {
     }
 
     async upsertByUserId(userId: number, dto: CreateUserProfileDto) {
-        const existing = await this.findByUserId(userId);
+        try{
+            const existing = await this.findByUserId(userId);
 
-        if (existing) {
-            return this.update(existing.id, dto);
+            if (existing) {
+                return this.update(existing.id, dto);
+            }
+
+            return this.create({
+                ...dto,
+                userId
+            });
+        }catch (e: any){
+            this.logger.error(e);
+            handleMySQLError(e);
+            throw e;
         }
 
-        return this.create({
-            ...dto,
-            userId
-        });
     }
 }

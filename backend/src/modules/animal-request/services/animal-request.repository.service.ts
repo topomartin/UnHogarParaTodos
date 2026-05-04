@@ -4,9 +4,9 @@ import { Repository } from "typeorm";
 import { AnimalRequest } from "src/common/database/entities/animal_request.entity";
 import { handleMySQLError } from "src/common/database/mysql.error.handler";
 import { AnimalRequestStatus, AnimalRequestType } from "../../../common/knowledge/enums";
-import { QueryBuilderHelper } from '../../../common/database/queryBuilder.helper';
+import { QueryBuilderHelper } from "src/common/database/queryBuilder.helper";
 import { queryConfig } from "../config/query.config";
-import { IPaginatedResult } from "src/common/knowledge/interfaces";
+import { AnimalRequestSearchDto } from "../dto/animal-request-search.dto";
 
 @Injectable()
 export class AnimalRequestRepositoryService {
@@ -16,28 +16,33 @@ export class AnimalRequestRepositoryService {
     constructor(
         @InjectRepository(AnimalRequest)
         private repo: Repository<AnimalRequest>,
-        private queryBuilderHelper: QueryBuilderHelper
+        private queryBuilderHelper: QueryBuilderHelper,
     ) { }
 
     async create(data) {
         try {
             return await this.repo.save(data);
-        } catch (e:any) {
+        } catch (e: any) {
             this.logger.error(e);
             handleMySQLError(e);
         }
     }
 
-    async findAll(filterData:any): Promise<IPaginatedResult<AnimalRequest>> {
-        //return this.repo.find({ relations: ["user", "animal"] });
-        const query = this.repo.createQueryBuilder('animal_request');
-        const {qb, take, page} = await this.queryBuilderHelper.SelectQueryBuilder(query, queryConfig, filterData )
-        const [data, total] = await qb.getManyAndCount();
-        
-        return {
-            data: data.map(({ ...animal }) => animal as AnimalRequest),
-            meta: {total, page, lastPage: Math.ceil(total / take), limit: take }
-        };
+    async findAll(filterData: AnimalRequestSearchDto): Promise<any> {
+        try{
+            const query = this.repo.createQueryBuilder('animal-request');
+            const {qb, take, page} = await this.queryBuilderHelper.SelectQueryBuilder(query, queryConfig, filterData )
+            const [data, total] = await qb.getManyAndCount();
+
+            return {
+                data: data.map(({ ...animalRequest }) => animalRequest as AnimalRequest),
+                meta: {total, page, lastPage: Math.ceil(total / take), limit: take }
+            };
+        }catch (e: any){
+            this.logger.error(e);
+            handleMySQLError(e);
+        }
+
     }
 
     async findOne(id: number) {

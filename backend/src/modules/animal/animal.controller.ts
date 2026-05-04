@@ -21,14 +21,27 @@ import { AnimalService } from "./services/animal.service";
 import { AnimalSearchDto } from "./dto/animal-search.dto";
 import { IPaginatedResult } from "src/common/knowledge/interfaces";
 import { PaginatedAnimalDto } from "./dto/paginated-swagger-animal.dto";
+import { ApiKeyGuard } from "../auth/guards/apiKey.guard";
 
+import { AnimalImageService } from './services/animal-image.service';
+import { AnimalImageDto } from './dto/animal-image.dto';
+import { UploadAnimalImagesDto } from './dto/upload-animal-images.dto';
+
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { multerAnimalConfig } from 'src/common/utils/multer-animal.config';
+import { Express } from 'express';
+import { AnimalSchemaService } from "./services/animal-schema.service";
 
 @ApiTags(AnimalController.name)
+//@UseGuards(ApiKeyGuard)
+//@ApiSecurity('api-key')
 @Controller('animal')
 export class AnimalController {
 
     constructor(
-        private animalService: AnimalService
+        private animalService: AnimalService,
+        private animalImageService: AnimalImageService,
+        private schemaService: AnimalSchemaService
     ) { }
 
     @ApiOkResponse({ type: Animal })
@@ -57,4 +70,68 @@ export class AnimalController {
         return this.animalService.update(id, updateAnimalDto);
     }
 
+    //@Delete(':id')
+    //delete(@Param('id') id: string) {
+    //    return this.animalService.delete(id);
+    //}
+
+    // -------------------------
+    // IMAGES
+    // -------------------------
+
+    @ApiConsumes('multipart/form-data')
+    @ApiBody({ type: UploadAnimalImagesDto })
+    @ApiOkResponse({ type: [AnimalImageDto] })
+    @Post(':id/images')
+    @UseInterceptors(FilesInterceptor('files', 20, multerAnimalConfig))
+    uploadImages(
+        @Param('id', ParseIntPipe) id: number,
+        @UploadedFiles() files: Express.Multer.File[],
+    ) {
+        return this.animalImageService.uploadImages(id, files);
+    }
+
+    @ApiOkResponse({ type: [AnimalImageDto] })
+    @Get(':id/images')
+    getImages(@Param('id', ParseIntPipe) id: number) {
+        return this.animalImageService.findByAnimal(id);
+    }
+
+    @ApiOkResponse({ type: AnimalImageDto })
+    @Patch('images/:imageId/main')
+    setMain(@Param('imageId', ParseIntPipe) imageId: number) {
+        return this.animalImageService.setMainImage(imageId);
+    }
+
+    @ApiOkResponse({ type: Boolean })
+    @Delete('images/:imageId')
+    deleteImage(@Param('imageId', ParseIntPipe) imageId: number) {
+        return this.animalImageService.softDeleteImage(imageId);
+    }
+
+    @ApiOkResponse({ type: AnimalImageDto })
+    @Patch('images/:imageId/restore')
+    restoreImage(@Param('imageId', ParseIntPipe) imageId: number) {
+        return this.animalImageService.restoreImage(imageId);
+    }
+
+    @ApiOkResponse({ type: Boolean })
+    @Delete('images/:imageId/hard')
+    hardDeleteImage(@Param('imageId', ParseIntPipe) imageId: number) {
+        return this.animalImageService.hardDeleteImage(imageId);
+    }
+
+    @Get('schema/gridSchema')
+    getGridSchema() {
+        return this.schemaService.getGridSchema();
+    }
+
+    @Get('schema/createSchema')
+    getCreateSchema() {
+        return this.schemaService.getCreateSchema();
+    }
+    @Get('schema/updateSchema')
+    getUpdateSchema() {
+        return this.schemaService.getUpdateSchema();
+    }
 }
