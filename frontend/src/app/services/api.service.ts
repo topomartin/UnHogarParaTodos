@@ -42,6 +42,11 @@ export class ApiService {
       .pipe(catchError(err => this.handleError(err)));
   }
 
+  public delete(path: string): Observable<any> {
+    return this.http.delete(`${this.API_URL}${path}`, this.getOptions())
+      .pipe(catchError(err => this.handleError(err)));
+  }
+
   public getImageUrl(path: string): string {
     if (!path) return '';
 

@@ -12,6 +12,7 @@ import { VerPerfilComponent } from './modules/VerPerfil/component/verperfil.comp
 import { EditarPerfilComponent } from './modules/editarperfil/component/editarperfil.component';
 import { ListaAnimalComponent } from './modules/listaanimal/component/listaanimal.component';
 import { DetalleAnimalComponent } from './modules/detallesanimal/component/detalleanimal.component';
+import { AnimalRequestFormComponent } from './modules/animalrequestform/component/animalrequestform.component';
 import { AdoptarAnimalComponent } from './modules/adoptaranimal/component/adoptaranimal.component';
 import { RegisterFosterComponent } from './modules/registerfoster/component/registerfoster.component';
 import { SponsorAnimalComponent } from './modules/sponsor-animal/component/sponsor-animal.component';
@@ -22,6 +23,7 @@ import { NavigationBarComponent } from './modules/shared/navigation-bar/navigati
 import { FooterComponent } from './modules/shared/footer/footer';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AdminModule } from './modules/admin/adminpage.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { FormsModule } from '@angular/forms';
     NavigationBarComponent,
     FooterComponent,
     HomeComponent,
+    AnimalRequestFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
+    AdminModule
   ],
   bootstrap: [AppComponent],
 })

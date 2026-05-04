@@ -1,9 +1,10 @@
 import { UserRole } from 'src/common/knowledge/enums';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToMany, OneToOne } from 'typeorm';
 import { Adoption } from './adoption.entity';
-import { FosterProfile } from './foster_profile.entity';
 import { Fostering } from './fostering.entity';
 import { Sponsorship } from './sponsorship.entity';
+import { UserProfile } from './user_profile.entity';
+import { AnimalRequest } from './animal_request.entity';
 
 @Entity()
 export class User {
@@ -13,7 +14,7 @@ export class User {
     @Column({ type: "varchar", length: 50, unique: true })
     username!: string;
 
-    @Column({ length: 254 })
+    @Column({ select: false,  length: 254 })
     password!: string;
 
     @Column({ type: "varchar", length: 50, unique: true })
@@ -35,11 +36,14 @@ export class User {
     @Column({ type: "timestamp", nullable: true, default: null })
     deleted_at!: Date;
 
+    @OneToOne(() => UserProfile, (profile) => profile.user)
+    profile!: UserProfile;
+
     @OneToMany(() => Adoption, (adoption) => adoption.user)
     adoptions!: Adoption[]
 
-    @OneToMany(() => FosterProfile, (fosterProfile) => fosterProfile.user)
-    foster_profiles!: FosterProfile[]
+    @OneToMany(() => AnimalRequest, (req) => req.user)
+    animal_requests!: AnimalRequest[];
 
     @OneToMany(() => Fostering, (fostering) => fostering.user)
     fosterings!: Fostering[]

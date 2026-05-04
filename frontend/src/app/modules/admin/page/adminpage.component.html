@@ -1,0 +1,15 @@
+
+<mat-tab-group>
+
+  <mat-tab *ngFor="let tab of tabs" [label]="tab.modelName">
+    <ng-template matTabContent>
+      <div style="padding: 16px;">
+        <app-innertab
+          [columns]="tab.displayedColumns"
+          [modelName] = "tab.modelName" >
+        </app-innertab>
+      </div>
+    </ng-template>
+  </mat-tab>
+
+</mat-tab-group>

@@ -11,6 +11,8 @@ import { AdoptarAnimalComponent } from "./modules/adoptaranimal/component/adopta
 import { RegisterFosterComponent } from "./modules/registerfoster/component/registerfoster.component";
 import { SponsorAnimalComponent } from './modules/sponsor-animal/component/sponsor-animal.component';
 import { ContactComponent } from './modules/appcontact/component/appcontact.component';
+import { AnimalRequestFormComponent } from './modules/animalrequestform/component/animalrequestform.component';
+import { AdminPageComponent } from './modules/admin/page/adminpage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'edit-profile', component: EditarPerfilComponent },
   { path: 'adopt/:id', component: AdoptarAnimalComponent },
   { path: 'sponsor/:id', component: SponsorAnimalComponent },
+  { path: 'animal-request/:id/:type', component: AnimalRequestFormComponent },
+  { path: 'admin', component: AdminPageComponent},
 
   // Paginas a ver en menu-nav
   {

@@ -6,6 +6,7 @@ export const queryConfig: IQueryConfig<Animal> = {
     rangeFields: ['birth_date'],
     sortFields: ['name'],
     joins: [
-        { property: 'adoptions', alias: 'adoption', type: 'left'},
+        { property: 'animal_requests', alias: 'request', type: 'left'},
+        { property: 'profile', alias: 'profile', type: 'left'},
     ]
 }
