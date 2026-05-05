@@ -1,0 +1,12 @@
+{
+  "ANIMAL_TYPE": {
+    "dog": "Perro",
+    "cat": "Gato",
+    "rabbit": "Conejo"
+  },
+  "ANIMAL_STATUS": {
+    "available": "Disponible",
+    "pending": "Pendiente",
+    "adopted": "Adoptado"
+  }
+}

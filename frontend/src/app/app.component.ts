@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,11 @@ import { Component, signal } from '@angular/core';
   standalone: false
 })
 export class AppComponent {
-   title = ('Un Lugar para Todos');
+   title = ('Un Hogar para Todos');
+   constructor(private translate: TranslateService) {
+      this.translate.addLangs(['es', 'ca', 'en']);
+      this.translate.setDefaultLang('ca');
+
+      this.translate.use('ca'); // idioma inicial
+    }
 }

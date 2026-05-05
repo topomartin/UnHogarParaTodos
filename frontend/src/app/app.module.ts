@@ -24,6 +24,8 @@ import { FooterComponent } from './modules/shared/footer/footer';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminModule } from './modules/admin/adminpage.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,13 @@ import { AdminModule } from './modules/admin/adminpage.module';
     CommonModule,
     FormsModule,
     AdminModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: provideTranslateHttpLoader({
+        prefix: '/i18n/',
+        suffix: '.json'
+      })
+    }),
   ],
   bootstrap: [AppComponent],
 })
