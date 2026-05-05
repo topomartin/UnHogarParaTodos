@@ -25,6 +25,9 @@
         </th>
 
         <td mat-cell *matCellDef="let row">
+          <button *ngFor="let element of fullColumnsData" mat-icon-button color="primary" [matTooltip]="element.label"  (click)="customAction(element.options.customAction,row, element.key)">
+            <mat-icon>{{element.options.icon}}</mat-icon>
+          </button>
 
           <button *ngIf="canUpdate" mat-icon-button color="primary" (click)="edit(row)">
             <mat-icon>edit</mat-icon>

@@ -81,4 +81,8 @@ export class AnimalController {
     getUpdateSchema() {
         return this.schemaService.getUpdateSchema();
     }
+    @Get('schema/infoSchema')
+    getInfoSchema() {
+        return this.schemaService.getInfoSchema();
+    }
 }

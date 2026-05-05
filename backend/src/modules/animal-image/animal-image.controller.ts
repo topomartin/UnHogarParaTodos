@@ -41,8 +41,8 @@ export class AnimalImageController {
     ) { }
 
     // Upload images for an animal
-    @UseGuards(AuthGuard, RolesGuard)
-    @Roles(UserRole.WORKER, UserRole.ADMIN)
+    //@UseGuards(AuthGuard, RolesGuard)
+    //@Roles(UserRole.WORKER, UserRole.ADMIN)
     @Post(':animalId')
     @ApiConsumes('multipart/form-data')
     @ApiBody({ type: UploadAnimalImagesDto })

@@ -41,8 +41,8 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button (click)="cancel()">Cancelar</button>
-  <button mat-raised-button color="primary" (click)="save()">
+  <button mat-button (click)="cancel()">Cerrar</button>
+  <button mat-raised-button *ngIf="data.mode != 'info'" color="primary" (click)="save()">
     {{ actionLabel }}
   </button>
 </mat-dialog-actions>

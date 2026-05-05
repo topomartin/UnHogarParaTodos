@@ -4,7 +4,7 @@ export interface IColumnItem {
   key: string;
   label: string;
   type?: ColumnType;
-  enumValues?: string[];
+  options?: string[];
 
 }
 

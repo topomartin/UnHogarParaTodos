@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CreateUpdateDialogComponent } from '../create-update.dialog.component/create-update.dialog.component';
+import { ViewImageDialogComponent } from '../view-image.dialog.componet/viewImage.dialog.component';
 
 @Component({
   selector: 'app-innertab',
@@ -64,10 +65,31 @@ export class InnerTabComponent implements OnInit {
       this.gridSchemaSubscription.unsubscribe();
     });
   }
-
-  get displayedColumns(): string[] {
-    return [...this.columns.map(c => c.key), 'acciones'];
+  get fullColumnsData(): any[] {
+    const fullColumnsData =  [...this.columns.filter((column: any)=>{return column.type != null && column.type == 'option' }).map(c => c)];
+    return  fullColumnsData;
   }
+  get displayedColumns(): string[] {
+    return [...this.columns.filter(
+      (column: any)=>{
+        return column.type == null || (column.type == 'option' && column.options.showColumn == true)}).map(c => c.key), 'acciones'];
+  }
+
+  customAction(customAction: string, row: any, key?: string | undefined) {
+  switch (customAction) {
+
+    case 'viewImage':
+      this.viewImage(row);
+      break;
+    case 'info':
+      const modelName =  key ? key.split('.')[0] : null;
+      this.getInfo(modelName!, row[`${modelName}`]);
+      break;
+
+    default:
+      console.warn('Acción no reconocida');
+  }
+}
 
   create(){
     this.createSchemaSubscription = this.dataService.getCreateSchema(this.modelName).subscribe({
@@ -150,6 +172,7 @@ export class InnerTabComponent implements OnInit {
 
   }
 
+
   delete(row: any) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '420px',
@@ -182,6 +205,35 @@ export class InnerTabComponent implements OnInit {
         console.log(error);
       }
     });
+  }
+
+
+  viewImage(row: any){
+    const dialogRef = this.dialog.open(ViewImageDialogComponent, {
+          disableClose: false,
+          data: {
+            title: `Ver imágenes de ${row.name}`,
+            data: row.images
+          }
+        });
+  }
+
+  getInfo(modelName: string, row: any){
+    this.dataService.getInfoSchema(modelName).subscribe(
+      {next:
+        (schema)=>{
+          const dialogRef = this.dialog.open(CreateUpdateDialogComponent, {
+          disableClose: true,
+          data: {
+            title: `Info ${modelName}`,
+            mode: 'info',
+            schema: schema,
+            data: row
+          }
+        });
+        }
+      }
+    )
   }
 
   private loadData(): void {

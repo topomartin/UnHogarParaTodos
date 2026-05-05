@@ -19,7 +19,7 @@ export class CreateUpdateDialogComponent implements OnInit {
     public data: {
       title: string;
       schema: FormSchema;
-      mode?: 'create' | 'update';
+      mode?: 'create' | 'update' | 'info';
       data?: any;
     }
   ) {}

@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { AnimalGridSchema } from "../schemas/grid-schema";
 import { AnimalCreateSchema } from "../schemas/create-schema";
+import { AnimalInfoSchema } from "../schemas/info-schema";
 
 @Injectable()
 export class AnimalSchemaService {
@@ -13,5 +14,8 @@ export class AnimalSchemaService {
     };
     getGridSchema(){
         return AnimalGridSchema;
+    }
+    getInfoSchema(){
+        return AnimalInfoSchema;
     }
 }

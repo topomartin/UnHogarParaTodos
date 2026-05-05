@@ -55,4 +55,8 @@ export class UserController {
     getUpdateSchema() {
         return this.schemaService.getUpdateSchema();
     }
+    @Get('schema/infoSchema')
+    getInfoSchema() {
+        return this.schemaService.getUpdateSchema();
+    }
 }

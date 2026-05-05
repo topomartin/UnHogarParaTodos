@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AnimalImageController } from './animal-image.controller';
+import { beforeEach, describe, it } from 'node:test';
 
 describe('AnimalImageController', () => {
   let controller: AnimalImageController;
@@ -16,3 +17,7 @@ describe('AnimalImageController', () => {
     expect(controller).toBeDefined();
   });
 });
+function expect(controller: AnimalImageController) {
+  throw new Error('Function not implemented.');
+}
+

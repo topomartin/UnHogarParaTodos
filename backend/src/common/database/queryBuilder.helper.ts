@@ -9,7 +9,7 @@ export class QueryBuilderHelper {
         const TOP_LIMIT = 45;
         const take = Math.min(limit, TOP_LIMIT);
         const skip = (page -1) * take;
-
+        
         if (queryConfig.joins?.length) {
             queryConfig.joins.forEach((join) => {
                 const type = join.type ?? 'left';
@@ -65,7 +65,7 @@ export class QueryBuilderHelper {
                 qb.orderBy(`${sort.field}`, order);
             }
         }
-        
+
 
         qb.take(take).skip(skip);
         return {qb, page, take};
