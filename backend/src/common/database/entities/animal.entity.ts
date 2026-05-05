@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { AnimalStatus, AnimalType } from "src/common/knowledge/enums";
+import { AnimalStatus, AnimalType, AnimalSex } from "src/common/knowledge/enums";
 import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm"
 import { Adoption } from "./adoption.entity";
 import { Fostering } from "./fostering.entity";
@@ -18,19 +18,27 @@ export class Animal {
     @Column({ name: Names.tableFields.NAME, type: "varchar", length: 50, nullable: false })
     name!: string;
 
-    @ApiProperty({ enum: AnimalType, enumName: 'AnimalType'})
+    @ApiProperty({ enum: AnimalType, enumName: 'AnimalType' })
     @Column({ name: Names.tableFields.TYPE, type: 'enum', enum: AnimalType, nullable: false })
     type!: AnimalType;
 
-    @ApiProperty({example: new Date().toISOString().split('T')[0],format: 'date',})
+    @ApiProperty({ example: new Date().toISOString().split('T')[0], format: 'date', })
     @Column({ name: Names.tableFields.BIRTH_DATE, type: "date", nullable: false })
     birth_date!: Date;
+    
+    @ApiProperty({ enum: AnimalSex, enumName: 'AnimalSex' })
+    @Column({
+        type: 'enum',
+        enum: AnimalSex,
+        default: AnimalSex.UNKNOWN
+    })
+    sex!: AnimalSex;
 
     @ApiProperty()
     @Column({ name: Names.tableFields.DESCRIPTION, type: "varchar", length: 254 })
     description!: string;
 
-    @ApiProperty({ enum: AnimalStatus, enumName: 'AnimalStatus'})
+    @ApiProperty({ enum: AnimalStatus, enumName: 'AnimalStatus' })
     @Column({ name: Names.tableFields.STATUS, type: "enum", enum: AnimalStatus, default: AnimalStatus.AVAILABLE })
     status!: AnimalStatus;
 
@@ -57,7 +65,7 @@ export class Animal {
     @OneToMany(() => AnimalImage, (image) => image.animal)
     images!: AnimalImage[];
 
-    @OneToOne (() => AnimalProfile, (profile) => profile.animal)
+    @OneToOne(() => AnimalProfile, (profile) => profile.animal)
     profile!: AnimalProfile;
 
 }

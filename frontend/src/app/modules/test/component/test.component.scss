@@ -1,0 +1,54 @@
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.question {
+  margin-bottom: 20px;
+}
+
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.answers button {
+  flex: 1 1 calc(50% - 10px);
+  min-width: 120px;
+}
+
+button {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+button.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.submit {
+  margin-top: 20px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.cards-card {
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cards-card:hover {
+  background-color: #f5f5f5;
+}

@@ -36,7 +36,7 @@ export class SponsorAnimalComponent implements OnInit {
     });
 
     this.form = new FormGroup({
-      amount: new FormControl('', Validators.required),
+      amount: new FormControl('', [Validators.required, Validators.min(1)]),
       frequency: new FormControl('monthly', Validators.required),
       startDate: new FormControl('', Validators.required),
       message: new FormControl('')

@@ -7,7 +7,7 @@
     </div>
   </ng-container>
 
-  <!-- ANIMAL DETALLE -->
+  <!-- ANIMAL -->
   <div *ngIf="!loading && animal">
 
     <h1 class="titulo">{{ animal.name }}</h1>
@@ -15,8 +15,77 @@
     <div class="card">
 
       <p><strong>Tipo:</strong> {{ animal.type }}</p>
+
+      <p><strong>Sexo:</strong> {{ animal.sex }}</p>
+
+      <p><strong>Tamaño:</strong> {{ profile.size }}</p>
+
+      <p><strong>Raza:</strong> {{ profile.breed }}</p>
+
+      <p><strong>Color:</strong> {{ profile.color }}</p>
+
+      <p>
+        <strong>Edad:</strong>
+        {{ getAgeData(animal.birth_date).years }} años
+        {{ getAgeData(animal.birth_date).months }} meses
+      </p>
+
+      <p>
+        <strong>Categoría:</strong>
+        <span class="age-badge" [ngClass]="getAgeCategory(animal.birth_date)">
+          {{ getAgeCategory(animal.birth_date) | uppercase }}
+        </span>
+      </p>
+
       <p><strong>Fecha de nacimiento:</strong> {{ animal.birth_date }}</p>
+
+      <p><strong>Nivel de energia: </strong>{{ profile.energy_level }}</p>
+
+      <p><strong>Temperamento:</strong> {{ profile.temperament }}</p>
+
+      <p><strong>Tipo de vivienda preferida:</strong> {{ profile.preferred_housing_type }}</p>
+
+      <p><strong>Espacio mínimo requerido:</strong> {{ profile.min_space_required }} m²</p>
+
       <p><strong>Descripción:</strong> {{ animal.description }}</p>
+
+      <p>
+        <strong>Compatible con niños:</strong>
+        <span [class.ok]="profile.good_with_kids">
+          {{ profile.good_with_kids ? 'Sí' : 'No' }}
+        </span>
+      </p>
+
+      <p>
+        <strong>Compatible con otros animales:</strong>
+        <span [class.ok]="profile.good_with_animals">
+          {{ profile.good_with_animals ? 'Sí' : 'No' }}
+        </span>
+      </p>
+
+      <p>
+        <strong>Necesita jardín:</strong>
+        <span [class.warn]="profile.needs_garden">
+          {{ profile.needs_garden ? 'Sí' : 'No' }}
+        </span>
+      </p>
+
+      <p>
+        <strong>Requiere experiencia:</strong>
+        <span [class.warn]="profile.needs_experience">
+          {{ profile.needs_experience ? 'Sí' : 'No' }}
+        </span>
+      </p>
+
+      <div class="info-box">
+        <h3>💡 Recomendación de adopción</h3>
+        <p>{{ getAdoptionRecommendation(animal.birth_date) }}</p>
+      </div>
+
+      <div class="info-box">
+        <h3>👨‍👩‍👧 Compatibilidad con familias</h3>
+        <p>{{ getFamilyCompatibility(animal.birth_date) }}</p>
+      </div>
 
       <p class="status" [ngClass]="animal.status.toLowerCase()">
         <strong>Estado:</strong> {{ animal.status }}
@@ -25,17 +94,15 @@
         <span *ngIf="animal.status.toLowerCase() === 'pending'">⏳</span>
         <span *ngIf="animal.status.toLowerCase() === 'adopted'">❌</span>
       </p>
-
     </div>
-
   </div>
 
-  <!-- MENSAJE NO ENCONTRADO -->
+  <!-- NO ENCONTRADO -->
   <div *ngIf="!loading && animalNotFound" class="no-animal-message">
     <p>No se encontró el animal.</p>
   </div>
 
-  <!-- BOTÓN VOLVER -->
+  <!-- VOLVER -->
   <button class="btn-volver" routerLink="/listaanimal">
     ← Volver a la lista
   </button>

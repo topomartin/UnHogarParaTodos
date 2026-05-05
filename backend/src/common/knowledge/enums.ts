@@ -92,3 +92,9 @@ export enum Temperament {
     ACTIVE = 'active',
     AGGRESSIVE = 'aggressive',
 }
+
+export enum AnimalSex {
+  MALE = 'male',
+  FEMALE = 'female',
+  UNKNOWN = 'unknown'
+}
