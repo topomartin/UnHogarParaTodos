@@ -1,15 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, IsNull } from 'typeorm';
+import { IsNull } from 'typeorm';
 import { AnimalImage } from 'src/common/database/entities/animal_image.entity';
+import { AnimalImageRepositoryService } from './animal-image.repository.service';
 import * as fs from 'fs';
 import * as path from 'path';
 
 @Injectable()
 export class AnimalImageService {
     constructor(
-        @InjectRepository(AnimalImage)
-        private readonly imageRepository: Repository<AnimalImage>,
+        private animalImageRepositoryService: AnimalImageRepositoryService,
     ) { }
 
     async uploadImages(animalId: number, files: Express.Multer.File[]) {
@@ -20,15 +19,16 @@ export class AnimalImageService {
             String(animalId),
         );
 
+        if (!files || files.length === 0) {
+            return [];
+        }
+
         if (!fs.existsSync(basePath)) {
             fs.mkdirSync(basePath, { recursive: true });
         }
 
-        const existingImages = await this.imageRepository.find({
-            where: {
-                animal: { id: animalId },
-                deleted_at: IsNull(),
-            },
+        const existingImages = await this.animalImageRepositoryService.findActive({
+            animal: { id: animalId },
         });
 
         const isFirstImage = existingImages.length === 0;
@@ -42,7 +42,9 @@ export class AnimalImageService {
             const fileName = `img_${unique}_${file.originalname}`;
             const finalPath = path.join(basePath, fileName);
 
-            fs.renameSync(file.path, finalPath);
+            if (fs.existsSync(file.path)) {
+                fs.renameSync(file.path, finalPath);
+            }
 
             images.push({
                 image_url: `/uploads/animals/${animalId}/${fileName}`,
@@ -51,7 +53,7 @@ export class AnimalImageService {
             });
         }
 
-        const saved = await this.imageRepository.save(images);
+        const saved = await this.animalImageRepositoryService.save(images);
 
         await this.ensureMainImage(animalId);
 
@@ -59,18 +61,15 @@ export class AnimalImageService {
     }
 
     async setMainImage(imageId: number) {
-        const mainImage = await this.imageRepository.findOne({
-            where: { id: imageId, deleted_at: IsNull() },
-            relations: ['animal'],
+        const mainImage = await this.animalImageRepositoryService.findOne({
+            id: imageId, 
+            deleted_at: IsNull(),
         });
 
         if (!mainImage) return null;
 
-        const images = await this.imageRepository.find({
-            where: {
-                animal: { id: mainImage.animal.id },
-                deleted_at: IsNull(),
-            },
+        const images = await this.animalImageRepositoryService.findActive({
+            animal: { id: mainImage.animal },
         });
 
         for (const img of images) {
@@ -79,16 +78,16 @@ export class AnimalImageService {
 
         mainImage.is_main = true;
 
-        await this.imageRepository.save(images);
-        await this.imageRepository.save(mainImage);
+        await this.animalImageRepositoryService.save(images);
+        await this.animalImageRepositoryService.save(mainImage);
 
         return mainImage;
     }
 
     async softDeleteImage(imageId: number) {
-        const image = await this.imageRepository.findOne({
-            where: { id: imageId, deleted_at: IsNull() },
-            relations: ['animal'],
+        const image = await this.animalImageRepositoryService.findOne({
+            id: imageId, 
+            deleted_at: IsNull(),             
         });
 
         if (!image) return null;
@@ -96,7 +95,7 @@ export class AnimalImageService {
         image.deleted_at = new Date();
         image.is_main = false;
 
-        await this.imageRepository.save(image);
+        await this.animalImageRepositoryService.save(image);
 
         await this.ensureMainImage(image.animal.id);
 
@@ -104,16 +103,15 @@ export class AnimalImageService {
     }
 
     async restoreImage(imageId: number) {
-        const image = await this.imageRepository.findOne({
-            where: { id: imageId },
-            relations: ['animal'],
+        const image = await this.animalImageRepositoryService.findOne({
+            id: imageId,
         });
 
         if (!image || !image.deleted_at) return null;
 
         image.deleted_at = null;
 
-        await this.imageRepository.save(image);
+        await this.animalImageRepositoryService.save(image);
 
         await this.ensureMainImage(image.animal.id);
 
@@ -121,9 +119,8 @@ export class AnimalImageService {
     }
 
     async hardDeleteImage(imageId: number) {
-        const image = await this.imageRepository.findOne({
-            where: { id: imageId },
-            relations: ['animal'],
+        const image = await this.animalImageRepositoryService.findOne({
+            id: imageId,
         });
 
         if (!image) return null;
@@ -138,40 +135,16 @@ export class AnimalImageService {
             }
         }
 
-        await this.imageRepository.remove(image);
+        await this.animalImageRepositoryService.remove(image);
 
         await this.ensureMainImage(image.animal.id);
 
         return true;
     }
 
-
-    async findByAnimal(animalId: number) {
-        return this.imageRepository.find({
-            where: {
-                animal: { id: animalId },
-                deleted_at: IsNull(),
-            },
-            order: { created_at: 'DESC' },
-        });
-    }
-
-    async findAllIncludingDeleted(animalId: number) {
-        return this.imageRepository.find({
-            where: {
-                animal: { id: animalId },
-            },
-            order: { created_at: 'DESC' },
-        });
-    }
-
     private async ensureMainImage(animalId: number) {
-        const images = await this.imageRepository.find({
-            where: {
-                animal: { id: animalId },
-                deleted_at: IsNull(),
-            },
-            order: { created_at: 'DESC' },
+        const images = await this.animalImageRepositoryService.findActive({
+            animal: { id: animalId },
         });
 
         if (images.length === 0) return;
@@ -180,7 +153,29 @@ export class AnimalImageService {
 
         if (!hasMain) {
             images[0].is_main = true;
-            await this.imageRepository.save(images[0]);
+            await this.animalImageRepositoryService.save(images[0]);
         }
+    }
+
+    // SEARCH
+
+    async findAll(filter) {
+        return await this.animalImageRepositoryService.findAll(filter);
+    }
+
+    async findActive(filter) {
+        return await this.animalImageRepositoryService.findActive(filter);
+    }
+
+    async findOne(filter) {
+        return await this.animalImageRepositoryService.findOne(filter);
+    }
+
+    async findOneMain(filter) {
+        return await this.animalImageRepositoryService.findOneMain(filter);
+    }
+
+    async findAllMains() {
+        return await this.animalImageRepositoryService.findAllMains();
     }
 }

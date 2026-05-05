@@ -21,7 +21,12 @@ export class AuthService {
     }
     const {password, ...result } = user;
     if (appConfig.app.jwtActive){
-      return {access_token: await this.jwtService.signAsync({ ...result })};
+      return {
+        access_token: await this.jwtService.signAsync({
+          id: result.id,
+          role: result.role,
+        }),
+      };
     }else{
       return result;
     }

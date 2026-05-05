@@ -8,5 +8,6 @@ export const queryConfig: IQueryConfig<Animal> = {
     joins: [
         { property: 'animal_requests', alias: 'request', type: 'left'},
         { property: 'profile', alias: 'profile', type: 'left'},
+        { property: 'images', alias: 'image', type: 'left'},
     ]
 }

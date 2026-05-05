@@ -14,6 +14,9 @@ export class DetalleAnimalComponent implements OnInit {
   public profile: any;
   public loading: boolean = true;
   public animalNotFound: boolean = false;
+  public images: any[] = [];
+  public mainImage: string = '';
+
 
   constructor(
     private router: ActivatedRoute,
@@ -41,6 +44,8 @@ export class DetalleAnimalComponent implements OnInit {
           this.animalNotFound = true;
         }
 
+        this.loadImages(+id);
+
         this.loading = false;
         this.cdr.detectChanges();
       },
@@ -51,6 +56,24 @@ export class DetalleAnimalComponent implements OnInit {
         this.cdr.detectChanges();
       }
     );
+  }
+
+  loadImages(animalId: number) {
+    this.apiService.getAnimalImages(animalId).subscribe((imgs) => {
+
+      this.images = (imgs || []).map(img => ({
+        ...img,
+        image_url: this.apiService.getImageUrl(img.image_url)
+      }));
+
+      const main = this.images.find(i => i.is_main) || this.images[0];
+
+      this.mainImage = main
+        ? this.apiService.getImageUrl(main.image_url)
+        : '';
+
+      this.cdr.detectChanges();
+    });
   }
 
   // 🔥 EDAD EN AÑOS Y MESES

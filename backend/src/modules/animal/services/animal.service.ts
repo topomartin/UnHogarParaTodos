@@ -7,7 +7,6 @@ import { AnimalSearchDto } from '../dto/animal-search.dto';
 import { IPaginatedResult } from 'src/common/knowledge/interfaces';
 import { AnimalModelNames as Names } from '../config/animal-model-name';
 import { AnimalStatus } from 'src/common/knowledge/enums';
-import { AnimalProfileRepositoryService } from "src/modules/animal-profile/services/animal-profile.repository.service";
 import { AnimalProfileService } from 'src/modules/animal-profile/services/animal-profile.service';
 
 

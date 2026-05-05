@@ -36,7 +36,8 @@ export class AnimalRepositoryService {
             this.handleError(e);
         }
     }
-    async findAll(filterData: AnimalSearchDto): Promise<IPaginatedResult<Animal>> {
+
+    async findAll(filterData: AnimalSearchDto): Promise<IPaginatedResult<Animal>>{
 
         const query = this.animalRepository.createQueryBuilder('animal');
         const { qb, take, page } = await this.queryBuilderHelper.SelectQueryBuilder(query, queryConfig, filterData)
@@ -48,11 +49,10 @@ export class AnimalRepositoryService {
         };
     }
 
-
-    async update(id, parcialAnimal) {
-        try {
-            return this.animalRepository.update({ id }, parcialAnimal);
-        } catch (e) {
+    async update(id, parcialAnimal){
+        try{
+            return this.animalRepository.update({id}, parcialAnimal);
+        }catch (e){
             this.handleError(e);
         }
     }
