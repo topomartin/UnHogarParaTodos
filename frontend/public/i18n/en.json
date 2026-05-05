@@ -1,12 +1,235 @@
 {
-  "ANIMAL_TYPE": {
-    "dog": "Dog",
-    "cat": "Cat",
-    "rabbit": "Rabbit"
+  "APP": {
+    "TITLE": "A Home For Everyone"
   },
-  "ANIMAL_STATUS": {
-    "available": "Available",
-    "pending": "Pending",
-    "adopted": "Adopted"
+  "NAV": {
+    "HOME": "Home",
+    "ADOPT": "Adopt",
+    "LISTAANIMAL": "Animals",
+    "FOSTER": "Foster home",
+    "CONTACT": "Contact",
+    "AUTH": {
+      "LOGIN": "Log in",
+      "LOGOUT": "Log out",
+      "REGISTER": "Sign up"
+    },
+    "USER": {
+      "PROFILE": "Profile",
+      "ADMIN": "Admin",
+      "EDIT_PROFILE": "Edit Profile"
+    }
+  },
+  "COMMON": {
+    "PAGINATION": {
+      "PREV": "Previous",
+      "NEXT": "Next",
+      "PAGE": "Page",
+      "OF": "of"
+    },
+    "FILTER": {
+      "TITLE": "Filter by",
+      "TYPE": "Type",
+      "STATUS": "Status"
+    },
+    "SEARCH": {
+      "NAME": "Search by name"
+    },
+    "BUTTONS": {
+      "BACK": "Back",
+      "SAVE": "Save changes",
+      "CANCEL": "Cancel"
+    }
+  },
+  "ENUMS": {
+    "ANIMAL_TYPE": {
+      "dog": "Dog",
+      "cat": "Cat"
+    },
+    "ANIMAL_STATUS": {
+      "available": "Available",
+      "pending": "Pending",
+      "adopted": "Adopted"
+    },
+    "HOUSING": {
+      "house": "House",
+      "flat": "Apartment",
+      "room": "Room"
+    },
+    "FREQUENCY": {
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "unic": "One-time"
+    }
+  },
+  "ANIMAL": {
+    "TYPE": "Type",
+    "BIRTH_DATE": "Birth date",
+    "DESCRIPTION": "Description",
+    "STATUS": "Status",
+    "BUTTONS": {
+      "DETAIL": "View details",
+      "ADOPT": "Adopt",
+      "SPONSOR": "Sponsor"
+    },
+    "NOT_FOUND": "Animal not found."
+  },
+  "USER": {
+    "USERNAME": "Username",
+    "EMAIL": "Email",
+    "ROLE": "Role"
+  },
+  "ANIMAL_LIST": {
+    "EMPTY_STATE": "No animals to display."
+  },
+  "REQUEST": {
+    "ADOPTION_TITLE": "Adopt {{name}}",
+    "FOSTER_TITLE": "Foster {{name}}",
+    "SECTIONS": {
+      "PERSONAL": "Personal information",
+      "HOUSING": "Housing",
+      "EXPERIENCE": "Experience and pets",
+      "LIFESTYLE": "Lifestyle",
+      "MOTIVATION": "Motivation"
+    },
+    "FIELDS": {
+      "FULLNAME": "Full name *",
+      "PHONE": "Phone *",
+      "AGE": "Age *",
+      "ADDRESS": "Address *",
+      "HOUSING_TYPE": "Housing type *",
+      "SQUARE_METERS": "Square meters *",
+      "EXPERIENCE": "Do you have previous experience?",
+      "HAS_GARDEN": "Do you have a garden?",
+      "HAS_TERRACE": "Do you have a terrace?",
+      "OTHER_PETS": "Do you have other pets?",
+      "AVAILABLE_TIME": "Available time?",
+      "LIFESTYLE": "Lifestyle?",
+      "NOISE_TOLERANCE": "Noise tolerance?",
+      "TIME_AT_HOME": "Time at home?"
+    },
+    "VALUES": {
+      "AVAILABLE_TIME": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      },
+      "LIFESTYLE": {
+        "calm": "Calm",
+        "active": "Active"
+      },
+      "NOISE_TOLERANCE": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      },
+      "TIME_AT_HOME": {
+        "little": "Little",
+        "normal": "Normal",
+        "lot": "A lot"
+      }
+    },
+    "BUTTONS": {
+      "ADOPT": "Adopt {{name}}!",
+      "FOSTER": "Foster {{name}}!"
+    }
+  },
+  "HOME": {
+    "SUBTITLE": "Find, care for and adopt a new companion",
+    "HINT": "Click on an animal to learn their story 🐾",
+    "LOADING": "Loading animals...",
+    "ABOUT": {
+      "TITLE": "Who are we?",
+      "TEXT1": "We are an animal shelter dedicated to rescuing abandoned animals and finding them loving homes.",
+      "TEXT2": "Since our beginnings, we have helped hundreds of animals.",
+      "HIGHLIGHT": "🐾 Every adoption changes two lives."
+    },
+    "ADOPTED": {
+      "TITLE": "Happy stories",
+      "TEXT": "Animals that have already found a home thanks to you.",
+      "STORY": "Found their happy home",
+      "WITH": "with"
+    },
+    "CTA": {
+      "TITLE": "Do you want to help change a life?",
+      "TEXT": "Every adoption frees up space to save another animal. You can adopt, sponsor, or collaborate with us."
+    },
+    "BUTTONS": {
+      "LISTA_ANIMAL": "View available animals",
+      "CONTACT": "Contact"
+    }
+  },
+  "SPONSOR": {
+    "TITLE": "Sponsor {{name}}",
+    "SUBTITLE": "Your financial support helps cover {{name}}'s care, food, and veterinary expenses.",
+    "SUMMARY": {
+      "TITLE": "Sponsorship summary",
+      "AMOUNT": "Amount",
+      "FREQUENCY": "Frequency",
+      "START_DATE": "Start date"
+    },
+    "FIELDS": {
+      "AMOUNT": "Donation amount",
+      "MESSAGE": "Message for {{name}} (optional)",
+      "FREQUENCY": "Donation frequency",
+      "START_DATE": "Start date"
+    },
+    "BUTTONS": {
+      "PAY": "Sponsor {{name}} 💸"
+    }
+  },
+  "CONTACT": {
+    "TITLE": "Contact us",
+    "SUBTITLE": "Have questions? Write to us and we will reply as soon as possible.",
+    "PHONE": "Phone",
+    "PHONE_VALUE": "+34 600 123 456",
+    "EMAIL": "Email",
+    "EMAIL_VALUE": "info@protectora.org",
+    "LOCATION": "Location",
+    "LOCATION_VALUE": "Barcelona",
+    "SCHEDULE": "Schedule",
+    "SCHEDULE_VALUE": "Monday - Friday | 09:00 - 18:00 ",
+    "FORM": {
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "SUBJECT": "Subject",
+      "MESSAGE": "Message"
+    },
+    "BUTTONS": {
+      "SEND": "Send message"
+    },
+    "SUCCESS": "Message sent successfully. We will reply soon."
+  },
+  "AUTH": {
+    "PASSWORD": "Password",
+    "NEW_PASSWORD": "New password",
+    "CONFIRM_PASSWORD": "Confirm password",
+    "ALREADY_ACCOUNT": "Already have an account?",
+    "NO_ACCOUNT": "Don't have an account?",
+    "GDPR_TEXT": "I accept the privacy policy (GDPR)",
+    "GDPR_ERROR": "You must accept GDPR",
+    "BUTTONS": {
+      "LOGIN": "Log in",
+      "REGISTER": "Sign up"
+    }
+  },
+  "FOOTER": {
+    "DESCRIPTION": "Animal shelter dedicated to finding responsible families for every animal.",
+    "LINKS": "Links",
+    "RIGHTS": "© 2026 A Home For Everyone - All rights reserved"
+  },
+  "VALIDATION": {
+    "REQUIRED_USERNAME": "Username is required",
+    "REQUIRED_EMAIL": "Email is required",
+    "INVALID_EMAIL": "Invalid email",
+    "REQUIRED_PASSWORD": "Password is required",
+    "PASSWORD_MIN_LENGTH": "Password must be at least 6 characters",
+    "REQUIRED_CONFIRM": "You must confirm the password",
+    "PASSWORD_MISMATCH": "Passwords do not match",
+    "REQUIRED": "Required field"
+  },
+  "ERRORS": {
+    "GENERIC": "An error occurred",
+    "NOT_FOUND": "Not found",
+    "UNAUTHORIZED": "Unauthorized"
   }
 }

@@ -16,7 +16,6 @@ import { AnimalRequestFormComponent } from './modules/animalrequestform/componen
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'infoanimal/:id', component: DetalleAnimalComponent },
@@ -29,19 +28,19 @@ const routes: Routes = [
 
   // Paginas a ver en menu-nav
   {
-    path: 'listaanimal',
-    component: ListaAnimalComponent,
-    data: { // Se quita title ya que se usara el i18n para mostrar el texto con path
-      icon: 'pets',
+    path: 'home',
+    component: HomeComponent,
+    data: {
+      icon: 'home',
       showInMenu: true
       // roles: ['USER', 'ADMIN', 'WORKER'] // Limitar a dichos roles, por defecto se muestra sin log
     }
   },
   {
-    path: 'registerfoster',
-    component: RegisterFosterComponent,
-    data: {
-      icon: 'home',
+    path: 'listaanimal',
+    component: ListaAnimalComponent,
+    data: { // Se quita title ya que se usara el i18n para mostrar el texto con path
+      icon: 'pets',
       showInMenu: true
       // roles: ['USER', 'ADMIN', 'WORKER'] // Limitar a dichos roles, por defecto se muestra sin log
     }
