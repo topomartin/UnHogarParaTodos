@@ -3,8 +3,8 @@
   <h1 class="title">
     {{
        type === 'ADOPTION'
-            ? 'Adoptar a ' + animalName
-            : 'Casa de acogida para ' + animalName
+            ? ('REQUEST.ADOPTION_TITLE' | translate:{ name: animalName })
+            : ('REQUEST.FOSTER_TITLE' | translate:{ name: animalName })
     }}
   </h1>
 
@@ -12,103 +12,103 @@
 
     <!-- 👤 DATOS PERSONALES -->
     <div class="section">
-      <h2>Datos personales *</h2>
+      <h2>{{ 'REQUEST.SECTIONS.PERSONAL' | translate }}</h2>
 
-      <input placeholder="Nombre completo *" formControlName="fullname">
+      <input placeholder="{{ 'REQUEST.FIELDS.FULLNAME' | translate }}" formControlName="fullname">
       <div class="error" *ngIf="form.get('fullname')?.touched && form.get('fullname')?.invalid">
-        Campo obligatorio
+        {{ 'VALIDATION.REQUIRED' | translate }}
       </div>
 
-      <input placeholder="Teléfono *" formControlName="phone">
+      <input placeholder="{{ 'REQUEST.FIELDS.PHONE' | translate }}" formControlName="phone">
       <div class="error" *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid">
-        Campo obligatorio
+        {{ 'VALIDATION.REQUIRED' | translate }}
       </div>
 
-      <input type="number" placeholder="Edad *" formControlName="age">
+      <input type="number" placeholder="{{ 'REQUEST.FIELDS.AGE' | translate }}" formControlName="age">
       <div class="error" *ngIf="form.get('age')?.touched && form.get('age')?.invalid">
-        Campo obligatorio
+        {{ 'VALIDATION.REQUIRED' | translate }}
       </div>
 
-      <input placeholder="Dirección *" formControlName="address">
+      <input placeholder="{{ 'REQUEST.FIELDS.ADDRESS' | translate }}" formControlName="address">
       <div class="error" *ngIf="form.get('address')?.touched && form.get('address')?.invalid">
-        Campo obligatorio
+        {{ 'VALIDATION.REQUIRED' | translate }}
       </div>
     </div>
 
     <!-- 🏠 VIVIENDA -->
     <div class="section">
-      <h2>Vivienda *</h2>
+      <h2>{{ 'REQUEST.SECTIONS.HOUSING' | translate }}</h2>
 
       <select formControlName="housing_type">
-        <option value="">Tipo de vivienda *</option>
-        <option value="house">Casa</option>
-        <option value="flat">Piso</option>
-        <option value="room">Habitación</option>
+        <option value="">{{ 'REQUEST.FIELDS.HOUSING_TYPE' | translate }}</option>
+        <option value="house">{{ 'ENUMS.HOUSING.house' | translate }}</option>
+        <option value="flat">{{ 'ENUMS.HOUSING.flat' | translate }}</option>
+        <option value="room">{{ 'ENUMS.HOUSING.room' | translate }}</option>
       </select>
       <div class="error" *ngIf="form.get('housing_type')?.touched && form.get('housing_type')?.invalid">
-        Campo obligatorio
+        {{ 'VALIDATION.REQUIRED' | translate }}
       </div>
 
-      <input type="number" placeholder="Metros cuadrados *" formControlName="square_meters">
+      <input type="number" placeholder="{{ 'REQUEST.FIELDS.SQUARE_METERS' | translate }}" formControlName="square_meters">
       <div class="error" *ngIf="form.get('square_meters')?.touched && form.get('square_meters')?.invalid">
-        Campo obligatorio
+        {{ 'VALIDATION.REQUIRED' | translate }}
       </div>
 
       <label>
+        {{ 'REQUEST.FIELDS.HAS_GARDEN' | translate }}
         <input type="checkbox" formControlName="has_garden">
-        Tiene jardín?
       </label>
 
       <label>
+        {{ 'REQUEST.FIELDS.HAS_TERRACE' | translate }}
         <input type="checkbox" formControlName="has_terrace">
-        Tiene terraza?
       </label>
     </div>
 
     <!-- 🐾 ANIMALES Y EXPERIENCIA -->
     <div class="section">
-      <h2>Experiencia y Animales</h2>
+      <h2>{{ 'REQUEST.SECTIONS.EXPERIENCE' | translate }}</h2>
 
       <label>
+        {{ 'REQUEST.FIELDS.OTHER_PETS' | translate }}
         <input type="checkbox" formControlName="has_other_animals">
-        Hay otros animales?
       </label>
 
       <label>
+        {{ 'REQUEST.FIELDS.EXPERIENCE' | translate }}
         <input type="checkbox" formControlName="experience">
-        Tienes experiencia previa?
       </label>
     </div>
 
     <!-- ESTILO DE VIDA -->
     <div class="section">
-      <h2>Estilo de vida</h2>
+      <h2>{{ 'REQUEST.SECTIONS.LIFESTYLE' | translate }}</h2>
 
       <select formControlName="available_time">
-        <option value="">Tiempo disponible</option>
-        <option value="low">Poco</option>
-        <option value="medium">Medio</option>
-        <option value="high">Mucho</option>
+        <option value="">{{ 'REQUEST.FIELDS.AVAILABLE_TIME' | translate }}</option>
+        <option value="low">{{ 'REQUEST.VALUES.AVAILABLE_TIME.low' | translate }}</option>
+        <option value="medium">{{ 'REQUEST.VALUES.AVAILABLE_TIME.medium' | translate }}</option>
+        <option value="high">{{ 'REQUEST.VALUES.AVAILABLE_TIME.high' | translate }}</option>
       </select>
 
       <select formControlName="lifestyle">
-        <option value="">Estilo de vida</option>
-        <option value="calm">Tranquilo</option>
-        <option value="active">Activo</option>
+        <option value="">{{ 'REQUEST.FIELDS.LIFESTYLE' | translate }}</option>
+        <option value="calm">{{ 'REQUEST.VALUES.LIFESTYLE.calm' | translate }}</option>
+        <option value="active">{{ 'REQUEST.VALUES.LIFESTYLE.active' | translate }}</option>
       </select>
 
       <select formControlName="noise_tolerance">
-        <option value="">Tolerancia al ruido</option>
-        <option value="low">Baja</option>
-        <option value="medium">Media</option>
-        <option value="high">Alta</option>
+        <option value="">{{ 'REQUEST.FIELDS.NOISE_TOLERANCE' | translate }}</option>
+        <option value="low">{{ 'REQUEST.VALUES.NOISE_TOLERANCE.low' | translate }}</option>
+        <option value="medium">{{ 'REQUEST.VALUES.NOISE_TOLERANCE.medium' | translate }}</option>
+        <option value="high">{{ 'REQUEST.VALUES.NOISE_TOLERANCE.high' | translate }}</option>
       </select>
 
       <select formControlName="time_at_home">
-        <option value="">Tiempo en casa</option>
-        <option value="little">Poco</option>
-        <option value="normal">Normal</option>
-        <option value="lot">Mucho</option>
+        <option value="">{{ 'REQUEST.FIELDS.TIME_AT_HOME' | translate }}</option>
+        <option value="little">{{ 'REQUEST.VALUES.TIME_AT_HOME.little' | translate }}</option>
+        <option value="normal">{{ 'REQUEST.VALUES.TIME_AT_HOME.normal' | translate }}</option>
+        <option value="lot">{{ 'REQUEST.VALUES.TIME_AT_HOME.lot' | translate }}</option>
       </select>
 
       <input type="number" placeholder="Máx animales" formControlName="max_animals">
@@ -116,19 +116,19 @@
 
     <!-- ❤️ MOTIVACIÓN -->
     <div class="section">
-      <h2>Motivación *</h2>
+      <h2>{{ 'REQUEST.SECTIONS.MOTIVATION' | translate }}</h2>
 
       <textarea placeholder="¿Por qué quieres hacerlo? *" formControlName="motivation"></textarea>
       <div class="error" *ngIf="form.get('motivation')?.touched && form.get('motivation')?.invalid">
-        Campo obligatorio
+        {{ 'VALIDATION.REQUIRED' | translate }}
       </div>
     </div>
 
     <button type="submit" [disabled]="form.invalid">
       {{
         type === 'ADOPTION'
-          ? 'Enviar adopción'
-          : 'Enviar acogida'
+          ? ('REQUEST.BUTTONS.ADOPT' | translate:{ name: animalName })
+          : ('REQUEST.BUTTONS.FOSTER' | translate:{ name: animalName })
       }}
     </button>
 

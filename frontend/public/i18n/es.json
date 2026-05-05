@@ -1,12 +1,270 @@
 {
-  "ANIMAL_TYPE": {
-    "dog": "Perro",
-    "cat": "Gato",
-    "rabbit": "Conejo"
+  "APP": {
+    "TITLE": "Un Hogar Para Todos"
   },
-  "ANIMAL_STATUS": {
-    "available": "Disponible",
-    "pending": "Pendiente",
-    "adopted": "Adoptado"
+ 
+  "NAV": {
+    "HOME": "Inicio",
+    "ADOPT": "Adoptar",
+    "LISTAANIMAL": "Animales",
+    "FOSTER": "Casa de acogida",
+    "CONTACT": "Contacto",
+    "AUTH": {
+      "LOGIN": "Iniciar sesión",
+      "LOGOUT": "Cerrar sesión",
+      "REGISTER": "Regístrate"
+    },
+    "USER": {
+      "PROFILE": "Perfil",
+      "ADMIN": "Administrar",
+      "EDIT_PROFILE": "Editar Perfil"
+    }
+  },
+
+  "COMMON": {
+    "PAGINATION": {
+      "PREV": "Anterior",
+      "NEXT": "Siguiente",
+      "PAGE": "Página",
+      "OF": "de"
+    },
+
+    "FILTER": {
+      "TITLE": "Filtrar por",
+      "TYPE": "Tipo",
+      "STATUS": "Estado"
+    },
+
+    "SEARCH": {
+      "NAME": "Buscar por nombre"
+    },
+
+    "BUTTONS": {
+      "BACK": "Volver",
+      "SAVE": "Guardar cambios",
+      "CANCEL": "Cancelar"
+    }
+  },
+
+  "ENUMS": {
+    "ANIMAL_TYPE": {
+      "dog": "Perro",
+      "cat": "Gato"
+    },
+    "ANIMAL_STATUS": {
+      "available": "Disponible",
+      "pending": "Pendiente",
+      "adopted": "Adoptado"
+    },
+    "HOUSING": {
+      "house": "Casa",
+      "flat": "Piso",
+      "room": "Habitación"
+    },
+    "FREQUENCY": {
+      "monthly": "Mensual",
+      "yearly": "Anual",
+      "unic": "Única vez"
+    }
+  },
+  
+  "ANIMAL": {
+    "TYPE": "Tipo",
+    "BIRTH_DATE": "Fecha de nacimiento",
+    "DESCRIPTION": "Descripción",
+    "STATUS": "Estado",
+    "BUTTONS": {
+      "DETAIL": "Ver detalles",
+      "ADOPT": "Adoptar",
+      "SPONSOR": "Apadrinar"
+    },
+    "NOT_FOUND": "No se a encontrado el animal."
+  },
+
+  "USER": {
+    "USERNAME": "Usuario",
+    "EMAIL": "Email",
+    "ROLE": "Rol"
+  },
+
+  "ANIMAL_LIST": {
+    "EMPTY_STATE": "No hay animales que mostrar."
+  },
+
+  "REQUEST": {
+    "ADOPTION_TITLE": "Adoptar a {{name}}",
+    "FOSTER_TITLE": "Casa de acogida para {{name}}",
+
+    "SECTIONS": {
+      "PERSONAL": "Datos personales",
+      "HOUSING": "Vivienda",
+      "EXPERIENCE": "Experiencia y Animales",
+      "LIFESTYLE": "Estilo de vida",
+      "MOTIVATION": "Motivación"
+    },
+
+    "FIELDS": {
+      "FULLNAME": "Nombre completo *",
+      "PHONE": "Teléfono *",
+      "AGE": "Edad *",
+      "ADDRESS": "Dirección *",
+      "HOUSING_TYPE": "Tipo de vivienda *",
+      "SQUARE_METERS": "Metros cuadrados *",
+      "EXPERIENCE": "¿Tienes experiencia previa?",
+      "HAS_GARDEN": "¿Tienes jardín?",
+      "HAS_TERRACE": "¿Tienes terraza?",
+      "OTHER_PETS": "¿Tienes otros animales?",
+      "AVAILABLE_TIME": "¿Timepo disponible?",
+      "LIFESTYLE": "¿Estilo de vida?",
+      "NOISE_TOLERANCE": "¿Tolerancia al ruido?",
+      "TIME_AT_HOME": "¿Tiempo en casa?"
+    },
+
+    "VALUES": {
+      "AVAILABLE_TIME": {
+        "low": "Poco",
+        "medium": "Medio",
+        "high": "Mucho"
+      },
+      "LIFESTYLE": {
+        "calm": "Tranquilo",
+        "active": "Activo"
+      },
+      "NOISE_TOLERANCE": {
+        "low": "Baja",
+        "medium": "Media",
+        "high": "Alta"
+      },
+      "TIME_AT_HOME": {
+        "little": "Poco",
+        "normal": "Normal",
+        "lot": "Mucho"
+      }
+    },
+
+    "BUTTONS": {
+      "ADOPT": "Adoptar a {{name}} !",
+      "FOSTER": "Acoger a {{name}} !"
+    }
+  },
+
+  "HOME": {
+    "SUBTITLE": "Encuentra, cuida y adopta un nuevo compañero",
+    "HINT": "Haz click en un animal para conocer su historia 🐾",
+    "LOADING": "Cargando animales...",
+
+    "ABOUT": {
+      "TITLE": "¿Quiénes somos?",
+      "TEXT1": "Somos una protectora dedicada a rescatar animales en situación de abandono y encontrarles un hogar lleno de cariño.",
+      "TEXT2": "Desde nuestros inicios hemos ayudado a cientos de animales.",
+      "HIGHLIGHT": "🐾 Cada adopción cambia dos vidas."
+    },
+
+    "ADOPTED": {
+      "TITLE": "Historias felices",
+      "TEXT": "Animales que ya encontraron un hogar gracias a ti.",
+      "STORY": "Encontro su hogar feliz",
+      "WITH": "con"
+    },
+
+    "CTA": {
+      "TITLE": "¿Quieres ayudar a cambiar una vida?",
+      "TEXT": "Cada adopción libera espacio para salvar otro animal. Puedes adoptar, apadrinar o colaborar con nosotros."
+    },
+
+    "BUTTONS": {
+      "LISTA_ANIMAL": "Ver animales disponibles",
+      "CONTACT": "Contactar"
+    }
+  },
+
+  "SPONSOR": {
+    "TITLE": "Apadrina a {{name}}",
+    "SUBTITLE": "Tu apoyo económico ayuda a cubrir los gastos de cuidado, alimentación y atención veterinaria de {{name}}.",
+
+    "SUMMARY": {
+      "TITLE": "Resumen de tu apadrinamiento",
+      "AMOUNT": "Cantidad",
+      "FREQUENCY": "Frecuencia",
+      "START_DATE": "Fecha de inicio"
+    },
+
+    "FIELDS": {
+      "AMOUNT": "Cantidad a donar",
+      "MESSAGE": "Mensaje para {{name}} (opcional)",
+      "FREQUENCY": "Frecuencia de la donación",
+      "START_DATE": "Fecha de inicio"
+    },
+
+    "BUTTONS": {
+      "PAY": "Apadrinar a {{name}} 💸"
+    }
+  },
+
+  "CONTACT": {
+    "TITLE": "Contáctanos",
+    "SUBTITLE": "¿Tienes dudas? Escríbenos y te responderemos lo antes posible.",
+
+    "PHONE": "Teléfono",
+    "PHONE_VALUE": "+34 600 123 456",
+    "EMAIL": "Email",
+    "EMAIL_VALUE": "info@protectora.org",
+    "LOCATION": "Ubicación",
+    "LOCATION_VALUE": "Barcelona",
+    "SCHEDULE": "Horario",
+    "SCHEDULE_VALUE": "Lunes - Viernes | 09:00 - 18:00 ",
+
+    "FORM": {
+      "NAME": "Nombre",
+      "EMAIL": "Email",
+      "SUBJECT": "Asunto",
+      "MESSAGE": "Mensaje"
+    },
+
+    "BUTTONS": {
+      "SEND": "Enviar mensaje"
+    },
+
+    "SUCCESS": "Mensaje enviado correctamente. Te responderemos pronto."
+  },
+
+  "AUTH": {
+    "PASSWORD": "Contraseña",
+    "NEW_PASSWORD": "Nueva contraseña",
+    "CONFIRM_PASSWORD": "Confirmar contraseña",
+
+    "ALREADY_ACCOUNT": "¿Ya tienes cuenta?",
+    "NO_ACCOUNT": "¿No tienes cuenta?",
+
+    "GDPR_TEXT": "Acepto la política de privacidad (GDPR)",
+    "GDPR_ERROR": "Debes aceptar el GDPR",
+    
+    "BUTTONS": {
+      "LOGIN": "Iniciar sesión",
+      "REGISTER": "Registrarse"
+    }
+  },
+
+  "FOOTER": {
+    "DESCRIPTION": "Protectora de animales dedicada a encontrar familias responsables para cada animal.",
+    "LINKS": "Enlaces",
+    "RIGHTS": "© 2026 Un Hogar Para Todos - Todos los derechos reservados"
+  },
+
+  "VALIDATION": {
+    "REQUIRED_USERNAME": "El nombre de usuario es obligatorio",
+    "REQUIRED_EMAIL": "El email es obligatorio",
+    "INVALID_EMAIL": "Email no válido",
+    "REQUIRED_PASSWORD": "La contraseña es obligatoria",
+    "PASSWORD_MIN_LENGTH": "La contraseña debe tener al menos 6 caracteres",
+    "REQUIRED_CONFIRM": "Debes confirmar la contraseña",
+    "PASSWORD_MISMATCH": "Las contraseñas no coinciden",
+    "REQUIRED": "Campo obligatorio"
+  },
+
+  "ERRORS": {
+    "GENERIC": "Ha ocurrido un error",
+    "NOT_FOUND": "No encontrado",
+    "UNAUTHORIZED": "No autorizado"
   }
 }

@@ -31,8 +31,7 @@ const routes: Routes = [
   {
     path: 'listaanimal',
     component: ListaAnimalComponent,
-    data: {
-      title: 'Lista Animales',
+    data: { // Se quita title ya que se usara el i18n para mostrar el texto con path
       icon: 'pets',
       showInMenu: true
       // roles: ['USER', 'ADMIN', 'WORKER'] // Limitar a dichos roles, por defecto se muestra sin log
@@ -42,7 +41,6 @@ const routes: Routes = [
     path: 'registerfoster',
     component: RegisterFosterComponent,
     data: {
-      title: 'Acogida',
       icon: 'home',
       showInMenu: true
       // roles: ['USER', 'ADMIN', 'WORKER'] // Limitar a dichos roles, por defecto se muestra sin log
@@ -52,7 +50,6 @@ const routes: Routes = [
     path: 'contact',
     component: ContactComponent,
     data: {
-      title: 'Contáctanos',
       icon: 'mail',
       showInMenu: true
     }

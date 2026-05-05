@@ -20,12 +20,12 @@
 
     <div class="card">
 
-      <p><strong>Tipo:</strong> {{ animal.type }}</p>
-      <p><strong>Fecha de nacimiento:</strong> {{ animal.birth_date }}</p>
-      <p><strong>Descripción:</strong> {{ animal.description }}</p>
+      <p><strong>{{ 'ANIMAL.TYPE' | translate }}:</strong> {{ ('ENUMS.ANIMAL_TYPE.' + animal.type) | translate }}</p>
+      <p><strong>{{ 'ANIMAL.BIRTH_DATE' | translate }}:</strong> {{ animal.birth_date }}</p>
+      <p><strong>{{ 'ANIMAL.DESCRIPTION' | translate }}:</strong> {{ animal.description }}</p>
 
       <p class="status" [ngClass]="animal.status.toLowerCase()">
-        <strong>Estado:</strong> {{ animal.status }}
+        <strong>{{ 'ANIMAL.STATUS' | translate }}:</strong> {{ ('ENUMS.ANIMAL_STATUS.' + animal.status) | translate }}
 
         <span *ngIf="animal.status.toLowerCase() === 'available'">✔️</span>
         <span *ngIf="animal.status.toLowerCase() === 'pending'">⏳</span>
@@ -46,12 +46,12 @@
 
   <!-- MENSAJE NO ENCONTRADO -->
   <div *ngIf="!loading && animalNotFound" class="no-animal-message">
-    <p>No se encontró el animal.</p>
+    <p>{{ 'ANIMAL.NOT_FOUND' | translate }}</p>
   </div>
 
   <!-- BOTÓN VOLVER -->
   <button class="btn-volver" routerLink="/listaanimal">
-    ← Volver a la lista
+    ← {{ 'COMMON.BUTTONS.BACK' | translate }}
   </button>
 
 </div>
