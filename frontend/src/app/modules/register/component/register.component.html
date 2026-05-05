@@ -1,53 +1,53 @@
 <div class="register-container">
   <mat-card class="register-card">
-    <mat-card-title>Regístrate</mat-card-title>
+    <mat-card-title>{{ 'NAV.AUTH.REGISTER' | translate }}</mat-card-title>
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
       <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Usuario</mat-label>
+        <mat-label>{{ 'USER.USERNAME' | translate }}</mat-label>
         <input matInput formControlName="username" required>
         <mat-error *ngIf="registerForm.get('username')?.hasError('required')">
-          El nombre de usuario es obligatorio
+          {{ 'VALIDATION.REQUIRED_USERNAME' | translate }}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Email</mat-label>
+        <mat-label>{{ 'USER.EMAIL' | translate }}</mat-label>
         <input matInput type="email" formControlName="email" required>
         <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
-          El email es obligatorio
+          {{ 'VALIDATION.REQUIRED_EMAIL' | translate }}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Contraseña</mat-label>
+        <mat-label>{{ 'AUTH.PASSWORD' | translate }}</mat-label>
         <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" required>
         <button mat-icon-button matSuffix (click)="clickEvent($event)" type="button">
           <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
         <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
-          La contraseña es obligatoria
+          {{ 'VALIDATION.REQUIRED_PASSWORD' | translate }}
         </mat-error>
       </mat-form-field>
 
       <!-- 🔥 NUEVO: GDPR -->
       <mat-checkbox formControlName="gdpr_consent">
-        Acepto la política de privacidad (GDPR)
+        {{ 'AUTH.GDPR_TEXT' | translate }}
       </mat-checkbox>
       <div class="error" *ngIf="registerForm.get('gdpr_consent')?.invalid && registerForm.get('gdpr_consent')?.touched">
-        Debes aceptar el GDPR
+        {{ 'AUTH.GDPR_ERROR' | translate }}
       </div>
 
       <button mat-raised-button color="primary" type="submit"
         class="register-button"
         [disabled]="registerForm.invalid">
-        Registrarse
+        {{ 'AUTH.BUTTONS.REGISTER' | translate }}
       </button>
       
       <div class="login-text">
-        ¿Ya tienes cuenta?
-        <button mat-button color="accent" routerLink="/login">Inicia sesión</button>
+        {{ 'AUTH.ALREADY_ACCOUNT' | translate }}
+        <button mat-button color="accent" routerLink="/login">{{ 'NAV.AUTH.LOGIN' | translate }}</button>
       </div>
 
     </form>

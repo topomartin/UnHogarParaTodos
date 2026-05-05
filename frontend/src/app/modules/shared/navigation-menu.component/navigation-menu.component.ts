@@ -95,7 +95,7 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit {
       })
       .map(route => ({
         link: '/' + (route.path ?? ''),
-        name: route.data?.['title'],
+        name: 'NAV.' + route.path?.replace(/-/g, '_').toUpperCase(),
         icon: route.data?.['icon']
       }));
   }
