@@ -2,18 +2,15 @@ export const AnswerGridSchema = {
   displayedColumns: [
     {
       key: 'id',
-      label: 'ID',
-      type: 'number'
+      label: 'ID'
     },
     {
       key: 'answer_text',
-      label: 'Respuesta',
-      type: 'text'
+      label: 'Respuesta'
     },
     {
       key: 'question.question_text',
-      label: 'Pregunta',
-      type: 'text'
+      label: 'Pregunta'
     }
   ]
 };

@@ -2,13 +2,11 @@ export const QuestionGridSchema = {
   displayedColumns: [
     {
       key: 'id',
-      label: 'ID',
-      type: 'number'
+      label: 'ID'
     },
     {
       key: 'question_text',
-      label: 'Pregunta',
-      type: 'text'
+      label: 'Pregunta'
     }
   ]
 };
