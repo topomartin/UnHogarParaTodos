@@ -106,7 +106,8 @@
     "BUTTONS": {
       "DETAIL": "Veure detalls",
       "ADOPT": "Adoptar",
-      "SPONSOR": "Apadrinar"
+      "SPONSOR": "Apadrinar",
+      "FOSTER": "Acollir"
     },
     "NOT_FOUND": "No s'ha trobat l'animal."
   },

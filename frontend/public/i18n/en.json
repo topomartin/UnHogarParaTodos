@@ -106,7 +106,8 @@
     "BUTTONS": {
       "DETAIL": "View details",
       "ADOPT": "Adopt",
-      "SPONSOR": "Sponsor"
+      "SPONSOR": "Sponsor",
+      "FOSTER": "Foster"
     },
     "NOT_FOUND": "Animal not found."
   },

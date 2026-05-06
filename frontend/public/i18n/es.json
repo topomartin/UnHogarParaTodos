@@ -48,7 +48,9 @@
     "BOOLEANS": {
       "TRUE": "Sí",
       "FALSE": "No"
-    }
+    },
+    
+    "NO_INFO": "Sin información"
   },
 
   "ENUMS": {
@@ -112,7 +114,8 @@
     "BUTTONS": {
       "DETAIL": "Ver detalles",
       "ADOPT": "Adoptar",
-      "SPONSOR": "Apadrinar"
+      "SPONSOR": "Apadrinar",
+      "FOSTER": "Acoger"
     },
     "NOT_FOUND": "No se a encontrado el animal."
   },
@@ -150,7 +153,7 @@
       "HAS_GARDEN": "¿Tienes jardín?",
       "HAS_TERRACE": "¿Tienes terraza?",
       "OTHER_PETS": "¿Tienes otros animales?",
-      "AVAILABLE_TIME": "¿Timepo disponible?",
+      "AVAILABLE_TIME": "¿Tiempo disponible?",
       "LIFESTYLE": "¿Estilo de vida?",
       "NOISE_TOLERANCE": "¿Tolerancia al ruido?",
       "TIME_AT_HOME": "¿Tiempo en casa?"

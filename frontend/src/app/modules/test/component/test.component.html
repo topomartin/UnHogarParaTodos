@@ -51,17 +51,17 @@
         <span *ngIf="a.compatibility >= 50">{{ 'TEST.RESULT.GOOD' | translate }}</span>
         <span *ngIf="a.compatibility < 50">{{ 'TEST.RESULT.BAD' | translate }}</span>
 
-        <p>🐶 {{ 'TEST.RESULT.TYPE' | translate }}: {{ ('ENUMS.ANIMAL_TYPE.' + (a.animal.type || '')) | translate }}</p>
+        <p>🐶 {{ 'TEST.RESULT.TYPE' | translate }}: {{ a.animal.type ? ('ENUMS.ANIMAL_TYPE.' + a.animal.type | translate) : ('COMMON.NO_INFO' | translate) }}</p>
 
-        <p>⚡ {{ 'TEST.RESULT.ENERGY' | translate }}: {{ ('ENUMS.ANIMAL_ENERGY_LEVEL.' + (a.animal.profile?.energy_level || '')) | translate }}</p>
+        <p>⚡ {{ 'TEST.RESULT.ENERGY' | translate }}: {{ a.animal.profile?.energy_level ? ('ENUMS.ANIMAL_ENERGY_LEVEL.' + a.animal.profile?.energy_level | translate) : ('COMMON.NO_INFO' | translate) }}</p>
 
-        <p>👶 {{ 'TEST.RESULT.KIDS' | translate }}: {{ (a.animal.profile?.good_with_kids ? 'COMMON.BOOLEANS.TRUE' : 'COMMON.BOOLEANS.FALSE') | translate }}</p>
+        <p>👶 {{ 'TEST.RESULT.KIDS' | translate }}: {{ a.animal.profile?.good_with_kids === true ? ('COMMON.BOOLEANS.TRUE' | translate) : a.animal.profile?.good_with_kids === false ? ('COMMON.BOOLEANS.FALSE' | translate) : ('COMMON.NO_INFO' | translate) }}</p>
 
-        <p>🏠 {{ 'TEST.RESULT.HOUSING' | translate }}: {{ ('ENUMS.HOUSING.' + (a.animal.profile?.preferred_housing_type || '')) | translate }}</p>
+        <p>🏠 {{ 'TEST.RESULT.HOUSING' | translate }}: {{ a.animal.profile?.preferred_housing_type ? ('ENUMS.HOUSING.' + a.animal.profile?.preferred_housing_type | translate) : ('COMMON.NO_INFO' | translate) }}</p>
 
-        <p>📏 {{ 'TEST.RESULT.SIZE' | translate }}: {{ ('ENUMS.ANIMAL_SIZE.' + (a.animal.profile?.size || '')) | translate }}</p>
+        <p>📏 {{ 'TEST.RESULT.SIZE' | translate }}: {{ a.animal.profile?.size ? ('ENUMS.ANIMAL_SIZE.' + a.animal.profile?.size | translate) : ('COMMON.NO_INFO' | translate) }}</p>
 
-        <p>🐕 {{ 'TEST.RESULT.EXPERIENCE' | translate }}: {{ (a.animal.profile?.needs_experience ? 'COMMON.BOOLEANS.TRUE' : 'COMMON.BOOLEANS.FALSE') | translate }}</p>
+        <p>🐕 {{ 'TEST.RESULT.EXPERIENCE' | translate }}: {{ a.animal.profile?.needs_experience === true ? ('COMMON.BOOLEANS.TRUE' | translate) : a.animal.profile?.needs_experience === false ? ('COMMON.BOOLEANS.FALSE' | translate) : ('COMMON.NO_INFO' | translate) }}</p>
 
         <button [routerLink]="['/infoanimal', a.animal.id]">
           {{ 'NAV.DETALLESANIMAL' | translate }}

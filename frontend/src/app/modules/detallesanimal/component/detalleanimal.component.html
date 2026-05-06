@@ -20,56 +20,80 @@
 
     <div class="card">
 
-      <p><strong>{{ 'ANIMAL.TYPE' | translate }}:</strong> {{ ('ENUMS.ANIMAL_TYPE.' + animal.type) | translate }}</p>
+      <p><strong>{{ 'ANIMAL.TYPE' | translate }}:</strong> {{ animal.type ? ('ENUMS.ANIMAL_TYPE.' + animal.type | translate) : ('COMMON.NO_INFO' | translate) }}</p>
       <p><strong>{{ 'ANIMAL.BIRTH_DATE' | translate }}:</strong> {{ animal.birth_date }}</p>
       <p><strong>{{ 'ANIMAL.DESCRIPTION' | translate }}:</strong> {{ animal.description }}</p>
 
       <p>
         <strong>{{ 'ANIMAL.KIDS_FRIENDLY' | translate }}:</strong>
-        <span [class.ok]="profile.good_with_kids">
-          {{ (profile.good_with_kids ? 'COMMON.BOOLEANS.TRUE' : 'COMMON.BOOLEANS.FALSE' ) | translate }}
+        <span [class.ok]="animal.profile?.good_with_kids">
+          {{ animal.profile?.good_with_kids === true ? ('COMMON.BOOLEANS.TRUE' | translate) : animal.profile?.good_with_kids === false ? ('COMMON.BOOLEANS.FALSE' | translate) : ('COMMON.NO_INFO' | translate) }}
         </span>
       </p>
 
       <p>
         <strong>{{ 'ANIMAL.PET_FRIENDLY' | translate }}:</strong>
-        <span [class.ok]="profile.good_with_animals">
-          {{ (profile.good_with_animals ? 'COMMON.BOOLEANS.TRUE' : 'COMMON.BOOLEANS.FALSE' ) | translate }}
+        <span [class.ok]="animal.profile?.good_with_animals">
+          {{ animal.profile?.good_with_animals === true ? ('COMMON.BOOLEANS.TRUE' | translate) : animal.profile?.good_with_animals === false ? ('COMMON.BOOLEANS.FALSE' | translate) : ('COMMON.NO_INFO' | translate) }}
         </span>
       </p>
 
       <p>
         <strong>{{ 'ANIMAL.NEEDS_GARDEN' | translate }}:</strong>
-        <span [class.warn]="profile.needs_garden">
-          {{ (profile.needs_garden ? 'COMMON.BOOLEANS.TRUE' : 'COMMON.BOOLEANS.FALSE' ) | translate }}
+        <span [class.warn]="animal.profile?.needs_garden">
+          {{ animal.profile?.needs_garden === true ? ('COMMON.BOOLEANS.TRUE' | translate) : animal.profile?.needs_garden === false ? ('COMMON.BOOLEANS.FALSE' | translate) : ('COMMON.NO_INFO' | translate) }}
         </span>
       </p>
 
       <p>
         <strong>{{ 'ANIMAL.NEEDS_EXPERIENCE' | translate }}:</strong>
-        <span [class.warn]="profile.needs_experience">
-          {{ (profile.needs_experience ? 'COMMON.BOOLEANS.TRUE' : 'COMMON.BOOLEANS.FALSE' ) | translate }}
+        <span [class.warn]="animal.profile?.needs_experience">
+          {{ animal.profile?.needs_experience === true ? ('COMMON.BOOLEANS.TRUE' | translate) : animal.profile?.needs_experience === false ? ('COMMON.BOOLEANS.FALSE' | translate) : ('COMMON.NO_INFO' | translate) }}
         </span>
       </p>
 
       <div class="info-box">
-        <h3>💡 {{ 'ANIMAL.ADOPTION_RECOMMENDATION' | translate }}</h3>
-        <p>{{ getAdoptionRecommendation(animal.birth_date) }}</p>
+        <h3>💡 {{ 'ANIMAL.ADOPTION_RECOMMENDATION_TEXT' | translate }}</h3>
+        <p>{{ getAdoptionRecommendation(animal.birth_date)  | translate }}</p>
       </div>
 
       <div class="info-box">
-        <h3>👨‍👩‍👧 {{ 'ANIMAL.FAMILY_COMPATIBILITY' | translate }}</h3>
-        <p>{{ getFamilyCompatibility(animal.birth_date) }}</p>
+        <h3>👨‍👩‍👧 {{ 'ANIMAL.FAMILY_COMPATIBILITY_TEXT' | translate }}</h3>
+        <p>{{ getFamilyCompatibility(animal.birth_date)  | translate }}</p>
       </div>
 
       <p class="status" [ngClass]="animal.status.toLowerCase()">
-        <strong>{{ 'ANIMAL.STATUS' | translate }}:</strong> {{ ('ENUMS.ANIMAL_STATUS.' + animal.status) | translate }}
+        <strong>{{ 'ANIMAL.STATUS' | translate }}:</strong> {{ animal.status ? ('ENUMS.ANIMAL_STATUS.' + animal.status | translate) : ('COMMON.NO_INFO' | translate) }}
 
         <span *ngIf="animal.status.toLowerCase() === 'available'">✔️</span>
         <span *ngIf="animal.status.toLowerCase() === 'pending'">⏳</span>
         <span *ngIf="animal.status.toLowerCase() === 'adopted'">❌</span>
       </p>
+      
+      <div class="acciones-detalle">
+
+        <button class="btn adoptar"
+          *ngIf="animal.status.toLowerCase() !== 'adopted'"
+          (click)="adoptarAnimal(animal.id)">
+          🐾 {{ 'ANIMAL.BUTTONS.ADOPT' | translate }}
+        </button>
+
+        <button class="btn apadrinar"
+          *ngIf="animal.status.toLowerCase() !== 'adopted'"
+          (click)="apadrinarAnimal(animal.id)">
+          💸 {{ 'ANIMAL.BUTTONS.SPONSOR' | translate }}
+        </button>
+
+        <button class="btn foster"
+          *ngIf="animal.status.toLowerCase() !== 'adopted'"
+          (click)="acogerAnimal(animal.id)">
+          🏠 {{ 'ANIMAL.BUTTONS.FOSTER' | translate }}
+        </button>
+
+      </div>
     </div>
+
+    
 
     <!-- GALERÍA -->
     <div style="display:flex; gap:10px; margin-top:10px;">

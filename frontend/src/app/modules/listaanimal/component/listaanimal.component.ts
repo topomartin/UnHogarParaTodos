@@ -116,4 +116,8 @@ export class ListaAnimalComponent implements OnInit {
     this.router.navigate(['/sponsor', id]);
   }
 
+  acogerAnimal(id: number) {
+    this.router.navigate(['/animal-request', id, 'FOSTER']);
+  }
+
 }

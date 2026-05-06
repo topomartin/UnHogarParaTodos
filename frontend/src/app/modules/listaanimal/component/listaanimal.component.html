@@ -28,10 +28,10 @@
       <!-- INFO -->
       <div class="info">
         <span class="nombre">{{ animal.name }}</span>
-        <span class="tipo">{{ ('ENUMS.ANIMAL_TYPE.' + animal.type) | translate }}</span>
+        <span class="tipo">{{ animal.type ? ('ENUMS.ANIMAL_TYPE.' + animal.type | translate) : ('COMMON.NO_INFO' | translate) }}</span>
 
         <span class="status" [ngClass]="animal.status.toLowerCase()">
-          {{ ('ENUMS.ANIMAL_STATUS.' + animal.status) | translate }}
+          {{ animal.status ? ('ENUMS.ANIMAL_STATUS.' + animal.status | translate) : ('COMMON.NO_INFO' | translate) }}
 
           <span *ngIf="animal.status.toLowerCase() === 'available'">✔️</span>
           <span *ngIf="animal.status.toLowerCase() === 'pending'">⏳</span>
@@ -48,7 +48,12 @@
 
         <button class="btn adoptar" *ngIf="animal.status.toLowerCase() !== 'adopted'"
           (click)="adoptarAnimal(animal.id)">
-          {{ 'ANIMAL.BUTTONS.ADOPT' | translate }}
+          🐾 {{ 'ANIMAL.BUTTONS.ADOPT' | translate }}
+        </button>
+
+        <button class="btn foster" *ngIf="animal.status.toLowerCase() !== 'adopted'"
+          (click)="acogerAnimal(animal.id)">
+          🏠 {{ 'ANIMAL.BUTTONS.FOSTER' | translate }}
         </button>
 
         <button class="btn apadrinar" *ngIf="animal.status.toLowerCase() !== 'adopted'" 

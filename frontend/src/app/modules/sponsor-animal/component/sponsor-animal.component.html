@@ -39,11 +39,11 @@
         {{
           form.value.frequency
             ? ('ENUMS.FREQUENCY.' + form.value.frequency | translate)
-            : '-'
+            : ('COMMON.NO_INFO' | translate)
         }}
       </p>
 
-      <p><strong>{{ 'SPONSOR.SUMMARY.START_DATE' | translate }}:</strong> {{ form.value.startDate || '-' }}</p>
+      <p><strong>{{ 'SPONSOR.SUMMARY.START_DATE' | translate }}:</strong> {{ form.value.startDate || ('COMMON.NO_INFO' | translate) }}</p>
 
     </div>
 

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
 
 @Component({
@@ -18,13 +18,14 @@ export class DetalleAnimalComponent implements OnInit {
   public mainImage: string = '';
 
   constructor(
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
+    private router: Router,
     private apiService: ApiService,
     private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
-    const id = this.router.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.getAnimal(id);
     }
@@ -132,4 +133,17 @@ export class DetalleAnimalComponent implements OnInit {
     if (years < 7) return 'ANIMAL.FAMILY_COMPATIBILITY.ADULT';
     return 'ANIMAL.FAMILY_COMPATIBILITY.SENIOR';
   }
+
+  adoptarAnimal(id: number) { 
+    this.router.navigate(['/animal-request', id, 'ADOPTION']);
+  }
+
+  apadrinarAnimal(id: number) {
+    this.router.navigate(['/sponsor', id]);
+  }
+
+  acogerAnimal(id: number) {
+    this.router.navigate(['/animal-request', id, 'FOSTER']);
+  }
+
 }
