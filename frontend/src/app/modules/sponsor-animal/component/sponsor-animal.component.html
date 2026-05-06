@@ -1,27 +1,28 @@
 <div class="container">
 
-  <h1>Apadrinar a {{ animalName }} 🐾</h1>
+  <h1>{{ 'SPONSOR.TITLE' | translate:{ name: animalName } }} </h1>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
     <!-- 💸 Cantidad -->
     <input type="number"
-           placeholder="Cantidad (€)"
+           placeholder="{{ 'SPONSOR.FIELDS.AMOUNT' | translate }}"
            formControlName="amount">
 
     <!-- 🧾 Mensaje -->
-    <textarea placeholder="Mensaje (opcional)"
+    <textarea placeholder="{{ 'SPONSOR.FIELDS.MESSAGE' | translate: { name: animalName } }}"
               formControlName="message"></textarea>
 
     <!-- 🔁 Frecuencia -->
     <select formControlName="frequency">
-      <option value="">Frecuencia</option>
-      <option value="monthly">Mensual</option>
-      <option value="yearly">Anual</option>
-      <option value="unic">Única vez</option>
+      <option value="" >{{ 'SPONSOR.FIELDS.FREQUENCY' | translate }}</option>
+      <option value="monthly">{{ 'ENUMS.FREQUENCY.monthly' | translate }}</option>
+      <option value="yearly">{{ 'ENUMS.FREQUENCY.yearly' | translate }}</option>
+      <option value="unic">{{ 'ENUMS.FREQUENCY.unic' | translate }}</option>
     </select>
 
     <!-- 📅 Fecha inicio -->
+    <span style="text-align: left;"> {{ 'SPONSOR.FIELDS.START_DATE' | translate }}:</span>
     <input type="date"
            formControlName="startDate"
            [min]="today">
@@ -29,26 +30,26 @@
     <!-- 📊 RESUMEN (solo visual) -->
     <div class="summary" *ngIf="form.value.amount || form.value.frequency">
 
-      <h3>Resumen de apadrinamiento</h3>
+      <h3>{{ 'SPONSOR.SUMMARY.TITLE' | translate }}</h3>
 
-      <p><strong>Cantidad:</strong> {{ form.value.amount || 0 }} €</p>
+      <p><strong>{{ 'SPONSOR.SUMMARY.AMOUNT' | translate }}:</strong> {{ form.value.amount || 0 }} €</p>
 
       <p>
-        <strong>Frecuencia:</strong>
+        <strong>{{ 'SPONSOR.SUMMARY.FREQUENCY' | translate }}:</strong>
         {{
-          form.value.frequency === 'monthly' ? 'Mensual' :
-          form.value.frequency === 'yearly' ? 'Anual' :
-          form.value.frequency === 'unic' ? 'Única vez' : '-'
+          form.value.frequency
+            ? ('ENUMS.FREQUENCY.' + form.value.frequency | translate)
+            : ('COMMON.NO_INFO' | translate)
         }}
       </p>
 
-      <p><strong>Inicio:</strong> {{ form.value.startDate || '-' }}</p>
+      <p><strong>{{ 'SPONSOR.SUMMARY.START_DATE' | translate }}:</strong> {{ form.value.startDate || ('COMMON.NO_INFO' | translate) }}</p>
 
     </div>
 
     <!-- BOTÓN -->
     <button type="submit" [disabled]="form.invalid">
-      Donar 💸
+      {{ 'SPONSOR.BUTTONS.PAY' | translate: { name: animalName } }}
     </button>
 
   </form>

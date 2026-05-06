@@ -7,5 +7,6 @@ export const AnimalGridSchema = {
         { key: 'type', label: 'Tipo' },
         { key: 'status', label: 'Estado' },
         { key: 'birth_date', label: 'Nacimiento' },
+        { key: 'images', label: 'Imágenes', type: 'option', options:{icon: 'image_search', customAction: 'viewImage'} },
     ]
 };

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
 
 @Component({
@@ -19,13 +19,14 @@ export class DetalleAnimalComponent implements OnInit {
 
 
   constructor(
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
+    private router: Router,
     private apiService: ApiService,
     private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
-    const id = this.router.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.getAnimal(id);
     }
@@ -43,8 +44,6 @@ export class DetalleAnimalComponent implements OnInit {
         } else {
           this.animalNotFound = true;
         }
-
-        console.log('👉 VOY A LLAMAR loadImages');
 
         this.loadImages(+id);
 
@@ -113,30 +112,43 @@ export class DetalleAnimalComponent implements OnInit {
   getAgeCategory(birthDate: string): string {
     const { years } = this.getAgeData(birthDate);
 
-    if (years < 1) return 'cachorro';
-    if (years < 7) return 'adulto';
-    return 'senior';
+    if (years < 1) return 'ANIMAL.AGE_CATEGORIES.PUPPY';
+    if (years < 7) return 'ANIMAL.AGE_CATEGORIES.ADULT';
+    return 'ANIMAL.AGE_CATEGORIES.SENIOR';
   }
 
   getAdoptionRecommendation(birthDate: string): string {
     const { years } = this.getAgeData(birthDate);
 
     if (years < 1) {
-      return 'Ideal para familias activas y con tiempo para cuidados intensivos.';
+      return 'ANIMAL.ADOPTION_RECOMMENDATIONS.PUPPY';
     }
 
     if (years < 7) {
-      return 'Perfecto para familias equilibradas o personas con experiencia.';
+      return 'ANIMAL.ADOPTION_RECOMMENDATIONS.ADULT';
     }
 
-    return 'Recomendado para familias tranquilas o personas mayores.';
+    return 'ANIMAL.ADOPTION_RECOMMENDATIONS.SENIOR';
   }
 
   getFamilyCompatibility(birthDate: string): string {
     const { years } = this.getAgeData(birthDate);
 
-    if (years < 1) return 'Alta energía / niños mayores';
-    if (years < 7) return 'Familias activas / niños';
-    return 'Familias tranquilas / sin mucha actividad';
+    if (years < 1) return 'ANIMAL.FAMILY_COMPATIBILITY.PUPPY';
+    if (years < 7) return 'ANIMAL.FAMILY_COMPATIBILITY.ADULT';
+    return 'ANIMAL.FAMILY_COMPATIBILITY.SENIOR';
   }
+
+  adoptarAnimal(id: number) { 
+    this.router.navigate(['/animal-request', id, 'ADOPTION']);
+  }
+
+  apadrinarAnimal(id: number) {
+    this.router.navigate(['/sponsor', id]);
+  }
+
+  acogerAnimal(id: number) {
+    this.router.navigate(['/animal-request', id, 'FOSTER']);
+  }
+
 }

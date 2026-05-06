@@ -1,0 +1,34 @@
+<!-- SWIPER BASE -->
+<swiper-container class="swiper-container-custom"
+  [loop]="true"
+  [navigation]="true"
+  [pagination]="true"
+  [autoplay]="{delay:3000}">
+
+  <swiper-slide *ngFor="let element of elements">
+    {{element.id}}
+    <div class="animal-card" (click)="navigateToDetail(element.id)">
+
+      <img
+        *ngIf="element.image_url; else noImage"
+        [src]="getImageUrl(element.image_url)"
+        (error)="handleImageError($event, element)"
+      />
+
+      <ng-template #noImage>
+        <div class="no-image">
+          <h2>{{ element.name }}</h2>
+          <p>{{ element.type }}</p>
+        </div>
+      </ng-template>
+
+      <div class="overlay">
+        <h2>{{ element.name }}</h2>
+        <small>{{ element.age }}</small>
+      </div>
+
+    </div>
+
+  </swiper-slide>
+
+</swiper-container>

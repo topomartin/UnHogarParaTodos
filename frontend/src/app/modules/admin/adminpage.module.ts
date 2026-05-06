@@ -6,18 +6,22 @@ import { InnerTabComponent } from './components/innertab.component/innertab.comp
 import { DeleteDialogComponent } from './components/delete.dialog.component/delete.dialog.component';
 import { CreateUpdateDialogComponent } from './components/create-update.dialog.component/create-update.dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ViewImageDialogComponent } from './components/view-image.dialog.componet/viewImage.dialog.component';
+import { SwiperCustomModule } from '../swiper/swiper.module';
 
 @NgModule({
   declarations: [
     AdminPageComponent,
     InnerTabComponent,
     DeleteDialogComponent,
-    CreateUpdateDialogComponent
+    CreateUpdateDialogComponent,
+    ViewImageDialogComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SwiperCustomModule
   ],
   exports: [AdminPageComponent]
 })

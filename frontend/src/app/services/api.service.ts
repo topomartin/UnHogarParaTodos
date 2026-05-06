@@ -34,8 +34,23 @@ export class ApiService {
       .pipe(catchError(err => this.handleError(err)));
   }
 
-  public post(path: string, body: object = {}): Observable<any> {
-    return this.http.post(`${this.API_URL}${path}`, JSON.stringify(body), this.getOptions())
+  public post(path: string, body: any): Observable<any> {
+    const token = localStorage.getItem('access_token');
+
+    let headers = new HttpHeaders();
+
+    // ❗ Solo poner JSON si NO es FormData
+    if (!(body instanceof FormData)) {
+      headers = headers.set('Content-Type', 'application/json');
+    }
+
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+
+    headers = headers.set('x-api-key', this.x_api_key);
+
+    return this.http.post(`${this.API_URL}${path}`, body, { headers })
       .pipe(catchError(err => this.handleError(err)));
   }
 

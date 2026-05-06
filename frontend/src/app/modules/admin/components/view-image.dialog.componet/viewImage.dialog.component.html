@@ -1,0 +1,40 @@
+<h2 mat-dialog-title class="dialog-title">
+  {{ data.title }}
+</h2>
+
+<mat-dialog-content class="dialog-content">
+
+  <!-- Swiper -->
+  <div class="swiper-container" *ngIf="data.data.length">
+    <app-swipper-component
+      [elements]="data.data">
+    </app-swipper-component>
+  </div>
+
+  <!-- Upload box -->
+  <div class="upload-container">
+
+    <label class="file-label">
+      <input
+        type="file"
+        (change)="onFileSelected($event)"
+        hidden
+      />
+      <span class="file-button">
+        Seleccionar archiu
+      </span>
+    </label>
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="upload()"
+      [disabled]="loading"
+    >
+      {{ loading ? 'Pujant...' : 'Importar Imatge' }}
+    </button>
+
+  </div>
+
+</mat-dialog-content>
+

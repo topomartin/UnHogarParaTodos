@@ -42,4 +42,7 @@ export class AdminPageService {
   getUpdateSchema(modelName:string){
     return this.apiService.get(`${modelName}/schema/updateSchema`);
   }
+  getInfoSchema(modelName:string){
+    return this.apiService.get(`${modelName}/schema/infoSchema`);
+  }
 }

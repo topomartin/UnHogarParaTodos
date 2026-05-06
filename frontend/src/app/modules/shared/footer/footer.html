@@ -4,31 +4,31 @@
 
     <!-- LOGO / INFO -->
     <div class="footer-section">
-      <h3>Un Hogar Para Todos</h3>
-      <p>Protectora de animales dedicada a encontrar familias responsables para cada animal.</p>
+      <h3>{{ 'APP.TITLE' | translate }}</h3>
+      <p>{{ 'FOOTER.DESCRIPTION' | translate }}</p>
     </div>
 
     <!-- LINKS -->
     <div class="footer-section">
-      <h4>Enlaces</h4>
-      <a routerLink="/home">Inicio</a>
-      <a routerLink="/listaanimal">Animales</a>
-      <a routerLink="/contact">Contacto</a>
-      <a routerLink="/registerfoster">Casa de acogida</a>
+      <h4>{{ 'FOOTER.LINKS' | translate }}</h4>
+      <a routerLink="/home">{{ 'NAV.HOME' | translate }}</a>
+      <a routerLink="/listaanimal">{{ 'NAV.LISTAANIMAL' | translate }}</a>
+      <a routerLink="/contact">{{ 'NAV.CONTACT' | translate }}</a>
+      <a routerLink="/registerfoster">{{ 'NAV.FOSTER' | translate }}</a>
     </div>
 
     <!-- CONTACTO -->
     <div class="footer-section">
-      <h4>Contacto</h4>
-      <p>📞 +34 600 123 456</p>
-      <p>📧 info@protectora.org</p>
-      <p>📍 Barcelona</p>
+      <h4>{{ 'CONTACT.TITLE' | translate }}</h4>
+      <p>📞 {{ 'CONTACT.PHONE_VALUE' | translate }}</p>
+      <p>📧 {{ 'CONTACT.EMAIL_VALUE' | translate }}</p>
+      <p>📍 {{ 'CONTACT.LOCATION_VALUE' | translate }}</p>
     </div>
 
   </div>
 
   <div class="footer-bottom">
-    <p>© 2026 Un Hogar Para Todos - Todos los derechos reservados</p>
+    <p>{{ 'FOOTER.RIGHTS' | translate }}</p>
   </div>
 
 </footer>

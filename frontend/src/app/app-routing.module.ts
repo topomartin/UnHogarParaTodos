@@ -18,7 +18,6 @@ import { TestComponent } from './modules/test/component/test.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'infoanimal/:id', component: DetalleAnimalComponent },
@@ -33,21 +32,19 @@ const routes: Routes = [
 
   // Paginas a ver en menu-nav
   {
-    path: 'listaanimal',
-    component: ListaAnimalComponent,
+    path: 'home',
+    component: HomeComponent,
     data: {
-      title: 'Lista Animales',
-      icon: 'pets',
+      icon: 'home',
       showInMenu: true
       // roles: ['USER', 'ADMIN', 'WORKER'] // Limitar a dichos roles, por defecto se muestra sin log
     }
   },
   {
-    path: 'registerfoster',
-    component: RegisterFosterComponent,
-    data: {
-      title: 'Acogida',
-      icon: 'home',
+    path: 'listaanimal',
+    component: ListaAnimalComponent,
+    data: { // Se quita title ya que se usara el i18n para mostrar el texto con path
+      icon: 'pets',
       showInMenu: true
       // roles: ['USER', 'ADMIN', 'WORKER'] // Limitar a dichos roles, por defecto se muestra sin log
     }
@@ -56,7 +53,6 @@ const routes: Routes = [
     path: 'contact',
     component: ContactComponent,
     data: {
-      title: 'Contáctanos',
       icon: 'mail',
       showInMenu: true
     }
@@ -65,7 +61,6 @@ const routes: Routes = [
     path: 'test',
     component: TestComponent,
     data: {
-      title: 'Test',
       icon: 'fact_check',
       showInMenu: true
     }

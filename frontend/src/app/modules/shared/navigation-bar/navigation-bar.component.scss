@@ -79,6 +79,39 @@
   font-weight: 500;
 }
 
+/* Flags / Language */
+.lang-button {
+  min-width: unset !important;
+  padding: 0 8px !important;
+}
+/* Personalización del menú de idiomas sobreescribiendo estilos por defecto */
+::ng-deep .flag-menu-panel.mat-mdc-menu-panel {
+  min-width: unset !important;
+  width: fit-content !important;
+  max-width: unset !important;
+}
+
+::ng-deep .flag-menu-panel .mat-mdc-menu-content {
+  padding: 0 !important;
+}
+
+::ng-deep .flag-menu-panel .flag-only-item.mat-mdc-menu-item {
+  min-width: unset !important;
+  padding: 10px !important;
+  height: auto !important;   
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.flag-img, .flag-img-menu {
+  width: 24px;   
+  display: block;
+  border-radius: 2px; 
+}
+
+
+
 /* mbl */
 @media (max-width: 768px) {
 
@@ -87,6 +120,10 @@
   }
 
   .username {
+    display: none;
+  }
+
+  .register-button {
     display: none;
   }
 
