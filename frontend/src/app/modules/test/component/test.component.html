@@ -1,14 +1,14 @@
 <div class="container">
 
-  <h1>🐾 Test de adopción</h1>
+  <h1>{{ 'TEST.TITLE' | translate }}</h1>
 
   <!-- INICIO -->
   <div *ngIf="!started && !finished">
-    <button (click)="startTest()">Iniciar test</button>
+    <button (click)="startTest()">{{ 'TEST.START' | translate }}</button>
   </div>
 
   <!-- LOADING -->
-  <div *ngIf="loading">Cargando preguntas...</div>
+  <div *ngIf="loading">{{ 'TEST.LOADING' | translate }}</div>
 
   <!-- TEST -->
   <div *ngIf="started && !loading">
@@ -25,20 +25,20 @@
     </div>
 
     <button class="submit" (click)="submitTest()">
-      Enviar test
+      {{ 'TEST.SUBMIT' | translate }}
     </button>
   </div>
 
   <!-- LOADING RESULT -->
   <div *ngIf="loadingResult">
-    Calculando resultado...
+    {{ 'TEST.LOADING_RESULT' | translate }}
   </div>
 
   <!-- RESULTADO -->
   <div *ngIf="finished && result">
 
 
-    <h2>🐾 Animales recomendados</h2>
+    <h2>{{ 'TEST.RESULT.TITLE' | translate }}</h2>
 
     <div class="cards">
 
@@ -46,25 +46,25 @@
 
         <h3>{{ a.animal.name }}</h3>
 
-        <p>📊 Compatibilidad: <b>{{ a.compatibility }}%</b></p>
+        <p>📊 {{ 'TEST.RESULT.COMPATIBILITY' | translate }}: <b>{{ a.compatibility }}%</b></p>
 
-        <span *ngIf="a.compatibility >= 50">🔥 Bien compatible</span>
-        <span *ngIf="a.compatibility < 50">⚠️ Poco compatible</span>
+        <span *ngIf="a.compatibility >= 50">{{ 'TEST.RESULT.GOOD' | translate }}</span>
+        <span *ngIf="a.compatibility < 50">{{ 'TEST.RESULT.BAD' | translate }}</span>
 
-        <p>🐶 Tipo: {{ a.animal.type }}</p>
+        <p>🐶 {{ 'TEST.RESULT.TYPE' | translate }}: {{ ('ENUMS.ANIMAL_TYPE.' + (a.animal.type || '')) | translate }}</p>
 
-        <p>⚡ Energía: {{ a.animal.profile?.energy_level }}</p>
+        <p>⚡ {{ 'TEST.RESULT.ENERGY' | translate }}: {{ ('ENUMS.ANIMAL_ENERGY_LEVEL.' + (a.animal.profile?.energy_level || '')) | translate }}</p>
 
-        <p>👶 Niños: {{ a.animal.profile?.good_with_kids ? 'Sí' : 'No' }}</p>
+        <p>👶 {{ 'TEST.RESULT.KIDS' | translate }}: {{ (a.animal.profile?.good_with_kids ? 'COMMON.BOOLEANS.TRUE' : 'COMMON.BOOLEANS.FALSE') | translate }}</p>
 
-        <p>🏠 Vivienda: {{ a.animal.profile?.preferred_housing_type }}</p>
+        <p>🏠 {{ 'TEST.RESULT.HOUSING' | translate }}: {{ ('ENUMS.HOUSING.' + (a.animal.profile?.preferred_housing_type || '')) | translate }}</p>
 
-        <p>📏 Tamaño: {{ a.animal.profile?.size }}</p>
+        <p>📏 {{ 'TEST.RESULT.SIZE' | translate }}: {{ ('ENUMS.ANIMAL_SIZE.' + (a.animal.profile?.size || '')) | translate }}</p>
 
-        <p>🐕 Experiencia requerida: {{ a.animal.profile?.needs_experience ? 'Sí' : 'No' }}</p>
+        <p>🐕 {{ 'TEST.RESULT.EXPERIENCE' | translate }}: {{ (a.animal.profile?.needs_experience ? 'COMMON.BOOLEANS.TRUE' : 'COMMON.BOOLEANS.FALSE') | translate }}</p>
 
         <button [routerLink]="['/infoanimal', a.animal.id]">
-          Ver detalle
+          {{ 'NAV.DETALLESANIMAL' | translate }}
         </button>
 
       </div>

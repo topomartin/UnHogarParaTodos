@@ -25,40 +25,40 @@
       <p><strong>{{ 'ANIMAL.DESCRIPTION' | translate }}:</strong> {{ animal.description }}</p>
 
       <p>
-        <strong>Compatible con niños:</strong>
+        <strong>{{ 'ANIMAL.KIDS_FRIENDLY' | translate }}:</strong>
         <span [class.ok]="profile.good_with_kids">
-          {{ profile.good_with_kids ? 'Sí' : 'No' }}
+          {{ (profile.good_with_kids ? 'COMMON.BOOLEANS.TRUE' : 'COMMON.BOOLEANS.FALSE' ) | translate }}
         </span>
       </p>
 
       <p>
-        <strong>Compatible con otros animales:</strong>
+        <strong>{{ 'ANIMAL.PET_FRIENDLY' | translate }}:</strong>
         <span [class.ok]="profile.good_with_animals">
-          {{ profile.good_with_animals ? 'Sí' : 'No' }}
+          {{ (profile.good_with_animals ? 'COMMON.BOOLEANS.TRUE' : 'COMMON.BOOLEANS.FALSE' ) | translate }}
         </span>
       </p>
 
       <p>
-        <strong>Necesita jardín:</strong>
+        <strong>{{ 'ANIMAL.NEEDS_GARDEN' | translate }}:</strong>
         <span [class.warn]="profile.needs_garden">
-          {{ profile.needs_garden ? 'Sí' : 'No' }}
+          {{ (profile.needs_garden ? 'COMMON.BOOLEANS.TRUE' : 'COMMON.BOOLEANS.FALSE' ) | translate }}
         </span>
       </p>
 
       <p>
-        <strong>Requiere experiencia:</strong>
+        <strong>{{ 'ANIMAL.NEEDS_EXPERIENCE' | translate }}:</strong>
         <span [class.warn]="profile.needs_experience">
-          {{ profile.needs_experience ? 'Sí' : 'No' }}
+          {{ (profile.needs_experience ? 'COMMON.BOOLEANS.TRUE' : 'COMMON.BOOLEANS.FALSE' ) | translate }}
         </span>
       </p>
 
       <div class="info-box">
-        <h3>💡 Recomendación de adopción</h3>
+        <h3>💡 {{ 'ANIMAL.ADOPTION_RECOMMENDATION' | translate }}</h3>
         <p>{{ getAdoptionRecommendation(animal.birth_date) }}</p>
       </div>
 
       <div class="info-box">
-        <h3>👨‍👩‍👧 Compatibilidad con familias</h3>
+        <h3>👨‍👩‍👧 {{ 'ANIMAL.FAMILY_COMPATIBILITY' | translate }}</h3>
         <p>{{ getFamilyCompatibility(animal.birth_date) }}</p>
       </div>
 

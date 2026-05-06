@@ -14,8 +14,9 @@ import { queryConfig } from "../config/query.config";
 export class AnimalRepositoryService {
     private logger = new Logger(AnimalRepositoryService.name);
     constructor(@InjectRepository(Animal)
-    private animalRepository: Repository<Animal>,
-        private queryBuilderHelper: QueryBuilderHelper) { }
+        private animalRepository: Repository<Animal>,
+        private queryBuilderHelper: QueryBuilderHelper
+    ) { }
 
 
     async create(cretateAnimalDto: CreateAnimalDto): Promise<Animal | null | undefined> {
@@ -30,7 +31,7 @@ export class AnimalRepositoryService {
         try {
             return await this.animalRepository.findOne({
                 where: filter,
-                relations: ['profile'] // 🔥 ESTO ES LO IMPORTANTE
+                relations: ['profile'] 
             });
         } catch (e) {
             this.handleError(e);

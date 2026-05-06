@@ -17,6 +17,7 @@ import { RegisterFosterComponent } from './modules/registerfoster/component/regi
 import { SponsorAnimalComponent } from './modules/sponsor-animal/component/sponsor-animal.component';
 import { ContactComponent } from './modules/appcontact/component/appcontact.component';
 import { TestComponent } from './modules/test/component/test.component';
+import { PrivacyPolicyComponent } from './modules/privacy-policy/privacy-policy';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavigationMenuComponent } from './modules/shared/navigation-menu.component/navigation-menu.component';
 import { NavigationBarComponent } from './modules/shared/navigation-bar/navigation-bar.component';
@@ -28,7 +29,6 @@ import { SwiperCustomModule } from './modules/swiper/swiper.module';
 import { HomepageModule } from './modules/home/home.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-
 
 @NgModule({
   declarations: [
@@ -47,7 +47,8 @@ import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
     NavigationBarComponent,
     FooterComponent,
     AnimalRequestFormComponent,
-    TestComponent
+    TestComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,
@@ -60,9 +61,7 @@ import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
     FormsModule,
     AdminModule,
     HomepageModule,
-    ReactiveFormsModule,
     SwiperCustomModule,
-    ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: provideTranslateHttpLoader({
         prefix: '/i18n/',

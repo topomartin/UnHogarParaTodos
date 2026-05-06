@@ -1,7 +1,5 @@
 {
-  "APP": {
-    "TITLE": "Un Hogar Para Todos"
-  },
+  "APP": { "TITLE": "Un Hogar Para Todos" },
  
   "NAV": {
     "HOME": "Inicio",
@@ -9,6 +7,8 @@
     "LISTAANIMAL": "Animales",
     "FOSTER": "Casa de acogida",
     "CONTACT": "Contacto",
+    "TEST" : "Test",
+    "DETALLESANIMAL": "Ver animal",
     "AUTH": {
       "LOGIN": "Iniciar sesión",
       "LOGOUT": "Cerrar sesión",
@@ -43,6 +43,11 @@
       "BACK": "Volver",
       "SAVE": "Guardar cambios",
       "CANCEL": "Cancelar"
+    },
+
+    "BOOLEANS": {
+      "TRUE": "Sí",
+      "FALSE": "No"
     }
   },
 
@@ -65,6 +70,16 @@
       "monthly": "Mensual",
       "yearly": "Anual",
       "unic": "Única vez"
+    },
+    "ANIMAL_ENERGY_LEVEL": {
+      "low": "Baja",
+      "medium": "Media",
+      "high": "Alta"
+    },
+    "ANIMAL_SIZE": {
+      "small": "Pequeño",
+      "medium": "Mediano",
+      "large": "Grande"
     }
   },
   
@@ -73,6 +88,27 @@
     "BIRTH_DATE": "Fecha de nacimiento",
     "DESCRIPTION": "Descripción",
     "STATUS": "Estado",
+    "KIDS_FRIENDLY": "Compatible con niños",
+    "PET_FRIENDLY": "Compatible con otros animales",
+    "NEEDS_GARDEN": "Necesita jardín",
+    "NEEDS_EXPERIENCE": "Requiere experiencia",
+    "AGE_CATEGORY": {
+      "PUPPY": "Cachorro",
+      "ADULT": "Adulto",
+      "SENIOR": "Senior"
+    },
+    "ADOPTION_RECOMMENDATION_TEXT": "Recomendación de adopción",
+    "ADOPTION_RECOMMENDATIONS": {
+      "PUPPY": "Ideal para familias activas y con tiempo para cuidados intensivos.",
+      "ADULT": "Perfecto para familias equilibradas o personas con experiencia.",
+      "SENIOR": "Recomendado para familias tranquilas o personas mayores."
+    },
+    "FAMILY_COMPATIBILITY_TEXT": "Compatibilidad con familias",
+    "FAMILY_COMPATIBILITY": {
+      "PUPPY": "Alta energía / niños mayores",
+      "ADULT": "Familias activas / niños",
+      "SENIOR": "Familias tranquilas / sin mucha actividad"
+    },
     "BUTTONS": {
       "DETAIL": "Ver detalles",
       "ADOPT": "Adoptar",
@@ -236,7 +272,8 @@
     "ALREADY_ACCOUNT": "¿Ya tienes cuenta?",
     "NO_ACCOUNT": "¿No tienes cuenta?",
 
-    "GDPR_TEXT": "Acepto la política de privacidad (GDPR)",
+    "GDPR_TEXT": "Acepto la",
+    "GDPR_LINK": "política de privacidad (GDPR)",
     "GDPR_ERROR": "Debes aceptar el GDPR",
     
     "BUTTONS": {
@@ -259,6 +296,7 @@
     "PASSWORD_MIN_LENGTH": "La contraseña debe tener al menos 6 caracteres",
     "REQUIRED_CONFIRM": "Debes confirmar la contraseña",
     "PASSWORD_MISMATCH": "Las contraseñas no coinciden",
+    "PASSWORD_PATTERN": "La contraseña debe tener mayúscula, minúscula, número y carácter especial",
     "REQUIRED": "Campo obligatorio"
   },
 
@@ -266,5 +304,70 @@
     "GENERIC": "Ha ocurrido un error",
     "NOT_FOUND": "No encontrado",
     "UNAUTHORIZED": "No autorizado"
+  },
+
+  "PRIVACY": {
+    "TITLE": "Política de Privacidad",
+    "INTRO": "En nuestra aplicación respetamos tu privacidad y nos comprometemos a proteger tus datos personales.",
+
+    "SECTION_1": {
+      "TITLE": "1. Responsable del tratamiento",
+      "TEXT": "Esta aplicación es gestionada por nuestro equipo de desarrollo y administración."
+    },
+
+    "SECTION_2": {
+      "TITLE": "2. Datos que recopilamos",
+      "ITEMS": {
+        "USERNAME": "Nombre de usuario",
+        "EMAIL": "Email",
+        "USAGE": "Datos de uso de la plataforma"
+      }
+    },
+
+    "SECTION_3": {
+      "TITLE": "3. Finalidad",
+      "TEXT": "Los datos se utilizan únicamente para la gestión de cuentas, adopciones y apadrinamientos."
+    },
+
+    "SECTION_4": {
+      "TITLE": "4. Conservación de datos",
+      "TEXT": "Los datos se conservan mientras la cuenta esté activa."
+    },
+
+    "SECTION_5": {
+      "TITLE": "5. Derechos del usuario",
+      "TEXT": "Puedes acceder, modificar o eliminar tus datos en cualquier momento contactando con nosotros."
+    },
+
+    "SECTION_6": {
+      "TITLE": "6. Seguridad",
+      "TEXT": "Aplicamos medidas técnicas y organizativas para proteger tu información."
+    },
+
+    "SECTION_7": {
+      "TITLE": "7. Contacto",
+      "TEXT": "Si tienes dudas, puedes contactarnos a través de la página de contacto."
+    }
+  },
+
+  "TEST": {
+    "TITLE": "🐾 Test de adopción",
+    "START": "Iniciar test",
+    "LOADING": "Cargando preguntas...",
+    "SUBMIT": "Enviar test",
+    "LOADING_RESULT": "Calculando resultado...",
+
+    "RESULT": {
+      "TITLE": "🐾 Animales recomendados",
+      "COMPATIBILITY": "Compatibilidad",
+      "GOOD": "🔥 Bien compatible",
+      "BAD": "⚠️ Poco compatible",
+      "TYPE": "Tipo",
+      "ENERGY": "Energía",
+      "KIDS": "Niños",
+      "HOUSING": "Vivienda",
+      "SIZE": "Tamaño",
+      "EXPERIENCE": "Experiencia requerida"
+    }
   }
 }
