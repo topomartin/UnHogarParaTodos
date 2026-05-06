@@ -61,7 +61,6 @@ const routes: Routes = [
     path: 'test',
     component: TestComponent,
     data: {
-      title: 'Test',
       icon: 'fact_check',
       showInMenu: true
     }

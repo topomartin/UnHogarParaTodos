@@ -1,13 +1,14 @@
 {
-  "APP": {
-    "TITLE": "Una Llar Per a Tothom"
-  },
+  "APP": { "TITLE": "Una Llar Per a Tothom" },
+
   "NAV": {
     "HOME": "Inici",
     "ADOPT": "Adoptar",
     "LISTAANIMAL": "Animals",
-    "FOSTER": "Casa d'acollida",
+    "FOSTER": "Acollida",
     "CONTACT": "Contacte",
+    "TEST": "Test",
+    "DETALLESANIMAL": "Veure animal",
     "AUTH": {
       "LOGIN": "Iniciar sessió",
       "LOGOUT": "Tancar sessió",
@@ -19,6 +20,7 @@
       "EDIT_PROFILE": "Editar perfil"
     }
   },
+
   "COMMON": {
     "PAGINATION": {
       "PREV": "Anterior",
@@ -31,15 +33,18 @@
       "TYPE": "Tipus",
       "STATUS": "Estat"
     },
-    "SEARCH": {
-      "NAME": "Cercar per nom"
-    },
+    "SEARCH": { "NAME": "Cercar per nom" },
     "BUTTONS": {
       "BACK": "Tornar",
-      "SAVE": "Desar canvis",
+      "SAVE": "Guardar canvis",
       "CANCEL": "Cancel·lar"
+    },
+    "BOOLEANS": {
+      "TRUE": "Sí",
+      "FALSE": "No"
     }
   },
+
   "ENUMS": {
     "ANIMAL_TYPE": {
       "dog": "Gos",
@@ -58,14 +63,46 @@
     "FREQUENCY": {
       "monthly": "Mensual",
       "yearly": "Anual",
-      "unic": "Una sola vegada"
+      "unic": "Una vegada"
+    },
+    "ANIMAL_ENERGY_LEVEL": {
+      "low": "Baixa",
+      "medium": "Mitjana",
+      "high": "Alta"
+    },
+    "ANIMAL_SIZE": {
+      "small": "Petit",
+      "medium": "Mitjà",
+      "large": "Gran"
     }
   },
+
   "ANIMAL": {
     "TYPE": "Tipus",
     "BIRTH_DATE": "Data de naixement",
     "DESCRIPTION": "Descripció",
     "STATUS": "Estat",
+    "KIDS_FRIENDLY": "Compatible amb nens",
+    "PET_FRIENDLY": "Compatible amb altres animals",
+    "NEEDS_GARDEN": "Necessita jardí",
+    "NEEDS_EXPERIENCE": "Requereix experiència",
+    "AGE_CATEGORY": {
+      "PUPPY": "Cadell",
+      "ADULT": "Adult",
+      "SENIOR": "Sènior"
+    },
+    "ADOPTION_RECOMMENDATION_TEXT": "Recomanació d’adopció",
+    "ADOPTION_RECOMMENDATIONS": {
+      "PUPPY": "Ideal per a famílies actives amb temps per a cures intensives.",
+      "ADULT": "Perfecte per a famílies equilibrades o persones amb experiència.",
+      "SENIOR": "Recomanat per a famílies tranquil·les o persones grans."
+    },
+    "FAMILY_COMPATIBILITY_TEXT": "Compatibilitat amb famílies",
+    "FAMILY_COMPATIBILITY": {
+      "PUPPY": "Alta energia / nens grans",
+      "ADULT": "Famílies actives / nens",
+      "SENIOR": "Famílies tranquil·les / poca activitat"
+    },
     "BUTTONS": {
       "DETAIL": "Veure detalls",
       "ADOPT": "Adoptar",
@@ -73,17 +110,20 @@
     },
     "NOT_FOUND": "No s'ha trobat l'animal."
   },
+
   "USER": {
     "USERNAME": "Usuari",
     "EMAIL": "Correu electrònic",
     "ROLE": "Rol"
   },
+
   "ANIMAL_LIST": {
     "EMPTY_STATE": "No hi ha animals per mostrar."
   },
+
   "REQUEST": {
     "ADOPTION_TITLE": "Adoptar {{name}}",
-    "FOSTER_TITLE": "Casa d'acollida per a {{name}}",
+    "FOSTER_TITLE": "Acollir {{name}}",
     "SECTIONS": {
       "PERSONAL": "Dades personals",
       "HOUSING": "Habitatge",
@@ -96,7 +136,7 @@
       "PHONE": "Telèfon *",
       "AGE": "Edat *",
       "ADDRESS": "Adreça *",
-      "HOUSING_TYPE": "Tipus d'habitatge *",
+      "HOUSING_TYPE": "Tipus d’habitatge *",
       "SQUARE_METERS": "Metres quadrats *",
       "EXPERIENCE": "Tens experiència prèvia?",
       "HAS_GARDEN": "Tens jardí?",
@@ -129,24 +169,25 @@
       }
     },
     "BUTTONS": {
-      "ADOPT": "Adoptar {{name}} !",
-      "FOSTER": "Acollir {{name}} !"
+      "ADOPT": "Adoptar {{name}}!",
+      "FOSTER": "Acollir {{name}}!"
     }
   },
+
   "HOME": {
     "SUBTITLE": "Troba, cuida i adopta un nou company",
     "HINT": "Fes clic en un animal per conèixer la seva història 🐾",
     "LOADING": "Carregant animals...",
     "ABOUT": {
       "TITLE": "Qui som?",
-      "TEXT1": "Som una protectora dedicada a rescatar animals en situació d'abandonament i trobar-los una llar plena d'afecte.",
-      "TEXT2": "Des dels nostres inicis hem ajudat centenars d'animals.",
+      "TEXT1": "Som una protectora dedicada a rescatar animals en situació d’abandonament i trobar-los una llar plena d’afecte.",
+      "TEXT2": "Des dels nostres inicis hem ajudat centenars d’animals.",
       "HIGHLIGHT": "🐾 Cada adopció canvia dues vides."
     },
     "ADOPTED": {
       "TITLE": "Històries felices",
       "TEXT": "Animals que ja han trobat una llar gràcies a tu.",
-      "STORY": "Va trobar la seva llar feliç",
+      "STORY": "Ha trobat una llar feliç",
       "WITH": "amb"
     },
     "CTA": {
@@ -158,27 +199,29 @@
       "CONTACT": "Contactar"
     }
   },
+
   "SPONSOR": {
     "TITLE": "Apadrina {{name}}",
-    "SUBTITLE": "El teu suport econòmic ajuda a cobrir les despeses de cura, alimentació i atenció veterinària de {{name}}.",
+    "SUBTITLE": "El teu suport ajuda a cobrir les despeses de cura, alimentació i atenció veterinària de {{name}}.",
     "SUMMARY": {
       "TITLE": "Resum del teu apadrinament",
       "AMOUNT": "Quantitat",
       "FREQUENCY": "Freqüència",
-      "START_DATE": "Data d'inici"
+      "START_DATE": "Data d’inici"
     },
     "FIELDS": {
       "AMOUNT": "Quantitat a donar",
       "MESSAGE": "Missatge per a {{name}} (opcional)",
       "FREQUENCY": "Freqüència de la donació",
-      "START_DATE": "Data d'inici"
+      "START_DATE": "Data d’inici"
     },
     "BUTTONS": {
       "PAY": "Apadrinar {{name}} 💸"
     }
   },
+
   "CONTACT": {
-    "TITLE": "Contacta'ns",
+    "TITLE": "Contacta amb nosaltres",
     "SUBTITLE": "Tens dubtes? Escriu-nos i et respondrem al més aviat possible.",
     "PHONE": "Telèfon",
     "PHONE_VALUE": "+34 600 123 456",
@@ -187,7 +230,7 @@
     "LOCATION": "Ubicació",
     "LOCATION_VALUE": "Barcelona",
     "SCHEDULE": "Horari",
-    "SCHEDULE_VALUE": "Dilluns - Divendres | 09:00 - 18:00 ",
+    "SCHEDULE_VALUE": "Dilluns - Divendres | 09:00 - 18:00",
     "FORM": {
       "NAME": "Nom",
       "EMAIL": "Correu electrònic",
@@ -199,37 +242,100 @@
     },
     "SUCCESS": "Missatge enviat correctament. Et respondrem aviat."
   },
+
   "AUTH": {
     "PASSWORD": "Contrasenya",
     "NEW_PASSWORD": "Nova contrasenya",
     "CONFIRM_PASSWORD": "Confirmar contrasenya",
     "ALREADY_ACCOUNT": "Ja tens compte?",
     "NO_ACCOUNT": "No tens compte?",
-    "GDPR_TEXT": "Accepto la política de privacitat (GDPR)",
-    "GDPR_ERROR": "Has d'acceptar el GDPR",
+    "GDPR_TEXT": "Accepto la",
+    "GDPR_LINK": "política de privacitat (GDPR)",
+    "GDPR_ERROR": "Has d’acceptar el GDPR",
     "BUTTONS": {
       "LOGIN": "Iniciar sessió",
       "REGISTER": "Registrar-se"
     }
   },
+
   "FOOTER": {
-    "DESCRIPTION": "Protectora d'animals dedicada a trobar famílies responsables per a cada animal.",
+    "DESCRIPTION": "Protectora d’animals dedicada a trobar famílies responsables per a cada animal.",
     "LINKS": "Enllaços",
     "RIGHTS": "© 2026 Una Llar Per a Tothom - Tots els drets reservats"
   },
+
   "VALIDATION": {
-    "REQUIRED_USERNAME": "El nom d'usuari és obligatori",
+    "REQUIRED_USERNAME": "El nom d’usuari és obligatori",
     "REQUIRED_EMAIL": "El correu electrònic és obligatori",
     "INVALID_EMAIL": "Correu electrònic no vàlid",
     "REQUIRED_PASSWORD": "La contrasenya és obligatòria",
     "PASSWORD_MIN_LENGTH": "La contrasenya ha de tenir almenys 6 caràcters",
     "REQUIRED_CONFIRM": "Has de confirmar la contrasenya",
     "PASSWORD_MISMATCH": "Les contrasenyes no coincideixen",
+    "PASSWORD_PATTERN": "La contrasenya ha de tenir majúscules, minúscules, número i caràcter especial",
     "REQUIRED": "Camp obligatori"
   },
+
   "ERRORS": {
     "GENERIC": "S'ha produït un error",
     "NOT_FOUND": "No trobat",
     "UNAUTHORIZED": "No autoritzat"
+  },
+
+  "PRIVACY": {
+    "TITLE": "Política de Privacitat",
+    "INTRO": "A la nostra aplicació respectem la teva privacitat i ens comprometem a protegir les teves dades personals.",
+    "SECTION_1": {
+      "TITLE": "1. Responsable del tractament",
+      "TEXT": "Aquesta aplicació és gestionada pel nostre equip de desenvolupament i administració."
+    },
+    "SECTION_2": {
+      "TITLE": "2. Dades que recopilem",
+      "ITEMS": {
+        "USERNAME": "Nom d’usuari",
+        "EMAIL": "Correu electrònic",
+        "USAGE": "Dades d’ús de la plataforma"
+      }
+    },
+    "SECTION_3": {
+      "TITLE": "3. Finalitat",
+      "TEXT": "Les dades s’utilitzen únicament per a la gestió de comptes, adopcions i apadrinaments."
+    },
+    "SECTION_4": {
+      "TITLE": "4. Conservació de dades",
+      "TEXT": "Les dades es conserven mentre el compte estigui actiu."
+    },
+    "SECTION_5": {
+      "TITLE": "5. Drets de l’usuari",
+      "TEXT": "Pots accedir, modificar o eliminar les teves dades en qualsevol moment contactant amb nosaltres."
+    },
+    "SECTION_6": {
+      "TITLE": "6. Seguretat",
+      "TEXT": "Apliquem mesures tècniques i organitzatives per protegir la teva informació."
+    },
+    "SECTION_7": {
+      "TITLE": "7. Contacte",
+      "TEXT": "Si tens dubtes, pots contactar amb nosaltres a través de la pàgina de contacte."
+    }
+  },
+
+  "TEST": {
+    "TITLE": "🐾 Test d’adopció",
+    "START": "Iniciar test",
+    "LOADING": "Carregant preguntes...",
+    "SUBMIT": "Enviar test",
+    "LOADING_RESULT": "Calculant resultat...",
+    "RESULT": {
+      "TITLE": "🐾 Animals recomanats",
+      "COMPATIBILITY": "Compatibilitat",
+      "GOOD": "🔥 Bona compatibilitat",
+      "BAD": "⚠️ Baixa compatibilitat",
+      "TYPE": "Tipus",
+      "ENERGY": "Energia",
+      "KIDS": "Nens",
+      "HOUSING": "Habitatge",
+      "SIZE": "Mida",
+      "EXPERIENCE": "Experiència requerida"
+    }
   }
 }

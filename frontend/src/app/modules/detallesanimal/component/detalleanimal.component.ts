@@ -106,30 +106,30 @@ export class DetalleAnimalComponent implements OnInit {
   getAgeCategory(birthDate: string): string {
     const { years } = this.getAgeData(birthDate);
 
-    if (years < 1) return 'cachorro';
-    if (years < 7) return 'adulto';
-    return 'senior';
+    if (years < 1) return 'ANIMAL.AGE_CATEGORIES.PUPPY';
+    if (years < 7) return 'ANIMAL.AGE_CATEGORIES.ADULT';
+    return 'ANIMAL.AGE_CATEGORIES.SENIOR';
   }
 
   getAdoptionRecommendation(birthDate: string): string {
     const { years } = this.getAgeData(birthDate);
 
     if (years < 1) {
-      return 'Ideal para familias activas y con tiempo para cuidados intensivos.';
+      return 'ANIMAL.ADOPTION_RECOMMENDATIONS.PUPPY';
     }
 
     if (years < 7) {
-      return 'Perfecto para familias equilibradas o personas con experiencia.';
+      return 'ANIMAL.ADOPTION_RECOMMENDATIONS.ADULT';
     }
 
-    return 'Recomendado para familias tranquilas o personas mayores.';
+    return 'ANIMAL.ADOPTION_RECOMMENDATIONS.SENIOR';
   }
 
   getFamilyCompatibility(birthDate: string): string {
     const { years } = this.getAgeData(birthDate);
 
-    if (years < 1) return 'Alta energía / niños mayores';
-    if (years < 7) return 'Familias activas / niños';
-    return 'Familias tranquilas / sin mucha actividad';
+    if (years < 1) return 'ANIMAL.FAMILY_COMPATIBILITY.PUPPY';
+    if (years < 7) return 'ANIMAL.FAMILY_COMPATIBILITY.ADULT';
+    return 'ANIMAL.FAMILY_COMPATIBILITY.SENIOR';
   }
 }
