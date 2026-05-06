@@ -3,9 +3,6 @@ import { ApiService } from '../../../services/api.service';
 import { Router } from '@angular/router';
 import Swiper from 'swiper';
 import { Navigation, Autoplay, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 
 // info
 interface Animal {
@@ -58,15 +55,21 @@ export class HomeComponent implements OnInit {
     this.loadAdoptions();
   }
 
+  getImageUrl(path: string) {
+    return `http://localhost:7200${path}`;
+  }
+
   // =========================
   //  CARRUSEL 1: DISPONIBLES
   // =========================
   loadAnimals(): void {
     this.loading = true;
 
+
     this.apiService.post('animal', {
       page: 1,
-      limit: 10
+      limit: 10,
+      sort:{field: 'RANDOM()', order: 'DESC'}
     }).subscribe({
       next: (res: { data: Animal[] }) => {
 
