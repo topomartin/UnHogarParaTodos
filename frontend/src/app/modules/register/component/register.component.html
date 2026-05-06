@@ -8,13 +8,9 @@
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>{{ 'USER.USERNAME' | translate }}</mat-label>
         <input matInput formControlName="username" required>
-        <mat-error *ngIf="registerForm.get('username')?.hasError('required')">
-          {{ 'VALIDATION.REQUIRED_USERNAME' | translate }}
-        <mat-label>Usuario</mat-label>
-        <input matInput formControlName="username">
 
         <mat-error *ngIf="isInvalid('username','required')">
-          El nombre de usuario es obligatorio
+          {{ 'VALIDATION.REQUIRED_USERNAME' | translate }}
         </mat-error>
       </mat-form-field>
 
@@ -22,62 +18,32 @@
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>{{ 'USER.EMAIL' | translate }}</mat-label>
         <input matInput type="email" formControlName="email" required>
-        <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
-          {{ 'VALIDATION.REQUIRED_EMAIL' | translate }}
-        <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="email">
 
         <mat-error *ngIf="isInvalid('email','required')">
-          El email es obligatorio
+          {{ 'VALIDATION.REQUIRED_EMAIL' | translate }}
         </mat-error>
 
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>{{ 'AUTH.PASSWORD' | translate }}</mat-label>
-        <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" required>
-        <button mat-icon-button matSuffix (click)="clickEvent($event)" type="button">
-          <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
-        </button>
-        <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
-          {{ 'VALIDATION.REQUIRED_PASSWORD' | translate }}
-        </mat-error>
-      </mat-form-field>
-
-      <!-- 🔥 NUEVO: GDPR -->
-      <mat-checkbox formControlName="gdpr_consent">
-        {{ 'AUTH.GDPR_TEXT' | translate }}
-      </mat-checkbox>
-      <div class="error" *ngIf="registerForm.get('gdpr_consent')?.invalid && registerForm.get('gdpr_consent')?.touched">
-        {{ 'AUTH.GDPR_ERROR' | translate }}
-      </div>
-
-      <button mat-raised-button color="primary" type="submit"
-        class="register-button"
-        [disabled]="registerForm.invalid">
-        {{ 'AUTH.BUTTONS.REGISTER' | translate }}
-      </button>
-
-      <div class="login-text">
-        {{ 'AUTH.ALREADY_ACCOUNT' | translate }}
-        <button mat-button color="accent" routerLink="/login">{{ 'NAV.AUTH.LOGIN' | translate }}</button>
-      </div>
         <mat-error *ngIf="isInvalid('email','email')">
-          Formato de email inválido
+          {{ 'VALIDATION.INVALID_EMAIL' | translate }}
         </mat-error>
       </mat-form-field>
 
       <!-- PASSWORD -->
       <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Contraseña</mat-label>
+        <mat-label>{{ 'AUTH.PASSWORD' | translate }}</mat-label>
 
-        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password"
-          (input)="registerForm.get('password')?.markAsDirty()">
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          formControlName="password"
+        />
 
         <button mat-icon-button matSuffix (click)="togglePassword($event)" type="button">
           <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
 
         <mat-error *ngIf="isInvalid('password','required')">
-          La contraseña es obligatoria
+          {{ 'VALIDATION.REQUIRED_PASSWORD' | translate }}
         </mat-error>
 
         <mat-error *ngIf="isInvalid('password','minlength')">
@@ -85,47 +51,58 @@
         </mat-error>
 
         <mat-error *ngIf="isInvalid('password','pattern')">
-          La contraseña debe tener mayúscula, minúscula, número y carácter especial
+          Debe tener mayúscula, minúscula, número y símbolo
         </mat-error>
       </mat-form-field>
 
-      <!-- CONFIRM PASSWORD (solo si password es válida) -->
-      <div *ngIf="isPasswordValid()">
+      <!-- CONFIRM PASSWORD -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>{{ 'AUTH.CONFIRM_PASSWORD' | translate }}</mat-label>
 
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Confirmar contraseña</mat-label>
+        <input
+          matInput
+          [type]="hideConfirmPassword ? 'password' : 'text'"
+          formControlName="confirmPassword"
+        />
 
-          <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword">
-
-          <button mat-icon-button matSuffix (click)="toggleConfirmPassword($event)" type="button">
-            <mat-icon>
-              {{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}
-            </mat-icon>
-          </button>
-        </mat-form-field>
-
-      </div>
+        <button mat-icon-button matSuffix (click)="toggleConfirmPassword($event)" type="button">
+          <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
 
       <!-- ERROR MATCH -->
-      <div class="error" *ngIf="registerForm.hasError('passwordMismatch')
-        && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)">
-        Las contraseñas no coinciden
+      <div class="error"
+        *ngIf="registerForm.hasError('passwordMismatch') &&
+        (registerForm.get('confirmPassword')?.touched)">
+        {{ 'VALIDATION.PASSWORD_MISMATCH' | translate }}
       </div>
 
       <!-- GDPR -->
       <mat-checkbox formControlName="gdpr_consent">
-        Acepto la
-        <a routerLink="/privacy-policy" target="_blank">política de privacidad</a>
+        {{ 'AUTH.GDPR_TEXT' | translate }}
       </mat-checkbox>
 
       <div class="error" *ngIf="isInvalid('gdpr_consent')">
-        Debes aceptar la política de privacidad
+        {{ 'AUTH.GDPR_ERROR' | translate }}
       </div>
 
       <!-- SUBMIT -->
-      <button mat-raised-button color="primary" class="register-button" type="submit" [disabled]="registerForm.invalid">
-        Registrarse
+      <button
+        mat-raised-button
+        color="primary"
+        class="register-button"
+        type="submit"
+        [disabled]="registerForm.invalid">
+        {{ 'AUTH.BUTTONS.REGISTER' | translate }}
       </button>
+
+      <!-- LOGIN LINK -->
+      <div class="login-text">
+        {{ 'AUTH.ALREADY_ACCOUNT' | translate }}
+        <button mat-button color="accent" routerLink="/login">
+          {{ 'NAV.AUTH.LOGIN' | translate }}
+        </button>
+      </div>
 
     </form>
   </mat-card>
