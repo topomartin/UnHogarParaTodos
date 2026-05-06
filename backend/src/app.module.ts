@@ -12,6 +12,7 @@ import { UserProfileModule } from './modules/user-profile/user-profile.module';
 import { AnimalRequestModule } from './modules/animal-request/animal-request.module';
 import { AnimalProfileModule } from './modules/animal-profile/animal-profile.module';
 import { AdminPageModule } from './modules/admin-page/admin-page.module';
+import { TestModule } from './modules/test/test.module';
 
 @Module({
   imports: [
@@ -26,9 +27,10 @@ import { AdminPageModule } from './modules/admin-page/admin-page.module';
     UserProfileModule,
     AnimalRequestModule,
     AnimalProfileModule,
-    AdminPageModule],
+    AdminPageModule,
+    TestModule],
 
   controllers: [],
-    providers: [TmpCleanerService],
+  providers: [TmpCleanerService],
 })
-export class AppModule {}
+export class AppModule { }

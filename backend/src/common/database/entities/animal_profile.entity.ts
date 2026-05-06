@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Animal } from "./animal.entity";
+import { EnergyLevel } from "src/common/knowledge/enums";
 
 @Entity('animal_profile')
 export class AnimalProfile {
@@ -12,10 +13,20 @@ export class AnimalProfile {
     animal!: Animal;
 
     @Column({ type: 'varchar', length: 50, nullable: true })
-    size!: string;
+    breed!: string;
 
     @Column({ type: 'varchar', length: 50, nullable: true })
-    energy_level!: string;
+    color!: string;
+
+    @Column({ type: 'varchar', length: 50, nullable: true })
+    size!: string;
+
+    @Column({
+        type: 'enum',
+        enum: EnergyLevel,
+        default: EnergyLevel.MEDIUM
+    })
+    energy_level!: EnergyLevel;
 
     @Column({ type: 'varchar', length: 50, nullable: true })
     temperament!: string;

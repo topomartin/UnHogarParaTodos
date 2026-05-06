@@ -13,6 +13,8 @@ import { SponsorAnimalComponent } from './modules/sponsor-animal/component/spons
 import { ContactComponent } from './modules/appcontact/component/appcontact.component';
 import { AdminPageComponent } from './modules/admin/page/adminpage.component';
 import { AnimalRequestFormComponent } from './modules/animalrequestform/component/animalrequestform.component';
+import { PrivacyPolicyComponent } from './modules/privacy-policy/privacy-policy';
+import { TestComponent } from './modules/test/component/test.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -25,6 +27,8 @@ const routes: Routes = [
   { path: 'sponsor/:id', component: SponsorAnimalComponent },
   { path: 'animal-request/:id/:type', component: AnimalRequestFormComponent },
   { path: 'admin', component: AdminPageComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: 'test', component: TestComponent },
 
   // Paginas a ver en menu-nav
   {
@@ -50,6 +54,15 @@ const routes: Routes = [
     component: ContactComponent,
     data: {
       icon: 'mail',
+      showInMenu: true
+    }
+  },
+  {
+    path: 'test',
+    component: TestComponent,
+    data: {
+      title: 'Test',
+      icon: 'fact_check',
       showInMenu: true
     }
   }

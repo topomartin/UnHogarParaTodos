@@ -7,7 +7,7 @@
     </div>
   </ng-container>
 
-  <!-- ANIMAL DETALLE -->
+  <!-- ANIMAL -->
   <div *ngIf="!loading && animal">
 
     <h1 class="titulo">{{ animal.name }}</h1>
@@ -24,6 +24,44 @@
       <p><strong>{{ 'ANIMAL.BIRTH_DATE' | translate }}:</strong> {{ animal.birth_date }}</p>
       <p><strong>{{ 'ANIMAL.DESCRIPTION' | translate }}:</strong> {{ animal.description }}</p>
 
+      <p>
+        <strong>Compatible con niños:</strong>
+        <span [class.ok]="profile.good_with_kids">
+          {{ profile.good_with_kids ? 'Sí' : 'No' }}
+        </span>
+      </p>
+
+      <p>
+        <strong>Compatible con otros animales:</strong>
+        <span [class.ok]="profile.good_with_animals">
+          {{ profile.good_with_animals ? 'Sí' : 'No' }}
+        </span>
+      </p>
+
+      <p>
+        <strong>Necesita jardín:</strong>
+        <span [class.warn]="profile.needs_garden">
+          {{ profile.needs_garden ? 'Sí' : 'No' }}
+        </span>
+      </p>
+
+      <p>
+        <strong>Requiere experiencia:</strong>
+        <span [class.warn]="profile.needs_experience">
+          {{ profile.needs_experience ? 'Sí' : 'No' }}
+        </span>
+      </p>
+
+      <div class="info-box">
+        <h3>💡 Recomendación de adopción</h3>
+        <p>{{ getAdoptionRecommendation(animal.birth_date) }}</p>
+      </div>
+
+      <div class="info-box">
+        <h3>👨‍👩‍👧 Compatibilidad con familias</h3>
+        <p>{{ getFamilyCompatibility(animal.birth_date) }}</p>
+      </div>
+
       <p class="status" [ngClass]="animal.status.toLowerCase()">
         <strong>{{ 'ANIMAL.STATUS' | translate }}:</strong> {{ ('ENUMS.ANIMAL_STATUS.' + animal.status) | translate }}
 
@@ -31,7 +69,6 @@
         <span *ngIf="animal.status.toLowerCase() === 'pending'">⏳</span>
         <span *ngIf="animal.status.toLowerCase() === 'adopted'">❌</span>
       </p>
-
     </div>
 
     <!-- GALERÍA -->
@@ -44,12 +81,12 @@
 
   </div>
 
-  <!-- MENSAJE NO ENCONTRADO -->
+  <!-- NO ENCONTRADO -->
   <div *ngIf="!loading && animalNotFound" class="no-animal-message">
     <p>{{ 'ANIMAL.NOT_FOUND' | translate }}</p>
   </div>
 
-  <!-- BOTÓN VOLVER -->
+  <!-- VOLVER -->
   <button class="btn-volver" routerLink="/listaanimal">
     ← {{ 'COMMON.BUTTONS.BACK' | translate }}
   </button>
