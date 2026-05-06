@@ -2,7 +2,7 @@
 
   <!-- ================= LOADING ================= -->
   <div *ngIf="loading">
-    <p>Cargando animales...</p>
+    <p>{{ 'HOME.LOADING' | translate }}</p>
   </div>
 
   <!-- ================= CAROUSEL PRINCIPAL ================= -->
@@ -10,9 +10,9 @@
 
     <!-- HEADER -->
     <div class="carousel-header">
-      <h1>Un Hogar Para Todos</h1>
-      <p>Encuentra, cuida y adopta un nuevo compañero</p>
-      <span class="hint">Haz click en un animal para conocer su historia 🐾</span>
+      <h1>{{ 'APP.TITLE' | translate }}</h1>
+      <p>{{ 'HOME.SUBTITLE' | translate }}</p>
+      <span class="hint">{{ 'HOME.HINT' | translate }}</span>
     </div>
 
     <!-- SWIPER -->
@@ -72,19 +72,18 @@
       </div>
 
       <div class="about-text">
-        <h2>¿Quiénes somos?</h2>
+        <h2>{{ 'HOME.ABOUT.TITLE' | translate }}</h2>
 
         <p>
-          Somos una protectora dedicada a rescatar animales en situación de abandono
-          y encontrarles un hogar lleno de cariño.
+          {{ 'HOME.ABOUT.TEXT1' | translate }}
         </p>
 
         <p>
-          Desde nuestros inicios, hemos ayudado a cientos de animales.
+          {{ 'HOME.ABOUT.TEXT2' | translate }}
         </p>
 
         <p class="highlight">
-          🐾 Cada adopción cambia dos vidas.
+          {{ 'HOME.ABOUT.HIGHLIGHT' | translate }}
         </p>
 
       </div>
@@ -96,8 +95,8 @@
   <div class="adopted-section">
 
     <div class="carousel-header">
-      <h2>Historias felices</h2>
-      <p>Animales que ya encontraron un hogar</p>
+      <h2>{{ 'HOME.ADOPTED.TITLE' | translate }}</h2>
+      <p>{{ 'HOME.ADOPTED.TEXT' | translate }}</p>
     </div>
 
     <div class="swiper swiper-adopted">
@@ -114,7 +113,7 @@
               <h2>{{ animal.name }}</h2>
 
               <p class="adoption-story">
-                Encontró su hogar feliz 🏡
+                {{ 'HOME.ADOPTED.STORY' | translate }} 
               </p>
 
               <small class="adoption-time">
@@ -122,7 +121,7 @@
               </small>
 
               <small *ngIf="animal.adopter_name" class="adopter">
-                Con {{ animal.adopter_name }}
+                {{ 'HOME.ADOPTED.WITH' | translate }} {{ animal.adopter_name }}
               </small>
 
             </div>
@@ -143,21 +142,20 @@
 
     <div class="final-content">
 
-      <h2>¿Quieres ayudar a cambiar una vida?</h2>
+      <h2>{{ 'HOME.CTA.TITLE' | translate }}</h2>
 
       <p>
-        Cada adopción libera espacio para salvar otro animal.
-        Puedes adoptar, apadrinar o colaborar con nosotros.
+        {{ 'HOME.CTA.TEXT' | translate }}
       </p>
 
       <div class="final-actions">
 
         <button routerLink="/listaanimal">
-          Ver animales disponibles
+          {{ 'HOME.BUTTONS.LISTA_ANIMAL' | translate }}
         </button>
 
         <button routerLink="/contact">
-          Contactar
+          {{ 'HOME.BUTTONS.CONTACT' | translate }}
         </button>
 
       </div>

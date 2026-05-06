@@ -6,8 +6,7 @@
       <mat-icon>menu</mat-icon>
     </button>
 
-    <div class="logo" [routerLink]="['/']">🐾</div> <!--<img src="assets/logo.png" class="logo-img">-->
-    <span class="title">Un Hogar Para Todos</span>
+    <div class="logo" [routerLink]="['/']">🐾 <span class="title" >{{ 'APP.TITLE' | translate }}</span></div> <!--<img src="assets/logo.png" class="logo-img">-->
   </div>
 
   <!-- CENTER -->
@@ -18,9 +17,28 @@
 
     <!-- CTA -->
     <button mat-raised-button color="primary" class="cta" [routerLink]="['/listaanimal']">
-      Adoptar
+      {{ 'NAV.ADOPT' | translate }}
     </button>
 
+    <!-- SELECTOR DE IDIOMAS CON IMAGEN -->
+    <button mat-button [matMenuTriggerFor]="langMenu" class="lang-button" [title]="getSelectedLangName()">
+      <img [src]="getSelectedFlagPath()" class="flag-img" [alt]="getSelectedLangName()">
+    </button>
+
+    <mat-menu #langMenu="matMenu" class="flag-menu-panel">
+      <button mat-menu-item (click)="changeLanguage('ca')" title="Català" class="flag-only-item">
+        <img src="flags/ca.svg" class="flag-img-menu" alt="Català">
+      </button>
+
+      <button mat-menu-item (click)="changeLanguage('es')" title="Español" class="flag-only-item">
+        <img src="flags/es.svg" class="flag-img-menu" alt="Español">
+      </button>
+
+      <button mat-menu-item (click)="changeLanguage('en')" title="English" class="flag-only-item">
+        <img src="flags/en.svg" class="flag-img-menu" alt="English">
+      </button>
+    </mat-menu>
+    
     <!-- USER AREA -->
     <ng-container *ngIf="user$ | async as user; else guest">
 
@@ -33,21 +51,21 @@
 
         <button mat-menu-item (click)="navigateAndClose('/profile')">
           <mat-icon>person</mat-icon>
-          <span>Perfil</span>
+          <span>{{ 'NAV.USER.PROFILE' | translate }}</span>
         </button>
 
         <button mat-menu-item
                 *ngIf="isAdminOrWorker(user)"
                 (click)="navigateAndClose('/admin')">
           <mat-icon>admin_panel_settings</mat-icon>
-          <span>Admin</span>
+          <span>{{ 'NAV.USER.ADMIN' | translate }}</span>
         </button>
 
         <mat-divider></mat-divider>
 
         <button mat-menu-item (click)="logout()">
           <mat-icon>logout</mat-icon>
-          <span>Logout</span>
+          <span>{{ 'NAV.AUTH.LOGOUT' | translate }}</span>
         </button>
 
       </mat-menu>
@@ -56,8 +74,8 @@
 
     <!-- GUEST -->
     <ng-template #guest>
-      <button mat-button [routerLink]="['/login']">Login</button>
-      <button mat-button [routerLink]="['/register']">Register</button>
+      <button mat-button [routerLink]="['/login']">{{ 'NAV.AUTH.LOGIN' | translate }}</button>
+      <button class="register-button" mat-button [routerLink]="['/register']">{{ 'NAV.AUTH.REGISTER' | translate }}</button>
     </ng-template>
 
   </div>

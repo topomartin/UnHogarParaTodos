@@ -1,25 +1,25 @@
 <div class="contact-container">
 
-    <h1>Contacta con nosotros</h1>
-    <p>¿Tienes dudas? Escríbenos y te responderemos lo antes posible.</p>
+    <h1>{{ 'CONTACT.TITLE' | translate }}</h1>
+    <p>{{ 'CONTACT.SUBTITLE' | translate }}</p>
 
     <!-- 📍 INFO EMPRESA -->
     <div class="contact-info">
 
         <div class="info-item">
-            📞 <strong>Teléfono:</strong> +34 600 123 456
+            📞 <strong>{{ 'CONTACT.PHONE' | translate }}:</strong> {{ 'CONTACT.PHONE_VALUE' | translate }}
         </div>
 
         <div class="info-item">
-            📧 <strong>Email:</strong> info@protectora.org
+            📧 <strong>{{ 'CONTACT.EMAIL' | translate }}:</strong> {{ 'CONTACT.EMAIL_VALUE' | translate }}
         </div>
 
         <div class="info-item">
-            📍 <strong>Ubicación:</strong> Barcelona, España
+            📍 <strong>{{ 'CONTACT.LOCATION' | translate }}:</strong> {{ 'CONTACT.LOCATION_VALUE' | translate }}
         </div>
 
         <div class="info-item">
-            🕒 <strong>Horario:</strong> Lunes - Viernes | 09:00 - 18:00
+            🕒 <strong>{{ 'CONTACT.SCHEDULE' | translate }}:</strong> {{ 'CONTACT.SCHEDULE_VALUE' | translate }}
         </div>
 
     </div>
@@ -27,22 +27,22 @@
     <!-- FORMULARIO -->
     <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!sent">
 
-        <input type="text" placeholder="Nombre" formControlName="name">
+        <input type="text" placeholder="{{ 'CONTACT.FORM.NAME' | translate }}" formControlName="name">
 
-        <input type="email" placeholder="Email" formControlName="email">
+        <input type="email" placeholder="{{ 'CONTACT.FORM.EMAIL' | translate }}" formControlName="email">
 
-        <input type="text" placeholder="Asunto" formControlName="subject">
+        <input type="text" placeholder="{{ 'CONTACT.FORM.SUBJECT' | translate }}" formControlName="subject">
 
-        <textarea placeholder="Mensaje" formControlName="message"></textarea>
+        <textarea placeholder="{{ 'CONTACT.FORM.MESSAGE' | translate }}" formControlName="message"></textarea>
 
         <button type="submit" [disabled]="form.invalid">
-            Enviar mensaje
+            {{ 'CONTACT.FORM.BUTTONS.SEND' | translate }}
         </button>
 
     </form>
 
     <div class="success" *ngIf="sent">
-        ✅ Mensaje enviado correctamente. Te responderemos pronto.
+        ✅ {{ 'CONTACT.SUCCESS' | translate }}
     </div>
 
 </div>

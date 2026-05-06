@@ -25,6 +25,8 @@ import { FormsModule } from '@angular/forms';
 import { AdminModule } from './modules/admin/adminpage.module';
 import { SwiperCustomModule } from './modules/swiper/swiper.module';
 import { HomepageModule } from './modules/home/home.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,14 @@ import { HomepageModule } from './modules/home/home.module';
     AdminModule,
     HomepageModule,
     ReactiveFormsModule,
-    SwiperCustomModule
+    SwiperCustomModule,
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: provideTranslateHttpLoader({
+        prefix: '/i18n/',
+        suffix: '.json'
+      })
+    }),
   ],
   bootstrap: [AppComponent],
 })

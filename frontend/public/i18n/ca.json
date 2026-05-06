@@ -1,0 +1,235 @@
+{
+  "APP": {
+    "TITLE": "Una Llar Per a Tothom"
+  },
+  "NAV": {
+    "HOME": "Inici",
+    "ADOPT": "Adoptar",
+    "LISTAANIMAL": "Animals",
+    "FOSTER": "Casa d'acollida",
+    "CONTACT": "Contacte",
+    "AUTH": {
+      "LOGIN": "Iniciar sessió",
+      "LOGOUT": "Tancar sessió",
+      "REGISTER": "Registra't"
+    },
+    "USER": {
+      "PROFILE": "Perfil",
+      "ADMIN": "Administrar",
+      "EDIT_PROFILE": "Editar perfil"
+    }
+  },
+  "COMMON": {
+    "PAGINATION": {
+      "PREV": "Anterior",
+      "NEXT": "Següent",
+      "PAGE": "Pàgina",
+      "OF": "de"
+    },
+    "FILTER": {
+      "TITLE": "Filtrar per",
+      "TYPE": "Tipus",
+      "STATUS": "Estat"
+    },
+    "SEARCH": {
+      "NAME": "Cercar per nom"
+    },
+    "BUTTONS": {
+      "BACK": "Tornar",
+      "SAVE": "Desar canvis",
+      "CANCEL": "Cancel·lar"
+    }
+  },
+  "ENUMS": {
+    "ANIMAL_TYPE": {
+      "dog": "Gos",
+      "cat": "Gat"
+    },
+    "ANIMAL_STATUS": {
+      "available": "Disponible",
+      "pending": "Pendent",
+      "adopted": "Adoptat"
+    },
+    "HOUSING": {
+      "house": "Casa",
+      "flat": "Pis",
+      "room": "Habitació"
+    },
+    "FREQUENCY": {
+      "monthly": "Mensual",
+      "yearly": "Anual",
+      "unic": "Una sola vegada"
+    }
+  },
+  "ANIMAL": {
+    "TYPE": "Tipus",
+    "BIRTH_DATE": "Data de naixement",
+    "DESCRIPTION": "Descripció",
+    "STATUS": "Estat",
+    "BUTTONS": {
+      "DETAIL": "Veure detalls",
+      "ADOPT": "Adoptar",
+      "SPONSOR": "Apadrinar"
+    },
+    "NOT_FOUND": "No s'ha trobat l'animal."
+  },
+  "USER": {
+    "USERNAME": "Usuari",
+    "EMAIL": "Correu electrònic",
+    "ROLE": "Rol"
+  },
+  "ANIMAL_LIST": {
+    "EMPTY_STATE": "No hi ha animals per mostrar."
+  },
+  "REQUEST": {
+    "ADOPTION_TITLE": "Adoptar {{name}}",
+    "FOSTER_TITLE": "Casa d'acollida per a {{name}}",
+    "SECTIONS": {
+      "PERSONAL": "Dades personals",
+      "HOUSING": "Habitatge",
+      "EXPERIENCE": "Experiència i animals",
+      "LIFESTYLE": "Estil de vida",
+      "MOTIVATION": "Motivació"
+    },
+    "FIELDS": {
+      "FULLNAME": "Nom complet *",
+      "PHONE": "Telèfon *",
+      "AGE": "Edat *",
+      "ADDRESS": "Adreça *",
+      "HOUSING_TYPE": "Tipus d'habitatge *",
+      "SQUARE_METERS": "Metres quadrats *",
+      "EXPERIENCE": "Tens experiència prèvia?",
+      "HAS_GARDEN": "Tens jardí?",
+      "HAS_TERRACE": "Tens terrassa?",
+      "OTHER_PETS": "Tens altres animals?",
+      "AVAILABLE_TIME": "Temps disponible?",
+      "LIFESTYLE": "Estil de vida?",
+      "NOISE_TOLERANCE": "Tolerància al soroll?",
+      "TIME_AT_HOME": "Temps a casa?"
+    },
+    "VALUES": {
+      "AVAILABLE_TIME": {
+        "low": "Poc",
+        "medium": "Mitjà",
+        "high": "Molt"
+      },
+      "LIFESTYLE": {
+        "calm": "Tranquil",
+        "active": "Actiu"
+      },
+      "NOISE_TOLERANCE": {
+        "low": "Baixa",
+        "medium": "Mitjana",
+        "high": "Alta"
+      },
+      "TIME_AT_HOME": {
+        "little": "Poc",
+        "normal": "Normal",
+        "lot": "Molt"
+      }
+    },
+    "BUTTONS": {
+      "ADOPT": "Adoptar {{name}} !",
+      "FOSTER": "Acollir {{name}} !"
+    }
+  },
+  "HOME": {
+    "SUBTITLE": "Troba, cuida i adopta un nou company",
+    "HINT": "Fes clic en un animal per conèixer la seva història 🐾",
+    "LOADING": "Carregant animals...",
+    "ABOUT": {
+      "TITLE": "Qui som?",
+      "TEXT1": "Som una protectora dedicada a rescatar animals en situació d'abandonament i trobar-los una llar plena d'afecte.",
+      "TEXT2": "Des dels nostres inicis hem ajudat centenars d'animals.",
+      "HIGHLIGHT": "🐾 Cada adopció canvia dues vides."
+    },
+    "ADOPTED": {
+      "TITLE": "Històries felices",
+      "TEXT": "Animals que ja han trobat una llar gràcies a tu.",
+      "STORY": "Va trobar la seva llar feliç",
+      "WITH": "amb"
+    },
+    "CTA": {
+      "TITLE": "Vols ajudar a canviar una vida?",
+      "TEXT": "Cada adopció allibera espai per salvar un altre animal. Pots adoptar, apadrinar o col·laborar amb nosaltres."
+    },
+    "BUTTONS": {
+      "LISTA_ANIMAL": "Veure animals disponibles",
+      "CONTACT": "Contactar"
+    }
+  },
+  "SPONSOR": {
+    "TITLE": "Apadrina {{name}}",
+    "SUBTITLE": "El teu suport econòmic ajuda a cobrir les despeses de cura, alimentació i atenció veterinària de {{name}}.",
+    "SUMMARY": {
+      "TITLE": "Resum del teu apadrinament",
+      "AMOUNT": "Quantitat",
+      "FREQUENCY": "Freqüència",
+      "START_DATE": "Data d'inici"
+    },
+    "FIELDS": {
+      "AMOUNT": "Quantitat a donar",
+      "MESSAGE": "Missatge per a {{name}} (opcional)",
+      "FREQUENCY": "Freqüència de la donació",
+      "START_DATE": "Data d'inici"
+    },
+    "BUTTONS": {
+      "PAY": "Apadrinar {{name}} 💸"
+    }
+  },
+  "CONTACT": {
+    "TITLE": "Contacta'ns",
+    "SUBTITLE": "Tens dubtes? Escriu-nos i et respondrem al més aviat possible.",
+    "PHONE": "Telèfon",
+    "PHONE_VALUE": "+34 600 123 456",
+    "EMAIL": "Correu electrònic",
+    "EMAIL_VALUE": "info@protectora.org",
+    "LOCATION": "Ubicació",
+    "LOCATION_VALUE": "Barcelona",
+    "SCHEDULE": "Horari",
+    "SCHEDULE_VALUE": "Dilluns - Divendres | 09:00 - 18:00 ",
+    "FORM": {
+      "NAME": "Nom",
+      "EMAIL": "Correu electrònic",
+      "SUBJECT": "Assumpte",
+      "MESSAGE": "Missatge"
+    },
+    "BUTTONS": {
+      "SEND": "Enviar missatge"
+    },
+    "SUCCESS": "Missatge enviat correctament. Et respondrem aviat."
+  },
+  "AUTH": {
+    "PASSWORD": "Contrasenya",
+    "NEW_PASSWORD": "Nova contrasenya",
+    "CONFIRM_PASSWORD": "Confirmar contrasenya",
+    "ALREADY_ACCOUNT": "Ja tens compte?",
+    "NO_ACCOUNT": "No tens compte?",
+    "GDPR_TEXT": "Accepto la política de privacitat (GDPR)",
+    "GDPR_ERROR": "Has d'acceptar el GDPR",
+    "BUTTONS": {
+      "LOGIN": "Iniciar sessió",
+      "REGISTER": "Registrar-se"
+    }
+  },
+  "FOOTER": {
+    "DESCRIPTION": "Protectora d'animals dedicada a trobar famílies responsables per a cada animal.",
+    "LINKS": "Enllaços",
+    "RIGHTS": "© 2026 Una Llar Per a Tothom - Tots els drets reservats"
+  },
+  "VALIDATION": {
+    "REQUIRED_USERNAME": "El nom d'usuari és obligatori",
+    "REQUIRED_EMAIL": "El correu electrònic és obligatori",
+    "INVALID_EMAIL": "Correu electrònic no vàlid",
+    "REQUIRED_PASSWORD": "La contrasenya és obligatòria",
+    "PASSWORD_MIN_LENGTH": "La contrasenya ha de tenir almenys 6 caràcters",
+    "REQUIRED_CONFIRM": "Has de confirmar la contrasenya",
+    "PASSWORD_MISMATCH": "Les contrasenyes no coincideixen",
+    "REQUIRED": "Camp obligatori"
+  },
+  "ERRORS": {
+    "GENERIC": "S'ha produït un error",
+    "NOT_FOUND": "No trobat",
+    "UNAUTHORIZED": "No autoritzat"
+  }
+}

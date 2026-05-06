@@ -1,23 +1,23 @@
 <div class="container">
 
-  <h1 class="titulo">Lista de Animales</h1>
+  <h1 class="titulo">{{ 'NAV.LISTAANIMAL' | translate }}</h1>
 
   <!-- FILTERS -->
   <div class="filters">
-    <input type="text" placeholder="Buscar por nombre" [(ngModel)]="searchText" (input)="onSearchChange()"
+    <input type="text" [placeholder]="'COMMON.SEARCH.NAME' | translate" [(ngModel)]="searchText" (input)="onSearchChange()"
       [disabled]="loading" />
 
     <select [(ngModel)]="selectedType" (change)="applyFilters()" [disabled]="loading">
-      <option value="">Todos los tipos</option>
-      <option value="cat">Gato</option>
-      <option value="dog">Perro</option>
+      <option value="">{{ 'COMMON.FILTER.TITLE' | translate }} {{ 'COMMON.FILTER.TYPE' | translate }}</option>
+      <option value="cat">{{ 'ENUMS.ANIMAL_TYPE.cat' | translate }}</option>
+      <option value="dog">{{ 'ENUMS.ANIMAL_TYPE.dog' | translate }}</option>
     </select>
 
     <select [(ngModel)]="selectedStatus" (change)="applyFilters()" [disabled]="loading">
-      <option value="">Todos los estados</option>
-      <option value="available">Disponible</option>
-      <option value="pending">Pendiente</option>
-      <option value="adopted">Adoptado</option>
+      <option value="">{{ 'COMMON.FILTER.TITLE' | translate }} {{ 'COMMON.FILTER.STATUS' | translate }}</option>
+      <option value="available">{{ 'ENUMS.ANIMAL_STATUS.available' | translate }}</option>
+      <option value="pending">{{ 'ENUMS.ANIMAL_STATUS.pending' | translate }}</option>
+      <option value="adopted">{{ 'ENUMS.ANIMAL_STATUS.adopted' | translate }}</option>
     </select>
   </div>
 
@@ -28,10 +28,10 @@
       <!-- INFO -->
       <div class="info">
         <span class="nombre">{{ animal.name }}</span>
-        <span class="tipo">{{ animal.type }}</span>
+        <span class="tipo">{{ ('ENUMS.ANIMAL_TYPE.' + animal.type) | translate }}</span>
 
         <span class="status" [ngClass]="animal.status.toLowerCase()">
-          {{ animal.status }}
+          {{ ('ENUMS.ANIMAL_STATUS.' + animal.status) | translate }}
 
           <span *ngIf="animal.status.toLowerCase() === 'available'">✔️</span>
           <span *ngIf="animal.status.toLowerCase() === 'pending'">⏳</span>
@@ -43,17 +43,17 @@
       <div class="acciones">
 
         <button class="btn detalle" (click)="verDetalle(animal.id)">
-          Ver detalles
+          {{ 'ANIMAL.BUTTONS.DETAIL' | translate }}
         </button>
 
-        <button class="btn adoptar" *ngIf="animal.status.toLowerCase() === 'available'"
+        <button class="btn adoptar" *ngIf="animal.status.toLowerCase() !== 'adopted'"
           (click)="adoptarAnimal(animal.id)">
-          Adoptar
+          {{ 'ANIMAL.BUTTONS.ADOPT' | translate }}
         </button>
 
-        <button class="btn apadrinar" *ngIf="animal.status.toLowerCase() === 'available'" 
+        <button class="btn apadrinar" *ngIf="animal.status.toLowerCase() !== 'adopted'" 
         (click)="apadrinarAnimal(animal.id)">
-          💸 Apadrinar
+          💸 {{ 'ANIMAL.BUTTONS.SPONSOR' | translate }}
         </button>
 
       </div>
@@ -64,19 +64,19 @@
 
   <!-- EMPTY STATE -->
   <div class="empty-state" *ngIf="animales.length === 0">
-    No hay animales que mostrar.
+    {{ 'ANIMAL_LIST.EMPTY_STATE' | translate }}
   </div>
 
   <!-- PAGINATION -->
   <div class="pagination" *ngIf="totalItems > itemsPerPage">
     <button class="btn" (click)="goToPreviousPage()" [disabled]="currentPage === 1 || loading">
-      Anterior
+      {{ 'COMMON.PAGINATION.PREV' | translate }}
     </button>
 
-    <span>Página {{ currentPage }} de {{ totalPages }}</span>
+    <span>{{ 'COMMON.PAGINATION.PAGE' | translate }} {{ currentPage }} {{ 'COMMON.PAGINATION.OF' | translate }} {{ totalPages }}</span>
 
     <button class="btn" (click)="goToNextPage()" [disabled]="currentPage === totalPages || loading">
-      Siguiente
+      {{ 'COMMON.PAGINATION.NEXT' | translate }}
     </button>
   </div>
 
