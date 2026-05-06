@@ -17,6 +17,7 @@ import { RegisterFosterComponent } from './modules/registerfoster/component/regi
 import { SponsorAnimalComponent } from './modules/sponsor-animal/component/sponsor-animal.component';
 import { ContactComponent } from './modules/appcontact/component/appcontact.component';
 import { TestComponent } from './modules/test/component/test.component';
+import { ImageViewerDialogComponent } from './modules/image-viewer-dialog/component/image-viewer-dialog.component';
 import { PrivacyPolicyComponent } from './modules/privacy-policy/privacy-policy';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavigationMenuComponent } from './modules/shared/navigation-menu.component/navigation-menu.component';
@@ -29,6 +30,7 @@ import { SwiperCustomModule } from './modules/swiper/swiper.module';
 import { HomepageModule } from './modules/home/home.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
     FooterComponent,
     AnimalRequestFormComponent,
     TestComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    ImageViewerDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,7 @@ import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
     AdminModule,
     HomepageModule,
     SwiperCustomModule,
+    MatDialogModule,
     TranslateModule.forRoot({
       loader: provideTranslateHttpLoader({
         prefix: '/i18n/',

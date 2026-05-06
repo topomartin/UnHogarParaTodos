@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
+import { ImageViewerDialogComponent } from '../../image-viewer-dialog/component/image-viewer-dialog.component';
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-detalleanimal',
@@ -21,7 +23,8 @@ export class DetalleAnimalComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private apiService: ApiService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -73,6 +76,18 @@ export class DetalleAnimalComponent implements OnInit {
         : '';
 
       this.cdr.detectChanges();
+    });
+  }
+
+  openImageViewer(index: number) {
+    this.dialog.open(ImageViewerDialogComponent, {
+      data: {
+        images: this.images,
+        index: index
+      },
+      panelClass: 'image-dialog',
+      maxWidth: '90vw',
+      maxHeight: '90vh'
     });
   }
 

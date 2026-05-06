@@ -76,7 +76,7 @@ export class ApiService {
   }
 
   public getAnimalImages(animalId: number): Observable<any[]> {
-    return this.get(`animal/${animalId}/images`);
+    return this.get(`animal-image/${animalId}`);
   }
 
   private handleError(error: HttpErrorResponse): Observable<any> {

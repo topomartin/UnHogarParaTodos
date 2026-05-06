@@ -1,0 +1,15 @@
+<div class="overlay" (click)="close()">
+
+  <div class="viewer" (click)="$event.stopPropagation()">
+
+    <button class="close" (click)="close()">✕</button>
+
+    <button class="nav left" (click)="prev()">‹</button>
+
+    <img [src]="images[currentIndex]?.image_url" />
+
+    <button class="nav right" (click)="next()">›</button>
+
+  </div>
+
+</div>
