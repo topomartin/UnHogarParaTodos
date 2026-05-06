@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
-import { HomeComponent } from './modules/home/component/home.component';
 import { LoginComponent } from './modules/login/component/login.component';
 import { RegisterComponent } from './modules/register/component/register.component';
 import { VerPerfilComponent } from './modules/VerPerfil/component/verperfil.component';
@@ -24,6 +23,8 @@ import { FooterComponent } from './modules/shared/footer/footer';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminModule } from './modules/admin/adminpage.module';
+import { SwiperCustomModule } from './modules/swiper/swiper.module';
+import { HomepageModule } from './modules/home/home.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,6 @@ import { AdminModule } from './modules/admin/adminpage.module';
     NavigationMenuComponent,
     NavigationBarComponent,
     FooterComponent,
-    HomeComponent,
     AnimalRequestFormComponent,
   ],
   imports: [
@@ -54,7 +54,9 @@ import { AdminModule } from './modules/admin/adminpage.module';
     CommonModule,
     FormsModule,
     AdminModule,
-    ReactiveFormsModule
+    HomepageModule,
+    ReactiveFormsModule,
+    SwiperCustomModule
   ],
   bootstrap: [AppComponent],
 })

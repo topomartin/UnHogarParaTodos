@@ -23,13 +23,13 @@
         <div class="swiper-slide" *ngFor="let animal of animals">
 
           <div class="animal-card"
-               (click)="navigateToDetail(animal.id)">
+              (click)="navigateToDetail(animal.id)">
 
             <!-- IMAGE -->
             <img *ngIf="animal.image_url; else noImage"
-                 [src]="animal.image_url"
-                 (error)="handleImageError($event)"
-                 [alt]="animal.name" />
+                [src]="getImageUrl(animal.image_url)"
+                (error)="handleImageError($event)"
+                [alt]="animal.name" />
 
             <!-- FALLBACK -->
             <ng-template #noImage>
@@ -107,7 +107,7 @@
 
           <div class="animal-card adopted">
 
-            <img [src]="animal.image_url" />
+            <img [src]="getImageUrl(animal.image_url)" />
 
             <div class="overlay">
 

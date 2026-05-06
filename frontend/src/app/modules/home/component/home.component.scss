@@ -1,3 +1,7 @@
+@use 'swiper/css' as *;
+@use 'swiper/css/navigation' as *;
+@use 'swiper/css/pagination' as *;
+
 /* =========================
     VARIABLES GLOBALES
 ========================= */
@@ -92,7 +96,7 @@
   width: 100%;
   max-width: 1100px;
   margin: 40px auto;
-  height: 400px; 
+  height: 400px;
 }
 
 .swiper-adopted .swiper-wrapper {

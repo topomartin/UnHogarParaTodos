@@ -33,6 +33,16 @@ async function bootstrap() {
   //CORS
   app.enableCors();
 
+  // STATIC FILES para animal-images
+app.useStaticAssets(join(process.cwd(), 'uploads'), {
+  prefix: '/uploads/',
+});
+
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.url}`);
+  next();
+});
+
   //Read images from HD
   app.useStaticAssets(join(process.cwd(), 'uploads'), {
       prefix: '/uploads/',
@@ -60,6 +70,7 @@ async function bootstrap() {
 
   app.useGlobalGuards(new ApiKeyGuard());
 
+  
 
   //APP SERVER PORT 
   const port = appConfig.app.port || 3000;

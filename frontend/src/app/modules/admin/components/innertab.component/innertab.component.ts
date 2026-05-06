@@ -213,9 +213,14 @@ export class InnerTabComponent implements OnInit {
           disableClose: false,
           data: {
             title: `Ver imágenes de ${row.name}`,
-            data: row.images
+            data: row.images,
+            elementId: row.id
           }
         });
+        dialogRef.afterClosed().subscribe(
+          (result)=>{
+          });
+
   }
 
   getInfo(modelName: string, row: any){
