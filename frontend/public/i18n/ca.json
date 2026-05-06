@@ -42,7 +42,9 @@
     "BOOLEANS": {
       "TRUE": "Sí",
       "FALSE": "No"
-    }
+    },
+    
+    "NO_INFO": "Sense informació"
   },
 
   "ENUMS": {

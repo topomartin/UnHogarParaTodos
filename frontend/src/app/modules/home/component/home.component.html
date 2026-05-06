@@ -27,7 +27,7 @@
 
             <!-- IMAGE -->
             <img *ngIf="animal.image_url; else noImage"
-                [src]="getImageUrl(animal.image_url)"
+                [src]="animal.image_url"
                 (error)="handleImageError($event)"
                 [alt]="animal.name" />
 
@@ -106,7 +106,9 @@
 
           <div class="animal-card adopted">
 
-            <img [src]="getImageUrl(animal.image_url)" />
+            <img [src]="animal.image_url"
+                (error)="handleImageError($event)"
+                [alt]="animal.name" />
 
             <div class="overlay">
 
@@ -116,7 +118,7 @@
                 {{ 'HOME.ADOPTED.STORY' | translate }} 
               </p>
 
-              <small class="adoption-time">
+              <small *ngIf="animal.adopted_at" class="adoption-time">
                 {{ animal.adopted_at }}
               </small>
 

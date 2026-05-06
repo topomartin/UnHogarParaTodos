@@ -16,7 +16,7 @@
     <img *ngIf="mainImage"
          [src]="mainImage"
          (error)="mainImage = 'https://picsum.photos/600/400'"
-         style="width: 400px; border-radius: 10px;" />
+         class="main-image"  />
 
     <div class="card">
 
@@ -96,11 +96,13 @@
     
 
     <!-- GALERÍA -->
-    <div style="display:flex; gap:10px; margin-top:10px;">
-      <img *ngFor="let img of images; let i = index"
-           [src]="img.image_url"
-           (click)="openImageViewer(i)"
-           style="width:80px; cursor:pointer; border-radius:6px;" />
+    <div class="gallery">
+      <img
+        *ngFor="let img of images; let i = index"
+        [src]="img.image_url"
+        (click)="openImageViewer(i)"
+        class="gallery-img"
+      />
     </div>
 
   </div>

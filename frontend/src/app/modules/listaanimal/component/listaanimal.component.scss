@@ -18,12 +18,20 @@
 }
 
 /* CARD */
-.card {
+.card {  
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "avatar info"
+    "avatar acciones";
+  gap: 10px;
+
   background-color: #f5f5f5;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
-  transition: all 0.3s ease; /* 🔥 animación suave */
+  transition: all 0.3s ease; 
 }
 
 /* 🔥 EFECTO HOVER */
@@ -34,10 +42,21 @@
 
 /* INFO */
 .info {
+  grid-area: info;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+}
+
+/* AVATAR IZQUIERDA */
+.animal-avatar {
+  grid-area: avatar;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
 }
 
 .nombre {
@@ -70,6 +89,7 @@
 
 /* BOTONES */
 .acciones {
+  grid-area: acciones;
   display: flex;
   justify-content: flex-end;
   gap: 10px;
@@ -235,5 +255,14 @@
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    grid-template-columns: 80px 1fr;
+    grid-template-areas:
+      "avatar info"
+      "acciones acciones";
   }
 }

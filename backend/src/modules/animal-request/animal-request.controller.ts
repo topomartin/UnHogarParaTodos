@@ -23,7 +23,6 @@ export class AnimalRequestController {
 
     @Post()
     @HttpCode(200)
-    @Post()
     findAll(@Body() filter: AnimalRequestSearchDto): Promise<IPaginatedResult<AnimalRequest | null | undefined>> {
         return this.service.findAll(filter);
     }

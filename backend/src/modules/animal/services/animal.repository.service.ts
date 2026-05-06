@@ -31,7 +31,7 @@ export class AnimalRepositoryService {
         try {
             return await this.animalRepository.findOne({
                 where: filter,
-                relations: ['profile'] 
+                relations: ['profile', 'images'] 
             });
         } catch (e) {
             this.handleError(e);

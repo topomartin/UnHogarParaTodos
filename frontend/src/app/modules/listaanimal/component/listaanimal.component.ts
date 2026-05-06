@@ -54,7 +54,17 @@ export class ListaAnimalComponent implements OnInit {
     this.apiService.post('animal', body).subscribe(
       (response: any) => {
 
-        this.animales = response.data;
+        this.animales = response.data.map((a: any) => {
+          const images = a.images || [];
+          const main = images.find((img: any) => img.is_main) || images[0];
+
+          return {
+            ...a,
+            image_url: main
+              ? this.apiService.getImageUrl(main.image_url)
+              : null
+          };
+        });
 
         this.totalItems = response.meta.total;
         this.totalPages = response.meta.lastPage;

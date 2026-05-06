@@ -25,18 +25,22 @@
 
     <div class="card" *ngFor="let animal of animales">
 
+      <img class="animal-avatar"
+          *ngIf="animal.image_url"
+          [src]="animal.image_url"
+          [alt]="animal.name" />
       <!-- INFO -->
-      <div class="info">
-        <span class="nombre">{{ animal.name }}</span>
-        <span class="tipo">{{ animal.type ? ('ENUMS.ANIMAL_TYPE.' + animal.type | translate) : ('COMMON.NO_INFO' | translate) }}</span>
+      <div class="info">        
+          <span class="nombre">{{ animal.name }}</span>        
+          <span class="tipo">{{ animal.type ? ('ENUMS.ANIMAL_TYPE.' + animal.type | translate) : ('COMMON.NO_INFO' | translate) }}</span>
 
-        <span class="status" [ngClass]="animal.status.toLowerCase()">
-          {{ animal.status ? ('ENUMS.ANIMAL_STATUS.' + animal.status | translate) : ('COMMON.NO_INFO' | translate) }}
+          <span class="status" [ngClass]="animal.status.toLowerCase()">
+            {{ animal.status ? ('ENUMS.ANIMAL_STATUS.' + animal.status | translate) : ('COMMON.NO_INFO' | translate) }}
 
-          <span *ngIf="animal.status.toLowerCase() === 'available'">✔️</span>
-          <span *ngIf="animal.status.toLowerCase() === 'pending'">⏳</span>
-          <span *ngIf="animal.status.toLowerCase() === 'adopted'">❌</span>
-        </span>
+            <span *ngIf="animal.status.toLowerCase() === 'available'">✔️</span>
+            <span *ngIf="animal.status.toLowerCase() === 'pending'">⏳</span>
+            <span *ngIf="animal.status.toLowerCase() === 'adopted'">❌</span>
+          </span>  
       </div>
 
       <!-- BOTONES -->

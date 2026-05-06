@@ -4,24 +4,29 @@ import { Router } from '@angular/router';
 import Swiper from 'swiper';
 import { Navigation, Autoplay, Pagination } from 'swiper/modules';
 
-// info
 interface Animal {
   id: number;
   name: string;
   type: string;
   status: string;
-  image_url?: string;
   birth_date: string;
-  age?: string;
+  age?: string;  
+  images?: AnimalImage[];
+  image_url: string;
 }
 
-// info
+interface AnimalImage {
+  image_url: string;
+  is_main: boolean;
+}
+
 interface AdoptedAnimal {
   id: number;
   name: string;
   image_url: string;
   adopted_at: string;
   adopter_name: string | null;
+  images?: AnimalImage[];
 }
 
 
@@ -69,11 +74,14 @@ export class HomeComponent implements OnInit {
     this.apiService.post('animal', {
       page: 1,
       limit: 10,
+      filter: {
+        status: 'available'
+      },
       sort:{field: 'RANDOM()', order: 'DESC'}
     }).subscribe({
       next: (res: { data: Animal[] }) => {
 
-        const available = (res.data || []).filter(a => a.status !== 'adopted');
+        const available = (res.data || []);
 
         const shuffled = available
           .map((a: Animal) => ({ a, sort: Math.random() }))
@@ -81,16 +89,29 @@ export class HomeComponent implements OnInit {
           .map(x => x.a);
 
         // FORZADA image_url mientras no hay image y calculateAge mientras no haya en backend
-        this.animals = shuffled.slice(0, 8).map(a => ({
-          ...a,
-          image_url: a.image_url ?? `https://picsum.photos/600/400?random=${a.id}`,
-          age: this.calculateAge(a.birth_date)
-        }));
+        this.animals = shuffled.slice(0, 5).map(a => {
+
+          const images = a.images || [];
+
+          const main = images.find((img: any) => img.is_main) || images[0];
+
+          return {
+            ...a,
+            image_url: main
+              ? this.apiService.getImageUrl(main.image_url)
+              : `https://picsum.photos/600/400?random=${a.id}`,
+            age: this.calculateAge(a.birth_date)
+          };
+        });
 
         this.loading = false;
 
         this.cdr.detectChanges();
-        setTimeout(() => this.initSwiper(), 0);
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            this.initSwiper();
+          });
+        });
       },
       error: (err) => {
         console.error(err);
@@ -104,41 +125,74 @@ export class HomeComponent implements OnInit {
   // =========================
   loadAdoptions(): void {
 
-    this.apiService.post('adoption', {
+    this.apiService.post('animal', {
       page: 1,
-      limit: 10,
+      limit: 8,
       filter: {
-        status: 'approved'
+        status: 'adopted'
       }
     }).subscribe({
-      next: (res: any) => {
+      next: async (res: any) => {
         const data = res.data || [];
 
-        this.adoptedAnimals = data.map((a: any) => ({
-          id: a.animal.id,
-          name: a.animal.name,
-          image_url: a.animal.image_url ?? `https://picsum.photos/600/400?random=${a.animal.id}`,
-          adopted_at: this.getTimeSince(a.date),
-          adopter_name: a.user?.name ?? null
-        }));
+        const result = await Promise.all(
+          data.map( async (animal: any) => {
+            const images = animal.images || [];
+            const main = images.find((img: any) => img.is_main) || images[0];
+            const adopterName = await this.getAdopterName(animal.id);
 
-        // fallback si no hay datos reales
-        if (this.adoptedAnimals.length === 0) {
-          this.isAdoptedMock = true;
-          this.adoptedAnimals = this.getFallbackAdoptedAnimals();
-        } else {
-          this.isAdoptedMock = false;
+            return {
+              name: animal.name,
+              image_url: main
+                ? this.apiService.getImageUrl(main.image_url)
+                : `https://picsum.photos/600/400?random=${animal.id}`,
+              adopted_at: animal.updated_at ? this.getTimeSince(animal.updated_at) : null,
+              adopter_name: adopterName || null
+            };
+          })
+        );
+
+        this.adoptedAnimals = result;
+
+        this.isAdoptedMock = this.adoptedAnimals.length === 0;
+
+        // reload si carga
+        if (this.adoptedSwiper) {
+          this.adoptedSwiper.destroy(true, true);
+          this.adoptedSwiper = undefined;
         }
 
         this.cdr.detectChanges();
-        setTimeout(() => {
-          this.initAdoptedSwiper();
-        }, 0);
+
+        if (this.adoptedAnimals.length > 0) {
+          setTimeout(() => {
+            requestAnimationFrame(() => {
+              this.initAdoptedSwiper();
+            });
+          });
+        }
       },
       error: (err) => {
         console.error(err);
       }
     });
+  }
+
+  private getAdopterName(animalId: number): Promise<string | null> {
+    return this.apiService.post('animal-requests', {
+      page: 1,
+      limit: 1,
+      filter: {
+        animal_id: animalId,
+        status: 'approved',
+        type: 'adoption'
+      }
+    }).toPromise()
+      .then((res: any) => {
+        const req = res.data?.[0];
+        return req?.user?.name ?? null;
+      })
+      .catch(() => null);
   }
 
   // info

@@ -14,10 +14,10 @@ export class DetalleAnimalComponent implements OnInit {
 
   public animal: any;
   public profile: any;
-  public loading: boolean = true;
-  public animalNotFound: boolean = false;
   public images: any[] = [];
   public mainImage: string = '';
+  public loading: boolean = true;
+  public animalNotFound: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,10 +45,23 @@ export class DetalleAnimalComponent implements OnInit {
           console.log('ANIMAL COMPLETO:', data);
         } else {
           this.animalNotFound = true;
+          this.loading = false;
+          return;
         }
 
-        this.loadImages(+id);
+        this.images = (this.animal?.images ?? [])
+          .filter((img: any) => !img.deleted_at)
+          .map((img: any) => ({
+            ...img,
+            image_url: this.apiService.getImageUrl(img.image_url)
+          }));
+        
+        const main = this.images.find(i => i.is_main) || this.images[0];
 
+        this.mainImage = main?.image_url
+          || `https://picsum.photos/600/400?random=${this.animal.id}`;
+
+        
         this.loading = false;
         this.cdr.detectChanges();
       },
@@ -59,24 +72,6 @@ export class DetalleAnimalComponent implements OnInit {
         this.cdr.detectChanges();
       }
     );
-  }
-
-  loadImages(animalId: number) {
-    this.apiService.getAnimalImages(animalId).subscribe((imgs) => {
-
-      this.images = (imgs || []).map(img => ({
-        ...img,
-        image_url: this.apiService.getImageUrl(img.image_url)
-      }));
-
-      const main = this.images.find(i => i.is_main) || this.images[0];
-
-      this.mainImage = main
-        ? this.apiService.getImageUrl(main.image_url)
-        : '';
-
-      this.cdr.detectChanges();
-    });
   }
 
   openImageViewer(index: number) {

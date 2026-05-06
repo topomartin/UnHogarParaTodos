@@ -1,5 +1,7 @@
 @use '@angular/material' as mat;
-
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
 @include mat.core();
 
 html {
