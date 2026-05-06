@@ -44,6 +44,8 @@ export class DetalleAnimalComponent implements OnInit {
           this.animalNotFound = true;
         }
 
+        console.log('👉 VOY A LLAMAR loadImages');
+
         this.loadImages(+id);
 
         this.loading = false;
@@ -61,6 +63,8 @@ export class DetalleAnimalComponent implements OnInit {
   loadImages(animalId: number) {
     this.apiService.getAnimalImages(animalId).subscribe((imgs) => {
 
+      console.log('IMAGES FROM BACKEND:', imgs);
+
       this.images = (imgs || []).map(img => ({
         ...img,
         image_url: this.apiService.getImageUrl(img.image_url)
@@ -71,6 +75,8 @@ export class DetalleAnimalComponent implements OnInit {
       this.mainImage = main
         ? this.apiService.getImageUrl(main.image_url)
         : '';
+
+      console.log('MAIN IMAGE:', this.mainImage);
 
       this.cdr.detectChanges();
     });

@@ -20,6 +20,16 @@ export const AdminPageGridSchema = {
             modelName: 'sponsorship',
             canCreate: false,
             canUpdate: false
+        },
+        {
+            modelName: 'questions',
+            canCreate: true,
+            canUpdate: true
+        },
+        {
+            modelName: 'answers',
+            canCreate: true,
+            canUpdate: true
         }
     ]
 };
