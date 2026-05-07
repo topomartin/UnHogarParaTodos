@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
 import { AuthenticationService, IUser } from "../../../services/authentication.service";
+import { ChangeDetectorRef } from "@angular/core";
 
 @Component({
   selector: 'app-verperfil',
@@ -15,7 +16,8 @@ export class VerPerfilComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +35,10 @@ export class VerPerfilComponent implements OnInit {
 
     // refrescar datos desde backend
     this.authService.getUserById(currentUser.id).subscribe(
-      res => this.user = res,
+      res => {
+        this.user = res;
+        this.cdr.detectChanges();
+      },
       err => {
         console.error('Error al cargar perfil', err);
       }
